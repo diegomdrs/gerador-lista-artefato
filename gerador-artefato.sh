@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ./gerador-artefato.sh -d /kdi/git/crm-patrimonio-api -u c1282036 -t 900089
+# ./gerador-artefato.sh -d /foo/foo-api -u X1337 -t 900089
 
 while getopts "d:u:t:" opt
 do
