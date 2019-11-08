@@ -17,7 +17,7 @@ $ chmod +x ~/.local/bin/gerador-artefato.sh
 
 ``` console
 
-$ ./gerador-artefato.sh -d /kdi/git -p foo -u X1337 -t 900089
+$ gerador-artefato.sh -d /kdi/git -p foo -u X1337 -t 900089
 
 ```
 
