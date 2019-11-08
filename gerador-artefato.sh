@@ -5,7 +5,7 @@
 
 DIRETORIO_PROJETOS='/kdi/git'
 
-gerarArtefato()
+gerarListaArtefato()
 {
     git -C $1 log --author=$2 --all --name-status -C --grep=$3| tac | grep -E "^[A,M,C,D]\s|^R.*\s" | sort -u -k 2 | awk -F '\t' '{print $1 "\t'"$(basename $1)"'/" $2 }'
 }
@@ -20,8 +20,10 @@ do
    esac
 done
 
-for DIRETORIO in $DIRETORIO_PROJETOS/$PROJETO*; do
-    if [ -d $DIRETORIO ]; then
-        gerarArtefato $DIRETORIO $USUARIO $TASK
-    fi
-done
+if [[ ! -z $PROJETO && ! -z $TASK && ! -z $USUARIO ]]; then 
+    for DIRETORIO in $DIRETORIO_PROJETOS/$PROJETO*; do
+        if [ -d $DIRETORIO ]; then
+            gerarListaArtefato $DIRETORIO $USUARIO $TASK
+        fi
+    done
+fi
