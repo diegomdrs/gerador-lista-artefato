@@ -4,6 +4,17 @@ Comando para listar os artefatos incluídos/alterados/renomeados/removidos para 
 
 ## Para Linux
 
+### Instalação
+
+``` console
+
+$ cp gerador-artefato.sh ~/.local/bin
+$ chmod +x ~/.local/bin/gerador-artefato.sh
+
+```
+
+### Uso
+
 ``` console
 
 $ ./gerador-artefato.sh -d /kdi/git -p foo -u X1337 -t 900089
