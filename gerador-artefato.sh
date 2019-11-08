@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# ./gerador-artefato.sh -p crm-patrimonio -u c1282036 -t 900089
-# ./gerador-artefato.sh -d /kdi/git -p crm-patrimonio -u c1282036 -t 900089
+# ./gerador-artefato.sh -p foo -u X1337 -t 900089
+# ./gerador-artefato.sh -d /kdi/git -p foo -u X1337 -t 900089
 
 DIRETORIO_PROJETOS='/kdi/git'
 
