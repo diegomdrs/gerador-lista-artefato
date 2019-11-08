@@ -15,5 +15,3 @@ Onde:
 - NUM_TASK: Número da tarefa
 - NOME_AUTHOR: Nome/Matrícula do autor dos commits
 - PROJETO: nome do projeto (ex. foo, bar)
-
-## Para Windows
