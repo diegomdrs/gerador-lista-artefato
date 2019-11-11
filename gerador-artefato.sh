@@ -4,7 +4,7 @@ DIRETORIO_PROJETOS='/kdi/git'
 
 gerarListaArtefato()
 {
-    git -C $1 log --author=$2 --all --name-status -C --grep=$3| tac | grep -E "^[A,M,C,D]\s|^R.*\s" | sort -u -k 2 | awk -F '\t' '{print $1 "\t'"$(basename $1)"'/" $2 }'
+    git -C $1 log --no-merges --author=$2 --all --name-status -C --grep=$3| tac | grep -E "^[A,M,C,D]\s|^R.*\s" | sort -u -k 2 | awk -F '\t' '{print $1 "\t'"$(basename $1)"'/" $2 }'
 }
 
 while getopts "d:p:t:u:" opt
