@@ -30,12 +30,27 @@ Onde:
 
 ``` console
 # gerador-artefato.sh -p foo -u X1337 -t 900089
-```
 
-``` console
-# gerador-artefato.sh -d /kdi/git -p foo -u X1337 -t 900089
+D       foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayFoo.java
+M       foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayConsultarFoo.java
+A       foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayIncluirFoo.java
+M       foo-estatico/Gruntfile.js
+M       foo-estatico/karma.conf.js
+M       foo-estatico/package.json
+
 ```
 
 ``` console
 # gerador-artefato.sh -d /kdi/git -p foo -p bar -u X1337 -t 900089
+
+D       foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayFoo.java
+M       foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayConsultarFoo.java
+A       foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayIncluirFoo.java
+M       foo-estatico/Gruntfile.js
+M       foo-estatico/karma.conf.js
+M       foo-estatico/package.json
+M       bar-estatico/package.json
+D       bar-estatico/spec/app/spas/bar/altera-bar-controllers-spec.js
+A       bar-estatico/src/app/componentes/base-controller.js
+
 ```
