@@ -24,7 +24,7 @@ Onde:
 - -d: Diretório dos projetos (se for omitido, será usado /kdi/git)
 - -p: Lista de projetos do Git (podem ser passados vários projetos separados por espaço ou vírgula)
 - -u: Usuário do Git
-- -t: Lista de tarefas (podem ser passadas vários tarefas separadas por espaço ou vírgula)
+- -t: Lista de tarefas (podem ser passadas várias tarefas separadas por espaço ou vírgula)
 
 ### Exemplos de Uso
 
