@@ -41,7 +41,7 @@ M       foo-estatico/package.json
 ```
 
 ``` console
-# gerador-artefato.sh -d /kdi/git -p foo -p bar -u X1337 -t '900089,900081'
+# gerador-artefato.sh -d /kdi/git -p foo -p 'foo bar' -u X1337 -t '900089,900081'
 
 Tarefa nº 900089
 
