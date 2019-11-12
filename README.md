@@ -29,7 +29,7 @@ Onde:
 ### Exemplos de Uso
 
 ``` console
-# gerador-artefato.sh -p foo -u X1337 -t 900089
+$ gerador-artefato.sh -p foo -u X1337 -t 900089
 
 D       foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayFoo.java
 M       foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayConsultarFoo.java
@@ -41,7 +41,7 @@ M       foo-estatico/package.json
 ```
 
 ``` console
-# gerador-artefato.sh -d /kdi/git -p foo -p 'foo bar' -u X1337 -t '900089,900081'
+$ gerador-artefato.sh -d /kdi/git -p foo -p 'foo bar' -u X1337 -t '900089,900081'
 
 Tarefa nº 900089
 
