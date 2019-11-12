@@ -22,9 +22,9 @@ $ gerador-artefato.sh -d /kdi/git -p foo -u X1337 -t 900089
 Onde:
 
 - -d: Diretório dos projetos (se for omitido, será usado /kdi/git)
-- -p: Projeto do Git (podem ser passados vários projetos)
+- -p: Lista de projetos do Git (podem ser passados vários projetos separados por espaço ou vírgula)
 - -u: Usuário do Git
-- -t: Tarefa
+- -t: Lista de tarefas (podem ser passadas vários tarefas separadas por espaço ou vírgula)
 
 ### Exemplos de Uso
 
@@ -41,7 +41,9 @@ M       foo-estatico/package.json
 ```
 
 ``` console
-# gerador-artefato.sh -d /kdi/git -p foo -p bar -u X1337 -t 900089
+# gerador-artefato.sh -d /kdi/git -p foo -p bar -u X1337 -t '900089,900081'
+
+Tarefa nº 900089
 
 D       foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayFoo.java
 M       foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayConsultarFoo.java
@@ -52,5 +54,10 @@ M       foo-estatico/package.json
 M       bar-estatico/package.json
 D       bar-estatico/spec/app/spas/bar/altera-bar-controllers-spec.js
 A       bar-estatico/src/app/componentes/base-controller.js
+
+Tarefa n° 900081
+
+M       foo-estatico/Gruntfile.js
+M       foo-estatico/karma.conf.js
 
 ```
