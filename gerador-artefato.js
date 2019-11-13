@@ -2,19 +2,17 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
 
-var params = {}
-
 init()
 
 function init() {
 
-  obterParametros()
+  let params = obterParametros();
 
-  if (params['diretorio'] && params['author'] && params['task']) {
+  if (params.diretorio && params.autor && params.task) {
 
-    gitLog().then(function (saidaComando) {
-
-      var lista = obterLista(saidaComando.stdout);
+    executarComandoGitLog(params.diretorio, params.autor, params.task).then(function (saidaComando) {
+    
+      var lista = obterLista(saidaComando.stdout, params.task);
 
       imprimirLista(lista)
     })
@@ -30,11 +28,13 @@ function imprimirLista(lista) {
   }
 }
 
-async function gitLog() {
-  return await exec('git -C ' + params['diretorio'] + ' log --no-merges --author=' + params['author'] + ' --all --name-status -C --grep=' + params['task'] + '');
+async function executarComandoGitLog(diretorio, autor, task) {
+  return await exec('git -C ' + diretorio + 
+    ' log --no-merges --author=' + autor + 
+      ' --all --name-status -C --grep=' + task + '');
 }
 
-function obterLista(saidaComando) {
+function obterLista(saidaComando, task) {
 
   // Regex que seleciona cada commit, autor, data e os artefatos
   // let listaSaida = saida.match(/(commit).*\n(Author).*\n(Date).*\n[\s\S]*?(?=\n.*?((commit).*\n(Author).*\n(Date).*\n))/g)
@@ -53,7 +53,7 @@ function obterLista(saidaComando) {
       let obj = {
         tipoAlteracao: artefato.match(/^(M|D|A|R)/g)[0],
         artefato: artefato.match(/[^\s+]\w.*/g)[0],
-        task: params['task'],
+        task: task,
         numeroAlteracao: 1
       };
   
@@ -75,11 +75,16 @@ function obterLista(saidaComando) {
 }
 
 function obterParametros() {
+
+  let obj = {}
+
   args.forEach(function (arg) {
 
-    key = arg.split('=')[0]
-    value = arg.split('=')[1]
+    let key = arg.split('=')[0]
+    let value = arg.split('=')[1]
 
-    params[key] = value;
+    obj[key] = value;
   });
+
+  return obj
 }
