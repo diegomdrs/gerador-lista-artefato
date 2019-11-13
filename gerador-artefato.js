@@ -3,7 +3,6 @@ const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
 
 var params = {}
-var saida = ''
 
 init()
 
@@ -13,29 +12,33 @@ function init() {
 
   if (params['diretorio'] && params['author'] && params['task']) {
 
-    gitLog().then(function () {
+    gitLog().then(function (saida) {
 
-      var listaSaida = saida.match(/(commit).*\n(Author).*\n(Date).*\n{2}\s+(task).*\n{2}(M|D|A|R.*).*/g)
+      var lista = foo(saida.stdout);
 
-      var listaObjetos = listaSaida.map(function (foo) {
-
-        var obj = {}
-
-        obj.commit = foo.split('\n')[0].trim();
-        obj.author = foo.split('\n')[1]
-        obj.date = foo.split('\n')[2]
-
-        return obj;
-      })
-
-      console.log(listaSaida);
+      console.log(lista)
     })
   }
 }
 
 async function gitLog() {
-  const { stdout, stderr } = await exec('git -C ' + params['diretorio'] + ' log --no-merges --author=' + params['author'] + ' --all --name-status -C --grep=' + params['task'] + '');
-  saida = stdout;
+  return await exec('git -C ' + params['diretorio'] + ' log --no-merges --author=' + params['author'] + ' --all --name-status -C --grep=' + params['task'] + '');
+}
+
+function foo(saida) {
+
+  // Regex que seleciona cada commit, autor, data e os artefatos
+  // var listaSaida = saida.match(/(commit).*\n(Author).*\n(Date).*\n[\s\S]*?(?=\n.*?((commit).*\n(Author).*\n(Date).*\n))/g)
+
+  var listaSaida = saida.match(/^((M|D|A){1}|R.*)\s.*$/gm)
+
+  return listaSaida.map(function (artefato) {
+    return {
+      tipoAlteracao: artefato.match(/^(M|D|A|R)/g)[0],
+      artefato: artefato.match(/[^\s+]\w.*/g)[0],
+      task: params['task']
+    };
+  })
 }
 
 function obterParametros() {
