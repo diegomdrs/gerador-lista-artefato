@@ -14,7 +14,7 @@ function init() {
 
     gitLog().then(function (saida) {
 
-      var lista = foo(saida.stdout);
+      var lista = obterLista(saida.stdout);
 
       imprimirLista(lista)
     })
@@ -32,7 +32,7 @@ async function gitLog() {
   return await exec('git -C ' + params['diretorio'] + ' log --no-merges --author=' + params['author'] + ' --all --name-status -C --grep=' + params['task'] + '');
 }
 
-function foo(saida) {
+function obterLista(saida) {
 
   // Regex que seleciona cada commit, autor, data e os artefatos
   // var listaSaida = saida.match(/(commit).*\n(Author).*\n(Date).*\n[\s\S]*?(?=\n.*?((commit).*\n(Author).*\n(Date).*\n))/g)
