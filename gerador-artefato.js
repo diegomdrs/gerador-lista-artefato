@@ -12,9 +12,9 @@ function init() {
 
   if (params['diretorio'] && params['author'] && params['task']) {
 
-    gitLog().then(function (saida) {
+    gitLog().then(function (saidaComando) {
 
-      var lista = obterLista(saida.stdout);
+      var lista = obterLista(saidaComando.stdout);
 
       imprimirLista(lista)
     })
@@ -32,12 +32,12 @@ async function gitLog() {
   return await exec('git -C ' + params['diretorio'] + ' log --no-merges --author=' + params['author'] + ' --all --name-status -C --grep=' + params['task'] + '');
 }
 
-function obterLista(saida) {
+function obterLista(listaSaidaComando) {
 
   // Regex que seleciona cada commit, autor, data e os artefatos
-  // var listaSaida = saida.match(/(commit).*\n(Author).*\n(Date).*\n[\s\S]*?(?=\n.*?((commit).*\n(Author).*\n(Date).*\n))/g)
+  // let listaSaida = saida.match(/(commit).*\n(Author).*\n(Date).*\n[\s\S]*?(?=\n.*?((commit).*\n(Author).*\n(Date).*\n))/g)
 
-  var listaSaida = saida.match(/^((M|D|A){1}|R.*)\s.*$/gm)
+  let listaSaida = listaSaidaComando.match(/^((M|D|A){1}|R.*)\s.*$/gm)
 
   return listaSaida.map(function (artefato) {
     return {
