@@ -36,9 +36,6 @@ async function executarComandoGitLog(diretorio, autor, task) {
 
 function obterLista(saidaComando, task, diretorio) {
 
-  // Regex que seleciona cada commit, autor, data e os artefatos
-  // let listaSaida = saida.match(/(commit).*\n(Author).*\n(Date).*\n[\s\S]*?(?=\n.*?((commit).*\n(Author).*\n(Date).*\n))/g)
-
   let listaArtefatosSaidaComando = saidaComando.match(/^((M|D|A){1}|R.*)\s.*$/gm)
 
   // A lista é ordenada para os commits com 'A' (Added) aparecerem primeiro na lista
@@ -51,7 +48,7 @@ function obterLista(saidaComando, task, diretorio) {
     listaArtefatosSaidaComando.forEach(function (artefatoSaida) {
       
       let tipoAlteracao = artefatoSaida.match(/^(M|D|A|R)/g)[0]
-      let diretorioProjeto = diretorio.match(/[^/]*$/g)[0]
+      let diretorioProjeto = diretorio.match(/[^/|\\]*$/g)[0]
       let artefato = diretorioProjeto + '/' + artefatoSaida.match(/[^\s+]\w.*/g)[0]
 
       let objEncontrado = listaSaida.find(function(objSaida){
