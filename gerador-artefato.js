@@ -2,7 +2,8 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
 
-// node gerador-artefato.js diretorio=/kdi/git/crm-patrimonio-estatico autor=c1299072 task=1194436
+// ex. Linux: node gerador-artefato.js diretorio=/kdi/git/foo-estatico autor=X1337 task=1194436
+// ex. Windows: node gerador-artefato.js diretorio=C:\kdi\git\foo-estatico autor=X1337 task=1194436
 
 init()
 
