@@ -43,7 +43,7 @@ function obterLista(saidaComando, task, diretorio) {
 
   if(listaArtefatosSaidaComando && listaArtefatosSaidaComando.length){
 
-    let listaSaida = []
+    let listaArtefato = []
 
     listaArtefatosSaidaComando.forEach(function (artefatoSaida) {
       
@@ -51,16 +51,14 @@ function obterLista(saidaComando, task, diretorio) {
       let diretorioProjeto = diretorio.match(/[^/|\\]*$/g)[0]
       let artefato = diretorioProjeto + '/' + artefatoSaida.match(/[^\s+]\w.*/g)[0]
 
-      let objEncontrado = listaSaida.find(function(objSaida){
+      let artefatoEncontrado = listaArtefato.find(function(objSaida){
         return objSaida.artefato === artefato;
       })
   
-      if(objEncontrado) {
-  
-        objEncontrado.numeroAlteracao += 1;
+      if(artefatoEncontrado) {
+        artefatoEncontrado.numeroAlteracao += 1;
       } else {
-  
-        listaSaida.push({
+        listaArtefato.push({
           tipoAlteracao: tipoAlteracao,
           artefato: artefato,
           task: task,
@@ -69,7 +67,7 @@ function obterLista(saidaComando, task, diretorio) {
       }
     })
   
-    return listaSaida
+    return listaArtefato
   }
 }
 
