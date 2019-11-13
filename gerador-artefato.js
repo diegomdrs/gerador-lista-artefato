@@ -23,9 +23,11 @@ function init() {
 
 function imprimirLista(lista) {
 
-  lista.forEach(function (item) {
-    console.log(item.tipoAlteracao + '\t' + item.numeroAlteracao + '\t' + item.artefato);
-  });
+  if(lista) {
+      lista.forEach(function (item) {
+        console.log(item.tipoAlteracao + '\t' + item.numeroAlteracao + '\t' + item.artefato);
+      });
+  }
 }
 
 async function gitLog() {
@@ -39,31 +41,37 @@ function obterLista(saidaComando) {
 
   let listaArtefatosSaidaComando = saidaComando.match(/^((M|D|A){1}|R.*)\s.*$/gm)
 
-  let listaSaida = []
+  // A lista é ordenada para os commits com 'A' (Added) aparecerem primeiro na lista
+  listaArtefatosSaidaComando.sort()
 
-  listaArtefatosSaidaComando.forEach(function (artefato) {
-    
-    let obj = {
-      tipoAlteracao: artefato.match(/^(M|D|A|R)/g)[0],
-      artefato: artefato.match(/[^\s+]\w.*/g)[0],
-      task: params['task'],
-      numeroAlteracao: 1
-    };
+  if(listaArtefatosSaidaComando && listaArtefatosSaidaComando.length){
 
-    let objEncontrado = listaSaida.find(function(objSaida){
-      return objSaida.artefato === obj.artefato;
+    let listaSaida = []
+
+    listaArtefatosSaidaComando.forEach(function (artefato) {
+      
+      let obj = {
+        tipoAlteracao: artefato.match(/^(M|D|A|R)/g)[0],
+        artefato: artefato.match(/[^\s+]\w.*/g)[0],
+        task: params['task'],
+        numeroAlteracao: 1
+      };
+  
+      let objEncontrado = listaSaida.find(function(objSaida){
+        return objSaida.artefato === obj.artefato;
+      })
+  
+      if(objEncontrado) {
+  
+        objEncontrado.numeroAlteracao += 1;
+      } else {
+  
+        listaSaida.push(obj)
+      }
     })
-
-    if(objEncontrado) {
-
-      objEncontrado.numeroAlteracao += 1;
-    } else {
-
-      listaSaida.push(obj)
-    }
-  })
-
-  return listaSaida
+  
+    return listaSaida
+  }
 }
 
 function obterParametros() {
