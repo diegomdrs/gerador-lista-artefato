@@ -16,9 +16,16 @@ function init() {
 
       var lista = foo(saida.stdout);
 
-      console.log(lista)
+      imprimirLista(lista)
     })
   }
+}
+
+function imprimirLista(lista) {
+
+  lista.forEach(function(item){
+      console.log(item.tipoAlteracao + '\t' + item.artefato);
+  });
 }
 
 async function gitLog() {
