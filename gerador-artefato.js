@@ -12,7 +12,7 @@ function init() {
 
     executarComandoGitLog(params.diretorio, params.autor, params.task).then(function (saidaComando) {
     
-      var lista = obterLista(saidaComando.stdout, params.task);
+      var lista = obterLista(saidaComando.stdout, params.task, params.diretorio);
 
       imprimirLista(lista)
     })
@@ -34,7 +34,7 @@ async function executarComandoGitLog(diretorio, autor, task) {
       ' --all --name-status -C --grep=' + task + '');
 }
 
-function obterLista(saidaComando, task) {
+function obterLista(saidaComando, task, diretorio) {
 
   // Regex que seleciona cada commit, autor, data e os artefatos
   // let listaSaida = saida.match(/(commit).*\n(Author).*\n(Date).*\n[\s\S]*?(?=\n.*?((commit).*\n(Author).*\n(Date).*\n))/g)
@@ -48,17 +48,14 @@ function obterLista(saidaComando, task) {
 
     let listaSaida = []
 
-    listaArtefatosSaidaComando.forEach(function (artefato) {
+    listaArtefatosSaidaComando.forEach(function (artefatoSaida) {
       
-      let obj = {
-        tipoAlteracao: artefato.match(/^(M|D|A|R)/g)[0],
-        artefato: artefato.match(/[^\s+]\w.*/g)[0],
-        task: task,
-        numeroAlteracao: 1
-      };
-  
+      let tipoAlteracao = artefatoSaida.match(/^(M|D|A|R)/g)[0]
+      let diretorioProjeto = diretorio.match(/[^/]*$/g)[0]
+      let artefato = diretorioProjeto + '/' + artefatoSaida.match(/[^\s+]\w.*/g)[0]
+
       let objEncontrado = listaSaida.find(function(objSaida){
-        return objSaida.artefato === obj.artefato;
+        return objSaida.artefato === artefato;
       })
   
       if(objEncontrado) {
@@ -66,7 +63,12 @@ function obterLista(saidaComando, task) {
         objEncontrado.numeroAlteracao += 1;
       } else {
   
-        listaSaida.push(obj)
+        listaSaida.push({
+          tipoAlteracao: tipoAlteracao,
+          artefato: artefato,
+          task: task,
+          numeroAlteracao: 1
+        })
       }
     })
   
