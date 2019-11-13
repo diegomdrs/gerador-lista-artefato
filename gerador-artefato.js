@@ -2,8 +2,8 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
 
-// ex. Linux: node gerador-artefato.js diretorio=/kdi/git/foo-estatico autor=X1337 task=1194436
-// ex. Windows: node gerador-artefato.js diretorio=C:\kdi\git\foo-estatico autor=X1337 task=1194436
+// ex. Linux: node gerador-artefato.js diretorio=/kdi/git/crm-patrimonio-estatico autor=c1282036 task=1194436
+// ex. Windows: node gerador-artefato.js diretorio=C:\kdi\git\crm-patrimonio-estatico autor=c1299072 task=1194436
 
 init()
 
@@ -17,18 +17,24 @@ function init() {
     
       var lista = obterLista(saidaComando.stdout, params.task, params.diretorio);
 
-      imprimirLista(lista)
+      if(lista) {
+
+        lista.sort(ordenarLista)
+
+        imprimirLista(lista)
+      }
     })
   }
 }
 
-function imprimirLista(lista) {
+function ordenarLista(artefatoA, artefatoB) {
+  return artefatoA.artefato > artefatoB.artefato
+}
 
-  if(lista) {
-      lista.forEach(function (item) {
-        console.log(item.tipoAlteracao + '\t' + item.numeroAlteracao + '\t' + item.artefato);
-      });
-  }
+function imprimirLista(lista) {
+    lista.forEach(function (item) {
+      console.log(item.tipoAlteracao + '\t' + item.numeroAlteracao + '\t' + item.artefato);
+    });
 }
 
 async function executarComandoGitLog(diretorio, autor, task) {
@@ -55,7 +61,8 @@ function obterLista(saidaComando, task, diretorio) {
       let artefato = diretorioProjeto + '/' + artefatoSaida.match(/[^\s+]\w.*/g)[0]
 
       let artefatoEncontrado = listaArtefato.find(function(objSaida){
-        return objSaida.artefato === artefato;
+        return objSaida.artefato === artefato &&
+          objSaida.tipoAlteracao === tipoAlteracao;
       })
   
       if(artefatoEncontrado) {
