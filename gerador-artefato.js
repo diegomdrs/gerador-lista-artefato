@@ -2,6 +2,8 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
 
+// node gerador-artefato.js diretorio=/kdi/git/crm-patrimonio-estatico autor=c1299072 task=1194436
+
 init()
 
 function init() {
@@ -38,10 +40,10 @@ function obterLista(saidaComando, task, diretorio) {
 
   let listaArtefatosSaidaComando = saidaComando.match(/^((M|D|A){1}|R.*)\s.*$/gm)
 
-  // A lista é ordenada para os commits com 'A' (Added) aparecerem primeiro na lista
-  listaArtefatosSaidaComando.sort()
-
   if(listaArtefatosSaidaComando && listaArtefatosSaidaComando.length){
+
+    // A lista é ordenada para os commits com 'A' (Added) aparecerem primeiro na lista
+    listaArtefatosSaidaComando.sort()
 
     let listaArtefato = []
 
