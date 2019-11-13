@@ -14,17 +14,33 @@ function init() {
   if (params.diretorio && params.autor && params.task) {
 
     executarComandoGitLog(params.diretorio, params.autor, params.task).then(function (saidaComando) {
-    
-      var lista = obterLista(saidaComando.stdout, params.task, params.diretorio);
 
-      if(lista) {
+      var lista = obterLista(saidaComando.stdout, params.task, params.diretorio);
+      
+      if (lista) {
+        
+        lista = removerDeletados(lista);
 
         lista.sort(ordenarLista)
 
-        imprimirLista(lista)
+        // imprimirLista(lista)
       }
     })
   }
+}
+
+function removerDeletados(listaArtefato) {
+
+  return listaArtefato.filter(function (artefatoFilter) {
+  
+    let condicaoA = artefatoFilter.tipoAlteracao !== 'D' && listaArtefato.some(function(artefatoSome){
+      return (artefatoFilter.artefato === artefatoSome.artefato) && artefatoSome.tipoAlteracao === 'D'
+    }) 
+
+    console.log('artefatoFilter: ' + artefatoFilter.tipoAlteracao + ' condicao: ' + condicaoA)
+    
+    return condicaoA
+  })
 }
 
 function ordenarLista(artefatoA, artefatoB) {
@@ -32,52 +48,38 @@ function ordenarLista(artefatoA, artefatoB) {
 }
 
 function imprimirLista(lista) {
-    lista.forEach(function (item) {
-      console.log(item.tipoAlteracao + '\t' + item.numeroAlteracao + '\t' + item.artefato);
-    });
+  lista.forEach(function (item) {
+    console.log(item.tipoAlteracao + '\t' + item.artefato);
+  });
 }
 
 async function executarComandoGitLog(diretorio, autor, task) {
-  return await exec('git -C ' + diretorio + 
-    ' log --no-merges --author=' + autor + 
-      ' --all --name-status -C --grep=' + task + '');
+  return await exec('git -C ' + diretorio +
+    ' log --no-merges --author=' + autor +
+    ' --all --name-status -C --grep=' + task + '');
 }
 
 function obterLista(saidaComando, task, diretorio) {
 
   let listaArtefatosSaidaComando = saidaComando.match(/^((M|D|A){1}|R.*)\s.*$/gm)
 
-  if(listaArtefatosSaidaComando && listaArtefatosSaidaComando.length){
+  if (listaArtefatosSaidaComando && listaArtefatosSaidaComando.length) {
 
     // A lista é ordenada para os commits com 'A' (Added) aparecerem primeiro na lista
-    listaArtefatosSaidaComando.sort()
+    // listaArtefatosSaidaComando.sort(function(a, b){ return a > b })
 
-    let listaArtefato = []
+    return listaArtefatosSaidaComando.map(function (artefatoSaida) {
 
-    listaArtefatosSaidaComando.forEach(function (artefatoSaida) {
-      
       let tipoAlteracao = artefatoSaida.match(/^(M|D|A|R)/g)[0]
       let diretorioProjeto = diretorio.match(/[^/|\\]*$/g)[0]
       let artefato = diretorioProjeto + '/' + artefatoSaida.match(/[^\s+]\w.*/g)[0]
 
-      let artefatoEncontrado = listaArtefato.find(function(objSaida){
-        return objSaida.artefato === artefato &&
-          objSaida.tipoAlteracao === tipoAlteracao;
-      })
-  
-      if(artefatoEncontrado) {
-        artefatoEncontrado.numeroAlteracao += 1;
-      } else {
-        listaArtefato.push({
-          tipoAlteracao: tipoAlteracao,
-          artefato: artefato,
-          task: task,
-          numeroAlteracao: 1
-        })
+      return {
+        tipoAlteracao: tipoAlteracao,
+        artefato: artefato,
+        task: task
       }
     })
-  
-    return listaArtefato
   }
 }
 
