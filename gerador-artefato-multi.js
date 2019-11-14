@@ -2,8 +2,8 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
 
-// ex. Linux:   node gerador-artefato.js --diretorio=/kdi/git/crm-patrimonio-estatico --autor=c1299072 --task=1194436
-// ex. Windows: node gerador-artefato.js --diretorio=C:\kdi\git\crm-patrimonio-estatico --autor=c1299072 --task=1194436
+// ex. Linux:   node gerador-artefato.js --lista-projeto=/kdi/git/crm-patrimonio-estatico --autor=c1299072 --task=1194436
+// ex. Windows: node gerador-artefato.js --lista-projeto=C:\kdi\git\crm-patrimonio-estatico --autor=c1299072 --task=1194436
 
 init()
 
@@ -11,11 +11,11 @@ function init() {
 
   let params = obterParametros();
 
-  if (params.diretorio && params.autor && params.task) {
+  if (params.listaprojeto && params.autor && params.task) {
 
-    executarComandoGitLog(params.diretorio, params.autor, params.task).then(function (saidaComando) {
+    executarComandoGitLog(params.listaprojeto, params.autor, params.task).then(function (saidaComando) {
 
-      let lista = obterLista(saidaComando.stdout, params.task, params.diretorio);
+      let lista = obterLista(saidaComando.stdout, params.task, params.listaprojeto);
 
       if (lista) {
 
@@ -55,15 +55,15 @@ function imprimirLista(lista) {
   });
 }
 
-async function executarComandoGitLog(diretorio, autor, task) {
+async function executarComandoGitLog(projeto, autor, task) {
 
-  let comando = 'git -C ' + diretorio + ' log --no-merges --author=' + autor +
+  let comando = 'git -C ' + projeto + ' log --no-merges --author=' + autor +
     ' --all --name-status --grep=' + task;
 
   return await exec(comando);
 }
 
-function obterLista(saidaComando, task, diretorio) {
+function obterLista(saidaComando, task, projeto) {
 
   let listaArtefatosSaidaComando = saidaComando.match(/^((M|D|A){1}|R.*)\s.*$/gm)
   let listaSaida = []
@@ -73,7 +73,7 @@ function obterLista(saidaComando, task, diretorio) {
     listaArtefatosSaidaComando.forEach(function (artefatoSaida) {
 
       let tipoAlteracao = artefatoSaida.match(/^(M|D|A|R)/g)[0]
-      let diretorioProjeto = diretorio.match(/[^/|\\]*$/g)[0]
+      let diretorioProjeto = projeto.match(/[^/|\\]*$/g)[0]
       let artefato = diretorioProjeto + '/' + artefatoSaida.match(/[^\s+]\w.*/g)[0]
 
       let artefatoModificaoEncontrado = listaSaida.find(function(objSaida){
@@ -104,7 +104,7 @@ function obterParametros() {
 
   args.forEach(function (arg) {
 
-    let key = arg.split('=')[0].match(/\w+/g)
+    let key = arg.split('=')[0].replace(/[^\w]/g,'')
     let value = arg.split('=')[1]
 
     obj[key] = value;
