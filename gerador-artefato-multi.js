@@ -15,20 +15,18 @@ function init() {
 
     params.task.forEach(function (task) {
 
-      console.log('\nTarefa nº ' + task + '\n')
-
       params.projeto.forEach(function (projeto) {
 
         executarComandoGitLog(projeto, params.autor, task).then(function (saidaComando) {
   
           let lista = obterLista(saidaComando.stdout, task, projeto);
   
-          if (lista) {
+          if (lista && lista.length > 0) {
   
             lista = removerDeletados(lista);
             lista.sort(ordenarLista)
   
-            imprimirLista(lista)
+            imprimirLista(lista, task)
           }
         }).catch(function (error) {
   
@@ -56,7 +54,10 @@ function ordenarLista(artefatoA, artefatoB) {
   return artefatoA.artefato > artefatoB.artefato
 }
 
-function imprimirLista(lista) {
+function imprimirLista(lista, task) {
+
+  console.log('\nTarefa nº ' + task + '\n')
+
   lista.forEach(function (item) {
 
     console.log(item.tipoAlteracao + '\t' + 
