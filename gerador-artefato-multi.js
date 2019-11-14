@@ -24,20 +24,21 @@ function init() {
 
     Promise.all(listaPromise).then(function (listaSaidaComando) {
 
-      listaSaidaComando.forEach(function (saidaComando) {
+      let foo = listaSaidaComando.reduce(function(foo, comando){
 
-        console.log(saidaComando)
+        console.log(comando)
+        // console.log(foo)
+      });
 
-        // let lista = obterLista(saidaComando.stdout, saidaComando.task, saidaComando.projeto);
+      // let lista = obterLista(saidaComando.stdout, saidaComando.task, saidaComando.projeto);
 
-        // if (lista && lista.length > 0) {
+      // if (lista && lista.length > 0) {
 
-        //   // lista = removerDeletados(lista);
-        //   lista.sort(ordenarLista)
+      //   // lista = removerDeletados(lista);
+      //   lista.sort(ordenarLista)
 
-        //   imprimirLista(lista)
-        // }
-      })
+      //   imprimirLista(lista)
+      // }
     })
   }
 }
