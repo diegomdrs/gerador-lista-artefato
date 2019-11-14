@@ -20,26 +20,29 @@ function init() {
       if (lista) {
         
         lista = removerDeletados(lista);
+        // lista = removerDuplicados(lista);
 
         lista.sort(ordenarLista)
 
-        // imprimirLista(lista)
+        imprimirLista(lista)
       }
     })
   }
 }
 
+function removerDuplicados(listaArtefato) {
+
+  return listaArtefato.filter(function (artefatoFilter) {
+    
+  })
+}
+
 function removerDeletados(listaArtefato) {
 
   return listaArtefato.filter(function (artefatoFilter) {
-  
-    let condicaoA = artefatoFilter.tipoAlteracao !== 'D' && listaArtefato.some(function(artefatoSome){
+    return artefatoFilter.tipoAlteracao !== 'D' && !listaArtefato.some(function(artefatoSome){
       return (artefatoFilter.artefato === artefatoSome.artefato) && artefatoSome.tipoAlteracao === 'D'
-    }) 
-
-    console.log('artefatoFilter: ' + artefatoFilter.tipoAlteracao + ' condicao: ' + condicaoA)
-    
-    return condicaoA
+    })
   })
 }
 
@@ -64,9 +67,6 @@ function obterLista(saidaComando, task, diretorio) {
   let listaArtefatosSaidaComando = saidaComando.match(/^((M|D|A){1}|R.*)\s.*$/gm)
 
   if (listaArtefatosSaidaComando && listaArtefatosSaidaComando.length) {
-
-    // A lista é ordenada para os commits com 'A' (Added) aparecerem primeiro na lista
-    // listaArtefatosSaidaComando.sort(function(a, b){ return a > b })
 
     return listaArtefatosSaidaComando.map(function (artefatoSaida) {
 
