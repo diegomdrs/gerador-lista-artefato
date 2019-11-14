@@ -74,10 +74,7 @@ function obterLista(saidaComando, task, diretorio) {
         return objSaida.artefato === artefato && objSaida.tipoAlteracao === 'M';
       })
 
-      if(artefatoModificaoEncontrado) {
-  
-        artefatoModificaoEncontrado.numeroAlteracao += 1;
-      } else {
+      if(tipoAlteracao === 'A' || !artefatoModificaoEncontrado) {
   
         listaSaida.push({
           tipoAlteracao: tipoAlteracao,
@@ -85,6 +82,9 @@ function obterLista(saidaComando, task, diretorio) {
           task: task,
           numeroAlteracao: 1
         })
+      } else {
+        
+        artefatoModificaoEncontrado.numeroAlteracao += 1;
       }
     })
   }
