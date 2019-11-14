@@ -22,25 +22,36 @@ function init() {
       });
     })
 
-    Promise.all(listaPromise).then(function (listaSaidaComando) {
+    // Promise.all(listaPromise).then(function (listaSaidaComando) {
 
-      let foo = listaSaidaComando.reduce(function(foo, comando){
+    //   let foo = listaSaidaComando.reduce(function(key, comando){
 
-        console.log(comando)
-        // console.log(foo)
-      });
+    //     bar.projeto = comando.task
 
-      // let lista = obterLista(saidaComando.stdout, saidaComando.task, saidaComando.projeto);
+    //     console.log(bar)
+    //   });
 
-      // if (lista && lista.length > 0) {
+    // })
 
-      //   // lista = removerDeletados(lista);
-      //   lista.sort(ordenarLista)
+    let cars = [
+      { brand: 'Audi', color: 'black' },
+      { brand: 'Audi', color: 'white' },
+      { brand: 'Ferarri', color: 'red' },
+      { brand: 'Ford', color: 'white' },
+      { brand: 'Peugot', color: 'white' }
+    ];
 
-      //   imprimirLista(lista)
-      // }
-    })
+    console.log(groupBy('brand', cars))
   }
+}
+
+function groupBy(key, array) {
+
+  return array.reduce(function (objectsByKeyValue, obj){
+    const value = obj[key];
+    objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
+    return objectsByKeyValue;
+  }, {});
 }
 
 function removerDeletados(listaArtefato) {
