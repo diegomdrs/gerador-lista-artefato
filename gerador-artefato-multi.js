@@ -27,6 +27,10 @@ function init() {
       let objAgrupadoPorTask = groupBy('task', listaSaidaComando)
 
       console.log(objAgrupadoPorTask)
+    }).catch(function(erro){
+
+      console.log(erro.cmd)
+      console.log(erro.stderr)
     })
 
     // let cars = [
