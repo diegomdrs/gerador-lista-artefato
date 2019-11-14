@@ -24,6 +24,10 @@ function init() {
 
         imprimirLista(lista)
       }
+    }).catch(function(error){
+
+      console.log(error.cmd)
+      console.log(error.stderr)
     })
   }
 }
@@ -55,8 +59,6 @@ async function executarComandoGitLog(diretorio, autor, task) {
 
   let comando = 'git -C ' + diretorio + ' log --no-merges --author=' + autor +
     ' --all --name-status --grep=' + task;
-
-  console.log(comando)
 
   return await exec(comando);
 }
