@@ -71,7 +71,7 @@ async function executarComandoGitLog(projeto, autor, task) {
   let comando = 'git -C ' + projeto + ' log --no-merges --author=' + autor +
     ' --all --name-status --grep=' + task;
 
-  console.log('\n' + comando + '\n')
+  console.log(comando + '\n')
 
   return await exec(comando);
 }
