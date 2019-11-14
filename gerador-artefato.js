@@ -2,7 +2,7 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
 
-// ex. Linux: node gerador-artefato.js diretorio=/kdi/git/crm-patrimonio-estatico autor=c1282036 task=1194436
+// ex. Linux:   node gerador-artefato.js diretorio=/kdi/git/crm-patrimonio-estatico autor=c1282036 task=1194436
 // ex. Windows: node gerador-artefato.js diretorio=C:\kdi\git\crm-patrimonio-estatico autor=c1299072 task=1194436
 
 init()
@@ -46,14 +46,19 @@ function ordenarLista(artefatoA, artefatoB) {
 
 function imprimirLista(lista) {
   lista.forEach(function (item) {
+
     console.log(item.tipoAlteracao + '\t' + item.numeroAlteracao + '\t' + item.artefato);
   });
 }
 
 async function executarComandoGitLog(diretorio, autor, task) {
-  return await exec('git -C ' + diretorio +
-    ' log --no-merges --author=' + autor +
-    ' --all --name-status -C --grep=' + task + '');
+
+  let comando = 'git -C ' + diretorio + ' log --no-merges --author=' + autor +
+    ' --all --name-status --grep=' + task;
+
+  console.log(comando)
+
+  return await exec(comando);
 }
 
 function obterLista(saidaComando, task, diretorio) {
