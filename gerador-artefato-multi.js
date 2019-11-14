@@ -49,7 +49,7 @@ function groupBy(key, array) {
   return array.reduce(function (objectsByKeyValue, obj) {
     const value = obj[key];
 
-    delete obj.stdout
+    obj.stdout = ''
 
     objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
     return objectsByKeyValue;
