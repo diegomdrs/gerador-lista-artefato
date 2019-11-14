@@ -15,6 +15,8 @@ function init() {
 
     params.task.forEach(function (task) {
 
+      console.log('\nTarefa nº ' + task + '\n')
+
       params.projeto.forEach(function (projeto) {
 
         executarComandoGitLog(projeto, params.autor, task).then(function (saidaComando) {
@@ -26,7 +28,7 @@ function init() {
             lista = removerDeletados(lista);
             lista.sort(ordenarLista)
   
-            imprimirLista(lista, task)
+            imprimirLista(lista)
           }
         }).catch(function (error) {
   
@@ -54,9 +56,7 @@ function ordenarLista(artefatoA, artefatoB) {
   return artefatoA.artefato > artefatoB.artefato
 }
 
-function imprimirLista(lista, task) {
-
-  console.log('\nTarefa nº ' + task + '\n')
+function imprimirLista(lista) {
 
   lista.forEach(function (item) {
 
@@ -70,6 +70,8 @@ async function executarComandoGitLog(projeto, autor, task) {
 
   let comando = 'git -C ' + projeto + ' log --no-merges --author=' + autor +
     ' --all --name-status --grep=' + task;
+
+  console.log('\n' + comando + '\n')
 
   return await exec(comando);
 }
