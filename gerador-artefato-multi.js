@@ -22,33 +22,35 @@ function init() {
       });
     })
 
-    // Promise.all(listaPromise).then(function (listaSaidaComando) {
+    Promise.all(listaPromise).then(function (listaSaidaComando) {
 
-    //   let foo = listaSaidaComando.reduce(function(key, comando){
+      let foo = groupBy('task', listaSaidaComando)
 
-    //     bar.projeto = comando.task
+      Object.values(foo).forEach(function(bar){
 
-    //     console.log(bar)
-    //   });
+        console.log(bar)
+      })
+    })
 
-    // })
+    // let cars = [
+    //   { brand: 'Audi', color: 'black' },
+    //   { brand: 'Audi', color: 'white' },
+    //   { brand: 'Ferarri', color: 'red' },
+    //   { brand: 'Ford', color: 'white' },
+    //   { brand: 'Peugot', color: 'white' }
+    // ];
 
-    let cars = [
-      { brand: 'Audi', color: 'black' },
-      { brand: 'Audi', color: 'white' },
-      { brand: 'Ferarri', color: 'red' },
-      { brand: 'Ford', color: 'white' },
-      { brand: 'Peugot', color: 'white' }
-    ];
-
-    console.log(groupBy('brand', cars))
+    // console.log(groupBy('brand', cars))
   }
 }
 
 function groupBy(key, array) {
 
-  return array.reduce(function (objectsByKeyValue, obj){
+  return array.reduce(function (objectsByKeyValue, obj) {
     const value = obj[key];
+
+    delete obj.stdout
+
     objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
     return objectsByKeyValue;
   }, {});
