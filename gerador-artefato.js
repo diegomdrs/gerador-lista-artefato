@@ -70,13 +70,13 @@ function obterLista(saidaComando, task, diretorio) {
       let diretorioProjeto = diretorio.match(/[^/|\\]*$/g)[0]
       let artefato = diretorioProjeto + '/' + artefatoSaida.match(/[^\s+]\w.*/g)[0]
 
-      let objEncontrado = listaSaida.find(function(objSaida){
+      let artefatoModificaoEncontrado = listaSaida.find(function(objSaida){
         return objSaida.artefato === artefato && objSaida.tipoAlteracao === 'M';
       })
 
-      if(objEncontrado) {
+      if(artefatoModificaoEncontrado) {
   
-        objEncontrado.numeroAlteracao += 1;
+        artefatoModificaoEncontrado.numeroAlteracao += 1;
       } else {
   
         listaSaida.push({
