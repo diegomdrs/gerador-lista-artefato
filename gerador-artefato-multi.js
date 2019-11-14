@@ -2,7 +2,9 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
 
-// ex. Linux:   node gerador-artefato-multi.js --projeto=/kdi/git/apc-api,/kdi/git/apc-estatico --autor=c1282036 --task=900089
+var listaPromise = []
+
+// ex. Linux:   node gerador-artefato-multi.js --projeto=/kdi/git/apc-api,/kdi/git/apc-estatico,/kdi/git/crm-patrimonio-estatico --autor=c1282036 --task=1194196,1189666
 // ex. Windows: TODO
 
 init()
@@ -15,27 +17,27 @@ function init() {
 
     params.task.forEach(function (task) {
 
-      console.log('\nTarefa nº ' + task + '\n')
-
       params.projeto.forEach(function (projeto) {
-
-        executarComandoGitLog(projeto, params.autor, task).then(function (saidaComando) {
-  
-          let lista = obterLista(saidaComando.stdout, task, projeto);
-  
-          if (lista && lista.length > 0) {
-  
-            lista = removerDeletados(lista);
-            lista.sort(ordenarLista)
-  
-            imprimirLista(lista)
-          }
-        }).catch(function (error) {
-  
-          console.log(error.cmd)
-          console.log(error.stderr)
-        })
+        listaPromise.push(executarComandoGitLog(projeto, params.autor, task))
       });
+    })
+
+    Promise.all(listaPromise).then(function (listaSaidaComando) {
+
+      listaSaidaComando.forEach(function (saidaComando) {
+
+        console.log(saidaComando)
+
+        // let lista = obterLista(saidaComando.stdout, saidaComando.task, saidaComando.projeto);
+
+        // if (lista && lista.length > 0) {
+
+        //   // lista = removerDeletados(lista);
+        //   lista.sort(ordenarLista)
+
+        //   imprimirLista(lista)
+        // }
+      })
     })
   }
 }
@@ -60,9 +62,9 @@ function imprimirLista(lista) {
 
   lista.forEach(function (item) {
 
-    console.log(item.tipoAlteracao + '\t' + 
-      item.numeroAlteracao + '\t' + 
-        item.artefato);
+    console.log(item.tipoAlteracao + '\t' +
+      item.numeroAlteracao + '\t' +
+      item.artefato);
   });
 }
 
@@ -71,9 +73,14 @@ async function executarComandoGitLog(projeto, autor, task) {
   let comando = 'git -C ' + projeto + ' log --no-merges --author=' + autor +
     ' --all --name-status --grep=' + task;
 
-  console.log(comando + '\n')
+  // console.log(comando + '\n')
 
-  return await exec(comando);
+  var retorno = await exec(comando);
+  retorno.projeto = projeto;
+  retorno.task = task
+  retorno.comando = comando;
+
+  return retorno
 }
 
 function obterLista(saidaComando, task, projeto) {
