@@ -24,12 +24,9 @@ function init() {
 
     Promise.all(listaPromise).then(function (listaSaidaComando) {
 
-      let foo = groupBy('task', listaSaidaComando)
+      let objAgrupadoPorTask = groupBy('task', listaSaidaComando)
 
-      Object.values(foo).forEach(function(bar){
-
-        console.log(bar)
-      })
+      console.log(objAgrupadoPorTask)
     })
 
     // let cars = [
@@ -44,13 +41,10 @@ function init() {
   }
 }
 
-function groupBy(key, array) {
+function groupBy(key, lista) {
 
-  return array.reduce(function (objectsByKeyValue, obj) {
+  return lista.reduce(function (objectsByKeyValue, obj) {
     const value = obj[key];
-
-    obj.stdout = ''
-
     objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
     return objectsByKeyValue;
   }, {});
@@ -98,6 +92,10 @@ async function executarComandoGitLog(projeto, autor, task) {
 }
 
 function obterLista(saidaComando, task, projeto) {
+
+  // console.log('saidaComando: ' + saidaComando)
+  // console.log('task: ' + task)
+  // console.log('projeto: ' + projeto)
 
   let listaArtefatosSaidaComando = saidaComando.match(/^((M|D|A){1}|R.*)\s.*$/gm)
   let listaSaida = []
