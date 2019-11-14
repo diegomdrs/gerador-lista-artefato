@@ -20,7 +20,6 @@ function init() {
       if (lista) {
 
         lista = removerDeletados(lista);
-
         lista.sort(ordenarLista)
 
         imprimirLista(lista)
