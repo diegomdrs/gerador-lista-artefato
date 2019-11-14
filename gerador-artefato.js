@@ -2,8 +2,8 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
 
-// ex. Linux:   node gerador-artefato.js diretorio=/kdi/git/crm-patrimonio-estatico autor=c1282036 task=1194436
-// ex. Windows: node gerador-artefato.js diretorio=C:\kdi\git\crm-patrimonio-estatico autor=c1299072 task=1194436
+// ex. Linux:   node gerador-artefato.js --diretorio=/kdi/git/crm-patrimonio-estatico --autor=c1299072 --task=1194436
+// ex. Windows: node gerador-artefato.js --diretorio=C:\kdi\git\crm-patrimonio-estatico --autor=c1299072 --task=1194436
 
 init()
 
@@ -104,7 +104,7 @@ function obterParametros() {
 
   args.forEach(function (arg) {
 
-    let key = arg.split('=')[0]
+    let key = arg.split('=')[0].match(/\w+/g)
     let value = arg.split('=')[1]
 
     obj[key] = value;
