@@ -86,16 +86,8 @@ function agruparPorTask(listaComandoExecutado) {
     // console.log('prev: ' + JSON.stringify(prev))
 
     const isListaTaskVazia = !prev.listaTask
-    const isListaContemTask = prev.listaTask.some(function (itemLista) {
-
-        // console.log('itemLista.task ' + itemLista.task)
-        // console.log('taskAgrupadora ' + taskAgrupadora + '\n')
-
-        return itemLista.task ===  taskAgrupadora
-      });
 
     console.log('isListaTaskVazia ' + isListaTaskVazia)
-    console.log('isListaContemTask ' + isListaContemTask)
 
     if (isListaTaskVazia) {
 
@@ -103,7 +95,17 @@ function agruparPorTask(listaComandoExecutado) {
 
     } else {
 
-      prev.listaTask.push({ task: taskAgrupadora })
+      const isListaContemTask = prev.listaTask.some(function (itemLista) {
+
+        // console.log('itemLista.task ' + itemLista.task)
+        // console.log('taskAgrupadora ' + taskAgrupadora + '\n')
+
+        return itemLista.task ===  taskAgrupadora
+      });     
+
+      if(!isListaContemTask) {
+        prev.listaTask.push({ task: taskAgrupadora })
+      }
     }
 
     return prev
