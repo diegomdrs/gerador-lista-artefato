@@ -51,7 +51,7 @@ function imprimirLista(lista) {
 
 function obterListaFoo(listaComandoExecutado) {
 
-  const listaComandoExecutadoPorTask = agruparPorTask(listaComandoExecutado)
+  const objetoComandoExecutadoPorTask = agruparPorTask(listaComandoExecutado)
 
   // Object.keys(listaComandoExecutadoPorTask).forEach(function (key) {
 
@@ -68,23 +68,46 @@ function obterListaFoo(listaComandoExecutado) {
   //   });
   // })
 
-  return listaComandoExecutadoPorTask;
+  return objetoComandoExecutadoPorTask;
 }
 
 function agruparPorTask(listaComandoExecutado) {
 
-  return listaComandoExecutado.reduce(function(prev, item){
+  return listaComandoExecutado.reduce(function (prev, item) {
 
-    const itemAgrupador = item.task;
+    const taskAgrupadora = item.task;
 
-    if(!prev[itemAgrupador]) {
-      prev[itemAgrupador] = [item]
+    // if(!prev[itemAgrupador]) {
+    //   prev[itemAgrupador] = [item]
+    // } else {
+    //   prev[itemAgrupador].push(item)
+    // }
+
+    // console.log('prev: ' + JSON.stringify(prev))
+
+    const isListaTaskVazia = !prev.listaTask
+    // const isListaContemTask = prev.listaTask.some(function (itemLista) {
+
+    //     // console.log('itemLista.task ' + itemLista.task)
+    //     // console.log('taskAgrupadora ' + taskAgrupadora + '\n')
+
+    //     return itemLista.task ===  taskAgrupadora
+    //   });
+
+    console.log('isListaTaskVazia ' + isListaTaskVazia)
+
+    if (isListaTaskVazia) {
+
+      prev.listaTask = [{ task: taskAgrupadora }]
+
     } else {
-      prev[itemAgrupador].push(item)
+
+      prev.listaTask.push({ task: taskAgrupadora })
     }
 
     return prev
-  },{});
+
+  }, {});
 }
 
 function removerDeletados(listaArtefato) {
