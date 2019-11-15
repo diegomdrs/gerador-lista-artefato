@@ -76,42 +76,32 @@ function agruparPorTask(listaComandoExecutado) {
   return listaComandoExecutado.reduce(function (prev, item) {
 
     const taskAgrupadora = item.task;
-    const stout = item.stout;
-
-    // const listaArtefato = item
-
-    // if(!prev[itemAgrupador]) {
-    //   prev[itemAgrupador] = [item]
-    // } else {
-    //   prev[itemAgrupador].push(item)
-    // }
-
-    // console.log('prev: ' + JSON.stringify(prev))
-
-    const isListaTaskVazia = !prev.listaTask
+    const stdout = item.stdout;
+    const isListaTaskVazia = !prev
 
     if (isListaTaskVazia) {
 
-      prev.listaTask = [{ task: taskAgrupadora, stout: stout }]
+      prev = [{ task: taskAgrupadora, stdout: stdout }]
 
     } else {
 
-      const taskEncontrada = prev.listaTask.find(function (itemLista) {
+      const taskEncontrada = prev.find(function (itemLista) {
         return itemLista.task === taskAgrupadora
       });
 
       if(taskEncontrada) {
 
-        console.log(taskEncontrada)
+        taskEncontrada.stdout = taskEncontrada.stdout.concat('\n' + stdout)
 
       } else if (!taskEncontrada) {
-        prev.listaTask.push({ task: taskAgrupadora, stout: stout })
+
+        prev.push({ task: taskAgrupadora, stdout: stdout })
       }
     }
 
     return prev
 
-  }, {});
+  }, []);
 }
 
 function removerDeletados(listaArtefato) {
