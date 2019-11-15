@@ -2,7 +2,7 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
 
-const listaPromise = []
+const listaPromiseExecucaoComando = []
 
 // ex. Linux:   node gerador-artefato-multi.js --projeto=/kdi/git/apc-api,/kdi/git/apc-estatico,/kdi/git/crm-patrimonio-estatico --autor=c1282036 --task=1194196,1189666
 // ex. Windows: TODO
@@ -20,48 +20,71 @@ function init() {
     params.task.forEach(function (task) {
 
       params.projeto.forEach(function (projeto) {
-        listaPromise.push(executarComandoGitLog(projeto, params.autor, task))
+        listaPromiseExecucaoComando.push(executarComandoGitLog(projeto, params.autor, task))
       });
     })
 
-    Promise.all(listaPromise).then(function (listaSaidaComando) {
+    Promise.all(listaPromiseExecucaoComando).then(function (listaComandoExecutado) {
 
-      console.log(listaSaidaComando)
+      const listFoo = obterListaFoo(listaComandoExecutado)
 
-      let objAgrupadoPorTask = groupBy('task', listaSaidaComando)
-
-      Object.keys(objAgrupadoPorTask).forEach(function (key) {
-
-        const listaSaidaByTask = objAgrupadoPorTask[key]
-
-        listaSaidaByTask.forEach(function (execucaoComando) {
-
-          let listaArtefato = obterLista(execucaoComando.stdout,
-            execucaoComando.task, execucaoComando.projeto);
-
-          listaArtefato = removerDeletados(listaArtefato);
-
-          listaArtefato.sort(ordenarLista)
-          // imprimirLista(listaArtefato)
-        });
-      })
-
+      imprimirLista(listFoo)
 
     }).catch(function (erro) {
-
       console.log(erro.cmd)
       console.log(erro.stderr)
     })
   }
 }
 
-function groupBy(key, lista) {
+function imprimirLista(lista) {
 
-  return lista.reduce(function (objectsByKeyValue, obj) {
-    const value = obj[key];
-    objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
-    return objectsByKeyValue;
-  }, {});
+  console.log(lista)
+
+  // lista.forEach(function (item) {
+
+  //   console.log(item.tipoAlteracao + '\t' +
+  //     item.numeroAlteracao + '\t' +
+  //     item.artefato);
+  // });
+}
+
+function obterListaFoo(listaComandoExecutado) {
+
+  const listaComandoExecutadoPorTask = agruparPorTask(listaComandoExecutado)
+
+  // Object.keys(listaComandoExecutadoPorTask).forEach(function (key) {
+
+  //   const listaSaidaByTask = listaComandoExecutadoPorTask[key]
+
+  //   listaSaidaByTask.forEach(function (execucaoComando) {
+
+  //     let listaArtefato = obterLista(execucaoComando.stdout,
+  //       execucaoComando.task, execucaoComando.projeto);
+
+  //     listaArtefato = removerDeletados(listaArtefato);
+
+  //     listaArtefato.sort(ordenarLista)
+  //   });
+  // })
+
+  return listaComandoExecutadoPorTask;
+}
+
+function agruparPorTask(listaComandoExecutado) {
+
+  return listaComandoExecutado.reduce(function(prev, item){
+
+    const itemAgrupador = item.task;
+
+    if(!prev[itemAgrupador]) {
+      prev[itemAgrupador] = [item]
+    } else {
+      prev[itemAgrupador].push(item)
+    }
+
+    return prev
+  },{});
 }
 
 function removerDeletados(listaArtefato) {
@@ -81,16 +104,6 @@ function removerDeletados(listaArtefato) {
 
 function ordenarLista(artefatoA, artefatoB) {
   return artefatoA.artefato > artefatoB.artefato
-}
-
-function imprimirLista(lista) {
-
-  lista.forEach(function (item) {
-
-    console.log(item.tipoAlteracao + '\t' +
-      item.numeroAlteracao + '\t' +
-      item.artefato);
-  });
 }
 
 async function executarComandoGitLog(projeto, autor, task) {
