@@ -74,8 +74,7 @@ function obterListaAgrupadaPorTask(listaComandoExecutado) {
 
     comandoExecutado.listaProjeto.forEach(function (projeto) {
 
-      let listaArtefatoProjeto = obterListaArtefato(comandoExecutado.task, projeto.projeto,
-        projeto.stdout);
+      let listaArtefatoProjeto = obterListaArtefato(projeto.projeto,projeto.stdout);
 
       listaArtefatoProjeto = removerDeletados(listaArtefatoProjeto);
       listaArtefatoProjeto.sort(ordenarLista)
@@ -167,7 +166,7 @@ async function executarComandoGitLog(projeto, autor, task) {
   return retorno
 }
 
-function obterListaArtefato(task, projeto, stdout) {
+function obterListaArtefato(projeto, stdout) {
 
   let listaArtefatosSaidaComando = stdout.match(/^((M|D|A){1}|R.*)\s.*$/gm)
   let listaSaida = []
@@ -189,7 +188,6 @@ function obterListaArtefato(task, projeto, stdout) {
         listaSaida.push({
           tipoAlteracao: tipoAlteracao,
           artefato: artefato,
-          task: task,
           numeroAlteracao: 1
         })
       } else {
