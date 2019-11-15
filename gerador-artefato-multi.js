@@ -87,8 +87,6 @@ function agruparPorTask(listaComandoExecutado) {
 
     const isListaTaskVazia = !prev.listaTask
 
-    console.log('isListaTaskVazia ' + isListaTaskVazia)
-
     if (isListaTaskVazia) {
 
       prev.listaTask = [{ task: taskAgrupadora }]
@@ -96,10 +94,6 @@ function agruparPorTask(listaComandoExecutado) {
     } else {
 
       const isListaContemTask = prev.listaTask.some(function (itemLista) {
-
-        // console.log('itemLista.task ' + itemLista.task)
-        // console.log('taskAgrupadora ' + taskAgrupadora + '\n')
-
         return itemLista.task ===  taskAgrupadora
       });     
 
