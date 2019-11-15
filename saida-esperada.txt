@@ -1,0 +1,59 @@
+Tarefa nº 1194196
+
+commit 27b80e10dc9b50131293b5a8ab2dbe677c8a3ef8
+Author: c1282036 <c1282036@bb.com.br>
+Date:   Thu Nov 14 21:02:34 2019 -0300
+
+    task 1194196 commit
+
+M       foo-api/README.md
+
+commit 88b668c26156b1218a21c7cbe3c043f9922931d0
+Author: c1282036 <c1282036@bb.com.br>
+Date:   Thu Nov 14 21:06:54 2019 -0300
+
+    task 1194196 commit
+
+M       foo-estatico/README.md
+
+Tarefa nº 1189666
+
+commit d36693edbb929e0520ea342220a0c46325373fd9 (HEAD -> master)
+Author: c1282036 <c1282036@bb.com.br>
+Date:   Thu Nov 14 21:31:42 2019 -0300
+
+    task 1189666 commit
+
+D       foo-api/README.md
+
+commit afc249b4ec24e9167b2854184ada9e4d8ad17281
+Author: c1282036 <c1282036@bb.com.br>
+Date:   Thu Nov 14 21:31:05 2019 -0300
+
+    task 1189666 commit
+
+M       foo-api/README.md
+
+commit 8daf9ab2feb1ccf049e741f3e0870ee68aa81462
+Author: c1282036 <c1282036@bb.com.br>
+Date:   Thu Nov 14 21:10:17 2019 -0300
+
+    task 1189666 commit
+
+M       foo-api/README.md
+
+commit c49e116c8d3a3c562d0c7d5167f178639bb5976c (HEAD -> master)
+Author: c1282036 <c1282036@bb.com.br>
+Date:   Thu Nov 14 21:30:21 2019 -0300
+
+    task 1189666 commit
+
+M       foo-estatico/README.md
+
+commit f70a2ff0aff4f8749d03022d44f7892d454ea786
+Author: c1282036 <c1282036@bb.com.br>
+Date:   Thu Nov 14 21:10:41 2019 -0300
+
+    task 1189666 commit
+
+M       foo-estatico/README.md

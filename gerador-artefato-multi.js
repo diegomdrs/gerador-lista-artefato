@@ -7,7 +7,16 @@ const listaPromiseExecucaoComando = []
 // ex. Linux:   node gerador-artefato-multi.js --projeto=/kdi/git/apc-api,/kdi/git/apc-estatico,/kdi/git/crm-patrimonio-estatico --autor=c1282036 --task=1194196,1189666
 // ex. Windows: TODO
 
-// node gerador-artefato-multi.js --projeto=/home/jon/Documents/comando-qas/foo-estatico,/home/jon/Documents/comando-qas/foo-api --autor=c1282036 --task=1194196
+// node gerador-artefato-multi.js --projeto=/home/jon/Documents/comando-qas/foo-estatico,/home/jon/Documents/comando-qas/foo-api --autor=c1282036 --task=1194196,1189666
+// ./gerador-artefato.sh -d /home/jon/Documents/comando-qas -p 'foo' -u c1282036 -t '1194196,1189666'
+
+// 1194196
+// git -C /home/jon/Documents/comando-qas/foo-api log --no-merges --author=c1282036 --all --name-status --grep=1194196
+// git -C /home/jon/Documents/comando-qas/foo-estatico log --no-merges --author=c1282036 --all --name-status --grep=1194196
+
+// 1189666
+// git -C /home/jon/Documents/comando-qas/foo-api log --no-merges --author=c1282036 --all --name-status --grep=1189666 
+// git -C /home/jon/Documents/comando-qas/foo-estatico log --no-merges --author=c1282036 --all --name-status --grep=1189666
 
 init()
 
@@ -41,12 +50,12 @@ function imprimirListaAgrupadaPorTask(lista) {
 
   lista.forEach(function (item) {
 
-    console.log("\nTask nº " + item.task + '\n')
+    console.log("\nTarefa nº " + item.task + '\n')
 
     item.listaArtefato.forEach(function (artefato) {
 
       console.log(artefato.tipoAlteracao + '\t' +
-        artefato.numeroAlteracao + '\t' +
+        // artefato.numeroAlteracao + '\t' +
         artefato.artefato);
     })
   });
@@ -61,7 +70,7 @@ function obterListaAgrupadaPorTask(listaComandoExecutado) {
     let listaArtefato = obterListaArtefato(comandoExecutado.task, comandoExecutado.projeto,
       comandoExecutado.stdout);
 
-    listaArtefato = removerDeletados(listaArtefato);
+    // listaArtefato = removerDeletados(listaArtefato);
     listaArtefato.sort(ordenarLista)
 
     return {
