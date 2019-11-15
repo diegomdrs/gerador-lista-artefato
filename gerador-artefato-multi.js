@@ -28,41 +28,30 @@ function init() {
 
       let objAgrupadoPorTask = groupBy('task', listaSaidaComando)
 
-      Object.keys(objAgrupadoPorTask).forEach(function(key){
+      Object.keys(objAgrupadoPorTask).forEach(function (key) {
 
         console.log('\nTarefa nº ' + key + '\n')
 
         const listaSaidaByTask = objAgrupadoPorTask[key]
 
-        console.log(listaSaidaByTask)
+        listaSaidaByTask.forEach(function (execucaoComando) {
 
-        listaSaidaByTask.forEach(function(foo){
+          let listaArtefato = obterLista(execucaoComando.stdout,
+            execucaoComando.task, execucaoComando.projeto);
 
-          const lista = obterLista(foo.stdout,foo.task,foo.projeto);
+          listaArtefato = removerDeletados(listaArtefato);
 
-          // lista = removerDeletados(lista);
-          lista.sort(ordenarLista)
-
-          // imprimirLista(lista)
+          listaArtefato.sort(ordenarLista)
+          imprimirLista(listaArtefato)
         });
       })
 
 
-    }).catch(function(erro){
+    }).catch(function (erro) {
 
       console.log(erro.cmd)
       console.log(erro.stderr)
     })
-
-    // let cars = [
-    //   { brand: 'Audi', color: 'black' },
-    //   { brand: 'Audi', color: 'white' },
-    //   { brand: 'Ferarri', color: 'red' },
-    //   { brand: 'Ford', color: 'white' },
-    //   { brand: 'Peugot', color: 'white' }
-    // ];
-
-    // console.log(groupBy('brand', cars))
   }
 }
 
@@ -77,16 +66,17 @@ function groupBy(key, lista) {
 
 function removerDeletados(listaArtefato) {
 
-  return listaArtefato.filter(function (artefatoFilter) {
-
-    // console.log('artefatoFilter: ' + artefatoFilter.artefato)
+  var retorno = listaArtefato.filter(function (artefatoFilter) {
 
     let possuiArtefatoCorrespondenteDeletado = listaArtefato.some(function (artefatoSome) {
+
       return (artefatoFilter.artefato === artefatoSome.artefato) && artefatoSome.tipoAlteracao === 'D'
     })
 
     return artefatoFilter.tipoAlteracao !== 'D' && !possuiArtefatoCorrespondenteDeletado
   })
+
+  return retorno
 }
 
 function ordenarLista(artefatoA, artefatoB) {
@@ -108,8 +98,6 @@ async function executarComandoGitLog(projeto, autor, task) {
   let comando = 'git -C ' + projeto + ' log --no-merges --author=' + autor +
     ' --all --name-status --grep=' + task;
 
-  // console.log(comando + '\n')
-
   var retorno = await exec(comando);
   retorno.projeto = projeto;
   retorno.task = task
@@ -119,10 +107,6 @@ async function executarComandoGitLog(projeto, autor, task) {
 }
 
 function obterLista(saidaComando, task, projeto) {
-
-  // console.log('saidaComando: ' + saidaComando)
-  // console.log('task: ' + task)
-  // console.log('projeto: ' + projeto)
 
   let listaArtefatosSaidaComando = saidaComando.match(/^((M|D|A){1}|R.*)\s.*$/gm)
   let listaSaida = []
