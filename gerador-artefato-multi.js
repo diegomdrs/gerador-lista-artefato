@@ -71,7 +71,7 @@ function obterListaAgrupadaPorTask(listaComandoExecutado) {
       comandoExecutado.stdout);
 
     // listaArtefato = removerDeletados(listaArtefato);
-    listaArtefato.sort(ordenarLista)
+    // listaArtefato.sort(ordenarLista)
 
     return {
       task: comandoExecutado.task,
