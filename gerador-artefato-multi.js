@@ -26,9 +26,9 @@ function init() {
 
     Promise.all(listaPromiseExecucaoComando).then(function (listaComandoExecutado) {
 
-      const listFoo = obterListaFoo(listaComandoExecutado)
+      const listaAgrupadaPorTask = obterListaAgrupadaPorTask(listaComandoExecutado)
 
-      imprimirLista(listFoo)
+      imprimirListaAgrupadaPorTask(listaAgrupadaPorTask)
 
     }).catch(function (erro) {
       console.log(erro.cmd)
@@ -37,47 +37,41 @@ function init() {
   }
 }
 
-function imprimirLista(lista) {
+function imprimirListaAgrupadaPorTask(lista) {
 
-  console.log(lista)
+  lista.forEach(function (item) {
 
-  // lista.forEach(function (item) {
+    console.log("\nTask nº " + item.task + '\n')
 
-  //   console.log(item.tipoAlteracao + '\t' +
-  //     item.numeroAlteracao + '\t' +
-  //     item.artefato);
-  // });
+    item.listaArtefato.forEach(function (artefato) {
+
+      console.log(artefato.tipoAlteracao + '\t' +
+        artefato.numeroAlteracao + '\t' +
+        artefato.artefato);
+    })
+  });
 }
 
-function obterListaFoo(listaComandoExecutado) {
+function obterListaAgrupadaPorTask(listaComandoExecutado) {
 
-  const listaComandoExecutadoPorTask = agruparPorTask(listaComandoExecutado)
+  const listaComandoAgrupadoPorTask = agruparListaComandoPorTask(listaComandoExecutado)
 
-  // listaComandoExecutadoPorTask.map(function (comandoExecutado) {
+  return listaComandoAgrupadoPorTask.map(function (comandoExecutado) {
 
-  //   let listaArtefato = obterListaArtefato(comandoExecutado.task, comandoExecutado.projeto,
-  //     comandoExecutado.stdout);
-  // })
+    let listaArtefato = obterListaArtefato(comandoExecutado.task, comandoExecutado.projeto,
+      comandoExecutado.stdout);
 
-  // Object.keys(listaComandoExecutadoPorTask).forEach(function (key) {
+    listaArtefato = removerDeletados(listaArtefato);
+    listaArtefato.sort(ordenarLista)
 
-  //   const listaSaidaByTask = listaComandoExecutadoPorTask[key]
-
-  //   listaSaidaByTask.forEach(function (execucaoComando) {
-
-  //     let listaArtefato = obterLista(execucaoComando.stdout,
-  //       execucaoComando.task, execucaoComando.projeto);
-
-  //     listaArtefato = removerDeletados(listaArtefato);
-
-  //     listaArtefato.sort(ordenarLista)
-  //   });
-  // })
-
-  return listaComandoExecutadoPorTask;
+    return {
+      task: comandoExecutado.task,
+      listaArtefato: listaArtefato
+    }
+  })
 }
 
-function agruparPorTask(listaComandoExecutado) {
+function agruparListaComandoPorTask(listaComandoExecutado) {
 
   return listaComandoExecutado.reduce(function (prev, item) {
 
