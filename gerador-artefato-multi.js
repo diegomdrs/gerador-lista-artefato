@@ -76,6 +76,8 @@ function agruparPorTask(listaComandoExecutado) {
   return listaComandoExecutado.reduce(function (prev, item) {
 
     const taskAgrupadora = item.task;
+    const stout = item.stout;
+
     // const listaArtefato = item
 
     // if(!prev[itemAgrupador]) {
@@ -90,16 +92,20 @@ function agruparPorTask(listaComandoExecutado) {
 
     if (isListaTaskVazia) {
 
-      prev.listaTask = [{ task: taskAgrupadora }]
+      prev.listaTask = [{ task: taskAgrupadora, stout: stout }]
 
     } else {
 
       const taskEncontrada = prev.listaTask.find(function (itemLista) {
-        return itemLista.task ===  taskAgrupadora
-      });     
+        return itemLista.task === taskAgrupadora
+      });
 
-      if(!taskEncontrada) {
-        prev.listaTask.push({ task: taskAgrupadora })
+      if(taskEncontrada) {
+
+        console.log(taskEncontrada)
+
+      } else if (!taskEncontrada) {
+        prev.listaTask.push({ task: taskAgrupadora, stout: stout })
       }
     }
 
