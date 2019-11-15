@@ -55,8 +55,8 @@ function imprimirListaAgrupadaPorTask(lista) {
     item.listaArtefato.forEach(function (artefato) {
 
       console.log(artefato.tipoAlteracao + '\t' +
-        // artefato.numeroAlteracao + '\t' +
-        artefato.artefato);
+        artefato.numeroAlteracao + '\t' +
+          artefato.artefato);
     })
   });
 }
