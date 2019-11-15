@@ -2,8 +2,6 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
 
-const listaPromiseExecucaoComando = []
-
 // ex. Linux:   node gerador-artefato-multi.js --projeto=/kdi/git/apc-api,/kdi/git/apc-estatico,/kdi/git/crm-patrimonio-estatico --autor=c1282036 --task=1194196,1189666
 // ex. Windows: TODO
 
@@ -28,6 +26,8 @@ function init() {
   let params = obterParametros();
 
   if (params.projeto && params.autor && params.task) {
+
+    const listaPromiseExecucaoComando = []
 
     params.task.forEach(function (task) {
 
@@ -87,17 +87,6 @@ function obterListaAgrupadaPorTask(listaComandoExecutado) {
       task: comandoExecutado.task,
       listaArtefato: listaArtefato
     }
-
-    // let listaArtefato = obterListaArtefato(comandoExecutado.task, comandoExecutado.projeto,
-    //   comandoExecutado.stdout);
-
-    // // listaArtefato = removerDeletados(listaArtefato);
-    // // listaArtefato.sort(ordenarLista)
-
-    // return {
-    //   task: comandoExecutado.task,
-    //   listaArtefato: listaArtefato
-    // }
   })
 }
 
