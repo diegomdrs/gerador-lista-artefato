@@ -76,6 +76,7 @@ function agruparPorTask(listaComandoExecutado) {
   return listaComandoExecutado.reduce(function (prev, item) {
 
     const taskAgrupadora = item.task;
+    // const listaArtefato = item
 
     // if(!prev[itemAgrupador]) {
     //   prev[itemAgrupador] = [item]
@@ -93,11 +94,11 @@ function agruparPorTask(listaComandoExecutado) {
 
     } else {
 
-      const isListaContemTask = prev.listaTask.some(function (itemLista) {
+      const taskEncontrada = prev.listaTask.find(function (itemLista) {
         return itemLista.task ===  taskAgrupadora
       });     
 
-      if(!isListaContemTask) {
+      if(!taskEncontrada) {
         prev.listaTask.push({ task: taskAgrupadora })
       }
     }
