@@ -90,7 +90,7 @@ function agruparListaComandoPorTask(listaComandoExecutado) {
 
     const taskAgrupadora = item.task;
     const isListaTaskVazia = prev.length === 0
-    const itemProjeto = {projeto: item.projeto}
+    const itemProjeto = {projeto: item.projeto, stdout: ''}
 
     let comandoExecutado = {
       task: taskAgrupadora,
