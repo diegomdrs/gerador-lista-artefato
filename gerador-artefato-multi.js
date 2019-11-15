@@ -34,6 +34,8 @@ function init() {
 
         const listaSaidaByTask = objAgrupadoPorTask[key]
 
+        console.log(listaSaidaByTask)
+
         listaSaidaByTask.forEach(function(foo){
 
           const lista = obterLista(foo.stdout,foo.task,foo.projeto);
@@ -41,7 +43,7 @@ function init() {
           // lista = removerDeletados(lista);
           lista.sort(ordenarLista)
 
-          imprimirLista(lista)
+          // imprimirLista(lista)
         });
       })
 
@@ -76,6 +78,8 @@ function groupBy(key, lista) {
 function removerDeletados(listaArtefato) {
 
   return listaArtefato.filter(function (artefatoFilter) {
+
+    // console.log('artefatoFilter: ' + artefatoFilter.artefato)
 
     let possuiArtefatoCorrespondenteDeletado = listaArtefato.some(function (artefatoSome) {
       return (artefatoFilter.artefato === artefatoSome.artefato) && artefatoSome.tipoAlteracao === 'D'
