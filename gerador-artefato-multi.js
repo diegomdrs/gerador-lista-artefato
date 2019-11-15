@@ -2,7 +2,7 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
 
-var listaPromise = []
+const listaPromise = []
 
 // ex. Linux:   node gerador-artefato-multi.js --projeto=/kdi/git/apc-api,/kdi/git/apc-estatico,/kdi/git/crm-patrimonio-estatico --autor=c1282036 --task=1194196,1189666
 // ex. Windows: TODO
@@ -26,11 +26,11 @@ function init() {
 
     Promise.all(listaPromise).then(function (listaSaidaComando) {
 
+      console.log(listaSaidaComando)
+
       let objAgrupadoPorTask = groupBy('task', listaSaidaComando)
 
       Object.keys(objAgrupadoPorTask).forEach(function (key) {
-
-        console.log('\nTarefa nº ' + key + '\n')
 
         const listaSaidaByTask = objAgrupadoPorTask[key]
 
@@ -42,7 +42,7 @@ function init() {
           listaArtefato = removerDeletados(listaArtefato);
 
           listaArtefato.sort(ordenarLista)
-          imprimirLista(listaArtefato)
+          // imprimirLista(listaArtefato)
         });
       })
 
