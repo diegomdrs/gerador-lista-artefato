@@ -48,36 +48,40 @@ function init() {
 
 function imprimirListaAgrupadaPorTask(lista) {
 
-  lista.forEach(function (item) {
+  console.log(JSON.stringify(lista))
 
-    console.log("\nTarefa nº " + item.task + '\n')
+  // lista.forEach(function (item) {
 
-    item.listaArtefato.forEach(function (artefato) {
+  //   console.log("\nTarefa nº " + item.task + '\n')
 
-      console.log(artefato.tipoAlteracao + '\t' +
-        artefato.numeroAlteracao + '\t' +
-          artefato.artefato);
-    })
-  });
+  //   item.listaArtefato.forEach(function (artefato) {
+
+  //     console.log(artefato.tipoAlteracao + '\t' +
+  //       artefato.numeroAlteracao + '\t' +
+  //         artefato.artefato);
+  //   })
+  // });
 }
 
 function obterListaAgrupadaPorTask(listaComandoExecutado) {
 
-  const listaComandoAgrupadoPorTask = agruparListaComandoPorTask(listaComandoExecutado)
+  // const listaComandoAgrupadoPorTask = agruparListaComandoPorTask(listaComandoExecutado)
 
-  return listaComandoAgrupadoPorTask.map(function (comandoExecutado) {
+  return agruparListaComandoPorTask(listaComandoExecutado)
 
-    let listaArtefato = obterListaArtefato(comandoExecutado.task, comandoExecutado.projeto,
-      comandoExecutado.stdout);
+  // return listaComandoAgrupadoPorTask.map(function (comandoExecutado) {
 
-    // listaArtefato = removerDeletados(listaArtefato);
-    // listaArtefato.sort(ordenarLista)
+  //   let listaArtefato = obterListaArtefato(comandoExecutado.task, comandoExecutado.projeto,
+  //     comandoExecutado.stdout);
 
-    return {
-      task: comandoExecutado.task,
-      listaArtefato: listaArtefato
-    }
-  })
+  //   // listaArtefato = removerDeletados(listaArtefato);
+  //   // listaArtefato.sort(ordenarLista)
+
+  //   return {
+  //     task: comandoExecutado.task,
+  //     listaArtefato: listaArtefato
+  //   }
+  // })
 }
 
 function agruparListaComandoPorTask(listaComandoExecutado) {
@@ -85,13 +89,14 @@ function agruparListaComandoPorTask(listaComandoExecutado) {
   return listaComandoExecutado.reduce(function (prev, item) {
 
     const taskAgrupadora = item.task;
-    const stdout = item.stdout;
-    const isListaTaskVazia = !prev
+    const isListaTaskVazia = prev.length === 0
+    const itemProjeto = {projeto: item.projeto}
 
-    const comandoExecutado = {
+    let comandoExecutado = {
       task: taskAgrupadora,
-      stdout: stdout,
-      projeto: item.projeto
+      listaProjeto: [itemProjeto]
+      // projeto: item.projeto
+      // stdout: item.stdout,
     }
 
     if (isListaTaskVazia) {
@@ -106,7 +111,15 @@ function agruparListaComandoPorTask(listaComandoExecutado) {
 
       if (taskEncontrada) {
 
-        taskEncontrada.stdout = taskEncontrada.stdout.concat('\n' + stdout)
+        const projetoEncontrado = taskEncontrada.listaProjeto.find(function (projetoLista) {
+          return projetoLista.projeto === item.projeto
+        });
+
+        if(!projetoEncontrado) {
+          taskEncontrada.listaProjeto.push(itemProjeto)
+        } 
+
+        // taskEncontrada.stdout = taskEncontrada.stdout.concat('\n' + item.stdout)
 
       } else if (!taskEncontrada) {
 

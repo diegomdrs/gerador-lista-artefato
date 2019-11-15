@@ -15,7 +15,7 @@
             "args": [
               "--autor=c1282036",
               "--projeto=/home/jon/Documents/comando-qas/foo-estatico,/home/jon/Documents/comando-qas/foo-api", 
-              "--task=1194196,1189666" 
+              "--task=1194196" 
             ]
         }
     ]
