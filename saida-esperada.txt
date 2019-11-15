@@ -15,8 +15,11 @@ M       2      foo-estatico/README.md
 
 Tarefa nº 1194196
 
-M       2       foo-estatico/README.md
+M	1	foo-estatico/README.md
+M	1	foo-api/README.md
 
 Tarefa nº 1189666
 
-M       5       foo-estatico/README.md
+M	2	foo-estatico/README.md
+D	1	foo-api/README.md
+M	2	foo-api/README.md

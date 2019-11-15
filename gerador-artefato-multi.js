@@ -18,6 +18,9 @@ const listaPromiseExecucaoComando = []
 // git -C /home/jon/Documents/comando-qas/foo-api log --no-merges --author=c1282036 --all --name-status --grep=1189666 
 // git -C /home/jon/Documents/comando-qas/foo-estatico log --no-merges --author=c1282036 --all --name-status --grep=1189666
 
+// TODO
+// Testar com uma task que nao existe
+
 init()
 
 function init() {
@@ -48,40 +51,54 @@ function init() {
 
 function imprimirListaAgrupadaPorTask(lista) {
 
-  console.log(JSON.stringify(lista))
+  lista.forEach(function (item) {
 
-  // lista.forEach(function (item) {
+    console.log("\nTarefa nº " + item.task + '\n')
 
-  //   console.log("\nTarefa nº " + item.task + '\n')
+    item.listaArtefato.forEach(function (artefato) {
 
-  //   item.listaArtefato.forEach(function (artefato) {
-
-  //     console.log(artefato.tipoAlteracao + '\t' +
-  //       artefato.numeroAlteracao + '\t' +
-  //         artefato.artefato);
-  //   })
-  // });
+      console.log(artefato.tipoAlteracao + '\t' +
+        artefato.numeroAlteracao + '\t' +
+        artefato.artefato);
+    })
+  });
 }
 
 function obterListaAgrupadaPorTask(listaComandoExecutado) {
 
-  // const listaComandoAgrupadoPorTask = agruparListaComandoPorTask(listaComandoExecutado)
+  const listaComandoAgrupadoPorTask = agruparListaComandoPorTask(listaComandoExecutado)
 
-  return agruparListaComandoPorTask(listaComandoExecutado)
+  return listaComandoAgrupadoPorTask.map(function (comandoExecutado) {
 
-  // return listaComandoAgrupadoPorTask.map(function (comandoExecutado) {
+    let listaArtefato = []
 
-  //   let listaArtefato = obterListaArtefato(comandoExecutado.task, comandoExecutado.projeto,
-  //     comandoExecutado.stdout);
+    comandoExecutado.listaProjeto.forEach(function (projeto) {
 
-  //   // listaArtefato = removerDeletados(listaArtefato);
-  //   // listaArtefato.sort(ordenarLista)
+      let listaArtefatoProjeto = obterListaArtefato(comandoExecutado.task, projeto.projeto,
+        projeto.stdout);
 
-  //   return {
-  //     task: comandoExecutado.task,
-  //     listaArtefato: listaArtefato
-  //   }
-  // })
+      listaArtefatoProjeto = removerDeletados(listaArtefatoProjeto);
+      listaArtefatoProjeto.sort(ordenarLista)
+
+      listaArtefato.push.apply(listaArtefato, listaArtefatoProjeto)
+    })
+
+    return {
+      task: comandoExecutado.task,
+      listaArtefato: listaArtefato
+    }
+
+    // let listaArtefato = obterListaArtefato(comandoExecutado.task, comandoExecutado.projeto,
+    //   comandoExecutado.stdout);
+
+    // // listaArtefato = removerDeletados(listaArtefato);
+    // // listaArtefato.sort(ordenarLista)
+
+    // return {
+    //   task: comandoExecutado.task,
+    //   listaArtefato: listaArtefato
+    // }
+  })
 }
 
 function agruparListaComandoPorTask(listaComandoExecutado) {
@@ -90,13 +107,11 @@ function agruparListaComandoPorTask(listaComandoExecutado) {
 
     const taskAgrupadora = item.task;
     const isListaTaskVazia = prev.length === 0
-    const itemProjeto = {projeto: item.projeto, stdout: ''}
+    const itemProjeto = { projeto: item.projeto, stdout: item.stdout }
 
     let comandoExecutado = {
       task: taskAgrupadora,
       listaProjeto: [itemProjeto]
-      // projeto: item.projeto
-      // stdout: item.stdout,
     }
 
     if (isListaTaskVazia) {
@@ -115,12 +130,12 @@ function agruparListaComandoPorTask(listaComandoExecutado) {
           return projetoLista.projeto === item.projeto
         });
 
-        if(!projetoEncontrado) {
+        if (projetoEncontrado) {
+          projetoEncontrado.stdout = projetoEncontrado.stdout.concat('\n' + item.stdout)
+
+        } else {
           taskEncontrada.listaProjeto.push(itemProjeto)
-        } 
-
-        // taskEncontrada.stdout = taskEncontrada.stdout.concat('\n' + item.stdout)
-
+        }
       } else if (!taskEncontrada) {
 
         prev.push(comandoExecutado)
