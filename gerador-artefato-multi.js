@@ -7,6 +7,8 @@ var listaPromise = []
 // ex. Linux:   node gerador-artefato-multi.js --projeto=/kdi/git/apc-api,/kdi/git/apc-estatico,/kdi/git/crm-patrimonio-estatico --autor=c1282036 --task=1194196,1189666
 // ex. Windows: TODO
 
+// node gerador-artefato-multi.js --projeto=/home/jon/Documents/comando-qas/foo-estatico,/home/jon/Documents/comando-qas/foo-api --autor=c1282036 --task=1194196
+
 init()
 
 function init() {
@@ -26,7 +28,24 @@ function init() {
 
       let objAgrupadoPorTask = groupBy('task', listaSaidaComando)
 
-      console.log(objAgrupadoPorTask)
+      Object.keys(objAgrupadoPorTask).forEach(function(key){
+
+        console.log('\nTarefa nº ' + key + '\n')
+
+        const listaSaidaByTask = objAgrupadoPorTask[key]
+
+        listaSaidaByTask.forEach(function(foo){
+
+          const lista = obterLista(foo.stdout,foo.task,foo.projeto);
+
+          // lista = removerDeletados(lista);
+          lista.sort(ordenarLista)
+
+          imprimirLista(lista)
+        });
+      })
+
+
     }).catch(function(erro){
 
       console.log(erro.cmd)
