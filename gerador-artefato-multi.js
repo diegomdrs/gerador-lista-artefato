@@ -51,7 +51,13 @@ function imprimirLista(lista) {
 
 function obterListaFoo(listaComandoExecutado) {
 
-  const objetoComandoExecutadoPorTask = agruparPorTask(listaComandoExecutado)
+  const listaComandoExecutadoPorTask = agruparPorTask(listaComandoExecutado)
+
+  // listaComandoExecutadoPorTask.map(function (comandoExecutado) {
+
+  //   let listaArtefato = obterListaArtefato(comandoExecutado.task, comandoExecutado.projeto,
+  //     comandoExecutado.stdout);
+  // })
 
   // Object.keys(listaComandoExecutadoPorTask).forEach(function (key) {
 
@@ -68,7 +74,7 @@ function obterListaFoo(listaComandoExecutado) {
   //   });
   // })
 
-  return objetoComandoExecutadoPorTask;
+  return listaComandoExecutadoPorTask;
 }
 
 function agruparPorTask(listaComandoExecutado) {
@@ -79,9 +85,15 @@ function agruparPorTask(listaComandoExecutado) {
     const stdout = item.stdout;
     const isListaTaskVazia = !prev
 
+    const comandoExecutado = {
+      task: taskAgrupadora,
+      stdout: stdout,
+      projeto: item.projeto
+    }
+
     if (isListaTaskVazia) {
 
-      prev = [{ task: taskAgrupadora, stdout: stdout }]
+      prev = [comandoExecutado]
 
     } else {
 
@@ -89,18 +101,17 @@ function agruparPorTask(listaComandoExecutado) {
         return itemLista.task === taskAgrupadora
       });
 
-      if(taskEncontrada) {
+      if (taskEncontrada) {
 
         taskEncontrada.stdout = taskEncontrada.stdout.concat('\n' + stdout)
 
       } else if (!taskEncontrada) {
 
-        prev.push({ task: taskAgrupadora, stdout: stdout })
+        prev.push(comandoExecutado)
       }
     }
 
     return prev
-
   }, []);
 }
 
@@ -136,9 +147,9 @@ async function executarComandoGitLog(projeto, autor, task) {
   return retorno
 }
 
-function obterLista(saidaComando, task, projeto) {
+function obterListaArtefato(task, projeto, stdout) {
 
-  let listaArtefatosSaidaComando = saidaComando.match(/^((M|D|A){1}|R.*)\s.*$/gm)
+  let listaArtefatosSaidaComando = stdout.match(/^((M|D|A){1}|R.*)\s.*$/gm)
   let listaSaida = []
 
   if (listaArtefatosSaidaComando && listaArtefatosSaidaComando.length) {
