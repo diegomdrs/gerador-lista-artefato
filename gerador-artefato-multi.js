@@ -4,22 +4,8 @@ const path = require('path');
 const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
 
-// ex. Linux:   node gerador-artefato-multi.js --projeto=/kdi/git/apc-api,/kdi/git/apc-estatico,/kdi/git/crm-patrimonio-estatico --autor=c1282036 --task=1194196,1189666
+// ex. Linux:   node gerador-artefato-multi.js --diretorio=/home/jon/Documents/comando-qas --projeto=foo-estatico,foo-api --autor=c1282036 --task=1194196,1189666
 // ex. Windows: TODO
-
-// node gerador-artefato-multi.js --diretorio=/home/jon/Documents/comando-qas --projeto=foo-estatico,foo-api --autor=c1282036 --task=1194196,1189666
-// ./gerador-artefato.sh -d /home/jon/Documents/comando-qas -p 'foo' -u c1282036 -t '1194196,1189666'
-
-// 1194196
-// git -C /home/jon/Documents/comando-qas/foo-api log --no-merges --author=c1282036 --all --name-status --grep=1194196
-// git -C /home/jon/Documents/comando-qas/foo-estatico log --no-merges --author=c1282036 --all --name-status --grep=1194196
-
-// 1189666
-// git -C /home/jon/Documents/comando-qas/foo-api log --no-merges --author=c1282036 --all --name-status --grep=1189666 
-// git -C /home/jon/Documents/comando-qas/foo-estatico log --no-merges --author=c1282036 --all --name-status --grep=1189666
-
-// TODO
-// Testar com uma task que nao existe
 
 init()
 
@@ -31,9 +17,9 @@ function init() {
 
     const listaPromiseExecucaoComando = []
 
-    params.task.forEach(function (task) {
+    obterLista(params.task).forEach(function (task) {
 
-      params.projeto.forEach(function (projeto) {
+      obterLista(params.projeto).forEach(function (projeto) {
 
         const caminhoProjeto = path.join(params.diretorio, projeto)
 
@@ -129,7 +115,7 @@ function agruparListaComandoPorTask(listaComandoExecutado) {
         } else {
           taskEncontrada.listaProjeto.push(itemProjeto)
         }
-      } else if (!taskEncontrada) {
+      } else {
 
         prev.push(comandoExecutado)
       }
@@ -184,11 +170,11 @@ function obterListaArtefato(projeto, stdout) {
       let diretorioProjeto = projeto.match(/[^/|\\]*$/g)[0]
       let artefato = diretorioProjeto + '/' + artefatoSaida.match(/[^\s+]\w.*/g)[0]
 
-      let artefatoModificaoEncontrado = listaSaida.find(function (objSaida) {
+      let artefatoModificacaoEncontrado = listaSaida.find(function (objSaida) {
         return objSaida.artefato === artefato && objSaida.tipoAlteracao === 'M';
       })
 
-      if (tipoAlteracao === 'A' || !artefatoModificaoEncontrado) {
+      if (tipoAlteracao === 'A' || !artefatoModificacaoEncontrado) {
 
         listaSaida.push({
           tipoAlteracao: tipoAlteracao,
@@ -197,12 +183,21 @@ function obterListaArtefato(projeto, stdout) {
         })
       } else {
 
-        artefatoModificaoEncontrado.numeroAlteracao += 1;
+        artefatoModificacaoEncontrado.numeroAlteracao += 1;
       }
     })
   }
 
   return listaSaida
+}
+
+function obterLista(param) {
+
+  if(!Array.isArray(param)) {
+    return param.split()
+  }
+
+  return param
 }
 
 function obterParametros() {

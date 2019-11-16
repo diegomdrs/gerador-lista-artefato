@@ -7,7 +7,22 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Teste 1 projeto",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/gerador-artefato-multi.js",
+            "args": [
+                "--diretorio=/home/jon/Documents/comando-qas",
+                "--projeto=foo-estatico",
+                "--autor=c1282036",
+                "--task=1194196"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Teste 2 ou mais projetos",
             "skipFiles": [
                 "<node_internals>/**"
             ],
