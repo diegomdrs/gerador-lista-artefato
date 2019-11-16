@@ -1,71 +1,165 @@
 const util = require('util');
+const path = require('path');
+
 const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
 
-// ex. Linux:   node gerador-artefato.js --diretorio=/kdi/git/crm-patrimonio-estatico --autor=c1299072 --task=1194436
-// ex. Windows: node gerador-artefato.js --diretorio=C:\kdi\git\crm-patrimonio-estatico --autor=c1299072 --task=1194436
+// ex. Linux:   node gerador-artefato-multi.js --diretorio=/home/jon/Documents/comando-qas --projeto=foo-estatico,foo-api --autor=c1282036 --task=1194196,1189666
+// ex. Windows: TODO
 
 init()
 
 function init() {
 
-  let params = obterParametros();
+  const params = obterParametros();
 
-  if (params.diretorio && params.autor && params.task) {
+  if (params.projeto && params.autor && params.task && params.diretorio) {
 
-    executarComandoGitLog(params.diretorio, params.autor, params.task).then(function (saidaComando) {
+    const listaPromiseExecucaoComando = []
 
-      let lista = obterLista(saidaComando.stdout, params.task, params.diretorio);
+    obterLista(params.task).forEach(function (task) {
 
-      if (lista) {
+      obterLista(params.projeto).forEach(function (projeto) {
 
-        lista = removerDeletados(lista);
-        lista.sort(ordenarLista)
+        const caminhoProjeto = path.join(params.diretorio, projeto)
 
-        imprimirLista(lista)
-      }
-    }).catch(function(error){
+        listaPromiseExecucaoComando.push(executarComandoGitLog(caminhoProjeto, params.autor, task))
+      });
+    })
 
-      console.log(error.cmd)
-      console.log(error.stderr)
+    Promise.all(listaPromiseExecucaoComando).then(function (listaComandoExecutado) {
+
+      const listaAgrupadaPorTask = obterListaAgrupadaPorTask(listaComandoExecutado)
+
+      imprimirListaAgrupadaPorTask(listaAgrupadaPorTask)
+
+    }).catch(function (erro) {
+      console.log(erro.cmd)
+      console.log(erro.stderr)
     })
   }
 }
 
+function imprimirListaAgrupadaPorTask(lista) {
+
+  lista.forEach(function (item) {
+
+    console.log("\nTarefa nº " + item.task + '\n')
+
+    item.listaArtefato.forEach(function (artefato) {
+
+      console.log(artefato.tipoAlteracao + '\t' +
+        artefato.numeroAlteracao + '\t' +
+        artefato.artefato);
+    })
+  });
+}
+
+function obterListaAgrupadaPorTask(listaComandoExecutado) {
+
+  const listaComandoAgrupadoPorTask = agruparListaComandoPorTask(listaComandoExecutado)
+
+  return listaComandoAgrupadoPorTask.map(function (comandoExecutado) {
+
+    let listaArtefato = []
+
+    comandoExecutado.listaProjeto.forEach(function (projeto) {
+
+      let listaArtefatoProjeto = obterListaArtefato(projeto.nomeProjeto, projeto.stdout);
+
+      listaArtefatoProjeto = removerDeletados(listaArtefatoProjeto);
+      listaArtefatoProjeto.sort(ordenarLista)
+
+      listaArtefato.push.apply(listaArtefato, listaArtefatoProjeto)
+    })
+
+    return {
+      task: comandoExecutado.task,
+      listaArtefato: listaArtefato
+    }
+  })
+}
+
+function agruparListaComandoPorTask(listaComandoExecutado) {
+
+  return listaComandoExecutado.reduce(function (prev, item) {
+
+    const taskAgrupadora = item.task;
+    const isListaTaskVazia = prev.length === 0
+    const itemProjeto = { nomeProjeto: item.projeto, stdout: item.stdout }
+
+    let comandoExecutado = {
+      task: taskAgrupadora,
+      listaProjeto: [itemProjeto]
+    }
+
+    if (isListaTaskVazia) {
+
+      prev = [comandoExecutado]
+
+    } else {
+
+      const taskEncontrada = prev.find(function (itemLista) {
+        return itemLista.task === taskAgrupadora
+      });
+
+      if (taskEncontrada) {
+
+        const projetoEncontrado = taskEncontrada.listaProjeto.find(function (projetoLista) {
+          return projetoLista.nomeProjeto === item.projeto
+        });
+
+        if (projetoEncontrado) {
+          projetoEncontrado.stdout = projetoEncontrado.stdout.concat('\n' + item.stdout)
+
+        } else {
+          taskEncontrada.listaProjeto.push(itemProjeto)
+        }
+      } else {
+
+        prev.push(comandoExecutado)
+      }
+    }
+
+    return prev
+  }, []);
+}
+
 function removerDeletados(listaArtefato) {
 
-  return listaArtefato.filter(function (artefatoFilter) {
+  var retorno = listaArtefato.filter(function (artefatoFilter) {
 
     let possuiArtefatoCorrespondenteDeletado = listaArtefato.some(function (artefatoSome) {
+
       return (artefatoFilter.artefato === artefatoSome.artefato) && artefatoSome.tipoAlteracao === 'D'
     })
 
     return artefatoFilter.tipoAlteracao !== 'D' && !possuiArtefatoCorrespondenteDeletado
   })
+
+  return retorno
 }
 
 function ordenarLista(artefatoA, artefatoB) {
   return artefatoA.artefato > artefatoB.artefato
 }
 
-function imprimirLista(lista) {
-  lista.forEach(function (item) {
+async function executarComandoGitLog(projeto, autor, task) {
 
-    console.log(item.tipoAlteracao + '\t' + item.numeroAlteracao + '\t' + item.artefato);
-  });
-}
-
-async function executarComandoGitLog(diretorio, autor, task) {
-
-  let comando = 'git -C ' + diretorio + ' log --no-merges --author=' + autor +
+  let comando = 'git -C ' + projeto + ' log --no-merges --author=' + autor +
     ' --all --name-status --grep=' + task;
 
-  return await exec(comando);
+  var retorno = await exec(comando);
+  retorno.projeto = projeto;
+  retorno.task = task
+  retorno.comando = comando;
+
+  return retorno
 }
 
-function obterLista(saidaComando, task, diretorio) {
+function obterListaArtefato(projeto, stdout) {
 
-  let listaArtefatosSaidaComando = saidaComando.match(/^((M|D|A){1}|R.*)\s.*$/gm)
+  let listaArtefatosSaidaComando = stdout.match(/^((M|D|A){1}|R.*)\s.*$/gm)
   let listaSaida = []
 
   if (listaArtefatosSaidaComando && listaArtefatosSaidaComando.length) {
@@ -73,29 +167,37 @@ function obterLista(saidaComando, task, diretorio) {
     listaArtefatosSaidaComando.forEach(function (artefatoSaida) {
 
       let tipoAlteracao = artefatoSaida.match(/^(M|D|A|R)/g)[0]
-      let diretorioProjeto = diretorio.match(/[^/|\\]*$/g)[0]
+      let diretorioProjeto = projeto.match(/[^/|\\]*$/g)[0]
       let artefato = diretorioProjeto + '/' + artefatoSaida.match(/[^\s+]\w.*/g)[0]
 
-      let artefatoModificaoEncontrado = listaSaida.find(function(objSaida){
+      let artefatoModificacaoEncontrado = listaSaida.find(function (objSaida) {
         return objSaida.artefato === artefato && objSaida.tipoAlteracao === 'M';
       })
 
-      if(tipoAlteracao === 'A' || !artefatoModificaoEncontrado) {
-  
+      if (tipoAlteracao === 'A' || !artefatoModificacaoEncontrado) {
+
         listaSaida.push({
           tipoAlteracao: tipoAlteracao,
           artefato: artefato,
-          task: task,
           numeroAlteracao: 1
         })
       } else {
-        
-        artefatoModificaoEncontrado.numeroAlteracao += 1;
+
+        artefatoModificacaoEncontrado.numeroAlteracao += 1;
       }
     })
   }
 
   return listaSaida
+}
+
+function obterLista(param) {
+
+  if(!Array.isArray(param)) {
+    return param.split()
+  }
+
+  return param
 }
 
 function obterParametros() {
@@ -104,8 +206,12 @@ function obterParametros() {
 
   args.forEach(function (arg) {
 
-    let key = arg.split('=')[0].match(/\w+/g)
+    const key = arg.split('=')[0].replace(/[^\w]/g, '')
     let value = arg.split('=')[1]
+
+    if (value.match(/\w+,\w+/g)) {
+      value = value.split(',')
+    }
 
     obj[key] = value;
   });
