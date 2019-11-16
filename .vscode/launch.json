@@ -13,9 +13,10 @@
             ],
             "program": "${workspaceFolder}/gerador-artefato-multi.js",
             "args": [
-              "--autor=c1282036",
-              "--projeto=/home/jon/Documents/comando-qas/foo-estatico,/home/jon/Documents/comando-qas/foo-api", 
-              "--task=1189666" 
+                "--diretorio=/home/jon/Documents/comando-qas",
+                "--projeto=foo-estatico,foo-api",
+                "--autor=c1282036",
+                "--task=1194196,1189666"
             ]
         }
     ]

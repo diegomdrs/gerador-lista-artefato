@@ -1,11 +1,13 @@
 const util = require('util');
+const path = require('path');
+
 const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
 
 // ex. Linux:   node gerador-artefato-multi.js --projeto=/kdi/git/apc-api,/kdi/git/apc-estatico,/kdi/git/crm-patrimonio-estatico --autor=c1282036 --task=1194196,1189666
 // ex. Windows: TODO
 
-// node gerador-artefato-multi.js --projeto=/home/jon/Documents/comando-qas/foo-estatico,/home/jon/Documents/comando-qas/foo-api --autor=c1282036 --task=1194196,1189666
+// node gerador-artefato-multi.js --diretorio=/home/jon/Documents/comando-qas --projeto=foo-estatico,foo-api --autor=c1282036 --task=1194196,1189666
 // ./gerador-artefato.sh -d /home/jon/Documents/comando-qas -p 'foo' -u c1282036 -t '1194196,1189666'
 
 // 1194196
@@ -23,16 +25,19 @@ init()
 
 function init() {
 
-  let params = obterParametros();
+  const params = obterParametros();
 
-  if (params.projeto && params.autor && params.task) {
+  if (params.projeto && params.autor && params.task && params.diretorio) {
 
     const listaPromiseExecucaoComando = []
 
     params.task.forEach(function (task) {
 
       params.projeto.forEach(function (projeto) {
-        listaPromiseExecucaoComando.push(executarComandoGitLog(projeto, params.autor, task))
+
+        const caminhoProjeto = path.join(params.diretorio, projeto)
+
+        listaPromiseExecucaoComando.push(executarComandoGitLog(caminhoProjeto, params.autor, task))
       });
     })
 
@@ -74,7 +79,7 @@ function obterListaAgrupadaPorTask(listaComandoExecutado) {
 
     comandoExecutado.listaProjeto.forEach(function (projeto) {
 
-      let listaArtefatoProjeto = obterListaArtefato(projeto.nomeProjeto,projeto.stdout);
+      let listaArtefatoProjeto = obterListaArtefato(projeto.nomeProjeto, projeto.stdout);
 
       listaArtefatoProjeto = removerDeletados(listaArtefatoProjeto);
       listaArtefatoProjeto.sort(ordenarLista)
@@ -206,8 +211,12 @@ function obterParametros() {
 
   args.forEach(function (arg) {
 
-    let key = arg.split('=')[0].replace(/[^\w]/g, '')
-    let value = arg.split('=')[1].split(',')
+    const key = arg.split('=')[0].replace(/[^\w]/g, '')
+    let value = arg.split('=')[1]
+
+    if (value.match(/\w+,\w+/g)) {
+      value = value.split(',')
+    }
 
     obj[key] = value;
   });
