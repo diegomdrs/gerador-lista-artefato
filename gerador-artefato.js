@@ -4,9 +4,6 @@ const path = require('path');
 const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
 
-// ex. Linux:   node gerador-artefato-multi.js --diretorio=/home/jon/Documents/comando-qas --projeto=foo-estatico,foo-api --autor=c1282036 --task=1194196,1189666
-// ex. Windows: TODO
-
 init()
 
 function init() {
