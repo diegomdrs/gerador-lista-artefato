@@ -64,7 +64,7 @@ function obterListaAgrupadaPorTask(listaComandoExecutado) {
 
       let listaArtefatoProjeto = obterListaArtefato(projeto.nomeProjeto, projeto.stdout);
 
-      listaArtefatoProjeto = removerDeletados(listaArtefatoProjeto);
+      listaArtefatoProjeto = removerArtefatoDeletado(listaArtefatoProjeto);
       listaArtefatoProjeto.sort(ordenarLista)
 
       listaArtefato.push.apply(listaArtefato, listaArtefatoProjeto)
@@ -122,7 +122,7 @@ function agruparListaComandoPorTask(listaComandoExecutado) {
   }, []);
 }
 
-function removerDeletados(listaArtefato) {
+function removerArtefatoDeletado(listaArtefato) {
 
   var retorno = listaArtefato.filter(function (artefatoFilter) {
 
