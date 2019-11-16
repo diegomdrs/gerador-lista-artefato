@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/gerador-artefato-multi.js",
+            "program": "${workspaceFolder}/gerador-artefato.js",
             "args": [
                 "--diretorio=/home/jon/Documents/comando-qas",
                 "--projeto=foo-estatico",
@@ -26,7 +26,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/gerador-artefato-multi.js",
+            "program": "${workspaceFolder}/gerador-artefato.js",
             "args": [
                 "--diretorio=/home/jon/Documents/comando-qas",
                 "--projeto=foo-estatico,foo-api",
