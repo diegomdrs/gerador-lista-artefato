@@ -74,7 +74,7 @@ function obterListaAgrupadaPorTask(listaComandoExecutado) {
 
     comandoExecutado.listaProjeto.forEach(function (projeto) {
 
-      let listaArtefatoProjeto = obterListaArtefato(projeto.projeto,projeto.stdout);
+      let listaArtefatoProjeto = obterListaArtefato(projeto.nomeProjeto,projeto.stdout);
 
       listaArtefatoProjeto = removerDeletados(listaArtefatoProjeto);
       listaArtefatoProjeto.sort(ordenarLista)
@@ -95,7 +95,7 @@ function agruparListaComandoPorTask(listaComandoExecutado) {
 
     const taskAgrupadora = item.task;
     const isListaTaskVazia = prev.length === 0
-    const itemProjeto = { projeto: item.projeto, stdout: item.stdout }
+    const itemProjeto = { nomeProjeto: item.projeto, stdout: item.stdout }
 
     let comandoExecutado = {
       task: taskAgrupadora,
@@ -115,7 +115,7 @@ function agruparListaComandoPorTask(listaComandoExecutado) {
       if (taskEncontrada) {
 
         const projetoEncontrado = taskEncontrada.listaProjeto.find(function (projetoLista) {
-          return projetoLista.projeto === item.projeto
+          return projetoLista.nomeProjeto === item.projeto
         });
 
         if (projetoEncontrado) {
