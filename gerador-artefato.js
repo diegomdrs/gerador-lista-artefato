@@ -171,8 +171,8 @@ function obterListaArtefato(projeto, stdout) {
     listaArtefatosSaidaComando.forEach(function (artefatoSaida) {
 
       const diretorioProjeto = path.basename(projeto)
-      const tipoAlteracao = artefatoSaida.match(/^(M|D|A|R)/g)[0]
-      const artefato = artefatoSaida.match(/[^(R\d+\s)]\w.*/g)[0]
+      const tipoAlteracao = artefatoSaida.match(/^\w{1}/g)[0]
+      const artefato = artefatoSaida.match(/[^\s]\w{5}.*/g)[0]
 
       const caminhoArtefato = artefato
         .replace(/^/g, diretorioProjeto + '/')
