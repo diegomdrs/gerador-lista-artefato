@@ -170,9 +170,9 @@ function obterListaArtefato(projeto, stdout) {
 
     listaArtefatosSaidaComando.forEach(function (artefatoSaida) {
 
-      let tipoAlteracao = artefatoSaida.match(/^(M|D|A|R)/g)[0]
-      let diretorioProjeto = path.basename(projeto)
-      let artefato = diretorioProjeto + '/' + artefatoSaida.match(/[^\s+]\w.*/g)[0]
+      const diretorioProjeto = path.basename(projeto)
+      const tipoAlteracao = artefatoSaida.match(/^(M|D|A|R)/g)[0]
+      let artefato = artefatoSaida.match(/[^(M|D|A|R)\d\s+)]\w.*/g)[0]
 
       let artefatoModificacaoEncontrado = listaSaida.find(function (objSaida) {
         return objSaida.artefato === artefato && objSaida.tipoAlteracao === 'M';
