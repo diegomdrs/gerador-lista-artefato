@@ -23,7 +23,7 @@ function init() {
 
         const caminhoProjeto = path.join(params.diretorio, projeto)
 
-        if(fs.existsSync(caminhoProjeto)) {
+        if (fs.existsSync(caminhoProjeto)) {
           listaPromiseExecucaoComando.push(executarComandoGitLog(caminhoProjeto, params.autor, task))
         }
       });
@@ -59,7 +59,11 @@ function imprimirListaAgrupadaPorTask(lista) {
 
 function obterListaAgrupadaPorTask(listaComandoExecutado) {
 
-  const listaComandoAgrupadoPorTask = agruparListaComandoPorTask(listaComandoExecutado)
+  const listaComandoExecutadoComStdout = listaComandoExecutado.filter(function(comandoExecutado){
+    return comandoExecutado.stdout
+  })
+
+  const listaComandoAgrupadoPorTask = agruparListaComandoPorTask(listaComandoExecutadoComStdout)
 
   return listaComandoAgrupadoPorTask.map(function (comandoExecutado) {
 
@@ -195,7 +199,7 @@ function obterListaArtefato(projeto, stdout) {
 
 function obterLista(param) {
 
-  if(!Array.isArray(param)) {
+  if (!Array.isArray(param)) {
     return param.split()
   }
 
