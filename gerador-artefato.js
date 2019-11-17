@@ -132,7 +132,7 @@ function agruparListaComandoPorTask(listaComandoExecutado) {
 
 function removerArtefatoDeletado(listaArtefato) {
 
-  var retorno = listaArtefato.filter(function (artefatoFilter) {
+  return listaArtefato.filter(function (artefatoFilter) {
 
     let possuiArtefatoCorrespondenteDeletado = listaArtefato.some(function (artefatoSome) {
 
@@ -141,8 +141,6 @@ function removerArtefatoDeletado(listaArtefato) {
 
     return artefatoFilter.tipoAlteracao !== 'D' && !possuiArtefatoCorrespondenteDeletado
   })
-
-  return retorno
 }
 
 function ordenarLista(artefatoA, artefatoB) {
