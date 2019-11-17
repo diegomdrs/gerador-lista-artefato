@@ -1,8 +1,11 @@
 const util = require('util');
 const path = require('path');
+const fs = require("fs");
 
 const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
+
+// node gerador-artefato.js --diretorio=/home/jon/Documents/comando-qas --projeto=bar-estatico,bar-api --autor=c1282036 --task=1111111,2222222
 
 init()
 
@@ -20,7 +23,9 @@ function init() {
 
         const caminhoProjeto = path.join(params.diretorio, projeto)
 
-        listaPromiseExecucaoComando.push(executarComandoGitLog(caminhoProjeto, params.autor, task))
+        if(fs.existsSync(caminhoProjeto)) {
+          listaPromiseExecucaoComando.push(executarComandoGitLog(caminhoProjeto, params.autor, task))
+        }
       });
     })
 
