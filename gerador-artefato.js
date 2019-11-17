@@ -163,7 +163,7 @@ async function executarComandoGitLog(projeto, autor, task) {
 
 function obterListaArtefato(projeto, stdout) {
 
-  const listaArtefatosSaidaComando = stdout.match(/^((M|A){1}|R\d+)\s.*$/gm)
+  const listaArtefatosSaidaComando = stdout.match(/^([A-Z]{1}|R\d+)\s.*$/gm)
   let listaSaida = []
 
   if (listaArtefatosSaidaComando && listaArtefatosSaidaComando.length) {
