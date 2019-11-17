@@ -2,6 +2,8 @@
 
 Comando para listar os artefatos incluídos/alterados/renomeados/removidos para geração do QAS
 
+## Pré-requisitos 
+
 ## Uso
 
 ``` console
