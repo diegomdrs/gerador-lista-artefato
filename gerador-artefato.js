@@ -4,6 +4,8 @@ const path = require('path');
 const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
 
+// node gerador-artefato.js --diretorio=/home/jon/Documents/comando-qas --projeto=bar-estatico,bar-api --autor=c1282036 --task=1111111,2222222
+
 init()
 
 function init() {
@@ -54,27 +56,33 @@ function imprimirListaAgrupadaPorTask(lista) {
 
 function obterListaAgrupadaPorTask(listaComandoExecutado) {
 
-  const listaComandoAgrupadoPorTask = agruparListaComandoPorTask(listaComandoExecutado)
-
-  return listaComandoAgrupadoPorTask.map(function (comandoExecutado) {
-
-    let listaArtefato = []
-
-    comandoExecutado.listaProjeto.forEach(function (projeto) {
-
-      let listaArtefatoProjeto = obterListaArtefato(projeto.nomeProjeto, projeto.stdout);
-
-      listaArtefatoProjeto = removerArtefatoDeletado(listaArtefatoProjeto);
-      listaArtefatoProjeto.sort(ordenarLista)
-
-      listaArtefato.push.apply(listaArtefato, listaArtefatoProjeto)
-    })
-
-    return {
-      task: comandoExecutado.task,
-      listaArtefato: listaArtefato
-    }
+  const listaComandoExecutadoComStdout = listaComandoExecutado.filter(function (comandoExecutado) {
+    return comandoExecutado.stdout
   })
+
+  return agruparListaComandoPorTask(listaComandoExecutadoComStdout)
+    .map(function (comandoExecutado) {
+
+      let listaArtefato = []
+
+      comandoExecutado.listaProjeto.forEach(function (projeto) {
+
+        let listaArtefatoProjeto = obterListaArtefato(projeto.nomeProjeto, projeto.stdout);
+
+        listaArtefatoProjeto = removerArtefatoDeletado(listaArtefatoProjeto);
+        listaArtefatoProjeto.sort(ordenarLista)
+
+        listaArtefato.push.apply(listaArtefato, listaArtefatoProjeto)
+      })
+
+      return {
+        task: comandoExecutado.task,
+        listaArtefato: listaArtefato
+      }
+    })
+    .filter(function (item) {
+      return item.listaArtefato.length
+    })
 }
 
 function agruparListaComandoPorTask(listaComandoExecutado) {
@@ -124,17 +132,16 @@ function agruparListaComandoPorTask(listaComandoExecutado) {
 
 function removerArtefatoDeletado(listaArtefato) {
 
-  var retorno = listaArtefato.filter(function (artefatoFilter) {
+  return listaArtefato.filter(function (artefatoFilter) {
 
     let possuiArtefatoCorrespondenteDeletado = listaArtefato.some(function (artefatoSome) {
 
-      return (artefatoFilter.artefato === artefatoSome.artefato) && artefatoSome.tipoAlteracao === 'D'
+      return (artefatoFilter.artefato === artefatoSome.artefato)
+        && artefatoSome.tipoAlteracao === 'D'
     })
 
     return artefatoFilter.tipoAlteracao !== 'D' && !possuiArtefatoCorrespondenteDeletado
   })
-
-  return retorno
 }
 
 function ordenarLista(artefatoA, artefatoB) {
@@ -156,26 +163,30 @@ async function executarComandoGitLog(projeto, autor, task) {
 
 function obterListaArtefato(projeto, stdout) {
 
-  let listaArtefatosSaidaComando = stdout.match(/^((M|D|A){1}|R.*)\s.*$/gm)
+  const listaArtefatosSaidaComando = stdout.match(/^((M|A){1}|R\d+)\s.*$/gm)
   let listaSaida = []
 
   if (listaArtefatosSaidaComando && listaArtefatosSaidaComando.length) {
 
     listaArtefatosSaidaComando.forEach(function (artefatoSaida) {
 
-      let tipoAlteracao = artefatoSaida.match(/^(M|D|A|R)/g)[0]
-      let diretorioProjeto = projeto.match(/[^/|\\]*$/g)[0]
-      let artefato = diretorioProjeto + '/' + artefatoSaida.match(/[^\s+]\w.*/g)[0]
+      const diretorioProjeto = path.basename(projeto)
+      const tipoAlteracao = artefatoSaida.match(/^\w{1}/g)[0]
+      const artefato = artefatoSaida.match(/[^\s]\w{5}.*/g)[0]
+
+      const caminhoArtefato = artefato
+        .replace(/^/g, diretorioProjeto + '/')
+          .replace(/\s+/g, ' ' + diretorioProjeto + '/')
 
       let artefatoModificacaoEncontrado = listaSaida.find(function (objSaida) {
-        return objSaida.artefato === artefato && objSaida.tipoAlteracao === 'M';
+        return objSaida.artefato === caminhoArtefato && objSaida.tipoAlteracao === 'M';
       })
 
       if (tipoAlteracao === 'A' || !artefatoModificacaoEncontrado) {
 
         listaSaida.push({
           tipoAlteracao: tipoAlteracao,
-          artefato: artefato,
+          artefato: caminhoArtefato,
           numeroAlteracao: 1
         })
       } else {
@@ -190,7 +201,7 @@ function obterListaArtefato(projeto, stdout) {
 
 function obterLista(param) {
 
-  if(!Array.isArray(param)) {
+  if (!Array.isArray(param)) {
     return param.split()
   }
 
