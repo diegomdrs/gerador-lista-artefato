@@ -80,7 +80,7 @@ function obterListaAgrupadaPorTask(listaComandoExecutado) {
         listaArtefato: listaArtefato
       }
     })
-    .filter(function(item){
+    .filter(function (item) {
       return item.listaArtefato.length
     })
 }
@@ -136,7 +136,8 @@ function removerArtefatoDeletado(listaArtefato) {
 
     let possuiArtefatoCorrespondenteDeletado = listaArtefato.some(function (artefatoSome) {
 
-      return (artefatoFilter.artefato === artefatoSome.artefato) && artefatoSome.tipoAlteracao === 'D'
+      return (artefatoFilter.artefato === artefatoSome.artefato)
+        && artefatoSome.tipoAlteracao === 'D'
     })
 
     return artefatoFilter.tipoAlteracao !== 'D' && !possuiArtefatoCorrespondenteDeletado
@@ -162,7 +163,7 @@ async function executarComandoGitLog(projeto, autor, task) {
 
 function obterListaArtefato(projeto, stdout) {
 
-  let listaArtefatosSaidaComando = stdout.match(/^((M|D|A){1}|R.*)\s.*$/gm)
+  const listaArtefatosSaidaComando = stdout.match(/^((M|D|A){1}|R.*)\s.*$/gm)
   let listaSaida = []
 
   if (listaArtefatosSaidaComando && listaArtefatosSaidaComando.length) {
@@ -170,7 +171,7 @@ function obterListaArtefato(projeto, stdout) {
     listaArtefatosSaidaComando.forEach(function (artefatoSaida) {
 
       let tipoAlteracao = artefatoSaida.match(/^(M|D|A|R)/g)[0]
-      let diretorioProjeto = projeto.match(/[^/|\\]*$/g)[0]
+      let diretorioProjeto = path.basename(projeto)
       let artefato = diretorioProjeto + '/' + artefatoSaida.match(/[^\s+]\w.*/g)[0]
 
       let artefatoModificacaoEncontrado = listaSaida.find(function (objSaida) {
