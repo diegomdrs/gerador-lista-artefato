@@ -5,6 +5,7 @@ Comando para listar os artefatos incluídos/alterados/renomeados/removidos para 
 ## Pré-requisitos 
 
 - Utilizar o comando `git mv` ao renomear artefatos
+- Não utilizar espaços nos nomes dos arquivos
 
 ## Uso
 
