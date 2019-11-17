@@ -172,7 +172,7 @@ function obterListaArtefato(projeto, stdout) {
 
       const diretorioProjeto = path.basename(projeto)
       const tipoAlteracao = artefatoSaida.match(/^(M|D|A|R)/g)[0]
-      const artefato = artefatoSaida.match(/[^(M|D|A|R)\d+\s+)]\w.*/g)[0]
+      const artefato = artefatoSaida.match(/[^(R\d+\s)]\w.*/g)[0]
 
       const caminhoArtefato = artefato
         .replace(/^/g, diretorioProjeto + '/')
