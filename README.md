@@ -41,3 +41,7 @@ Onde:
 - Ação executada no artefato na tarefa - Added (A), Modified (M), Renamed (R)
 - Nº de modificações do artefato na tarefa
 - Nome do artefato
+
+## TODO
+
+- Tratar arquivos deletados e depois adicionados com o mesmo nome
