@@ -172,17 +172,21 @@ function obterListaArtefato(projeto, stdout) {
 
       const diretorioProjeto = path.basename(projeto)
       const tipoAlteracao = artefatoSaida.match(/^(M|D|A|R)/g)[0]
-      let artefato = artefatoSaida.match(/[^(M|D|A|R)\d\s+)]\w.*/g)[0]
+      const artefato = artefatoSaida.match(/[^(M|D|A|R)\d+\s+)]\w.*/g)[0]
+
+      const caminhoArtefato = artefato
+        .replace(/^/g, diretorioProjeto + '/')
+          .replace(/\s+/g, ' ' + diretorioProjeto + '/')
 
       let artefatoModificacaoEncontrado = listaSaida.find(function (objSaida) {
-        return objSaida.artefato === artefato && objSaida.tipoAlteracao === 'M';
+        return objSaida.artefato === caminhoArtefato && objSaida.tipoAlteracao === 'M';
       })
 
       if (tipoAlteracao === 'A' || !artefatoModificacaoEncontrado) {
 
         listaSaida.push({
           tipoAlteracao: tipoAlteracao,
-          artefato: artefato,
+          artefato: caminhoArtefato,
           numeroAlteracao: 1
         })
       } else {
