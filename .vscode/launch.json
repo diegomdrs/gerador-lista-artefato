@@ -29,7 +29,7 @@
             "program": "${workspaceFolder}/gerador-artefato.js",
             "args": [
                 "--diretorio=/home/jon/Documents/comando-qas",
-                "--projeto=bar-estatico,bar-api",
+                "--projeto=bar-estatico",
                 "--autor=c1282036",
                 "--task=1111111,2222222"
             ]

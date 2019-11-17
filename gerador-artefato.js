@@ -1,6 +1,5 @@
 const util = require('util');
 const path = require('path');
-const fs = require("fs");
 
 const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
@@ -23,9 +22,7 @@ function init() {
 
         const caminhoProjeto = path.join(params.diretorio, projeto)
 
-        if (fs.existsSync(caminhoProjeto)) {
-          listaPromiseExecucaoComando.push(executarComandoGitLog(caminhoProjeto, params.autor, task))
-        }
+        listaPromiseExecucaoComando.push(executarComandoGitLog(caminhoProjeto, params.autor, task))
       });
     })
 
@@ -59,31 +56,33 @@ function imprimirListaAgrupadaPorTask(lista) {
 
 function obterListaAgrupadaPorTask(listaComandoExecutado) {
 
-  const listaComandoExecutadoComStdout = listaComandoExecutado.filter(function(comandoExecutado){
+  const listaComandoExecutadoComStdout = listaComandoExecutado.filter(function (comandoExecutado) {
     return comandoExecutado.stdout
   })
 
-  const listaComandoAgrupadoPorTask = agruparListaComandoPorTask(listaComandoExecutadoComStdout)
+  return agruparListaComandoPorTask(listaComandoExecutadoComStdout)
+    .map(function (comandoExecutado) {
 
-  return listaComandoAgrupadoPorTask.map(function (comandoExecutado) {
+      let listaArtefato = []
 
-    let listaArtefato = []
+      comandoExecutado.listaProjeto.forEach(function (projeto) {
 
-    comandoExecutado.listaProjeto.forEach(function (projeto) {
+        let listaArtefatoProjeto = obterListaArtefato(projeto.nomeProjeto, projeto.stdout);
 
-      let listaArtefatoProjeto = obterListaArtefato(projeto.nomeProjeto, projeto.stdout);
+        listaArtefatoProjeto = removerArtefatoDeletado(listaArtefatoProjeto);
+        listaArtefatoProjeto.sort(ordenarLista)
 
-      listaArtefatoProjeto = removerArtefatoDeletado(listaArtefatoProjeto);
-      listaArtefatoProjeto.sort(ordenarLista)
+        listaArtefato.push.apply(listaArtefato, listaArtefatoProjeto)
+      })
 
-      listaArtefato.push.apply(listaArtefato, listaArtefatoProjeto)
+      return {
+        task: comandoExecutado.task,
+        listaArtefato: listaArtefato
+      }
     })
-
-    return {
-      task: comandoExecutado.task,
-      listaArtefato: listaArtefato
-    }
-  })
+    .filter(function(item){
+      return item.listaArtefato.length
+    })
 }
 
 function agruparListaComandoPorTask(listaComandoExecutado) {
