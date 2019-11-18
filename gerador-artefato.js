@@ -4,7 +4,8 @@ const path = require('path');
 const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
 
-// node gerador-artefato.js --diretorio=/home/jon/Documents/comando-qas --projeto=bar-estatico,bar-api --autor=c1282036 --task=1111111,2222222
+// node gerador-artefato.js --diretorio=/kdi/git --projeto=crm-patrimonio-api,crm-patrimonio-estatico,apc-api,apc-estatico --autor=c1282036 --task=1194196,1189666,1186823,1181009,1179615,1176490,1186251
+// gerador-artefato.sh -d /kdi/git -p 'crm-patrimonio-api,crm-patrimonio-estatico,apc-api,apc-estatico' -u c1282036 -t 1194196,1189666,1186823,1181009,1179615,1176490,1186251
 
 init()
 
@@ -172,7 +173,7 @@ function obterListaArtefato(projeto, stdout) {
 
       const diretorioProjeto = path.basename(projeto)
       const tipoAlteracao = artefatoSaida.match(/^\w{1}/g)[0]
-      const artefato = artefatoSaida.match(/[^\s]\w{4}.*/g)[0]
+      const artefato = artefatoSaida.match(/\s.+/g)[0].match(/\w.+/g)[0]
 
       const caminhoArtefato = artefato
         .replace(/^/g, diretorioProjeto + '/')
