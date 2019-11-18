@@ -4,9 +4,6 @@ const path = require('path');
 const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
 
-// node gerador-artefato.js --diretorio=/kdi/git --projeto=crm-patrimonio-api,crm-patrimonio-estatico,apc-api,apc-estatico --autor=c1282036 --task=1194196,1189666,1186823,1181009,1179615,1176490,1186251
-// gerador-artefato.sh -d /kdi/git -p 'crm-patrimonio-api,crm-patrimonio-estatico,apc-api,apc-estatico' -u c1282036 -t 1194196,1189666,1186823,1181009,1179615,1176490,1186251
-
 init()
 
 function init() {
