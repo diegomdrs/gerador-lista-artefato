@@ -9,8 +9,16 @@ Comando para listar os artefatos incluídos/alterados/renomeados/removidos para 
 
 ## Uso
 
+### Linux
+
 ``` console
 $ node gerador-artefato.js --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
+```
+
+### Windows
+
+``` console
+$ node gerador-artefato.js --diretorio=C:/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
 ```
 
 Onde:
