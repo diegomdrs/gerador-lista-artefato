@@ -163,7 +163,7 @@ async function executarComandoGitLog(projeto, autor, task) {
 
 function obterListaArtefato(projeto, stdout) {
 
-  const listaArtefatosSaidaComando = stdout.match(/^((M|A){1}|R\d+)\s.*$/gm)
+  const listaArtefatosSaidaComando = stdout.match(/^([A-Z]{1}|R\d+)\s.*$/gm)
   let listaSaida = []
 
   if (listaArtefatosSaidaComando && listaArtefatosSaidaComando.length) {
@@ -172,7 +172,7 @@ function obterListaArtefato(projeto, stdout) {
 
       const diretorioProjeto = path.basename(projeto)
       const tipoAlteracao = artefatoSaida.match(/^\w{1}/g)[0]
-      const artefato = artefatoSaida.match(/[^\s]\w{5}.*/g)[0]
+      const artefato = artefatoSaida.match(/[^\s]\w{4}.*/g)[0]
 
       const caminhoArtefato = artefato
         .replace(/^/g, diretorioProjeto + '/')
