@@ -1,4 +1,4 @@
-# Comando para listagem de artefatos do QAS
+# Script para listagem de artefatos do QAS
 
 Comando para listar os artefatos incluídos/alterados/renomeados/removidos para geração do QAS
 
