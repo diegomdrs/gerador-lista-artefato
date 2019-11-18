@@ -152,7 +152,7 @@ function ordenarLista(artefatoA, artefatoB) {
 async function executarComandoGitLog(projeto, autor, task) {
 
   let comando = 'git -C ' + projeto + ' log --no-merges --author=' + autor +
-    ' --all --name-status --grep=' + task;
+    ' --all --name-status -C --grep=' + task;
 
   var retorno = await exec(comando);
   retorno.projeto = projeto;
