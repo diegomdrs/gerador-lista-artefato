@@ -38,12 +38,14 @@ Tarefa nº 900081
 
 M   2   foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayConsultarFoo.java
 M   3   foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayIncluirFoo.java
+R   1   foo-estatico/foo.json bar-estatico/bar.json
+
 ```
 Onde:
 
 - Ação executada no artefato na tarefa - Added (A), Modified (M), Renamed (R)
 - Nº de modificações do artefato na tarefa
-- Nome do artefato
+- Caminho do artefato
 
 ## TODO
 
