@@ -2,6 +2,11 @@
 
 Comando para listar os artefatos incluídos/alterados/renomeados/removidos para geração do QAS
 
+## Pré-requisitos 
+
+- Utilizar o comando `git mv` ao renomear artefatos
+- Não utilizar espaços nos nomes dos arquivos
+
 ## Uso
 
 ``` console
@@ -15,7 +20,7 @@ Onde:
 - --autor: Autor dos commits
 - --task: Lista de tarefas (podem ser passadas várias tarefas separadas por vírgula)
 
-## Exemplo de Uso
+## Saida
 
 ``` console
 $ node gerador-artefato.js --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
@@ -34,3 +39,12 @@ Tarefa nº 900081
 M   2   foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayConsultarFoo.java
 M   3   foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayIncluirFoo.java
 ```
+Onde:
+
+- Ação executada no artefato na tarefa - Added (A), Modified (M), Renamed (R)
+- Nº de modificações do artefato na tarefa
+- Nome do artefato
+
+## TODO
+
+- Tratar arquivos deletados e depois adicionados com o mesmo nome
