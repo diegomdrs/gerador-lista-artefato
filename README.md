@@ -16,7 +16,7 @@ $ node gerador-artefato.js --diretorio=/kdi/git --projeto=foo-estatico,foo-api -
 Onde:
 
 - --diretorio: Diretório dos projetos Git
-- --projeto: Lista de projetos do Git (podem ser passados vários projetos separados por vírgula)
+- --projeto: Lista de projetos Git (podem ser passados vários projetos separados por vírgula)
 - --autor: Autor dos commits
 - --task: Lista de tarefas (podem ser passadas várias tarefas separadas por vírgula)
 
