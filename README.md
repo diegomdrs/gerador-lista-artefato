@@ -38,7 +38,7 @@ Tarefa nº 900081
 
 M   2   foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayConsultarFoo.java
 M   3   foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayIncluirFoo.java
-R   1   foo-estatico/foo.json bar-estatico/bar.json
+R   1   foo-estatico/foo.json foo-estatico/bar.json
 
 ```
 Onde:
