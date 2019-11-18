@@ -51,7 +51,7 @@ R   1   foo-estatico/foo.json foo-estatico/bar.json
 ```
 Onde:
 
-- Ação executada no artefato na tarefa - Added (A), Modified (M), Renamed (R)
+- Ação executada no artefato na tarefa - A (Added), M (Modified) e R (Renamed)
 - Nº de modificações do artefato na tarefa
 - Caminho do artefato
 
