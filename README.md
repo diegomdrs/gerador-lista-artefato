@@ -1,6 +1,6 @@
 # Gerador de listagem de artefatos do QAS
 
-Comando para listar os artefatos incluídos/alterados/renomeados/removidos para geração do QAS
+Comando para listar os artefatos incluídos/alterados/renomeados para geração do QAS
 
 ## Pré-requisitos 
 
@@ -58,3 +58,4 @@ Onde:
 ## TODO
 
 - Tratar arquivos deletados e depois adicionados com o mesmo nome
+- Utilizar vários parâmetros `--grep`
