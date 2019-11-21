@@ -12,7 +12,7 @@ function init() {
 
   if (params.projeto && params.autor && params.task && params.diretorio) {
 
-    let listaPromiseExecucaoComando = obterLista(params.task).reduce(function (prev, task) {
+    const listaPromiseExecucaoComando = obterLista(params.task).reduce(function (prev, task) {
 
       obterLista(params.projeto).forEach(function (projeto) {
 
