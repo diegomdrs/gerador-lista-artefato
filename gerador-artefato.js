@@ -47,7 +47,7 @@ function imprimirListaAgrupadaPorTask(lista) {
 
       console.log(artefato.tipoAlteracao + '\t' +
         artefato.numeroAlteracao + '\t' +
-        artefato.artefato);
+        artefato.nomeArtefato);
     })
   });
 }
@@ -134,7 +134,7 @@ function removerArtefatoDeletado(listaArtefato) {
 
     let possuiArtefatoCorrespondenteDeletado = listaArtefato.some(function (artefatoSome) {
 
-      return (artefatoFilter.artefato === artefatoSome.artefato)
+      return (artefatoFilter.nomeArtefato === artefatoSome.nomeArtefato)
         && artefatoSome.tipoAlteracao === 'D'
     })
 
@@ -143,7 +143,13 @@ function removerArtefatoDeletado(listaArtefato) {
 }
 
 function ordenarLista(artefatoA, artefatoB) {
-  return artefatoA.artefato > artefatoB.artefato
+
+  return reverterNomeArtefato(artefatoA.nomeArtefato) >
+    reverterNomeArtefato(artefatoB.nomeArtefato)
+}
+
+function reverterNomeArtefato(nomeArtefato) {
+  return nomeArtefato.split("").reverse().join("")
 }
 
 async function executarComandoGitLog(projeto, autor, task) {
@@ -174,17 +180,17 @@ function obterListaArtefato(projeto, stdout) {
 
       const caminhoArtefato = artefato
         .replace(/^/g, diretorioProjeto + '/')
-          .replace(/\s+/g, ' ' + diretorioProjeto + '/')
+        .replace(/\s+/g, ' ' + diretorioProjeto + '/')
 
       let artefatoModificacaoEncontrado = listaSaida.find(function (objSaida) {
-        return objSaida.artefato === caminhoArtefato && objSaida.tipoAlteracao === 'M';
+        return objSaida.nomeArtefato === caminhoArtefato && objSaida.tipoAlteracao === 'M';
       })
 
       if (tipoAlteracao === 'A' || !artefatoModificacaoEncontrado) {
 
         listaSaida.push({
           tipoAlteracao: tipoAlteracao,
-          artefato: caminhoArtefato,
+          nomeArtefato: caminhoArtefato,
           numeroAlteracao: 1
         })
       } else {
