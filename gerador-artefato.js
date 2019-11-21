@@ -12,17 +12,16 @@ function init() {
 
   if (params.projeto && params.autor && params.task && params.diretorio) {
 
-    const listaPromiseExecucaoComando = []
-
-    obterLista(params.task).forEach(function (task) {
+    let listaPromiseExecucaoComando = obterLista(params.task).reduce(function (prev, task) {
 
       obterLista(params.projeto).forEach(function (projeto) {
 
         const caminhoProjeto = path.join(params.diretorio, projeto)
-
-        listaPromiseExecucaoComando.push(executarComandoGitLog(caminhoProjeto, params.autor, task))
+        prev.push(executarComandoGitLog(caminhoProjeto, params.autor, task))
       });
-    })
+
+      return prev
+    },[])
 
     Promise.all(listaPromiseExecucaoComando).then(function (listaComandoExecutado) {
 
@@ -31,8 +30,7 @@ function init() {
       imprimirListaAgrupadaPorTask(listaAgrupadaPorTask)
 
     }).catch(function (erro) {
-      console.log(erro.cmd)
-      console.log(erro.stderr)
+      console.log(erro.cmd + '\n' + erro.stderr)
     })
   }
 }
@@ -45,8 +43,7 @@ function imprimirListaAgrupadaPorTask(lista) {
 
     item.listaArtefato.forEach(function (artefato) {
 
-      console.log(artefato.tipoAlteracao + '\t' +
-        artefato.numeroAlteracao + '\t' +
+      console.log(artefato.tipoAlteracao + '\t' + artefato.numeroAlteracao + '\t' +
         artefato.nomeArtefato);
     })
   });
@@ -88,7 +85,6 @@ function agruparListaComandoPorTask(listaComandoExecutado) {
   return listaComandoExecutado.reduce(function (prev, item) {
 
     const taskAgrupadora = item.task;
-    const isListaTaskVazia = prev.length === 0
     const itemProjeto = { nomeProjeto: item.projeto, stdout: item.stdout }
 
     let comandoExecutado = {
@@ -96,7 +92,7 @@ function agruparListaComandoPorTask(listaComandoExecutado) {
       listaProjeto: [itemProjeto]
     }
 
-    if (isListaTaskVazia) {
+    if (prev.length === 0) {
 
       prev = [comandoExecutado]
 
