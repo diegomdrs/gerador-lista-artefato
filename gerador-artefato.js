@@ -140,12 +140,12 @@ function removerArtefatoDeletado(listaArtefato) {
 
 function ordenarLista(artefatoA, artefatoB) {
 
-  return reverterNomeArtefato(artefatoA.nomeArtefato) >
-    reverterNomeArtefato(artefatoB.nomeArtefato)
+  return reverterNomeArtefato(artefatoA.nomeArtefato).localeCompare(
+    reverterNomeArtefato(artefatoB.nomeArtefato))
 }
 
 function reverterNomeArtefato(nomeArtefato) {
-  return nomeArtefato.split("").reverse().join("")
+  return nomeArtefato.split('').reverse().join('')
 }
 
 async function executarComandoGitLog(projeto, autor, task) {
