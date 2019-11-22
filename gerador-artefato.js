@@ -15,13 +15,11 @@ function init() {
     const listaPromiseExecucaoComando = obterLista(params.task).reduce(function (prev, task) {
 
       obterLista(params.projeto).forEach(function (projeto) {
-
-        const caminhoProjeto = path.join(params.diretorio, projeto)
-        prev.push(executarComandoGitLog(caminhoProjeto, params.autor, task))
+        prev.push(executarComandoGitLog(params.diretorio, projeto, params.autor, task))
       });
 
       return prev
-    },[])
+    }, [])
 
     Promise.all(listaPromiseExecucaoComando).then(function (listaComandoExecutado) {
 
@@ -29,8 +27,8 @@ function init() {
 
       imprimirListaAgrupadaPorTask(listaAgrupadaPorTask)
 
-    }).catch(function (erro) {
-      console.log(erro.cmd + '\n' + erro.stderr)
+    }).catch(function ({ cmd, stderr }) {
+      console.log(cmd + '\n' + stderr)
     })
   }
 }
@@ -41,10 +39,8 @@ function imprimirListaAgrupadaPorTask(lista) {
 
     console.log("\nTarefa nº " + item.task + '\n')
 
-    item.listaArtefato.forEach(function (artefato) {
-
-      console.log(artefato.tipoAlteracao + '\t' + artefato.numeroAlteracao + '\t' +
-        artefato.nomeArtefato);
+    item.listaArtefato.forEach(function ({ tipoAlteracao, numeroAlteracao, nomeArtefato }) {
+      console.log(tipoAlteracao + '\t' + numeroAlteracao + '\t' + nomeArtefato);
     })
   });
 }
@@ -148,9 +144,11 @@ function reverterNomeArtefato(nomeArtefato) {
   return nomeArtefato.split('').reverse().join('')
 }
 
-async function executarComandoGitLog(projeto, autor, task) {
+async function executarComandoGitLog(diretorio, projeto, autor, task) {
 
-  let comando = 'git -C ' + projeto + ' log --regexp-ignore-case --no-merges --author=' + autor +
+  const caminhoProjeto = path.join(diretorio, projeto)
+
+  let comando = 'git -C ' + caminhoProjeto + ' log --regexp-ignore-case --no-merges --author=' + autor +
     ' --all --name-status -C --grep=' + task;
 
   var retorno = await exec(comando);

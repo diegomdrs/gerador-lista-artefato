@@ -48,6 +48,21 @@
                 "--autor=c1282036",
                 "--task=1194196,1189666,1186823,1181009,1179615,1176490,1186251"
             ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Teste Foo",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/gerador-artefato.js",
+            "args": [
+                "--diretorio=/home/jon/Documents/comando-qas",
+                "--projeto=bar-estatico,foo-api",
+                "--autor=c1282036",
+                "--task=3333333"
+            ]
         }
     ]
 }
