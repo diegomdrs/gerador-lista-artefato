@@ -3,12 +3,11 @@ const path = require('path');
 
 const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
+const params = obterParametros();
 
 init()
 
 function init() {
-
-  const params = obterParametros();
 
   if (params.projeto && params.autor && params.task && params.diretorio) {
 
@@ -44,7 +43,10 @@ function imprimirListaTask(lista) {
       console.log('\n')
 
       projeto.listaArtefato.forEach(function ({ tipoAlteracao, numeroAlteracao, nomeArtefato }) {
-        console.log(tipoAlteracao + '\t' + numeroAlteracao + '\t' + nomeArtefato);
+
+        console.log(tipoAlteracao + '\t' +
+          (params.mostrarnummodificacao ? (numeroAlteracao + '\t') : ''  ) +
+            nomeArtefato);
       })
     })
   });
@@ -59,26 +61,26 @@ function obterListaAgrupadaPorTask(listaComandoExecutado) {
   return agruparListaComandoPorTask(listaComandoExecutadoComStdout)
     .map(function (comandoExecutado) {
 
-    let listaProjeto = comandoExecutado.listaProjeto.map(function (projeto) {
+      let listaProjeto = comandoExecutado.listaProjeto.map(function (projeto) {
 
-      let listaArtefatoProjeto = obterListaArtefato(projeto.nomeProjeto, projeto.stdout);
+        let listaArtefatoProjeto = obterListaArtefato(projeto.nomeProjeto, projeto.stdout);
 
-      listaArtefatoProjeto = removerArtefatoDeletado(listaArtefatoProjeto);
-      listaArtefatoProjeto.sort(ordenarLista)
+        listaArtefatoProjeto = removerArtefatoDeletado(listaArtefatoProjeto);
+        listaArtefatoProjeto.sort(ordenarLista)
+
+        return {
+          nomeProjeto: projeto.nomeProjeto,
+          listaArtefato: listaArtefatoProjeto
+        }
+      })
 
       return {
-        nomeProjeto: projeto.nomeProjeto,
-        listaArtefato: listaArtefatoProjeto
+        task: comandoExecutado.task,
+        listaProjeto: listaProjeto
       }
+    }).filter(function (item) {
+      return item.listaProjeto.length
     })
-
-    return {
-      task: comandoExecutado.task,
-      listaProjeto: listaProjeto
-    }
-  }).filter(function (item) {
-    return item.listaProjeto.length
-  })
 }
 
 function agruparListaComandoPorTask(listaComandoExecutado) {
@@ -220,8 +222,12 @@ function obterParametros() {
     const key = arg.split('=')[0].replace(/[^\w]/g, '')
     let value = arg.split('=')[1]
 
-    if (value.match(/\w+,\w+/g)) {
-      value = value.split(',')
+    if (value) {
+      if (value.match(/\w+,\w+/g)) {
+        value = value.split(',')
+      }
+    } else {
+      value = true
     }
 
     obj[key] = value;

@@ -61,7 +61,8 @@
                 "--diretorio=/home/jon/Documents/comando-qas",
                 "--projeto=bar-estatico,foo-api",
                 "--autor=c1282036",
-                "--task=3333333"
+                "--task=3333333",
+                "--mostrar-num-modificacao"
             ]
         }
     ]
