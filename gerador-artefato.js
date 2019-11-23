@@ -34,20 +34,28 @@ function init() {
 
 function imprimirListaTask(lista) {
 
-  lista.forEach(function (task) {
+  lista.forEach(function ({ task, listaProjeto }) {
 
-    console.log("\nTarefa nº " + task.task)
+    console.log("\nTarefa nº " + task)
 
-    task.listaProjeto.forEach(function (projeto) {
+    listaProjeto.forEach(function (projeto) {
 
-      console.log('\n')
+      console.log('')
 
-      projeto.listaArtefato.forEach(function ({ tipoAlteracao, numeroAlteracao, nomeArtefato }) {
+      projeto.listaArtefato.forEach(
+        function ({ tipoAlteracao, numeroAlteracao, nomeArtefato }, index) {
 
-        console.log(tipoAlteracao + '\t' +
-          (params.mostrarnummodificacao ? (numeroAlteracao + '\t') : '') +
-          nomeArtefato);
-      })
+          const artefatoAnterior = projeto.listaArtefato[index - 1]
+
+          if (artefatoAnterior && obterExtensao(artefatoAnterior.nomeArtefato)
+            .localeCompare(obterExtensao(nomeArtefato))) {
+            console.log('')
+          }
+
+          console.log(tipoAlteracao + '\t' +
+            (params.mostrarnummodificacao ? (numeroAlteracao + '\t') : '') +
+            nomeArtefato);
+        })
     })
   });
 }
@@ -212,6 +220,10 @@ function obterLista(param) {
   }
 
   return param
+}
+
+function obterExtensao(filename) {
+  return filename.split('.').pop()
 }
 
 function obterParametros() {
