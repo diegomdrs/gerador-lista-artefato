@@ -11,25 +11,18 @@ function init() {
 
   if (params.projeto && params.autor && params.task && params.diretorio) {
 
-    const listaPromiseExecucaoComando = obterLista(params.task).reduce(function (prev, task) {
+    const listaPromiseExecucaoComando = obterListaPromise()
 
-      obterLista(params.projeto).forEach(function (projeto) {
-        prev.push(executarComandoGitLog(params.diretorio, projeto, params.autor, task))
-      });
+      Promise.all(listaPromiseExecucaoComando).then(function (listaComandoExecutado) {
 
-      return prev
-    }, [])
+        const listaComandoComStout = filtrarComandosComSaida(listaComandoExecutado)
+        const listaArtefato = obterListaAgrupadaPorTask(listaComandoComStout)
 
-    Promise.all(listaPromiseExecucaoComando).then(function (listaComandoExecutado) {
+        imprimirListaTask(listaArtefato)
 
-      const listaComandoComStout = filtrarComandosComSaida(listaComandoExecutado)
-      const listaArtefato = obterListaAgrupadaPorTask(listaComandoComStout)
-
-      imprimirListaTask(listaArtefato)
-
-    }).catch(function ({ cmd, stderr }) {
-      console.log(cmd + '\n' + stderr)
-    })
+      }).catch(function ({ cmd, stderr }) {
+        console.log(cmd + '\n' + stderr)
+      })
   }
 }
 
@@ -52,7 +45,7 @@ function imprimirListaTask(listaArtefato) {
 
         console.log('Tarefa nº ' + tarefa.numTarefa + '\t' +
           tarefa.tipoAlteracao + '\t' +
-            tarefa.numeroAlteracao)
+          tarefa.numeroAlteracao)
       });
 
       console.log('\n' + artefato.nomeArtefato + '\n')
@@ -234,6 +227,17 @@ function obterLista(param) {
   }
 
   return param
+}
+
+function obterListaPromise() {
+  return obterLista(params.task).reduce(function (prev, task) {
+
+    obterLista(params.projeto).forEach(function (projeto) {
+      prev.push(executarComandoGitLog(params.diretorio, projeto, params.autor, task))
+    });
+
+    return prev
+  }, [])
 }
 
 function filtrarComandosComSaida(listaComandoExecutado) {
