@@ -147,7 +147,11 @@ function obterListaArtefatoTask({ task, nomeProjeto, stdout }) {
         listaTarefa: [tarefa]
       }
 
-      if (prev.length > 0) {
+      if (prev.length === 0) {
+
+        prev = [artefato]
+
+      } else if (prev.length > 0) {
 
         let artefatoEncontrado = prev.find(function (artefato) {
           return artefato.nomeArtefato === nomeArtefato
@@ -167,9 +171,6 @@ function obterListaArtefatoTask({ task, nomeProjeto, stdout }) {
         } else {
           prev.push(artefato)
         }
-
-      } else {
-        prev = [artefato]
       }
 
       return prev
