@@ -35,8 +35,22 @@ function init() {
 
 function imprimirListaTask(lista) {
 
-  lista.forEach(function (foo) {
-    console.log(foo.nomeArtefato)
+  params.task.forEach(function (tarefaParam) {
+
+    console.log('\nTarefa nº ' + tarefaParam + '\n')
+
+    lista.forEach(function (artefato) {
+
+      artefato.listaTarefa.forEach(function (tarefa) {
+
+        if (tarefa.numTarefa === tarefaParam) {
+
+          console.log(tarefa.tipoAlteracao + '\t' +
+            tarefa.numeroAlteracao + '\t' +
+            artefato.nomeArtefato)
+        }
+      })
+    })
   })
 }
 
@@ -63,8 +77,9 @@ function obterListaAgrupadaPorTask(listaComandoExecutado) {
 
         if (artefatoEncontrado) {
           artefatoEncontrado.listaTarefa.push.apply(
-            artefatoEncontrado.listaTarefa, artefatoNovo.listaTarefa)          
+            artefatoEncontrado.listaTarefa, artefatoNovo.listaTarefa)
         } else {
+
           prev.push(artefatoNovo)
         }
       })
