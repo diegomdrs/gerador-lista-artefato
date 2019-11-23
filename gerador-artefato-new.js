@@ -22,7 +22,8 @@ function init() {
 
     Promise.all(listaPromiseExecucaoComando).then(function (listaComandoExecutado) {
 
-      const listaAgrupadaPorTask = obterListaAgrupadaPorTask(listaComandoExecutado)
+      const listaComandoComStout = filtrarComandosComSaida(listaComandoExecutado)
+      const listaAgrupadaPorTask = obterListaAgrupadaPorTask(listaComandoComStout)
 
       // imprimirListaTask(listaAgrupadaPorTask)
 
@@ -55,40 +56,14 @@ function imprimirListaTask(lista) {
 
 function obterListaAgrupadaPorTask(listaComandoExecutado) {
 
-  const listaComandoExecutadoComStdout = listaComandoExecutado.filter(function (comandoExecutado) {
-    return comandoExecutado.stdout
+  const listaTaskProjeto = listarProjetoPorTask(listaComandoExecutado)
+
+  return listaTaskProjeto.map(function (projeto) {
+
+    let listaArtefatoProjetoTask = obterListaArtefatoTask(projeto);
+
+    console.table(listaArtefatoProjetoTask)
   })
-
-  const projetoPorTask = listarProjetoPorTask(listaComandoExecutadoComStdout)
-
-  return projetoPorTask.map(function (projeto) {
-
-    let listaArtefatoProjeto = obterListaArtefato(projeto);
-
-    console.table(listaArtefatoProjeto)
-
-    //   let listaProjeto = projeto.listaProjeto.map(function (projeto) {
-
-    //     let listaArtefatoProjeto = obterListaArtefato(projeto.nomeProjeto, projeto.stdout);
-
-    //     listaArtefatoProjeto = removerArtefatoDeletado(listaArtefatoProjeto);
-    //     listaArtefatoProjeto.sort(ordenarLista)
-
-    //     return {
-    //       nomeProjeto: projeto.nomeProjeto,
-    //       listaArtefato: listaArtefatoProjeto
-    //     }
-    //   })
-
-    //   return {
-    //     task: projeto.task,
-    //     listaProjeto: listaProjeto
-    //   }
-  })
-
-  // .filter(function (item) {
-  //   return item.listaProjeto.length
-  // })
 }
 
 function listarProjetoPorTask(listaComandoExecutado) {
@@ -96,54 +71,13 @@ function listarProjetoPorTask(listaComandoExecutado) {
   return listaComandoExecutado.map(function (item) {
 
     const itemProjeto = {
-      task: item.task, 
-      nomeProjeto: item.projeto, 
+      task: item.task,
+      nomeProjeto: item.projeto,
       stdout: item.stdout
     }
 
     return itemProjeto
   })
-
-  // return listaComandoExecutado.reduce(function (prev, item) {
-
-  //   const taskAgrupadora = item.task;
-  //   const itemProjeto = { nomeProjeto: item.projeto, stdout: item.stdout }
-
-  //   let comandoExecutado = {
-  //     task: taskAgrupadora,
-  //     listaProjeto: [itemProjeto]
-  //   }
-
-  //   if (prev.length === 0) {
-
-  //     prev = [comandoExecutado]
-
-  //   } else {
-
-  //     const taskEncontrada = prev.find(function (itemLista) {
-  //       return itemLista.task === taskAgrupadora
-  //     });
-
-  //     if (taskEncontrada) {
-
-  //       const projetoEncontrado = taskEncontrada.listaProjeto.find(function (projetoLista) {
-  //         return projetoLista.nomeProjeto === item.projeto
-  //       });
-
-  //       if (projetoEncontrado) {
-  //         projetoEncontrado.stdout = projetoEncontrado.stdout.concat('\n' + item.stdout)
-
-  //       } else {
-  //         taskEncontrada.listaProjeto.push(itemProjeto)
-  //       }
-  //     } else {
-
-  //       prev.push(comandoExecutado)
-  //     }
-  //   }
-
-  //   return prev
-  // }, []);
 }
 
 function removerArtefatoDeletado(listaArtefato) {
@@ -186,45 +120,52 @@ async function executarComandoGitLog(diretorio, projeto, autor, task) {
   return retorno
 }
 
-function obterListaArtefato({ task, nomeProjeto, stdout }) {
+function obterListaArtefatoTask({ task, nomeProjeto, stdout }) {
 
   const listaArtefatosSaidaComando = stdout.match(/^([A-Z]{1}|R\d+)\s.*$/gm)
-  let listaSaida = []
 
   if (listaArtefatosSaidaComando && listaArtefatosSaidaComando.length) {
 
-    listaArtefatosSaidaComando.forEach(function (artefatoSaida) {
+    return listaArtefatosSaidaComando.reduce(function (prev, artefatoSaida) {
 
-      const diretorioProjeto = path.basename(nomeProjeto)
       const tipoAlteracao = artefatoSaida.match(/^\w{1}/g)[0]
-      const artefato = artefatoSaida.match(/\s.+/g)[0].match(/\w.+/g)[0]
+      const diretorioProjeto = path.basename(nomeProjeto)
+      const arquivoArtefato = artefatoSaida.match(/\s.+/g)[0].match(/\w.+/g)[0]
 
-      const caminhoArtefato = artefato
+      const nomeArtefato = arquivoArtefato
         .replace(/^/g, diretorioProjeto + '/')
         .replace(/\s+/g, ' ' + diretorioProjeto + '/')
 
-      // let artefatoModificacaoEncontrado = listaSaida.find(function (objSaida) {
-      //   return objSaida.nomeArtefato === caminhoArtefato && objSaida.tipoAlteracao === 'M';
-      // })
+      const tarefa = {
+        numTarefa: task,
+        tipoAlteracao: tipoAlteracao,
+        numeroAlteracao: 1
+      }
 
-      // if (tipoAlteracao === 'A' || !artefatoModificacaoEncontrado) {
+      const artefato = {
+        nomeArtefato: nomeArtefato,
+        listaTarefa: [tarefa]
+      }
 
-      listaSaida.push({
-        nomeArtefato: caminhoArtefato,
-        listaTarefa: [{
-          numTarefa: task,
-          tipoAlteracao: tipoAlteracao,
-          numeroAlteracao: 1
-        }]
-      })
-      // } else {
+      if (prev.length > 0) {
 
-      //   artefatoModificacaoEncontrado.numeroAlteracao += 1;
-      // }
-    })
+        let artefatoEncontrado = prev.find(function (artefato) {
+          return artefato.nomeArtefato === nomeArtefato
+        })
+
+        if (artefatoEncontrado) {
+          artefatoEncontrado.listaTarefa.push(tarefa)
+        } else {
+          prev.push(artefato)
+        }
+
+      } else {
+        prev = [artefato]
+      }
+
+      return prev
+    }, [])
   }
-
-  return listaSaida
 }
 
 function obterLista(param) {
@@ -234,6 +175,12 @@ function obterLista(param) {
   }
 
   return param
+}
+
+function filtrarComandosComSaida(listaComandoExecutado) {
+  return listaComandoExecutado.filter(function (comandoExecutado) {
+    return comandoExecutado.stdout
+  })
 }
 
 function obterParametros() {
