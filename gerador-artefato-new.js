@@ -154,7 +154,16 @@ function obterListaArtefatoTask({ task, nomeProjeto, stdout }) {
         })
 
         if (artefatoEncontrado) {
-          artefatoEncontrado.listaTarefa.push(tarefa)
+
+          let taskModificacaoEncontrada = artefatoEncontrado.listaTarefa.find(function (tarefa) {
+            return tarefa.numTarefa === task && tarefa.tipoAlteracao === 'M'
+          })
+
+          if (taskModificacaoEncontrada && tipoAlteracao === 'M') {
+            taskModificacaoEncontrada.numeroAlteracao += 1
+          } else {
+            artefatoEncontrado.listaTarefa.push(tarefa)
+          }
         } else {
           prev.push(artefato)
         }
