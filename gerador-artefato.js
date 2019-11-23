@@ -43,14 +43,7 @@ function imprimirListaTask(lista) {
       console.log('')
 
       projeto.listaArtefato.forEach(
-        function ({ tipoAlteracao, numeroAlteracao, nomeArtefato }, index) {
-
-          const artefatoAnterior = projeto.listaArtefato[index - 1]
-
-          if (artefatoAnterior && obterExtensao(artefatoAnterior.nomeArtefato)
-            .localeCompare(obterExtensao(nomeArtefato))) {
-            console.log('')
-          }
+        function ({ tipoAlteracao, numeroAlteracao, nomeArtefato }) {
 
           console.log(tipoAlteracao + '\t' +
             (params.mostrarnummodificacao ? (numeroAlteracao + '\t') : '') +
@@ -220,10 +213,6 @@ function obterLista(param) {
   }
 
   return param
-}
-
-function obterExtensao(filename) {
-  return filename.split('.').pop()
 }
 
 function obterParametros() {
