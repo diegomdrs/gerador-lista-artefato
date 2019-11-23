@@ -4,9 +4,21 @@ Comando para listar os artefatos incluídos/alterados/renomeados para geração 
 
 ## Pré-requisitos 
 
+### Sistema
+
+- Node.js v10.15.2
+- Git
+
+### Git
+
 - Não utilizar espaços nos nomes dos arquivos
 - Configurar corretamente as variáveis do Git `user.name` e `user.email` com nome e matrícula
 - Verificar se os merges estão sendo realizados de maneira correta
+
+## Instalação
+
+- Baixe o script `gerador-artefato.js` no [aqui](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/gerador-artefato.js)] e salve no seu computador
+- Abra um terminal e execute o script com o `node`
 
 ## Uso
 
