@@ -56,7 +56,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/gerador-artefato.js",
+            "program": "${workspaceFolder}/gerador-artefato-new.js",
             "args": [
                 "--diretorio=/home/jon/Documents/comando-qas",
                 "--projeto=bar-estatico,foo-api",
