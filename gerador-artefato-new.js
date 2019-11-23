@@ -60,7 +60,7 @@ function obterListaAgrupadaPorTask(listaComandoExecutado) {
 
   return listaTaskProjeto.map(function (projeto) {
 
-    let listaArtefatoProjetoTask = obterListaArtefatoTask(projeto);
+    let listaArtefatoProjetoTask = obterListaArtefato(projeto);
 
     console.table(listaArtefatoProjetoTask)
   })
@@ -120,7 +120,7 @@ async function executarComandoGitLog(diretorio, projeto, autor, task) {
   return retorno
 }
 
-function obterListaArtefatoTask({ task, nomeProjeto, stdout }) {
+function obterListaArtefato({ task, nomeProjeto, stdout }) {
 
   const listaArtefatosSaidaComando = stdout.match(/^([A-Z]{1}|R\d+)\s.*$/gm)
 
