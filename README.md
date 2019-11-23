@@ -17,7 +17,7 @@ Comando para listar os artefatos incluídos/alterados/renomeados para geração 
 
 ## Instalação
 
-- Baixe o script `gerador-artefato.js` no [aqui](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/gerador-artefato.js)] e salve no seu computador
+- Baixe o script `gerador-artefato.js` no [aqui](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/gerador-artefato.js) e salve no seu computador
 - Abra um terminal e execute o script com o `node`
 
 ## Uso
