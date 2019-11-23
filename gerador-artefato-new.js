@@ -37,7 +37,14 @@ function imprimirListaTask(listaArtefato) {
 
   console.log('')
 
-  listaArtefato.forEach(function (artefato) {
+  const listaArtefatoMaisUmaTarefa = listaArtefato.filter(function (artefato) {
+    return artefato.listaTarefa.length > 1
+  })
+  const listaArtefatoAteUmaTarefa = listaArtefato.filter(function (artefato) {
+    return artefato.listaTarefa.length === 1
+  })
+
+  listaArtefatoMaisUmaTarefa.forEach(function (artefato) {
 
     if (artefato.listaTarefa.length > 1) {
 
@@ -52,22 +59,25 @@ function imprimirListaTask(listaArtefato) {
     }
   })
 
+  params.task.forEach(function (tarefaParam) {
 
-  // params.task.forEach(function (tarefaParam) {
+    console.log('Tarefa nº ' + tarefaParam + '\n')
 
-  //   lista.forEach(function (artefato) {
+    listaArtefatoAteUmaTarefa.forEach(function (artefato) {
 
-  //     artefato.listaTarefa.forEach(function (tarefa) {
+      artefato.listaTarefa.forEach(function (tarefa) {
 
-  //       if (tarefa.numTarefa === tarefaParam) {
+        if (tarefa.numTarefa === tarefaParam) {
 
-  //         console.log(tarefa.tipoAlteracao + '\t' +
-  //           tarefa.numeroAlteracao + '\t' +
-  //           artefato.nomeArtefato)
-  //       }
-  //     })
-  //   })
-  // })
+          console.log(tarefa.tipoAlteracao + '\t' +
+            tarefa.numeroAlteracao + '\t' +
+            artefato.nomeArtefato)
+        }
+      })
+    })
+
+    console.log('')
+  })
 }
 
 function obterListaAgrupadaPorTask(listaComandoExecutado) {
