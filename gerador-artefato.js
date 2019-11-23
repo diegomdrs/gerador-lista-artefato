@@ -45,8 +45,8 @@ function imprimirListaTask(lista) {
       projeto.listaArtefato.forEach(function ({ tipoAlteracao, numeroAlteracao, nomeArtefato }) {
 
         console.log(tipoAlteracao + '\t' +
-          (params.mostrarnummodificacao ? (numeroAlteracao + '\t') : ''  ) +
-            nomeArtefato);
+          (params.mostrarnummodificacao ? (numeroAlteracao + '\t') : '') +
+          nomeArtefato);
       })
     })
   });
@@ -143,8 +143,9 @@ function removerArtefatoDeletado(listaArtefato) {
 
 function ordenarLista(artefatoA, artefatoB) {
 
-  return reverterNomeArtefato(artefatoA.nomeArtefato).localeCompare(
-    reverterNomeArtefato(artefatoB.nomeArtefato))
+  return artefatoA.tipoAlteracao.localeCompare(artefatoB.tipoAlteracao) ||
+    reverterNomeArtefato(artefatoA.nomeArtefato).localeCompare(
+      reverterNomeArtefato(artefatoB.nomeArtefato))
 }
 
 function reverterNomeArtefato(nomeArtefato) {
