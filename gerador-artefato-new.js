@@ -52,9 +52,27 @@ function obterListaAgrupadaPorTask(listaComandoExecutado) {
 
       prev.push.apply(prev, listaArtefatoProjetoTask)
 
-    } else if (prev.length) {
+    } else if (prev.length > 0) {
 
-      prev.push.apply(prev, listaArtefatoProjetoTask)
+      listaArtefatoProjetoTask.forEach(function (artefatoNovo) {
+
+        let artefatoEncontrado = prev
+          .find(function (artefatoPrev) {
+
+            return artefatoPrev.nomeArtefato === artefatoNovo.nomeArtefato
+          })
+
+        if (artefatoEncontrado) {
+          artefatoEncontrado.listaTarefa.push.apply(
+            artefatoEncontrado.listaTarefa, artefatoNovo.listaTarefa)
+
+          console.log('')
+          
+        } else {
+
+          prev.push(artefatoNovo)
+        }
+      })
     }
 
     return prev
