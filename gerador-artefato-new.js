@@ -23,9 +23,9 @@ function init() {
     Promise.all(listaPromiseExecucaoComando).then(function (listaComandoExecutado) {
 
       const listaComandoComStout = filtrarComandosComSaida(listaComandoExecutado)
-      const listaAgrupadaPorTask = obterListaAgrupadaPorTask(listaComandoComStout)
+      const listaArtefato = obterListaAgrupadaPorTask(listaComandoComStout)
 
-      imprimirListaTask(listaAgrupadaPorTask)
+      imprimirListaTask(listaArtefato)
 
     }).catch(function ({ cmd, stderr }) {
       console.log(cmd + '\n' + stderr)
@@ -58,18 +58,13 @@ function obterListaAgrupadaPorTask(listaComandoExecutado) {
 
         let artefatoEncontrado = prev
           .find(function (artefatoPrev) {
-
             return artefatoPrev.nomeArtefato === artefatoNovo.nomeArtefato
           })
 
         if (artefatoEncontrado) {
           artefatoEncontrado.listaTarefa.push.apply(
-            artefatoEncontrado.listaTarefa, artefatoNovo.listaTarefa)
-
-          console.log('')
-          
+            artefatoEncontrado.listaTarefa, artefatoNovo.listaTarefa)          
         } else {
-
           prev.push(artefatoNovo)
         }
       })
