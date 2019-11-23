@@ -56,6 +56,7 @@ function obterListaAgrupadaPorTask(listaComandoExecutado) {
 
     } else if (prev.length) {
 
+      prev.push(listaArtefatoProjetoTask)
     }
 
     return prev
