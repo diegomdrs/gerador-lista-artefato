@@ -25,7 +25,7 @@ function init() {
       const listaComandoComStout = filtrarComandosComSaida(listaComandoExecutado)
       const listaAgrupadaPorTask = obterListaAgrupadaPorTask(listaComandoComStout)
 
-      // imprimirListaTask(listaAgrupadaPorTask)
+      imprimirListaTask(listaAgrupadaPorTask)
 
     }).catch(function ({ cmd, stderr }) {
       console.log(cmd + '\n' + stderr)
@@ -35,35 +35,31 @@ function init() {
 
 function imprimirListaTask(lista) {
 
-  lista.forEach(function ({ task, listaProjeto }) {
-
-    console.log("\nTarefa nº " + task)
-
-    listaProjeto.forEach(function (projeto) {
-
-      console.log('')
-
-      projeto.listaArtefato.forEach(
-        function ({ tipoAlteracao, numeroAlteracao, nomeArtefato }) {
-
-          console.log(tipoAlteracao + '\t' +
-            (params.mostrarnummodificacao ? (numeroAlteracao + '\t') : '') +
-            nomeArtefato);
-        })
+  lista.forEach(function(item){
+    item.forEach(function(foo){
+      console.log(foo.nomeArtefato)
     })
-  });
+  })
 }
 
 function obterListaAgrupadaPorTask(listaComandoExecutado) {
 
   const listaTaskProjeto = listarProjetoPorTask(listaComandoExecutado)
 
-  return listaTaskProjeto.map(function (projeto) {
+  return listaTaskProjeto.reduce(function (prev, projeto) {
 
     let listaArtefatoProjetoTask = obterListaArtefatoTask(projeto);
 
-    console.table(listaArtefatoProjetoTask)
-  })
+    if (prev.length === 0) {
+
+      prev = [listaArtefatoProjetoTask]
+
+    } else if (prev.length) {
+
+    }
+
+    return prev
+  }, [])
 }
 
 function listarProjetoPorTask(listaComandoExecutado) {
