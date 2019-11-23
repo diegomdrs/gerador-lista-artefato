@@ -33,25 +33,41 @@ function init() {
   }
 }
 
-function imprimirListaTask(lista) {
+function imprimirListaTask(listaArtefato) {
 
-  params.task.forEach(function (tarefaParam) {
+  console.log('')
 
-    console.log('\nTarefa nº ' + tarefaParam + '\n')
+  listaArtefato.forEach(function (artefato) {
 
-    lista.forEach(function (artefato) {
+    if (artefato.listaTarefa.length > 1) {
 
       artefato.listaTarefa.forEach(function (tarefa) {
 
-        if (tarefa.numTarefa === tarefaParam) {
+        console.log('Tarefa nº ' + tarefa.numTarefa + '\t' +
+          tarefa.tipoAlteracao + '\t' +
+            tarefa.numeroAlteracao)
+      });
 
-          console.log(tarefa.tipoAlteracao + '\t' +
-            tarefa.numeroAlteracao + '\t' +
-            artefato.nomeArtefato)
-        }
-      })
-    })
+      console.log('\n' + artefato.nomeArtefato + '\n')
+    }
   })
+
+
+  // params.task.forEach(function (tarefaParam) {
+
+  //   lista.forEach(function (artefato) {
+
+  //     artefato.listaTarefa.forEach(function (tarefa) {
+
+  //       if (tarefa.numTarefa === tarefaParam) {
+
+  //         console.log(tarefa.tipoAlteracao + '\t' +
+  //           tarefa.numeroAlteracao + '\t' +
+  //           artefato.nomeArtefato)
+  //       }
+  //     })
+  //   })
+  // })
 }
 
 function obterListaAgrupadaPorTask(listaComandoExecutado) {
