@@ -35,10 +35,8 @@ function init() {
 
 function imprimirListaTask(lista) {
 
-  lista.forEach(function(item){
-    item.forEach(function(foo){
-      console.log(foo.nomeArtefato)
-    })
+  lista.forEach(function (foo) {
+    console.log(foo.nomeArtefato)
   })
 }
 
@@ -52,11 +50,11 @@ function obterListaAgrupadaPorTask(listaComandoExecutado) {
 
     if (prev.length === 0) {
 
-      prev = [listaArtefatoProjetoTask]
+      prev.push.apply(prev, listaArtefatoProjetoTask)
 
     } else if (prev.length) {
 
-      prev.push(listaArtefatoProjetoTask)
+      prev.push.apply(prev, listaArtefatoProjetoTask)
     }
 
     return prev
