@@ -1,0 +1,16 @@
+[
+    {
+        "nomeArtefato": "foo-api/arquivo02.html",
+        "listaTarefa": [
+            {"numTarefa": "3333333", "tipoAlteracao": "M", "numModificacao": 5},
+            {"numTarefa": "2222222", "tipoAlteracao": "M", "numModificacao": 5},
+            {"numTarefa": "1111111", "tipoAlteracao": "A", "numModificacao": 5}
+        ]
+    },
+    {
+        "nomeArtefato": "foo-api/arquivo01.html",
+        "listaTarefa": [
+            {"numTarefa": "3333333", "tipoAlteracao": "M", "numModificacao": 5}
+        ]
+    }
+]
