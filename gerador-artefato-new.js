@@ -39,23 +39,12 @@ function imprimirListaTask(listaArtefato) {
 
   listaArtefatoMaisUmaTarefaModificacao.forEach(function (artefato) {
 
-    const listaTarefaTipoModificacao = artefato.listaTarefa
-      .filter(function (tarefa) {
-        return tarefa.tipoAlteracao === 'M'
-      })
+    artefato.listaTarefa.forEach(function (tarefa) {
+      console.log('Tarefa nº ' + tarefa.numTarefa +
+        ' (' + tarefa.tipoAlteracao + ')')
+    })
 
-    const totalModificacao = listaTarefaTipoModificacao
-      .reduce(function (total, tarefa) {
-        total += tarefa.numeroAlteracao
-        return total
-      }, 0)
-
-    const tarefas = listaTarefaTipoModificacao.map(function (tarefa) {
-      return tarefa.numTarefa
-    }).join(', ');
-
-    console.log('Tarefas nº ' + tarefas + '\n')
-    console.log('M' + '\t' + totalModificacao + '\t' + artefato.nomeArtefato + '\n')
+    console.log('\n' + artefato.nomeArtefato + '\n')
   })
 
   params.task.forEach(function (tarefaParam) {
