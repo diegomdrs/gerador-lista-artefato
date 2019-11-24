@@ -13,16 +13,16 @@ function init() {
 
     const listaPromiseExecucaoComando = obterListaPromise()
 
-      Promise.all(listaPromiseExecucaoComando).then(function (listaComandoExecutado) {
+    Promise.all(listaPromiseExecucaoComando).then(function (listaComandoExecutado) {
 
-        const listaComandoComStout = filtrarComandosComSaida(listaComandoExecutado)
-        const listaArtefato = obterListaAgrupadaPorTask(listaComandoComStout)
+      const listaComandoComStout = filtrarComandosComSaida(listaComandoExecutado)
+      const listaArtefato = obterListaAgrupadaPorTask(listaComandoComStout)
 
-        imprimirListaTask(listaArtefato)
+      imprimirListaTask(listaArtefato)
 
-      }).catch(function ({ cmd, stderr }) {
-        console.log(cmd + '\n' + stderr)
-      })
+    }).catch(function ({ cmd, stderr }) {
+      console.log(cmd + '\n' + stderr)
+    })
   }
 }
 
@@ -30,21 +30,32 @@ function imprimirListaTask(listaArtefato) {
 
   console.log('')
 
-  const listaArtefatoMaisUmaTarefa = listaArtefato.filter(function (artefato) {
+  const listaArtefatoMaisUmaTarefaModificacao = listaArtefato.filter(function (artefato) {
     return artefato.listaTarefa.length > 1
   })
   const listaArtefatoAteUmaTarefa = listaArtefato.filter(function (artefato) {
     return artefato.listaTarefa.length === 1
   })
 
-  listaArtefatoMaisUmaTarefa.forEach(function (artefato) {
+  listaArtefatoMaisUmaTarefaModificacao.forEach(function (artefato) {
 
-      const tarefas = artefato.listaTarefa.map(function (tarefa) {
-        return tarefa.numTarefa
-      }).join(', ');
+    const listaTarefaTipoModificacao = artefato.listaTarefa
+      .filter(function (tarefa) {
+        return tarefa.tipoAlteracao === 'M'
+      })
 
-      console.log('Tarefas nº ' + tarefas + '\n')
-      console.log(artefato.nomeArtefato + '\n')
+    const totalModificacao = listaTarefaTipoModificacao
+      .reduce(function (total, tarefa) {
+        total += tarefa.numeroAlteracao
+        return total
+      }, 0)
+
+    const tarefas = listaTarefaTipoModificacao.map(function (tarefa) {
+      return tarefa.numTarefa
+    }).join(', ');
+
+    console.log('Tarefas nº ' + tarefas + '\n')
+    console.log('M' + '\t' + totalModificacao + '\t' + artefato.nomeArtefato + '\n')
   })
 
   params.task.forEach(function (tarefaParam) {
