@@ -16,9 +16,9 @@ function init() {
     Promise.all(listaPromiseExecucaoComando).then(function (listaComandoExecutado) {
 
       const listaComandoComStout = filtrarComandosComSaida(listaComandoExecutado)
-      const listaArtefato = obterListaAgrupadaPorTask(listaComandoComStout)
+      const listaArtefato = obterListaTarefaAgrupadaPorArtefato(listaComandoComStout)
 
-      imprimirListaTask(listaArtefato)
+      imprimirListaArtefato(listaArtefato)
 
     }).catch(function ({ cmd, stderr }) {
       console.log(cmd + '\n' + stderr)
@@ -26,7 +26,7 @@ function init() {
   }
 }
 
-function imprimirListaTask(listaArtefato) {
+function imprimirListaArtefato(listaArtefato) {
 
   console.log('')
 
@@ -114,15 +114,15 @@ function listarArtefatoUmTipoModificacao(listaArtefato) {
     } else if (artefato.listaTarefa.length > 1) {
 
       const listaTarefaUnicoTipoAlteracao = artefato.listaTarefa
-        .filter(function (tarefa, indexAtual) {
+        .filter(function (tarefaAtual, indexAtual) {
 
-          const listaTarefaNaoContemAtual = artefato.listaTarefa
+          const listaSemTarefaAtual = artefato.listaTarefa
             .filter(function (tarefaFilter, index) {
               return index !== indexAtual
             })
 
-          const retorno = listaTarefaNaoContemAtual.some(function (tarefaSome) {
-            return tarefa.tipoAlteracao === tarefaSome.tipoAlteracao
+          const retorno = listaSemTarefaAtual.some(function (tarefaSome) {
+            return tarefaAtual.tipoAlteracao === tarefaSome.tipoAlteracao
           })
 
           return !retorno
@@ -138,7 +138,7 @@ function listarArtefatoUmTipoModificacao(listaArtefato) {
   return listaArtefatoAteUmTipo
 }
 
-function obterListaAgrupadaPorTask(listaComandoExecutado) {
+function obterListaTarefaAgrupadaPorArtefato(listaComandoExecutado) {
 
   const listaTaskProjeto = listarProjetoPorTask(listaComandoExecutado)
 
