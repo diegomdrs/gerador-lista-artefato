@@ -30,6 +30,10 @@ function imprimirListaArtefato(listaArtefato) {
 
   console.log('')
 
+  if(!params.mostrardeletados){
+    listaArtefato = removerArtefatoDeletado(listaArtefato)
+  }
+
   const listaArtefatoDuasModificacoes = listarArtefatoDuasModificacoes(listaArtefato)
   const listaArtefatoUmaModificacao = listarArtefatoUmTipoModificacao(listaArtefato)
 
@@ -201,16 +205,10 @@ function listarProjetoPorTask(listaComandoExecutado) {
 }
 
 function removerArtefatoDeletado(listaArtefato) {
-
-  return listaArtefato.filter(function (artefatoFilter) {
-
-    let possuiArtefatoCorrespondenteDeletado = listaArtefato.some(function (artefatoSome) {
-
-      return (artefatoFilter.nomeArtefato === artefatoSome.nomeArtefato)
-        && artefatoSome.tipoAlteracao === 'D'
+  return listaArtefato.filter(function (artefato) {
+    return !artefato.listaTarefa.some(function(tarefa){
+      return tarefa.tipoAlteracao === 'D'
     })
-
-    return artefatoFilter.tipoAlteracao !== 'D' && !possuiArtefatoCorrespondenteDeletado
   })
 }
 
@@ -340,5 +338,5 @@ function obterParametros() {
     accumulator[key] = value;
 
     return accumulator
-  },{});
+  }, {});
 }
