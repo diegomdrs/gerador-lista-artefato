@@ -30,6 +30,8 @@ function imprimirListaArtefato(listaArtefato) {
 
   console.log('')
 
+  listaArtefato.sort(ordenarListaArtefato)
+
   const listaArtefatoDuasModificacoes = listarArtefatoDuasModificacoes(listaArtefato)
   const listaArtefatoUmaModificacao = listarArtefatoUmTipoModificacao(listaArtefato)
 
@@ -48,7 +50,8 @@ function imprimirListaArtefatoDuasModificacoes(lista) {
     }, { totalModificacao: 0, listaTarefa: [] })
 
     console.log('Tarefas nº ' + tarefas.listaTarefa.join(', ') + '\n')
-    console.log('M\t' + tarefas.totalModificacao + '\t' +
+    console.log('M\t' +
+      (params.mostrarnummodificacao ? tarefas.totalModificacao + '\t' : '') +
       artefato.nomeArtefato + '\n')
   })
 }
@@ -66,7 +69,7 @@ function imprimirListaArtefatoUmaModificacao(listaArtefatoUmaModificacao) {
         if (tarefa.numTarefa === tarefaParam) {
 
           console.log(tarefa.tipoAlteracao + '\t' +
-            tarefa.numeroAlteracao + '\t' +
+            (params.mostrarnummodificacao ? tarefa.numeroAlteracao + '\t' : '') +
             artefato.nomeArtefato)
         }
       })
@@ -99,7 +102,7 @@ function listarArtefatoDuasModificacoes(listaArtefato) {
           return retorno
         })
 
-      if(listaTarefaMesmoTipo.length) {
+      if (listaTarefaMesmoTipo.length) {
 
         listaArtefatoDuasModificacoes.push({
           nomeArtefato: artefato.nomeArtefato,
@@ -213,11 +216,9 @@ function removerArtefatoDeletado(listaArtefato) {
   })
 }
 
-function ordenarLista(artefatoA, artefatoB) {
-
-  return artefatoA.tipoAlteracao.localeCompare(artefatoB.tipoAlteracao) ||
-    reverterNomeArtefato(artefatoA.nomeArtefato).localeCompare(
-      reverterNomeArtefato(artefatoB.nomeArtefato))
+function ordenarListaArtefato(artefatoA, artefatoB) {
+  return reverterNomeArtefato(artefatoA.nomeArtefato).localeCompare(
+    reverterNomeArtefato(artefatoB.nomeArtefato))
 }
 
 function reverterNomeArtefato(nomeArtefato) {
