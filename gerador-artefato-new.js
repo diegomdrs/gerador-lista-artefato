@@ -30,28 +30,36 @@ function imprimirListaTask(listaArtefato) {
 
   console.log('')
 
-  const listaArtefatoMaisUmaTarefaModificacao = listaArtefato.filter(function (artefato) {
-    return artefato.listaTarefa.length > 1
-  })
-  const listaArtefatoAteUmaTarefa = listaArtefato.filter(function (artefato) {
-    return artefato.listaTarefa.length === 1
-  })
+  const listaArtefatoDuasModificacoes = listarArtefatoDuasModificacoes(listaArtefato)
+  const listaArtefatoUmaModificacao = listarArtefatoUmTipoModificacao(listaArtefato)
 
-  listaArtefatoMaisUmaTarefaModificacao.forEach(function (artefato) {
+  imprimirListaArtefatoDuasModificacoes(listaArtefatoDuasModificacoes)
+  imprimirListaArtefatoUmaModificacao(listaArtefatoUmaModificacao)
+}
 
-    artefato.listaTarefa.forEach(function (tarefa) {
-      console.log('Tarefa nº ' + tarefa.numTarefa +
-        ' (' + tarefa.tipoAlteracao + ')')
-    })
+function imprimirListaArtefatoDuasModificacoes(lista) {
+  lista.forEach(function (artefato) {
 
-    console.log('\n' + artefato.nomeArtefato + '\n')
+    const tarefas = artefato.listaTarefa.reduce(function (prev, tarefa) {
+      prev.listaTarefa.push(tarefa.numTarefa)
+      prev.totalModificacao += tarefa.numeroAlteracao
+
+      return prev
+    }, { totalModificacao: 0, listaTarefa: [] })
+
+    console.log('Tarefas nº ' + tarefas.listaTarefa.join(', ') + '\n')
+    console.log('M\t' + tarefas.totalModificacao + '\t' +
+      artefato.nomeArtefato + '\n')
   })
+}
+
+function imprimirListaArtefatoUmaModificacao(listaArtefatoUmaModificacao) {
 
   params.task.forEach(function (tarefaParam) {
 
     console.log('Tarefa nº ' + tarefaParam + '\n')
 
-    listaArtefatoAteUmaTarefa.forEach(function (artefato) {
+    listaArtefatoUmaModificacao.forEach(function (artefato) {
 
       artefato.listaTarefa.forEach(function (tarefa) {
 
@@ -66,6 +74,68 @@ function imprimirListaTask(listaArtefato) {
 
     console.log('')
   })
+}
+
+function listarArtefatoDuasModificacoes(listaArtefato) {
+
+  let listaArtefatoDuasModificacoes = []
+
+  listaArtefato.forEach(function (artefato) {
+
+    if (artefato.listaTarefa.length > 1) {
+
+      const listaTarefaModificacao = artefato.listaTarefa.filter(function (tarefa) {
+        return tarefa.tipoAlteracao === 'M'
+      })
+
+      if (listaTarefaModificacao.length >= 2) {
+
+        listaArtefatoDuasModificacoes.push({
+          nomeArtefato: artefato.nomeArtefato,
+          listaTarefa: listaTarefaModificacao
+        })
+      }
+    }
+  })
+
+  return listaArtefatoDuasModificacoes
+}
+
+function listarArtefatoUmTipoModificacao(listaArtefato) {
+
+  let listaArtefatoAteUmTipo = []
+
+  listaArtefato.forEach(function (artefato) {
+
+    if (artefato.listaTarefa.length === 1) {
+
+      listaArtefatoAteUmTipo.push(artefato)
+
+    } else if (artefato.listaTarefa.length > 1) {
+
+      const listaTarefaUnicoTipoAlteracao = artefato.listaTarefa
+        .filter(function (tarefa, indexAtual) {
+
+          const listaTarefaNaoContemAtual = artefato.listaTarefa
+            .filter(function (tarefaFilter, index) {
+              return index !== indexAtual
+            })
+
+          const retorno = listaTarefaNaoContemAtual.some(function (tarefaSome) {
+            return tarefa.tipoAlteracao === tarefaSome.tipoAlteracao
+          })
+
+          return !retorno
+        })
+
+      listaArtefatoAteUmTipo.push({
+        nomeArtefato: artefato.nomeArtefato,
+        listaTarefa: listaTarefaUnicoTipoAlteracao
+      })
+    }
+  })
+
+  return listaArtefatoAteUmTipo
 }
 
 function obterListaAgrupadaPorTask(listaComandoExecutado) {
