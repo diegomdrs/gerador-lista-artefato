@@ -40,11 +40,11 @@ function imprimirListaArtefato(listaArtefato) {
 function imprimirListaArtefatoDuasModificacoes(lista) {
   lista.forEach(function (artefato) {
 
-    const tarefas = artefato.listaTarefa.reduce(function (prev, tarefa) {
-      prev.listaTarefa.push(tarefa.numTarefa)
-      prev.totalModificacao += tarefa.numeroAlteracao
+    const tarefas = artefato.listaTarefa.reduce(function (accumulator, tarefa) {
+      accumulator.listaTarefa.push(tarefa.numTarefa)
+      accumulator.totalModificacao += tarefa.numeroAlteracao
 
-      return prev
+      return accumulator
     }, { totalModificacao: 0, listaTarefa: [] })
 
     console.log('Tarefas nº ' + tarefas.listaTarefa.join(', ') + '\n')
@@ -154,21 +154,21 @@ function obterListaTarefaAgrupadaPorArtefato(listaComandoExecutado) {
 
   const listaTaskProjeto = listarProjetoPorTask(listaComandoExecutado)
 
-  return listaTaskProjeto.reduce(function (prev, projeto) {
+  return listaTaskProjeto.reduce(function (accumulator, projeto) {
 
     let listaArtefatoProjetoTask = obterListaArtefatoTask(projeto);
 
-    if (prev.length === 0) {
+    if (accumulator.length === 0) {
 
-      prev.push.apply(prev, listaArtefatoProjetoTask)
+      accumulator.push.apply(accumulator, listaArtefatoProjetoTask)
 
-    } else if (prev.length > 0) {
+    } else if (accumulator.length > 0) {
 
       listaArtefatoProjetoTask.forEach(function (artefatoNovo) {
 
-        let artefatoEncontrado = prev
-          .find(function (artefatoPrev) {
-            return artefatoPrev.nomeArtefato === artefatoNovo.nomeArtefato
+        let artefatoEncontrado = accumulator
+          .find(function (artefatoaccumulator) {
+            return artefatoaccumulator.nomeArtefato === artefatoNovo.nomeArtefato
           })
 
         if (artefatoEncontrado) {
@@ -176,12 +176,12 @@ function obterListaTarefaAgrupadaPorArtefato(listaComandoExecutado) {
             artefatoEncontrado.listaTarefa, artefatoNovo.listaTarefa)
         } else {
 
-          prev.push(artefatoNovo)
+          accumulator.push(artefatoNovo)
         }
       })
     }
 
-    return prev
+    return accumulator
   }, [])
 }
 
@@ -245,7 +245,7 @@ function obterListaArtefatoTask({ task, nomeProjeto, stdout }) {
 
   if (listaArtefatosSaidaComando && listaArtefatosSaidaComando.length) {
 
-    return listaArtefatosSaidaComando.reduce(function (prev, artefatoSaida) {
+    return listaArtefatosSaidaComando.reduce(function (accumulator, artefatoSaida) {
 
       const tipoAlteracao = artefatoSaida.match(/^\w{1}/g)[0]
       const diretorioProjeto = path.basename(nomeProjeto)
@@ -266,13 +266,13 @@ function obterListaArtefatoTask({ task, nomeProjeto, stdout }) {
         listaTarefa: [tarefa]
       }
 
-      if (prev.length === 0) {
+      if (accumulator.length === 0) {
 
-        prev = [artefato]
+        accumulator = [artefato]
 
-      } else if (prev.length > 0) {
+      } else if (accumulator.length > 0) {
 
-        let artefatoEncontrado = prev.find(function (artefato) {
+        let artefatoEncontrado = accumulator.find(function (artefato) {
           return artefato.nomeArtefato === nomeArtefato
         })
 
@@ -288,11 +288,11 @@ function obterListaArtefatoTask({ task, nomeProjeto, stdout }) {
             artefatoEncontrado.listaTarefa.push(tarefa)
           }
         } else {
-          prev.push(artefato)
+          accumulator.push(artefato)
         }
       }
 
-      return prev
+      return accumulator
     }, [])
   }
 }
@@ -307,13 +307,13 @@ function obterLista(param) {
 }
 
 function obterListaPromise() {
-  return obterLista(params.task).reduce(function (prev, task) {
+  return obterLista(params.task).reduce(function (accumulator, task) {
 
     obterLista(params.projeto).forEach(function (projeto) {
-      prev.push(executarComandoGitLog(params.diretorio, projeto, params.autor, task))
+      accumulator.push(executarComandoGitLog(params.diretorio, projeto, params.autor, task))
     });
 
-    return prev
+    return accumulator
   }, [])
 }
 
