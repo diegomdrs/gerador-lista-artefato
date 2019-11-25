@@ -30,8 +30,6 @@ function imprimirListaArtefato(listaArtefato) {
 
   console.log('')
 
-  listaArtefato.sort(ordenarListaArtefato)
-
   const listaArtefatoDuasModificacoes = listarArtefatoDuasModificacoes(listaArtefato)
   const listaArtefatoUmaModificacao = listarArtefatoUmTipoModificacao(listaArtefato)
 
@@ -185,7 +183,7 @@ function obterListaTarefaAgrupadaPorArtefato(listaComandoExecutado) {
     }
 
     return accumulator
-  }, [])
+  }, []).sort(ordenarListaArtefato)
 }
 
 function listarProjetoPorTask(listaComandoExecutado) {
