@@ -76,31 +76,6 @@ function imprimirListaArtefatoUmaModificacao(listaArtefatoUmaModificacao) {
   })
 }
 
-// function listarArtefatoDuasModificacoes(listaArtefato) {
-
-//   let listaArtefatoDuasModificacoes = []
-
-//   listaArtefato.forEach(function (artefato) {
-
-//     if (artefato.listaTarefa.length > 1) {
-
-//       const listaTarefaModificacao = artefato.listaTarefa.filter(function (tarefa) {
-//         return tarefa.tipoAlteracao === 'M'
-//       })
-
-//       if (listaTarefaModificacao.length >= 2) {
-
-//         listaArtefatoDuasModificacoes.push({
-//           nomeArtefato: artefato.nomeArtefato,
-//           listaTarefa: listaTarefaModificacao
-//         })
-//       }
-//     }
-//   })
-
-//   return listaArtefatoDuasModificacoes
-// }
-
 function listarArtefatoDuasModificacoes(listaArtefato) {
 
   let listaArtefatoDuasModificacoes = []
