@@ -46,7 +46,8 @@
                 "--diretorio=/kdi/git",
                 "--projeto=crm-patrimonio-api,crm-patrimonio-estatico,apc-api,apc-estatico",
                 "--autor=c1282036",
-                "--task=1194196,1189666,1186823,1181009,1179615,1176490,1186251"
+                "--task=1194196,1189666,1186823,1181009,1179615,1176490,1186251",
+                "--mostrar-num-modificacao"
             ]
         },
         {

@@ -326,9 +326,7 @@ function filtrarComandosComSaida(listaComandoExecutado) {
 
 function obterParametros() {
 
-  let obj = {}
-
-  args.forEach(function (arg) {
+  return args.reduce(function (accumulator, arg) {
 
     const key = arg.split('=')[0].replace(/[^\w]/g, '')
     let value = arg.split('=')[1]
@@ -341,8 +339,8 @@ function obterParametros() {
       value = true
     }
 
-    obj[key] = value;
-  });
+    accumulator[key] = value;
 
-  return obj
+    return accumulator
+  },{});
 }
