@@ -76,6 +76,31 @@ function imprimirListaArtefatoUmaModificacao(listaArtefatoUmaModificacao) {
   })
 }
 
+// function listarArtefatoDuasModificacoes(listaArtefato) {
+
+//   let listaArtefatoDuasModificacoes = []
+
+//   listaArtefato.forEach(function (artefato) {
+
+//     if (artefato.listaTarefa.length > 1) {
+
+//       const listaTarefaModificacao = artefato.listaTarefa.filter(function (tarefa) {
+//         return tarefa.tipoAlteracao === 'M'
+//       })
+
+//       if (listaTarefaModificacao.length >= 2) {
+
+//         listaArtefatoDuasModificacoes.push({
+//           nomeArtefato: artefato.nomeArtefato,
+//           listaTarefa: listaTarefaModificacao
+//         })
+//       }
+//     }
+//   })
+
+//   return listaArtefatoDuasModificacoes
+// }
+
 function listarArtefatoDuasModificacoes(listaArtefato) {
 
   let listaArtefatoDuasModificacoes = []
@@ -84,15 +109,26 @@ function listarArtefatoDuasModificacoes(listaArtefato) {
 
     if (artefato.listaTarefa.length > 1) {
 
-      const listaTarefaModificacao = artefato.listaTarefa.filter(function (tarefa) {
-        return tarefa.tipoAlteracao === 'M'
-      })
+      const listaTarefaMesmoTipo = artefato.listaTarefa
+        .filter(function (tarefaAtual, indexAtual) {
 
-      if (listaTarefaModificacao.length >= 2) {
+          const listaSemTarefaAtual = artefato.listaTarefa
+            .filter(function (tarefaFilter, index) {
+              return index !== indexAtual
+            })
+
+          const retorno = listaSemTarefaAtual.some(function (tarefaSome) {
+            return tarefaAtual.tipoAlteracao === tarefaSome.tipoAlteracao
+          })
+
+          return retorno
+        })
+
+      if(listaTarefaMesmoTipo.length) {
 
         listaArtefatoDuasModificacoes.push({
           nomeArtefato: artefato.nomeArtefato,
-          listaTarefa: listaTarefaModificacao
+          listaTarefa: listaTarefaMesmoTipo
         })
       }
     }
@@ -100,6 +136,7 @@ function listarArtefatoDuasModificacoes(listaArtefato) {
 
   return listaArtefatoDuasModificacoes
 }
+
 
 function listarArtefatoUmTipoModificacao(listaArtefato) {
 
