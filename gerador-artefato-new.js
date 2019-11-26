@@ -64,7 +64,18 @@ function imprimirListaArtefatoUmaModificacao(listaArtefatoUmaModificacao) {
 
     console.log('Tarefa nº ' + tarefaParam + '\n')
 
-    listaArtefatoUmaModificacao.forEach(function (artefato) {
+    listaArtefatoUmaModificacao.forEach(function (artefato, index) {
+
+      if(artefato.listaTarefa.length) {
+
+        const artefatoAnterior = listaArtefatoUmaModificacao[index - 1]
+
+        if (artefatoAnterior &&
+          artefatoAnterior.nomeProjeto !== artefato.nomeProjeto) {
+  
+          console.log('-----------------------')
+        }
+      }
 
       artefato.listaTarefa.forEach(function (tarefa) {
 
@@ -147,6 +158,7 @@ function listarArtefatoUmTipoModificacao(listaArtefato) {
 
       listaArtefatoAteUmTipo.push({
         nomeArtefato: artefato.nomeArtefato,
+        nomeProjeto: artefato.nomeProjeto,
         listaTarefa: listaTarefaUnicoTipoAlteracao
       })
     }
@@ -216,9 +228,6 @@ function ordenarListaArtefato(artefatoA, artefatoB) {
   return artefatoA.nomeProjeto.localeCompare(artefatoB.nomeProjeto) ||
     reverterNomeArtefato(artefatoA.nomeArtefato).localeCompare(
       reverterNomeArtefato(artefatoB.nomeArtefato))
-
-  // return reverterNomeArtefato(artefatoA.nomeArtefato).localeCompare(
-  //     reverterNomeArtefato(artefatoB.nomeArtefato))
 }
 
 function reverterNomeArtefato(nomeArtefato) {
@@ -329,16 +338,8 @@ function obterParametros() {
 
   return args.reduce(function (accum, arg) {
 
-    const key = obterKey(arg);
-    let value = arg.split('=')[1]
-
-    if (value) {
-      if (value.match(/\w+,\w+/g)) {
-        value = value.split(',')
-      }
-    } else {
-      value = true
-    }
+    const key = obterKey(arg)
+    const value = obterValue(arg)
 
     accum[key] = value;
 
@@ -347,8 +348,24 @@ function obterParametros() {
 }
 
 function obterKey(arg) {
+
   return arg.split('=')[0].replace(/--+/g, '')
     .replace(/-([a-z])/g, function (g) {
       return g[1].toUpperCase();
     })
+}
+
+function obterValue(arg) {
+
+  let value = arg.split('=')[1]
+
+  if (value) {
+    if (value.match(/\w+,\w+/g)) {
+      value = value.split(',')
+    }
+  } else {
+    value = true
+  }
+
+  return value
 }
