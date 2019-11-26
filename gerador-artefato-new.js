@@ -44,11 +44,11 @@ function imprimirListaArtefato(listaArtefato) {
 function imprimirListaArtefatoDuasModificacoes(lista) {
   lista.forEach(function (artefato) {
 
-    const tarefas = artefato.listaTarefa.reduce(function (accumulator, tarefa) {
-      accumulator.listaTarefa.push(tarefa.numTarefa)
-      accumulator.totalModificacao += tarefa.numeroAlteracao
+    const tarefas = artefato.listaTarefa.reduce(function (accum, tarefa) {
+      accum.listaTarefa.push(tarefa.numTarefa)
+      accum.totalModificacao += tarefa.numeroAlteracao
 
-      return accumulator
+      return accum
     }, { totalModificacao: 0, listaTarefa: [] })
 
     console.log('Tarefas nº ' + tarefas.listaTarefa.join(', ') + '\n')
@@ -159,21 +159,21 @@ function obterListaTarefaAgrupadaPorArtefato(listaComandoExecutado) {
 
   const listaTaskProjeto = listarProjetoPorTask(listaComandoExecutado)
 
-  return listaTaskProjeto.reduce(function (accumulator, projeto) {
+  return listaTaskProjeto.reduce(function (accum, projeto) {
 
     let listaArtefatoProjetoTask = obterListaArtefatoTask(projeto);
 
-    if (accumulator.length === 0) {
+    if (accum.length === 0) {
 
-      accumulator.push.apply(accumulator, listaArtefatoProjetoTask)
+      accum.push.apply(accum, listaArtefatoProjetoTask)
 
-    } else if (accumulator.length > 0) {
+    } else if (accum.length > 0) {
 
       listaArtefatoProjetoTask.forEach(function (artefatoNovo) {
 
-        let artefatoEncontrado = accumulator
-          .find(function (artefatoaccumulator) {
-            return artefatoaccumulator.nomeArtefato === artefatoNovo.nomeArtefato
+        let artefatoEncontrado = accum
+          .find(function (artefatoaccum) {
+            return artefatoaccum.nomeArtefato === artefatoNovo.nomeArtefato
           })
 
         if (artefatoEncontrado) {
@@ -181,12 +181,12 @@ function obterListaTarefaAgrupadaPorArtefato(listaComandoExecutado) {
             artefatoEncontrado.listaTarefa, artefatoNovo.listaTarefa)
         } else {
 
-          accumulator.push(artefatoNovo)
+          accum.push(artefatoNovo)
         }
       })
     }
 
-    return accumulator
+    return accum
   }, []).sort(ordenarListaArtefato)
 }
 
@@ -213,8 +213,12 @@ function removerArtefatoDeletado(listaArtefato) {
 }
 
 function ordenarListaArtefato(artefatoA, artefatoB) {
-  return reverterNomeArtefato(artefatoA.nomeArtefato).localeCompare(
-    reverterNomeArtefato(artefatoB.nomeArtefato))
+  return artefatoA.nomeProjeto.localeCompare(artefatoB.nomeProjeto) ||
+    reverterNomeArtefato(artefatoA.nomeArtefato).localeCompare(
+      reverterNomeArtefato(artefatoB.nomeArtefato))
+
+  // return reverterNomeArtefato(artefatoA.nomeArtefato).localeCompare(
+  //     reverterNomeArtefato(artefatoB.nomeArtefato))
 }
 
 function reverterNomeArtefato(nomeArtefato) {
@@ -242,7 +246,7 @@ function obterListaArtefatoTask({ task, nomeProjeto, stdout }) {
 
   if (listaArtefatosSaidaComando && listaArtefatosSaidaComando.length) {
 
-    return listaArtefatosSaidaComando.reduce(function (accumulator, artefatoSaida) {
+    return listaArtefatosSaidaComando.reduce(function (accum, artefatoSaida) {
 
       const tipoAlteracao = artefatoSaida.match(/^\w{1}/g)[0]
       const diretorioProjeto = path.basename(nomeProjeto)
@@ -260,16 +264,17 @@ function obterListaArtefatoTask({ task, nomeProjeto, stdout }) {
 
       const artefato = {
         nomeArtefato: nomeArtefato,
+        nomeProjeto: nomeProjeto,
         listaTarefa: [tarefa]
       }
 
-      if (accumulator.length === 0) {
+      if (accum.length === 0) {
 
-        accumulator = [artefato]
+        accum = [artefato]
 
-      } else if (accumulator.length > 0) {
+      } else if (accum.length > 0) {
 
-        let artefatoEncontrado = accumulator.find(function (artefato) {
+        let artefatoEncontrado = accum.find(function (artefato) {
           return artefato.nomeArtefato === nomeArtefato
         })
 
@@ -285,11 +290,11 @@ function obterListaArtefatoTask({ task, nomeProjeto, stdout }) {
             artefatoEncontrado.listaTarefa.push(tarefa)
           }
         } else {
-          accumulator.push(artefato)
+          accum.push(artefato)
         }
       }
 
-      return accumulator
+      return accum
     }, [])
   }
 }
@@ -304,13 +309,13 @@ function obterLista(param) {
 }
 
 function obterListaPromise() {
-  return obterLista(params.task).reduce(function (accumulator, task) {
+  return obterLista(params.task).reduce(function (accum, task) {
 
     obterLista(params.projeto).forEach(function (projeto) {
-      accumulator.push(executarComandoGitLog(params.diretorio, projeto, params.autor, task))
+      accum.push(executarComandoGitLog(params.diretorio, projeto, params.autor, task))
     });
 
-    return accumulator
+    return accum
   }, [])
 }
 
@@ -322,7 +327,7 @@ function filtrarComandosComSaida(listaComandoExecutado) {
 
 function obterParametros() {
 
-  return args.reduce(function (accumulator, arg) {
+  return args.reduce(function (accum, arg) {
 
     const key = obterKey(arg);
     let value = arg.split('=')[1]
@@ -335,9 +340,9 @@ function obterParametros() {
       value = true
     }
 
-    accumulator[key] = value;
+    accum[key] = value;
 
-    return accumulator
+    return accum
   }, {});
 }
 
