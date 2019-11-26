@@ -6,8 +6,8 @@ Comando para listar os artefatos incluídos/alterados/renomeados para geração 
 
 ### Sistema
 
-- Node.js v10.15.2
-- Git
+- Node.js com versão mínima v10.15.2
+- Git com versão mínima v2.7.4
 
 ### Git
 
@@ -18,7 +18,7 @@ Comando para listar os artefatos incluídos/alterados/renomeados para geração 
 ## Instalação
 
 - Baixe o script `gerador-artefato.js` [aqui](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/gerador-artefato.js) e salve no seu computador
-- Abra um terminal e execute o script com o `node`
+- Abra um terminal e execute o script com o comando `node`
 
 ## Uso
 
