@@ -204,15 +204,12 @@ function obterListaTarefaAgrupadaPorArtefato(listaComandoExecutado) {
 
 function listarProjetoPorTask(listaComandoExecutado) {
 
-  return listaComandoExecutado.map(function (item) {
-
-    const itemProjeto = {
-      task: item.task,
-      nomeProjeto: item.projeto,
-      stdout: item.stdout
+  return listaComandoExecutado.map(function ({task, projeto, stdout}) {
+    return {
+      task: task,
+      nomeProjeto: projeto,
+      stdout: stdout
     }
-
-    return itemProjeto
   })
 }
 
