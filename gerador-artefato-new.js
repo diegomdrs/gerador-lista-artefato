@@ -30,7 +30,7 @@ function imprimirListaArtefato(listaArtefato) {
 
   console.log('')
 
-  if(!params.mostrardeletados){
+  if (!params.mostrarDeletados) {
     listaArtefato = removerArtefatoDeletado(listaArtefato)
   }
 
@@ -53,7 +53,7 @@ function imprimirListaArtefatoDuasModificacoes(lista) {
 
     console.log('Tarefas nº ' + tarefas.listaTarefa.join(', ') + '\n')
     console.log('M\t' +
-      (params.mostrarnummodificacao ? tarefas.totalModificacao + '\t' : '') +
+      (params.mostrarNumModificacao ? tarefas.totalModificacao + '\t' : '') +
       artefato.nomeArtefato + '\n')
   })
 }
@@ -71,7 +71,7 @@ function imprimirListaArtefatoUmaModificacao(listaArtefatoUmaModificacao) {
         if (tarefa.numTarefa === tarefaParam) {
 
           console.log(tarefa.tipoAlteracao + '\t' +
-            (params.mostrarnummodificacao ? tarefa.numeroAlteracao + '\t' : '') +
+            (params.mostrarNumModificacao ? tarefa.numeroAlteracao + '\t' : '') +
             artefato.nomeArtefato)
         }
       })
@@ -206,7 +206,7 @@ function listarProjetoPorTask(listaComandoExecutado) {
 
 function removerArtefatoDeletado(listaArtefato) {
   return listaArtefato.filter(function (artefato) {
-    return !artefato.listaTarefa.some(function(tarefa){
+    return !artefato.listaTarefa.some(function (tarefa) {
       return tarefa.tipoAlteracao === 'D'
     })
   })
@@ -324,7 +324,7 @@ function obterParametros() {
 
   return args.reduce(function (accumulator, arg) {
 
-    const key = arg.split('=')[0].replace(/[^\w]/g, '')
+    const key = obterKey(arg);
     let value = arg.split('=')[1]
 
     if (value) {
@@ -339,4 +339,11 @@ function obterParametros() {
 
     return accumulator
   }, {});
+}
+
+function obterKey(arg) {
+  return arg.split('=')[0].replace(/--+/g, '')
+    .replace(/-([a-z])/g, function (g) {
+      return g[1].toUpperCase();
+    })
 }

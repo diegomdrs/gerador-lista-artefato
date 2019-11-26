@@ -61,7 +61,8 @@
                 "--projeto=bar-estatico,foo-api",
                 "--autor=c1282036",
                 "--task=2222222,3333333",
-                "--mostrar-num-modificacao"
+                "--mostrar-num-modificacao",
+                "--mostrar-deletados"
             ]
         },
         {
@@ -74,7 +75,8 @@
                 "--projeto=bar-estatico,foo-api",
                 "--autor=c1282036",
                 "--task=2222222,3333333",
-                "--mostrar-num-modificacao"
+                "--mostrar-num-modificacao",
+                "--mostrar-deletados"
             ]
         }
     ]
