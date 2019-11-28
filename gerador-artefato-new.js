@@ -64,7 +64,7 @@ function imprimirListaArtefatoUmaModificacao(listaArtefatoUmaModificacao) {
 
     console.log('Tarefa nº ' + tarefaParam + '\n')
 
-    listaArtefatoUmaModificacao.forEach(function (artefato, index) {
+    listaArtefatoUmaModificacao.forEach(function (artefato) {
 
       artefato.listaTarefa.filter(function (tarefa) {
         return tarefa.numTarefa === tarefaParam
