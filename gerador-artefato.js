@@ -3,153 +3,213 @@ const path = require('path');
 
 const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
+const params = obterParametros();
 
 init()
 
 function init() {
 
-  const params = obterParametros();
-
   if (params.projeto && params.autor && params.task && params.diretorio) {
 
-    const listaPromiseExecucaoComando = []
+    const listaPromiseExecucaoComando = obterListaPromise()
 
-    obterLista(params.task).forEach(function (task) {
+    Promise.all(listaPromiseExecucaoComando).then(listaComandoExecutado => {
 
-      obterLista(params.projeto).forEach(function (projeto) {
+      const listaComandoComStout = filtrarComandosComSaida(listaComandoExecutado)
+      const listaArtefato = obterListaTarefaAgrupadaPorArtefato(listaComandoComStout)
 
-        const caminhoProjeto = path.join(params.diretorio, projeto)
+      imprimirListaArtefato(listaArtefato)
 
-        listaPromiseExecucaoComando.push(executarComandoGitLog(caminhoProjeto, params.autor, task))
-      });
-    })
-
-    Promise.all(listaPromiseExecucaoComando).then(function (listaComandoExecutado) {
-
-      const listaAgrupadaPorTask = obterListaAgrupadaPorTask(listaComandoExecutado)
-
-      imprimirListaAgrupadaPorTask(listaAgrupadaPorTask)
-
-    }).catch(function (erro) {
-      console.log(erro.cmd)
-      console.log(erro.stderr)
-    })
+    }).catch(({ cmd, stderr }) =>
+      console.log(cmd + '\n' + stderr))
   }
 }
 
-function imprimirListaAgrupadaPorTask(lista) {
+function imprimirListaArtefato(listaArtefato) {
 
-  lista.forEach(function (item) {
+  console.log('')
 
-    console.log("\nTarefa nº " + item.task + '\n')
+  if (!params.mostrarDeletados) {
+    listaArtefato = removerArtefatoDeletado(listaArtefato)
+  }
 
-    item.listaArtefato.forEach(function (artefato) {
+  const listaArtefatoDuasModificacoes = listarArtefatoDuasModificacoes(listaArtefato)
+  const listaArtefatoUmaModificacao = listarArtefatoUmTipoModificacao(listaArtefato)
 
-      console.log(artefato.tipoAlteracao + '\t' +
-        artefato.numeroAlteracao + '\t' +
-        artefato.artefato);
-    })
-  });
+  imprimirListaArtefatoDuasModificacoes(listaArtefatoDuasModificacoes)
+  imprimirListaArtefatoUmaModificacao(listaArtefatoUmaModificacao)
 }
 
-function obterListaAgrupadaPorTask(listaComandoExecutado) {
+function imprimirListaArtefatoDuasModificacoes(lista) {
+  lista.forEach(artefato => {
 
-  const listaComandoExecutadoComStdout = listaComandoExecutado.filter(function (comandoExecutado) {
-    return comandoExecutado.stdout
+    const tarefas = artefato.listaTarefa.reduce((accum, tarefa) => {
+      accum.listaTarefa.push(tarefa.numTarefa)
+      accum.totalModificacao += tarefa.numeroAlteracao
+
+      return accum
+    }, { totalModificacao: 0, listaTarefa: [] })
+
+    console.log('Tarefas nº ' + tarefas.listaTarefa.join(', ') + '\n')
+    console.log('M\t' +
+      (params.mostrarNumModificacao ? tarefas.totalModificacao + '\t' : '') +
+      artefato.nomeArtefato + '\n')
+  })
+}
+
+function imprimirListaArtefatoUmaModificacao(listaArtefatoUmaModificacao) {
+
+  params.task.forEach(tarefaParam => {
+
+    console.log('Tarefa nº ' + tarefaParam + '\n')
+
+    listaArtefatoUmaModificacao.forEach(artefato => {
+
+      artefato.listaTarefa.filter(tarefa =>
+        tarefa.numTarefa === tarefaParam).forEach(tarefa => {
+
+          console.log(tarefa.tipoAlteracao + '\t' +
+            (params.mostrarNumModificacao ? tarefa.numeroAlteracao + '\t' : '') +
+            artefato.nomeArtefato)
+        })
+    })
+
+    console.log('')
+  })
+}
+
+function listarArtefatoDuasModificacoes(listaArtefato) {
+
+  let listaArtefatoDuasModificacoes = []
+
+  listaArtefato.forEach(artefato => {
+
+    if (artefato.listaTarefa.length > 1) {
+
+      const listaTarefaMesmoTipo = artefato.listaTarefa
+        .filter((tarefaAtual, indexAtual) => {
+
+          const listaSemTarefaAtual = artefato.listaTarefa
+            .filter((tarefaFilter, index) => index !== indexAtual)
+
+          const retorno = listaSemTarefaAtual.some(tarefaSome =>
+            tarefaAtual.tipoAlteracao === tarefaSome.tipoAlteracao)
+
+          return retorno
+        })
+
+      if (listaTarefaMesmoTipo.length) {
+
+        listaArtefatoDuasModificacoes.push({
+          nomeArtefato: artefato.nomeArtefato,
+          listaTarefa: listaTarefaMesmoTipo
+        })
+      }
+    }
   })
 
-  return agruparListaComandoPorTask(listaComandoExecutadoComStdout)
-    .map(function (comandoExecutado) {
-
-      let listaArtefato = []
-
-      comandoExecutado.listaProjeto.forEach(function (projeto) {
-
-        let listaArtefatoProjeto = obterListaArtefato(projeto.nomeProjeto, projeto.stdout);
-
-        listaArtefatoProjeto = removerArtefatoDeletado(listaArtefatoProjeto);
-        listaArtefatoProjeto.sort(ordenarLista)
-
-        listaArtefato.push.apply(listaArtefato, listaArtefatoProjeto)
-      })
-
-      return {
-        task: comandoExecutado.task,
-        listaArtefato: listaArtefato
-      }
-    })
-    .filter(function (item) {
-      return item.listaArtefato.length
-    })
+  return listaArtefatoDuasModificacoes
 }
 
-function agruparListaComandoPorTask(listaComandoExecutado) {
 
-  return listaComandoExecutado.reduce(function (prev, item) {
+function listarArtefatoUmTipoModificacao(listaArtefato) {
 
-    const taskAgrupadora = item.task;
-    const isListaTaskVazia = prev.length === 0
-    const itemProjeto = { nomeProjeto: item.projeto, stdout: item.stdout }
+  let listaArtefatoAteUmTipo = []
 
-    let comandoExecutado = {
-      task: taskAgrupadora,
-      listaProjeto: [itemProjeto]
+  listaArtefato.forEach(artefato => {
+
+    if (artefato.listaTarefa.length === 1) {
+
+      listaArtefatoAteUmTipo.push(artefato)
+
+    } else if (artefato.listaTarefa.length > 1) {
+
+      const listaTarefaUnicoTipoAlteracao = artefato.listaTarefa
+        .filter((tarefaAtual, indexAtual) => {
+
+          const listaSemTarefaAtual = artefato.listaTarefa
+            .filter((tarefaFilter, index) => index !== indexAtual)
+
+          const retorno = listaSemTarefaAtual.some(
+            tarefaSome => tarefaAtual.tipoAlteracao === tarefaSome.tipoAlteracao)
+
+          return !retorno
+        })
+
+      listaArtefatoAteUmTipo.push({
+        nomeArtefato: artefato.nomeArtefato,
+        nomeProjeto: artefato.nomeProjeto,
+        listaTarefa: listaTarefaUnicoTipoAlteracao
+      })
     }
+  })
 
-    if (isListaTaskVazia) {
+  return listaArtefatoAteUmTipo
+}
 
-      prev = [comandoExecutado]
+function obterListaTarefaAgrupadaPorArtefato(listaComandoExecutado) {
 
-    } else {
+  const listaTaskProjeto = listarProjetoPorTask(listaComandoExecutado)
 
-      const taskEncontrada = prev.find(function (itemLista) {
-        return itemLista.task === taskAgrupadora
-      });
+  return listaTaskProjeto.reduce((accum, projeto) => {
 
-      if (taskEncontrada) {
+    let listaArtefatoProjetoTask = obterListaArtefatoTask(projeto);
 
-        const projetoEncontrado = taskEncontrada.listaProjeto.find(function (projetoLista) {
-          return projetoLista.nomeProjeto === item.projeto
-        });
+    if (accum.length === 0) {
 
-        if (projetoEncontrado) {
-          projetoEncontrado.stdout = projetoEncontrado.stdout.concat('\n' + item.stdout)
+      accum.push.apply(accum, listaArtefatoProjetoTask)
 
+    } else if (accum.length > 0) {
+
+      listaArtefatoProjetoTask.forEach(artefatoNovo => {
+
+        let artefatoEncontrado = accum
+          .find(artefatoaccum =>
+            artefatoaccum.nomeArtefato === artefatoNovo.nomeArtefato
+          )
+
+        if (artefatoEncontrado) {
+          artefatoEncontrado.listaTarefa.push.apply(
+            artefatoEncontrado.listaTarefa, artefatoNovo.listaTarefa)
         } else {
-          taskEncontrada.listaProjeto.push(itemProjeto)
-        }
-      } else {
 
-        prev.push(comandoExecutado)
-      }
+          accum.push(artefatoNovo)
+        }
+      })
     }
 
-    return prev
-  }, []);
+    return accum
+  }, []).sort(ordenarListaArtefato)
+}
+
+function listarProjetoPorTask(listaComandoExecutado) {
+
+  return listaComandoExecutado.map(({ task, projeto, stdout }) =>
+    ({ task: task, nomeProjeto: projeto, stdout: stdout }))
 }
 
 function removerArtefatoDeletado(listaArtefato) {
-
-  return listaArtefato.filter(function (artefatoFilter) {
-
-    let possuiArtefatoCorrespondenteDeletado = listaArtefato.some(function (artefatoSome) {
-
-      return (artefatoFilter.artefato === artefatoSome.artefato)
-        && artefatoSome.tipoAlteracao === 'D'
-    })
-
-    return artefatoFilter.tipoAlteracao !== 'D' && !possuiArtefatoCorrespondenteDeletado
+  return listaArtefato.filter(artefato => {
+    return !artefato.listaTarefa.some(tarefa => tarefa.tipoAlteracao === 'D')
   })
 }
 
-function ordenarLista(artefatoA, artefatoB) {
-  return artefatoA.artefato > artefatoB.artefato
+function ordenarListaArtefato(artefatoA, artefatoB) {
+  return artefatoA.nomeProjeto.localeCompare(artefatoB.nomeProjeto) ||
+    reverterNomeArtefato(artefatoA.nomeArtefato).localeCompare(
+      reverterNomeArtefato(artefatoB.nomeArtefato))
 }
 
-async function executarComandoGitLog(projeto, autor, task) {
+function reverterNomeArtefato(nomeArtefato) {
+  return nomeArtefato.split('').reverse().join('')
+}
 
-  let comando = 'git -C ' + projeto + ' log --regexp-ignore-case --no-merges --author=' + autor +
-    ' --all --name-status -C --grep=' + task;
+async function executarComandoGitLog(diretorio, projeto, autor, task) {
+
+  const caminhoProjeto = path.join(diretorio, projeto)
+
+  let comando = 'git -C ' + caminhoProjeto + ' log --regexp-ignore-case --no-merges --author=' + 
+    autor + ' --all --name-status -C --grep=' + task;
 
   var retorno = await exec(comando);
   retorno.projeto = projeto;
@@ -159,42 +219,62 @@ async function executarComandoGitLog(projeto, autor, task) {
   return retorno
 }
 
-function obterListaArtefato(projeto, stdout) {
+function obterListaArtefatoTask({ task, nomeProjeto, stdout }) {
 
   const listaArtefatosSaidaComando = stdout.match(/^([A-Z]{1}|R\d+)\s.*$/gm)
-  let listaSaida = []
 
   if (listaArtefatosSaidaComando && listaArtefatosSaidaComando.length) {
 
-    listaArtefatosSaidaComando.forEach(function (artefatoSaida) {
+    return listaArtefatosSaidaComando.reduce((accum, artefatoSaida) => {
 
-      const diretorioProjeto = path.basename(projeto)
       const tipoAlteracao = artefatoSaida.match(/^\w{1}/g)[0]
-      const artefato = artefatoSaida.match(/\s.+/g)[0].match(/\w.+/g)[0]
+      const diretorioProjeto = path.basename(nomeProjeto)
+      const arquivoArtefato = artefatoSaida.match(/\s.+/g)[0].match(/\w.+/g)[0]
 
-      const caminhoArtefato = artefato
+      const nomeArtefato = arquivoArtefato
         .replace(/^/g, diretorioProjeto + '/')
-          .replace(/\s+/g, ' ' + diretorioProjeto + '/')
+        .replace(/\s+/g, ' ' + diretorioProjeto + '/')
 
-      let artefatoModificacaoEncontrado = listaSaida.find(function (objSaida) {
-        return objSaida.artefato === caminhoArtefato && objSaida.tipoAlteracao === 'M';
-      })
-
-      if (tipoAlteracao === 'A' || !artefatoModificacaoEncontrado) {
-
-        listaSaida.push({
-          tipoAlteracao: tipoAlteracao,
-          artefato: caminhoArtefato,
-          numeroAlteracao: 1
-        })
-      } else {
-
-        artefatoModificacaoEncontrado.numeroAlteracao += 1;
+      const tarefa = {
+        numTarefa: task,
+        tipoAlteracao: tipoAlteracao,
+        numeroAlteracao: 1
       }
-    })
-  }
 
-  return listaSaida
+      const artefato = {
+        nomeArtefato: nomeArtefato,
+        nomeProjeto: nomeProjeto,
+        listaTarefa: [tarefa]
+      }
+
+      if (accum.length === 0) {
+
+        accum = [artefato]
+
+      } else if (accum.length > 0) {
+
+        let artefatoEncontrado = accum.find(artefato => 
+          artefato.nomeArtefato === nomeArtefato)
+
+        if (artefatoEncontrado) {
+
+          let taskModificacaoEncontrada = artefatoEncontrado.listaTarefa.find(tarefa =>
+            tarefa.numTarefa === task && tarefa.tipoAlteracao === 'M'
+          )
+
+          if (taskModificacaoEncontrada && tipoAlteracao === 'M') {
+            taskModificacaoEncontrada.numeroAlteracao += 1
+          } else {
+            artefatoEncontrado.listaTarefa.push(tarefa)
+          }
+        } else {
+          accum.push(artefato)
+        }
+      }
+
+      return accum
+    }, [])
+  }
 }
 
 function obterLista(param) {
@@ -206,21 +286,47 @@ function obterLista(param) {
   return param
 }
 
+function obterListaPromise() {
+  return obterLista(params.task).reduce((accum, task) => {
+
+    obterLista(params.projeto).forEach(projeto =>
+      accum.push(executarComandoGitLog(params.diretorio, projeto, params.autor, task))
+    );
+
+    return accum
+  }, [])
+}
+
+function filtrarComandosComSaida(listaComandoExecutado) {
+  return listaComandoExecutado.filter(comandoExecutado => comandoExecutado.stdout)
+}
+
 function obterParametros() {
 
-  let obj = {}
+  return args.reduce((accum, arg) => {
+    accum[obterKey(arg)] = obterValue(arg)
+    
+    return accum
+  }, {});
+}
 
-  args.forEach(function (arg) {
+function obterKey(arg) {
 
-    const key = arg.split('=')[0].replace(/[^\w]/g, '')
-    let value = arg.split('=')[1]
+  return arg.split('=')[0].replace(/--+/g, '')
+    .replace(/-([a-z])/g, g => g[1].toUpperCase())
+}
 
+function obterValue(arg) {
+
+  let value = arg.split('=')[1]
+
+  if (value) {
     if (value.match(/\w+,\w+/g)) {
       value = value.split(',')
     }
+  } else {
+    value = true
+  }
 
-    obj[key] = value;
-  });
-
-  return obj
+  return value
 }
