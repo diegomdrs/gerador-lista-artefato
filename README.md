@@ -47,7 +47,7 @@ $ node gerador-artefato.js --diretorio=C:/kdi/git --projeto=foo-estatico,foo-api
 - --mostrar-num-modificacao: Nº de modificações do artefato na tarefa ou tarefas
 - --mostrar-deletados: Mostrar artefatos deletados na tarefa
 
-## Saida
+## Saida do gerador
 
 ``` console
 $ node gerador-artefato.js --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
@@ -55,24 +55,42 @@ $ node gerador-artefato.js --diretorio=/kdi/git --projeto=foo-estatico,foo-api -
 Tarefa nº 900089
 
 M   2   foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayConsultarFoo.java
-A   1   foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayIncluirFoo.java
 M   3   foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayIncluirFoo.java
+A   1   foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayIncluirFoo.java
 M   1   foo-estatico/Gruntfile.js
 M   1   foo-estatico/karma.conf.js
 M   1   foo-estatico/package.json
-
-Tarefa nº 900081
-
-M   2   foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayConsultarFoo.java
-M   3   foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayIncluirFoo.java
 R   1   foo-estatico/foo.json foo-estatico/bar.json
+D   1   foo-estatico/src/app/spas/foo/detalha-foo.tpl.html
 
 ```
 Onde:
 
-- Ação executada no artefato na tarefa - A (Added), M (Modified) e R (Renamed)
-- Nº de modificações do artefato na tarefa
+- Ação executada no artefato na tarefa - A (Added), M (Modified), R (Renamed) e D (Deleted)
+- Nº de modificações do artefato na tarefa - se utilizado o parâmetro `--mostrar-num-modificacao`
 - Caminho do artefato
+
+## Exemplos de uso
+
+``` console
+$ node gerador-artefato.js --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900077,900079
+
+Tarefas nº 900077, 900079
+
+M      foo-estatico/Gruntfile.js
+
+Tarefa nº 900077
+
+M      foo-estatico/src/app/spas/foo/inclusao-foo.tpl.html
+A      foo-estatico/src/app/spas/foo/inclusao-foo.tpl.html
+M      foo-estatico/src/app/spas/foo/altera-foo.tpl.html
+
+Tarefa nº 900079
+
+M       foo-api/pom.xml
+M       foo-api/operacoes.xml
+
+```
 
 ## TODO
 
