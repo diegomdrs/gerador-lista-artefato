@@ -76,5 +76,4 @@ Onde:
 
 ## TODO
 
-- Tratar arquivos deletados e depois adicionados com o mesmo nome
 - Utilizar vários parâmetros `--grep`
