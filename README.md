@@ -45,7 +45,7 @@ $ node gerador-artefato.js --diretorio=C:/kdi/git --projeto=foo-estatico,foo-api
 #### Paramêtros opcionais
 
 - --mostrar-num-modificacao: Nº de modificações do artefato na tarefa ou tarefas
-- --mostrar-deletados: 
+- --mostrar-deletados: Mostrar artefatos deletados na tarefa
 
 ## Saida
 
