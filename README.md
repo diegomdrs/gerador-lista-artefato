@@ -91,7 +91,3 @@ M       foo-api/pom.xml
 M       foo-api/operacoes.xml
 
 ```
-
-## TODO
-
-- Utilizar vários parâmetros `--grep`
