@@ -12,7 +12,7 @@ Comando para listar os artefatos incluídos/alterados/renomeados para geração 
 ### Git
 
 - Não utilizar espaços nos nomes dos arquivos
-- Configurar corretamente as variáveis do Git `user.name` e `user.email` com nome e matrícula
+- Configurar corretamente as variáveis do Git `user.name` e `user.email` com matrícula e email
 - Verificar se os merges estão sendo realizados de maneira correta
 - Utilizar o comando `git mv` para renomear os artefatos
 
