@@ -66,25 +66,13 @@ function imprimirListaArtefatoUmaModificacao(listaArtefatoUmaModificacao) {
 
     listaArtefatoUmaModificacao.forEach(function (artefato, index) {
 
-      if(artefato.listaTarefa.length) {
+      artefato.listaTarefa.filter(function (tarefa) {
+        return tarefa.numTarefa === tarefaParam
+      }).forEach(function(tarefa){
 
-        const artefatoAnterior = listaArtefatoUmaModificacao[index - 1]
-
-        if (artefatoAnterior &&
-          artefatoAnterior.nomeProjeto !== artefato.nomeProjeto) {
-  
-          console.log('-----------------------')
-        }
-      }
-
-      artefato.listaTarefa.forEach(function (tarefa) {
-
-        if (tarefa.numTarefa === tarefaParam) {
-
-          console.log(tarefa.tipoAlteracao + '\t' +
+        console.log(tarefa.tipoAlteracao + '\t' +
             (params.mostrarNumModificacao ? tarefa.numeroAlteracao + '\t' : '') +
             artefato.nomeArtefato)
-        }
       })
     })
 
