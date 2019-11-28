@@ -6,8 +6,8 @@ Comando para listar os artefatos incluídos/alterados/renomeados para geração 
 
 ### Sistema
 
-- Node.js com versão mínima v10.15.2
-- Git com versão mínima v2.7.4
+- Node.js versão mínima v10.15.2
+- Git versão mínima v2.7.4
 
 ### Git
 
