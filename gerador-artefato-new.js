@@ -187,11 +187,7 @@ function obterListaTarefaAgrupadaPorArtefato(listaComandoExecutado) {
 function listarProjetoPorTask(listaComandoExecutado) {
 
   return listaComandoExecutado.map(({ task, projeto, stdout }) =>
-    ({
-      task: task,
-      nomeProjeto: projeto,
-      stdout: stdout
-    }))
+    ({ task: task, nomeProjeto: projeto, stdout: stdout }))
 }
 
 function removerArtefatoDeletado(listaArtefato) {
@@ -215,8 +211,8 @@ async function executarComandoGitLog(diretorio, projeto, autor, task) {
 
   const caminhoProjeto = path.join(diretorio, projeto)
 
-  let comando = 'git -C ' + caminhoProjeto + ' log --regexp-ignore-case --no-merges --author=' + autor +
-    ' --all --name-status -C --grep=' + task;
+  let comando = 'git -C ' + caminhoProjeto + ' log --regexp-ignore-case --no-merges --author=' + 
+    autor + ' --all --name-status -C --grep=' + task;
 
   var retorno = await exec(comando);
   retorno.projeto = projeto;
