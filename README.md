@@ -50,7 +50,7 @@ $ node gerador-artefato.js --diretorio=C:/kdi/git --projeto=foo-estatico,foo-api
 ## Saida do gerador
 
 ``` console
-$ node gerador-artefato.js --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
+$ node gerador-artefato.js --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081 --mostrar-deletados --mostrar-num-modificacao
 
 Tarefa nº 900089
 
