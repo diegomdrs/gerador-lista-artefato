@@ -90,8 +90,7 @@ function listarArtefatoDuasModificacoes(listaArtefato) {
         .filter((tarefaAtual, indexAtual) => {
 
           const listaSemTarefaAtual = artefato.listaTarefa
-            .filter((tarefaFilter, index) =>
-              index !== indexAtual)
+            .filter((tarefaFilter, index) => index !== indexAtual)
 
           const retorno = listaSemTarefaAtual.some(tarefaSome =>
             tarefaAtual.tipoAlteracao === tarefaSome.tipoAlteracao)
@@ -129,11 +128,10 @@ function listarArtefatoUmTipoModificacao(listaArtefato) {
         .filter((tarefaAtual, indexAtual) => {
 
           const listaSemTarefaAtual = artefato.listaTarefa
-            .filter((tarefaFilter, index) =>
-              index !== indexAtual)
+            .filter((tarefaFilter, index) => index !== indexAtual)
 
-          const retorno = listaSemTarefaAtual.some(tarefaSome =>
-            tarefaAtual.tipoAlteracao === tarefaSome.tipoAlteracao)
+          const retorno = listaSemTarefaAtual.some(
+            tarefaSome => tarefaAtual.tipoAlteracao === tarefaSome.tipoAlteracao)
 
           return !retorno
         })
@@ -192,8 +190,7 @@ function listarProjetoPorTask(listaComandoExecutado) {
 
 function removerArtefatoDeletado(listaArtefato) {
   return listaArtefato.filter(artefato => {
-    return !artefato.listaTarefa.some(tarefa =>
-      tarefa.tipoAlteracao === 'D')
+    return !artefato.listaTarefa.some(tarefa => tarefa.tipoAlteracao === 'D')
   })
 }
 
@@ -256,9 +253,8 @@ function obterListaArtefatoTask({ task, nomeProjeto, stdout }) {
 
       } else if (accum.length > 0) {
 
-        let artefatoEncontrado = accum.find(artefato =>
-          artefato.nomeArtefato === nomeArtefato
-        )
+        let artefatoEncontrado = accum.find(artefato => 
+          artefato.nomeArtefato === nomeArtefato)
 
         if (artefatoEncontrado) {
 
@@ -308,12 +304,8 @@ function filtrarComandosComSaida(listaComandoExecutado) {
 function obterParametros() {
 
   return args.reduce((accum, arg) => {
-
-    const key = obterKey(arg)
-    const value = obterValue(arg)
-
-    accum[key] = value;
-
+    accum[obterKey(arg)] = obterValue(arg)
+    
     return accum
   }, {});
 }
