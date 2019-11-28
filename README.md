@@ -4,9 +4,21 @@ Comando para listar os artefatos incluídos/alterados/renomeados para geração 
 
 ## Pré-requisitos 
 
+### Sistema
+
+- Node.js versão mínima v10.15.2
+- Git versão mínima v2.7.4
+
+### Git
+
 - Não utilizar espaços nos nomes dos arquivos
 - Configurar corretamente as variáveis do Git `user.name` e `user.email` com nome e matrícula
 - Verificar se os merges estão sendo realizados de maneira correta
+
+## Instalação
+
+- Baixe o script `gerador-artefato.js` [aqui](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/gerador-artefato.js) e salve no seu computador
+- Abra um terminal e execute o script com o comando `node`
 
 ## Uso
 
@@ -22,12 +34,17 @@ $ node gerador-artefato.js --diretorio=/kdi/git --projeto=foo-estatico,foo-api -
 $ node gerador-artefato.js --diretorio=C:/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
 ```
 
-Onde:
+#### Onde:
 
 - --diretorio: Diretório dos projetos Git
 - --projeto: Lista de projetos Git (podem ser passados vários projetos separados por vírgula)
 - --autor: Autor dos commits
 - --task: Lista de tarefas (podem ser passadas várias tarefas separadas por vírgula)
+
+#### Paramêtros opcionais
+
+- --mostrar-num-modificacao: Nº de modificações do artefato na tarefa ou nas tarefas
+- --mostrar-deletados: 
 
 ## Saida
 
