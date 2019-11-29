@@ -59,7 +59,7 @@ function imprimirListaArtefatoDuasModificacoes(lista) {
 
 function imprimirListaArtefatoUmaModificacao(listaArtefatoUmaModificacao) {
 
-  params.task.forEach(tarefaParam => {
+  obterLista(params.task).forEach(tarefaParam => {
 
     console.log('Tarefa nº ' + tarefaParam + '\n')
 
