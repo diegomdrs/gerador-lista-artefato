@@ -5,6 +5,8 @@ const exec = util.promisify(require('child_process').exec);
 const args = process.argv.slice(2)
 const params = obterParametros();
 
+let listaTarefaComSaida = new Set();
+
 init()
 
 function init() {
@@ -16,6 +18,11 @@ function init() {
     Promise.all(listaPromiseExecucaoComando).then(listaComandoExecutado => {
 
       const listaComandoComStout = filtrarComandosComSaida(listaComandoExecutado)
+
+      listaComandoComStout.forEach(function(comando){
+        listaTarefaComSaida.add(comando.task)
+      })
+
       const listaArtefato = obterListaTarefaAgrupadaPorArtefato(listaComandoComStout)
 
       imprimirListaArtefato(listaArtefato)
@@ -59,7 +66,7 @@ function imprimirListaArtefatoDuasModificacoes(lista) {
 
 function imprimirListaArtefatoUmaModificacao(listaArtefatoUmaModificacao) {
 
-  obterLista(params.task).forEach(tarefaParam => {
+  listaTarefaComSaida.forEach(tarefaParam => {
 
     console.log('Tarefa nº ' + tarefaParam + '\n')
 
