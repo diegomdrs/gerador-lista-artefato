@@ -92,3 +92,13 @@ M       foo-api/pom.xml
 M       foo-api/operacoes.xml
 
 ```
+
+``` console
+$ node gerador-artefato.js --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900077,900099
+
+Tarefa nº 900077
+
+M      foo-estatico/src/app/spas/foo/inclusao-foo.tpl.html
+A      foo-estatico/src/app/spas/foo/inclusao-foo.tpl.html
+M      foo-estatico/src/app/spas/foo/altera-foo.tpl.html
+
