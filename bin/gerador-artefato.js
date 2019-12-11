@@ -2,83 +2,16 @@
 
 const util = require('util')
 const path = require('path')
-
 const exec = util.promisify(require('child_process').exec)
 const args = process.argv.slice(2)
-let params = {}
+
+const Tarefa = require('../models/tarefa')
+const Artefato = require('../models/artefato')
+const Comando = require('../models/comando')
+const Param = require('../models/param')
 
 let listaTarefaComSaida = new Set()
-
-class Param {
-
-  constructor(args) {
-    args.forEach((arg) => this['_' + this.getKey(arg)] = this.getValue(arg)
-    )
-  }
-
-  get autor() { return this._autor }
-  get task() { return this.getList(this._task) }
-  get projeto() { return this.getList(this._projeto) }
-  get diretorio() { return this._diretorio }
-  get mostrarDeletados() { return this._mostrarDeletados }
-  get mostrarNumModificacao() { return this._mostrarNumModificacao }
-
-  getList(param) {
-    return (!Array.isArray(param)) ? param.split() : param
-  }
-
-  getKey(arg) {
-    return arg.split('=')[0].replace(/--+/g, '')
-      .replace(/-([a-z])/g, g => g[1].toUpperCase())
-  }
-
-  getValue(arg) {
-
-    let value = arg.split('=')[1]
-
-    if (value) {
-      if (value.match(/\w+,\w+/g)) {
-        value = value.split(',')
-      }
-    } else {
-      value = true
-    }
-
-    return value
-  }
-}
-
-class Tarefa {
-  constructor(numTarefa, tipoAlteracao) {
-    this.numTarefa = numTarefa,
-      this.tipoAlteracao = tipoAlteracao,
-      this.numeroAlteracao = 1
-  }
-
-  isTipoAlteracaoModificacao() { return this.tipoAlteracao === 'M' }
-  isTipoAlteracaoDelecao() { return this.tipoAlteracao === 'D' }
-}
-
-class Artefato {
-  constructor(nomeArtefato, nomeProjeto, listaTarefa) {
-    this.nomeArtefato = nomeArtefato,
-      this.nomeProjeto = nomeProjeto,
-      this.listaTarefa = listaTarefa
-  }
-
-  getNomeArtefatoReverso() {
-    return this.nomeArtefato.split('').reverse().join('')
-  }
-}
-
-class Comando {
-  constructor(stdout, projeto, task, comando) {
-    this.stdout = stdout
-    this.nomeProjeto = projeto
-    this.task = task
-    this.comando = comando
-  }
-}
+let params = {}
 
 init(args)
 
@@ -153,6 +86,18 @@ function imprimirListaArtefatoTarefasIguais(listaArtefatoUmaModificacao) {
   })
 }
 
+/*
+Filtra artefatos com tarefas com o mesmo tipo de modificação. ex.
+
+---
+Tarefas nº 1189666, 1176490
+
+M	foo-estatico/src/lista-foo.tpl.html
+---
+
+No exemplo, o artefato lista-foo.tpl.html possui duas tarefas (1189666 e 1176490)
+com o mesmo tipo de modificação ('M' - Modified)
+*/
 function filtrarArtefatoTarefaMesmoTipo(listaArtefato) {
 
   let listaArtefatoTarefaMesmoTipo = []
