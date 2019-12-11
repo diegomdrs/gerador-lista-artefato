@@ -1,0 +1,23 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // node bin/gerador-artefato.js --diretorio=/home/foo/Documents --projeto=foo-estatico,foo-api --autor=diegomdrs --task=1111111 --mostrar-num-modificacao --mostrar-deletados
+            "type": "node",
+            "request": "launch",
+            "name": "home gerador-artefato.js",
+            "program": "${workspaceFolder}/bin/gerador-artefato.js",
+            "args": [
+                "--diretorio=/home/foo/Documents",
+                "--projeto=foo-estatico,foo-api",
+                "--autor=diegomdrs",
+                "--task=1111111",
+                "--mostrar-num-modificacao",
+                "--mostrar-deletados"
+            ]
+        }
+    ]
+}
