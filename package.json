@@ -3,9 +3,15 @@
   "version": "0.0.1",
   "description": "",
   "bin": {
-    "gerador-lista-artefato": "./bin/gerador-artefato.js"
+    "gerador-lista-artefato": "./bin/gerador-lista-artefato.js"
+  },
+  "scripts": {
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
 }

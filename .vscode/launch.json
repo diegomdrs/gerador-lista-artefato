@@ -5,11 +5,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            // node bin/gerador-artefato.js --diretorio=/home/foo/Documents --projeto=foo-estatico,foo-api --autor=diegomdrs --task=1111111 --mostrar-num-modificacao --mostrar-deletados
+            // node bin/gerador-lista-artefato.js --diretorio=/home/foo/Documents --projeto=foo-estatico,foo-api --autor=diegomdrs --task=1111111 --mostrar-num-modificacao --mostrar-deletados
             "type": "node",
             "request": "launch",
-            "name": "home gerador-artefato.js",
-            "program": "${workspaceFolder}/bin/gerador-artefato.js",
+            "name": "home gerador-lista-artefato.js",
+            "program": "${workspaceFolder}/bin/gerador-lista-artefato.js",
             "args": [
                 "--diretorio=/home/foo/Documents",
                 "--projeto=foo-estatico,foo-api",

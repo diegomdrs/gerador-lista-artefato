@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+module.exports = init;
+
 const util = require('util')
 const path = require('path')
 const exec = util.promisify(require('child_process').exec)
