@@ -11,6 +11,14 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diegomdrs/gerador-lista-artefato-qas"
+  },
+  "bugs": {
+    "url": "https://github.com/diegomdrs/gerador-lista-artefato-qas/issues"
+  },
+  "homepage": "https://github.com/diegomdrs/gerador-lista-artefato-qas#readme",
   "devDependencies": {
     "jest": "^24.9.0"
   }
