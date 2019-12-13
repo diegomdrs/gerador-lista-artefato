@@ -29,7 +29,7 @@ function init(args) {
 
         app.params = params
 
-        const geradorRouter = require('./routes/gerador')(app)
+        require('./routes/gerador')(app)
 
     } else {
 

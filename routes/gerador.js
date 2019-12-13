@@ -1,7 +1,9 @@
 
 module.exports = function (app) {
 
-    const gerador = require('../bin/gerador')(app.params)
+    const gerador = require('../bin/gerador')
 
-    // app.post('/gerador', gerador.gerarListaArtefato)
+    gerador.gerarListaArtefato(app.params)
+
+    // app.post('/gerador', gerador.gerarListaArtefato(app.params))
 }
