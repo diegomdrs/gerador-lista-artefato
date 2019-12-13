@@ -7,25 +7,30 @@ const Artefato = require('../models/artefato')
 const Comando = require('../models/comando')
 
 let listaTarefaComSaida = new Set()
+let params = {}
 
-exports.gerarListaArtefato = async function init(params) {
+exports.gerarListaArtefato = async function (params) {
 
   if (params.projeto && params.autor && params.task && params.diretorio) {
+
+    params = params
 
     try {
       const listaComandoComStout = await obterListaComandoExecutado()
       let listaArtefato = obterListaTarefaAgrupadaPorArtefato(listaComandoComStout)
 
-      if (!params.mostrarDeletados) {
-        listaArtefato = removerArtefatoDeletado(listaArtefato)
-      }
+      // return listaArtefato
 
-      const listaArtefatoTarefaMesmoTipo = filtrarArtefatoTarefaMesmoTipo(listaArtefato)
-      const listaArtefatoTarefasIguais = filtrarArtefatoTarefasIguais(listaArtefato)
+      // if (!params.mostrarDeletados) {
+      //   listaArtefato = removerArtefatoDeletado(listaArtefato)
+      // }
 
-      imprimirListaArtefato(listaArtefatoTarefaMesmoTipo, listaArtefatoTarefasIguais)
+      // const listaArtefatoTarefaMesmoTipo = filtrarArtefatoTarefaMesmoTipo(listaArtefato)
+      // const listaArtefatoTarefasIguais = filtrarArtefatoTarefasIguais(listaArtefato)
 
-    } catch ({ cmd, stderr }) {
+      // imprimirListaArtefato(listaArtefatoTarefaMesmoTipo, listaArtefatoTarefasIguais)
+
+    } catch (error) {
       throw new Error(error.message)
     }
   }

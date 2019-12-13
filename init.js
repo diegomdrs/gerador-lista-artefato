@@ -11,7 +11,7 @@ init(args)
 
 function init(args) {
 
-    const params = new Param(args)
+    const params = Param.getFromArgs(args)
 
     if (params.server) {
 
@@ -26,8 +26,6 @@ function init(args) {
         server.listen(port);
         server.on('error', onError)
         server.on('listening', onListening)
-
-        app.params = params
 
         require('./routes/gerador')(app)
 

@@ -2,8 +2,12 @@
 module.exports = function (app) {
 
     const gerador = require('../bin/gerador')
+    const Param = require('../models/param')
 
-    gerador.gerarListaArtefato(app.params)
+    app.post('/gerador', function (req, resp) {
 
-    // app.post('/gerador', gerador.gerarListaArtefato(app.params))
+        const params = Param.getFromBody(req.body)
+
+        resp.json(gerador.gerarListaArtefato(params))
+    })
 }
