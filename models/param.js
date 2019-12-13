@@ -11,7 +11,8 @@ class Param {
     get diretorio() { return this._diretorio }
     get mostrarDeletados() { return this._mostrarDeletados }
     get mostrarNumModificacao() { return this._mostrarNumModificacao }
-  
+    get server() { return this._server }
+
     getList(param) {
       return (!Array.isArray(param)) ? param.split() : param
     }

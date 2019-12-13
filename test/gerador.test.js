@@ -1,7 +1,6 @@
-const gerador = require('../bin/gerador-lista-artefato')
+const gerador = require('../bin/gerador')
 
 test('test foo', () => {
     
     gerador({autor: 'diegomdrs'})
-
 });
