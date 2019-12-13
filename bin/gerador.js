@@ -7,15 +7,12 @@ const Artefato = require('../models/artefato')
 const Comando = require('../models/comando')
 
 let listaTarefaComSaida = new Set()
-let params = {}
 
 module.exports = function gerador(params) {
 
   init(params)
 
   async function init(params) {
-
-    console.log(params)
 
     if (params.projeto && params.autor && params.task && params.diretorio) {
 
