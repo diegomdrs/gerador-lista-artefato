@@ -15,7 +15,7 @@ function init(args) {
 
     if (params.server) {
 
-        const app = require('./app')
+        const app = require('./config/express')
         const http = require('http')
 
         const port = normalizePort(process.env.PORT || PORT);
@@ -26,6 +26,9 @@ function init(args) {
         server.listen(port);
         server.on('error', onError)
         server.on('listening', onListening)
+
+        const geradorRouter = require('./routes/gerador')
+        app.use('/', geradorRouter)
 
     } else {
 

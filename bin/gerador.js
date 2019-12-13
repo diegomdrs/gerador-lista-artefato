@@ -1,16 +1,10 @@
-#!/usr/bin/env node
-
-// module.exports = init;
-
 const util = require('util')
 const path = require('path')
 const exec = util.promisify(require('child_process').exec)
-const args = process.argv.slice(2)
 
 const Tarefa = require('../models/tarefa')
 const Artefato = require('../models/artefato')
 const Comando = require('../models/comando')
-const Param = require('../models/param')
 
 let listaTarefaComSaida = new Set()
 let params = {}
