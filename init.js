@@ -27,8 +27,9 @@ function init(args) {
         server.on('error', onError)
         server.on('listening', onListening)
 
-        const geradorRouter = require('./routes/gerador')
-        app.use('/', geradorRouter)
+        app.params = params
+
+        const geradorRouter = require('./routes/gerador')(app)
 
     } else {
 

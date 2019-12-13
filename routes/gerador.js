@@ -1,7 +1,7 @@
-const express = require('express')
-const router = express.Router()
-const gerador = require('../bin/gerador');
 
-router.post('/gerador', gerador.gerarListaArtefato)
+module.exports = function (app) {
 
-module.exports = router
+    const gerador = require('../bin/gerador')(app.params)
+
+    // app.post('/gerador', gerador.gerarListaArtefato)
+}
