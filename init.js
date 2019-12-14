@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 
-const args = process.argv.slice(2)
 const Param = require('./models/param')
 
-init(args)
+init()
 
-async function init(args) {
+async function init() {
 
-    const params = Param.getFromArgs(args)
+    const params = require('./config/commander')
 
     if (params.server) {
 
