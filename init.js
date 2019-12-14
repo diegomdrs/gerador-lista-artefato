@@ -9,8 +9,8 @@ async function init() {
     if (params.server) {
 
         const app = require('./config/express')
+        
         require('./config/http')(app)
-
         require('./routes/gerador-web')(app)
 
     } else {
