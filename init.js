@@ -33,9 +33,8 @@ function init(args) {
 
         const gerador = require('./bin/gerador')(params)
 
-        await gerador.gerarListaArtefato()
-
-        console.log(params)
+        // await gerador.gerarListaArtefato()
+        // console.log(params)
     }
 }
 
