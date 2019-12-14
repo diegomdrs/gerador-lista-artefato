@@ -1,13 +1,13 @@
 
 module.exports = function (app) {
 
-    const gerador = require('../bin/gerador')
     const Param = require('../models/param')
 
-    app.post('/gerador', function (req, resp) {
+    app.post('/gerador', async function (req, resp) {
 
         const params = Param.getFromBody(req.body)
+        const gerador = require('../bin/gerador')(params)
 
-        resp.json(gerador.gerarListaArtefato(params))
+        resp.json(gerador.gerarListaArtefato)
     })
 }
