@@ -4,7 +4,7 @@ const package = require('../package.json')
 
 program
     .description('Comando para listar os artefatos incluídos/alterados/renomeados para geração do QAS')
-    .option('-s, --server', 'inicia a versão server')
+    .option('-s, --server', 'inicia a versão server e ignora os outros parâmetros')
     .option('-d, --diretorio <type>', 'diretório raiz dos projetos Git')
     .option('-p, --projeto <type>', 'lista de projetos Git (podem ser passados vários projetos separados por vírgula)', commaSeparatedList)
     .option('-a, --autor <type>', 'matrícula do autor dos commits')
