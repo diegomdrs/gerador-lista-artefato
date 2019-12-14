@@ -27,7 +27,7 @@ function init(args) {
         server.on('error', onError)
         server.on('listening', onListening)
 
-        require('./routes/geradorWeb')(app)
+        require('./routes/gerador-web')(app)
 
     } else {
 
