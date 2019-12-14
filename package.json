@@ -6,7 +6,8 @@
     "gerador": "./init.js"
   },
   "scripts": {
-    "start": "node init --server",
+    "start": "node init --s",
+    "dev": "node --inspect init --s",
     "test": "jest"
   },
   "keywords": [],
