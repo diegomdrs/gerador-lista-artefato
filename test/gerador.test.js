@@ -1,4 +1,4 @@
-const gerador = require('../bin/gerador')
+const gerador = require('../lib/gerador')
 
 test('test foo', () => {
     

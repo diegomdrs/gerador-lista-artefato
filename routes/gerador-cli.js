@@ -6,7 +6,7 @@ module.exports = function (app) {
     app.post('/gerador', async function (req, resp) {
 
         const params = Param.getFromBody(req.body)
-        const gerador = require('../bin/gerador')(params)
+        const gerador = require('../lib/gerador')(params)
 
         resp.json(await gerador.gerarListaArtefato())
     })
