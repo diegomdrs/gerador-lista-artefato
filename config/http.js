@@ -1,7 +1,3 @@
-/**
- * Module dependencies.
- */
-
 module.exports = function (app) {
 
   const debug = require('debug')('gerador-artefato:server');

@@ -1,10 +1,9 @@
 
 module.exports = function (app) {
 
-    const Param = require('../models/param')
-
     app.post('/gerador', async function (req, resp) {
 
+        const Param = require('../models/param')
         const params = new Param(req.body)
         const gerador = require('../lib/gerador')(params)
 
