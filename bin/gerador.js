@@ -56,7 +56,7 @@ function imprimirListaArtefatoTarefaMesmoTipo(lista) {
 
     console.log('Tarefas nº ' + tarefas.listaTarefa.join(', ') + '\n')
     console.log('M\t' +
-      (params.mostrarNumModificacao ? tarefas.totalModificacao + '\t' : '') +
+      params.mostrarNumModificacao && tarefas.totalModificacao + '\t' +
       artefato.nomeArtefato + '\n')
   })
 }
@@ -73,7 +73,7 @@ function imprimirListaArtefatoTarefasIguais(listaArtefatoUmaModificacao) {
         tarefa.numTarefa === tarefaParam).forEach(tarefa => {
 
           console.log(tarefa.tipoAlteracao + '\t' +
-            (params.mostrarNumModificacao ? tarefa.numeroAlteracao + '\t' : '') +
+            params.mostrarNumModificacao && tarefa.numeroAlteracao + '\t' +
             artefato.nomeArtefato)
         })
     })
