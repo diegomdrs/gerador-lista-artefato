@@ -18,10 +18,6 @@ async function init(args) {
 
     } else {
 
-        const gerador = require('./lib/gerador')(params)
-
-        await gerador.gerarListaArtefato()
-        
-        console.log(params)
+        require('./routes/gerador-cli')(params)
     }
 }

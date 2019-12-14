@@ -1,23 +1,19 @@
 
-module.exports = function (app) {
+module.exports = async function (params) {
 
-    const Param = require('../models/param')
+    const gerador = require('../lib/gerador')(params)
 
-    app.post('/gerador', async function (req, resp) {
+    const listaArtefato = await gerador.gerarListaArtefato()
 
-        const params = Param.getFromBody(req.body)
-        const gerador = require('../lib/gerador')(params)
-
-        resp.json(await gerador.gerarListaArtefato())
-    })
+    imprimirListaArtefato(listaArtefato)
 }
 
-function imprimirListaArtefato(listaArtefatoTarefaMesmoTipo, listaArtefatoTarefasIguais) {
+function imprimirListaArtefato(listaArtefato) {
 
     console.log('')
 
-    imprimirListaArtefatoTarefaMesmoTipo(listaArtefatoTarefaMesmoTipo)
-    imprimirListaArtefatoTarefasIguais(listaArtefatoTarefasIguais)
+    imprimirListaArtefatoTarefaMesmoTipo(listaArtefato.listaArtefatoTarefaMesmoTipo)
+    imprimirListaArtefatoTarefasIguais(listaArtefato.listaArtefatoTarefasIguais)
 }
 
 function imprimirListaArtefatoTarefaMesmoTipo(lista) {
