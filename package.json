@@ -3,11 +3,11 @@
   "version": "0.0.1",
   "description": "",
   "bin": {
-    "gerador": "./init.js"
+    "gerador-lista-artefato": "./init.js"
   },
   "scripts": {
-    "start": "node init --s",
-    "dev": "node --inspect init --s",
+    "start": "node init -s",
+    "dev": "node --inspect init -s",
     "test": "jest"
   },
   "keywords": [],
