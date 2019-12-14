@@ -5,14 +5,26 @@
   "bin": {
     "gerador": "./init.js"
   },
+  "scripts": {
+    "start": "node init --server",
+    "test": "jest"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "jest": "^24.9.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diegomdrs/gerador-lista-artefato-qas"
   },
+  "bugs": {
+    "url": "https://github.com/diegomdrs/gerador-lista-artefato-qas/issues"
+  },
+  "homepage": "https://github.com/diegomdrs/gerador-lista-artefato-qas#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0"
   }
 }

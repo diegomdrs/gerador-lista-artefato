@@ -23,7 +23,7 @@
             ]
         },
         {
-            // node init  --diretorio=/home/foo/Documents --projeto=foo-estatico,foo-api --autor=diegomdrs --task=1111111 --mostrar-num-modificacao --mostrar-deletados
+            // node init --diretorio=/home/foo/Documents --projeto=foo-estatico,foo-api --autor=diegomdrs --task=1111111 --mostrar-num-modificacao --mostrar-deletados
             "type": "node",
             "request": "launch",
             "name": "home gerador.js",
@@ -39,7 +39,7 @@
         },
         {
             // Comando que em que a tarefa 1210684 ficou vazia
-            // node init  --diretorio=/kdi/git --projeto=apc-estatico,apc-api,crm-patrimonio-estatico,crm-patrimonio-api --autor=c1299072 --task=1199211,1203082,1203670,1207175,1210684,1210658,1212262,1212444
+            // node init --diretorio=/kdi/git --projeto=apc-estatico,apc-api,crm-patrimonio-estatico,crm-patrimonio-api --autor=c1299072 --task=1199211,1203082,1203670,1207175,1210684,1210658,1212262,1212444
             "type": "node",
             "request": "launch",
             "name": "bb gerador.js",
