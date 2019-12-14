@@ -8,6 +8,6 @@ module.exports = function (app) {
         const params = Param.getFromBody(req.body)
         const gerador = require('../bin/gerador')(params)
 
-        resp.json(gerador.gerarListaArtefato)
+        resp.json(await gerador.gerarListaArtefato())
     })
 }
