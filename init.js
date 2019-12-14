@@ -27,13 +27,18 @@ function init(args) {
         server.on('error', onError)
         server.on('listening', onListening)
 
-        require('./routes/gerador')(app)
+        require('./routes/geradorWeb')(app)
 
     } else {
+
+        const gerador = require('./bin/gerador')(params)
+
+        await gerador.gerarListaArtefato()
 
         console.log(params)
     }
 }
+
 /**
  * Normalize a port into a number, string, or false.
  */

@@ -8,8 +8,8 @@ class Param {
 
     param._server = body.server
     param._autor = body.autor
-    param._task = this.getList(body.task)
-    param._projeto = this.getList(body.projeto)
+    param._task = Param.getList(body.task)
+    param._projeto = Param.getList(body.projeto)
     param._diretorio = body.diretorio
     param._mostrarDeletados = body.mostrarDeletados
     param._mostrarNumModificacao = body.mostrarNumModificacao
