@@ -17,12 +17,28 @@ describe('test foo', () => {
         }
 
         fs.mkdirSync(PATH_TEST)
-        fs.outputFileSync(PATH_TEST + '/arquivo.txt')
 
         git = require('simple-git/promise')(PATH_TEST)
-
         await git.init()
-        await git.add('./*')
+
+        // Criação
+        fs.outputFileSync(PATH_TEST + '/arquivo1.txt')
+        await git.add('./arquivo1.txt')
+        await git.commit("task 1111111 commit")
+
+        // Criação
+        fs.outputFileSync(PATH_TEST + '/arquivo2.txt')
+        await git.add('./arquivo2.txt')
+        await git.commit("task 2222222 commit")
+
+        // Modificação
+        fs.outputFileSync(PATH_TEST + '/arquivo1.txt', 'Mod 1')
+        await git.add('./arquivo1.txt')
+        await git.commit("task 1111111 commit")
+
+        // Modificação
+        fs.outputFileSync(PATH_TEST + '/arquivo2.txt', 'Mod 2')
+        await git.add('./arquivo2.txt')
         await git.commit("task 1111111 commit")
     })
 
@@ -32,10 +48,18 @@ describe('test foo', () => {
             diretorio: "/tmp",
             autor: "diegomdrs",
             projeto: NAME_APP,
-            task: "1111111"
+            task: ["1111111", "2222222"]
         })
 
         const retorno = await gerador(params).gerarListaArtefato()
+
+        // console.table(retorno.listaArtefatoTarefaMesmoTipo)
+ 
+        for (const artefato of retorno.listaArtefatoTarefasIguais) {
+            
+            console.log(artefato.nomeArtefato + ' ##########################')
+            console.table(artefato.listaTarefa)
+        }
 
         expect(retorno).toBeDefined()
     })
