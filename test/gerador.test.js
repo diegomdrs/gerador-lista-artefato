@@ -1,10 +1,10 @@
 const gerador = require('../lib/gerador')
 const Param = require('../models/param')
 const fs = require('fs-extra')
-const foo = require('../package.json')
+const app = require('../package.json')
 
-const NAME_APP = foo.name
-const PATH_TEST = '/tmp/' + NAME_APP
+const NAME_APP = app.name
+const PATH_TEST = 'test/' + NAME_APP
 
 let git = {}
 
@@ -31,6 +31,6 @@ describe('test foo', () => {
 
     afterEach(() => {
 
-        fs.removeSync(PATH_TEST)
+        // fs.removeSync(PATH_TEST)
     })
 })
