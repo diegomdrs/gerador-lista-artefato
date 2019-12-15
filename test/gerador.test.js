@@ -1,28 +1,36 @@
 const gerador = require('../lib/gerador')
-const exec = require('child_process').exec
+const Param = require('../models/param')
+const fs = require('fs-extra')
+const foo = require('../package.json')
 
-function execInTestDir(command, cb) {
-    exec(command, { cwd: __dirname }, cb)
-}
+const NAME_APP = foo.name
+const PATH_TEST = '/tmp/' + NAME_APP
+
+let git = {}
 
 describe('test foo', () => {
 
-    beforeEach(function (done) {
-        execInTestDir(__dirname + '/delete-repo.sh', function (error) {
-            if (error) {
-                return done(error)
-            }
-            execInTestDir(__dirname + '/create-repo.sh', done)
-        })
+    beforeEach(() => {
+
+        fs.mkdirSync(PATH_TEST)
+        git = require('simple-git')(PATH_TEST)
+        git.init()
     })
 
-    it('test one', () => { 
-        gerador({autor: 'diegomdrs'})
+    it('test one', () => {
+
+        const params = new Param({
+            diretorio: "/home/foo/Documents",
+            autor: "diegomdrs",
+            projeto: ["foo-estatico", "foo-api"],
+            task: ["1111111"]
+        })
+
+        gerador(params)
     })
 
-    afterEach((done) => {
-        execInTestDir(__dirname + '/delete-repo.sh', function () {
-            done()
-        })
+    afterEach(() => {
+
+        fs.removeSync(PATH_TEST)
     })
 })
