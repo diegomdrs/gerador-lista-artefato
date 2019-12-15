@@ -13,8 +13,12 @@ describe('test foo', () => {
     beforeEach(() => {
 
         fs.mkdirSync(PATH_TEST)
+        fs.outputFile(PATH_TEST + '/arquivo.txt')
+
         git = require('simple-git')(PATH_TEST)
-        git.init()
+            .init()
+            .add('./*')
+            .commit("task 1111111 commit")
     })
 
     it('test one', () => {
@@ -26,11 +30,13 @@ describe('test foo', () => {
             task: ["1111111"]
         })
 
-        gerador(params)
+        // const foo = gerador(params).gerarListaArtefato()
+
+        // console.log(foo)
     })
 
     afterEach(() => {
 
-        // fs.removeSync(PATH_TEST)
+        fs.removeSync(PATH_TEST)
     })
 })
