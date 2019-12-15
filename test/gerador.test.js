@@ -21,18 +21,18 @@ describe('test foo', () => {
             .commit("task 1111111 commit")
     })
 
-    it('test one', () => {
+    it('test one', async () => {
 
         const params = new Param({
-            diretorio: "/home/foo/Documents",
+            diretorio: "test",
             autor: "diegomdrs",
-            projeto: ["foo-estatico", "foo-api"],
-            task: ["1111111"]
+            projeto: NAME_APP,
+            task: "1111111"
         })
 
-        // const foo = gerador(params).gerarListaArtefato()
+        const foo = await gerador(params).gerarListaArtefato()
 
-        // console.log(foo)
+        console.log(foo)
     })
 
     afterEach(() => {

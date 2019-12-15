@@ -16,6 +16,17 @@
             // node init --diretorio=/home/foo/Documents --projeto=foo-estatico,foo-api --autor=diegomdrs --task=1111111 --mostrar-num-modificacao --mostrar-deletados
             "type": "node",
             "request": "launch",
+            "name": "jest",
+            "program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+            "args": [
+                "-i"
+            ],
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            // node init --diretorio=/home/foo/Documents --projeto=foo-estatico,foo-api --autor=diegomdrs --task=1111111 --mostrar-num-modificacao --mostrar-deletados
+            "type": "node",
+            "request": "launch",
             "name": "home init.js",
             "program": "${workspaceFolder}/init.js",
             "args": [
