@@ -35,9 +35,9 @@ describe('test foo', () => {
             task: "1111111"
         })
 
-        const foo = await gerador(params).gerarListaArtefato()
+        const retorno = await gerador(params).gerarListaArtefato()
 
-        console.log(foo)
+        expect(retorno).toBeDefined()
     })
 
     afterEach(() => {
