@@ -9,7 +9,9 @@ module.exports = async function (params) {
 
     function imprimirListaFoo(listaFoo) {
 
-        listaFoo.forEach(foo => {
+        console.log('')
+
+        for (const foo of listaFoo) {
 
             if (foo.listaNumTarefa.length === 1)
                 console.log('Tarefa nº ' + foo.listaNumTarefa[0] + '\n')
@@ -17,13 +19,13 @@ module.exports = async function (params) {
                 console.log('Tarefas nº ' + foo.listaNumTarefa.join(', ') + '\n')
             }
 
-            foo.listaArtefatoFoo.forEach(function (artefato) {
+            for (const artefato of foo.listaArtefatoFoo) {
                 console.log(imprimirFoo(artefato.tipoAlteracao,
                     artefato.numeroAlteracao, artefato.nomeArtefato))
-            })
+            }
 
             console.log('')
-        })
+        }
     }
 
     function imprimirFoo(tipoAlteracao, numeroAlteracao, nomeArtefato) {
