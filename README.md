@@ -48,15 +48,15 @@ $ ./gerador-lista-artefato-qas-win.exe --diretorio=C:/kdi/git --projeto=foo-esta
 
 ## Parâmetros
 
-- -d, --diretorio <type>     Diretório raiz dos projetos Git
-- -p, --projeto <type>       Lista de projetos Git (podem ser passados vários projetos separados por vírgula)
-- -a, --autor <type>         Matrícula do autor dos commits
-- -t, --task <type>          Lista de tarefas (podem ser passadas várias tarefas separadas por vírgula)
-- --mostrar-num-modificacao  Nº de modificações do artefato na tarefa ou tarefas (Opcional)
-- --mostrar-deletados        Mostra artefatos deletados na tarefa (Opcional)
-- -s, --server               Inicia a versão server e ignora os outros parâmetros
-- -v, --version              Mostra a versão do programa
-- -h, --help                 output usage information
+- -d, --diretorio: Diretório raiz dos projetos Git
+- -p, --projeto: Lista de projetos Git (podem ser passados vários projetos separados por vírgula)
+- -a, --autor <type>: Matrícula do autor dos commits
+- -t, --task <type>: Lista de tarefas (podem ser passadas várias tarefas separadas por vírgula)
+- --mostrar-num-modificacao: Nº de modificações do artefato na tarefa ou tarefas (Opcional)
+- --mostrar-deletados: Mostra artefatos deletados na tarefa (Opcional)
+- -s, --server: Inicia a versão server e ignora os outros parâmetros
+- -v, --version: Mostra a versão do programa
+- -h, --help: output usage information
 
 ## Saida do gerador
 
