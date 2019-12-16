@@ -21,8 +21,11 @@ module.exports = async function (params) {
 
         listaFoo.forEach(foo => {
 
-            if(foo.listaNumTarefa.length)
-                (console.log('Tarefas nº ' + foo.listaNumTarefa.join(', ') + '\n'))
+            if (foo.listaNumTarefa.length === 1)
+                console.log('Tarefa nº ' + foo.listaNumTarefa[0] + '\n')
+            else if (foo.listaNumTarefa.length > 1) {
+                console.log('Tarefas nº ' + foo.listaNumTarefa.join(', ') + '\n')
+            }
 
             foo.listaArtefatoFoo.forEach(function (artefato) {
                 console.log(imprimirFoo(artefato.tipoAlteracao,
