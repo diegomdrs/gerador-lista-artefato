@@ -18,11 +18,9 @@ Comando para listar os artefatos incluídos/alterados/renomeados para geração 
 
 ## Instalação
 
-- Baixe o script `gerador-lista-artefato-qas` e salve no seu computador
-
 ### Linux 
 
-- Baixe [aqui](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas-linux)
+- Baixe [aqui](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas-linux) para o seu computador
 
 - Em seguida, execute o comando abaixo:
 
@@ -32,7 +30,7 @@ $ chmod +x gerador-lista-artefato-qas-linux
 
 ### Windows 
 
-- Baixe [aqui](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas-win.exe)
+- Baixe [aqui](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas-win.exe) para o seu computador
 
 ## Uso
 
@@ -50,15 +48,15 @@ $ ./gerador-lista-artefato-qas-win.exe --diretorio=C:/kdi/git --projeto=foo-esta
 
 #### Onde:
 
-- --diretorio: Diretório raiz dos projetos Git
-- --projeto: Lista de projetos Git (podem ser passados vários projetos separados por vírgula)
-- --autor: Matrícula do autor dos commits
-- --task: Lista de tarefas (podem ser passadas várias tarefas separadas por vírgula)
-
-#### Paramêtros opcionais
-
-- --mostrar-num-modificacao: Nº de modificações do artefato na tarefa ou tarefas
-- --mostrar-deletados: Mostrar artefatos deletados na tarefa
+- -s, --server               Inicia a versão server e ignora os outros parâmetros
+- -d, --diretorio <type>     Diretório raiz dos projetos Git
+- -p, --projeto <type>       Lista de projetos Git (podem ser passados vários projetos separados por vírgula)
+- -a, --autor <type>         Matrícula do autor dos commits
+- -t, --task <type>          Lista de tarefas (podem ser passadas várias tarefas separadas por vírgula)
+- --mostrar-num-modificacao  Nº de modificações do artefato na tarefa ou tarefas (Opcional)
+- --mostrar-deletados        Mostra artefatos deletados na tarefa (Opcional)
+- -v, --version              Mostra a versão do programa
+- -h, --help                 output usage information
 
 ## Saida do gerador
 
