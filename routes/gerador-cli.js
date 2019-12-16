@@ -3,16 +3,34 @@ module.exports = async function (params) {
 
     const gerador = require('../lib/gerador')(params)
 
-    const listaArtefato = await gerador.gerarListaArtefato()
+    const listaFoo = await gerador.gerarListaArtefato()
 
-    imprimirListaArtefato(listaArtefato)
+    imprimirListaFoo(listaFoo)
 
-    function imprimirListaArtefato(listaArtefato) {
+    // imprimirListaArtefato(listaArtefato)
 
-        console.log('')
+    // function imprimirListaArtefato(listaArtefato) {
 
-        imprimirListaArtefatoComTarefaMesmoTipo(listaArtefato.listaArtefato)
-        imprimirListaTarefaFoo(listaArtefato.listaTarefaFoo)
+    //     console.log('')
+
+    //     imprimirListaArtefatoComTarefaMesmoTipo(listaArtefato.listaArtefato)
+    //     imprimirListaTarefaFoo(listaArtefato.listaTarefaFoo)
+    // }
+
+    function imprimirListaFoo(listaFoo) {
+
+        listaFoo.forEach(foo => {
+
+            if(foo.listaNumTarefa.length)
+                (console.log('Tarefas nº ' + foo.listaNumTarefa.join(', ') + '\n'))
+
+            foo.listaArtefatoFoo.forEach(function (artefato) {
+                console.log(imprimirFoo(artefato.tipoAlteracao,
+                    artefato.numeroAlteracao, artefato.nomeArtefato))
+            })
+
+            console.log('')
+        })
     }
 
     function imprimirListaArtefatoComTarefaMesmoTipo(listaArtefato) {
@@ -40,7 +58,7 @@ module.exports = async function (params) {
 
             tarefaFoo.listaArtefatoFoo.forEach(function (artefatoFoo) {
 
-                console.log(foo(artefatoFoo.tipoAlteracao,
+                console.log(imprimirFoo(artefatoFoo.tipoAlteracao,
                     artefatoFoo.numeroAlteracao, artefatoFoo.nomeArtefato))
             })
 
@@ -48,13 +66,13 @@ module.exports = async function (params) {
         })
     }
 
-    function foo(tipoAlteracao, numeroAlteracao, nomeArtefato) {
+    function imprimirFoo(tipoAlteracao, numeroAlteracao, nomeArtefato) {
 
         let retorno = tipoAlteracao + '\t'
 
         params.mostrarNumModificacao && (
             retorno = retorno.concat(numeroAlteracao + '\t'))
-        
+
         retorno = retorno.concat(nomeArtefato)
 
         return retorno
