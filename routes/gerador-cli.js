@@ -11,40 +11,41 @@ module.exports = async function (params) {
 
         console.log('')
 
-        imprimirListaArtefatoTarefaMesmoTipo(listaArtefato.listaArtefatoTarefaMesmoTipo)
-        imprimirListaArtefatoTarefasIguais(listaArtefato.listaArtefatoTarefasIguais)
+        imprimirListaArtefatoComTarefaMesmoTipo(listaArtefato.listaArtefatoComTarefaMesmoTipo)
+        imprimirListaArtefatoSemTarefaMesmoTipo(listaArtefato.listaArtefatoSemTarefaMesmoTipo)
     }
 
-    function imprimirListaArtefatoTarefaMesmoTipo(lista) {
-        lista.forEach(artefato => {
+    function imprimirListaArtefatoComTarefaMesmoTipo(listaArtefatoComTarefaMesmoTipo) {
+        listaArtefatoComTarefaMesmoTipo.forEach(artefato => {
 
             const tarefas = artefato.listaTarefa.reduce((accum, tarefa) => {
                 accum.listaTarefa.push(tarefa.numTarefa)
-                accum.totalModificacao += tarefa.numeroAlteracao
+                params.mostrarNumModificacao && 
+                    (accum.totalModificacao += tarefa.numeroAlteracao)
 
                 return accum
             }, { totalModificacao: 0, listaTarefa: [] })
 
             console.log('Tarefas nº ' + tarefas.listaTarefa.join(', ') + '\n')
-            console.log('M\t' +
-                params.mostrarNumModificacao && tarefas.totalModificacao + '\t' +
+            console.log('M\t' + 
+                (params.mostrarNumModificacao && tarefas.totalModificacao + '\t') +
                 artefato.nomeArtefato + '\n')
         })
     }
 
-    function imprimirListaArtefatoTarefasIguais(listaArtefatoUmaModificacao) {
+    function imprimirListaArtefatoSemTarefaMesmoTipo(listaArtefatoSemTarefaMesmoTipo) {
 
         gerador.listaTarefaComSaida.forEach(tarefaParam => {
 
             console.log('Tarefa nº ' + tarefaParam + '\n')
 
-            listaArtefatoUmaModificacao.forEach(artefato => {
+            listaArtefatoSemTarefaMesmoTipo.forEach(artefato => {
 
                 artefato.listaTarefa.filter(tarefa =>
                     tarefa.numTarefa === tarefaParam).forEach(tarefa => {
 
                         console.log(tarefa.tipoAlteracao + '\t' +
-                            params.mostrarNumModificacao && tarefa.numeroAlteracao + '\t' +
+                            (params.mostrarNumModificacao && tarefa.numeroAlteracao + '\t') +
                             artefato.nomeArtefato)
                     })
             })
