@@ -20,7 +20,7 @@ Comando para listar os artefatos incluídos/alterados/renomeados para geração 
 
 ### Linux 
 
-- Baixe [aqui](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas-linux) para o seu computador
+- Baixe [aqui](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas-linux) a versão Linux e salve no seu computador
 
 - Em seguida, execute o comando abaixo:
 
@@ -30,7 +30,7 @@ $ chmod +x gerador-lista-artefato-qas-linux
 
 ### Windows 
 
-- Baixe [aqui](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas-win.exe) para o seu computador
+- Baixe [aqui](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas-win.exe) a versão Windows e salve no seu computador
 
 ## Uso
 
@@ -46,15 +46,15 @@ $ ./gerador-lista-artefato-qas-linux --diretorio=/kdi/git --projeto=foo-estatico
 $ ./gerador-lista-artefato-qas-win.exe --diretorio=C:/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
 ```
 
-#### Onde:
+### Parâmetros:
 
-- -s, --server               Inicia a versão server e ignora os outros parâmetros
 - -d, --diretorio <type>     Diretório raiz dos projetos Git
 - -p, --projeto <type>       Lista de projetos Git (podem ser passados vários projetos separados por vírgula)
 - -a, --autor <type>         Matrícula do autor dos commits
 - -t, --task <type>          Lista de tarefas (podem ser passadas várias tarefas separadas por vírgula)
 - --mostrar-num-modificacao  Nº de modificações do artefato na tarefa ou tarefas (Opcional)
 - --mostrar-deletados        Mostra artefatos deletados na tarefa (Opcional)
+- -s, --server               Inicia a versão server e ignora os outros parâmetros
 - -v, --version              Mostra a versão do programa
 - -h, --help                 output usage information
 
