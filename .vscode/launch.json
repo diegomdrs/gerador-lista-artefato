@@ -27,6 +27,21 @@
             // node init --diretorio=/home/foo/Documents --projeto=foo-estatico,foo-api --autor=diegomdrs --task=1111111 --mostrar-num-modificacao --mostrar-deletados
             "type": "node",
             "request": "launch",
+            "name": "home test init.js",
+            "program": "${workspaceFolder}/init.js",
+            "args": [
+                "--diretorio=/tmp",
+                "--projeto=gerador-lista-artefato-qas",
+                "--autor=diegomdrs",
+                "--task=1111111,2222222",
+                "--mostrar-num-modificacao",
+                "--mostrar-deletados"
+            ]
+        },
+        {
+            // node init --diretorio=/home/foo/Documents --projeto=foo-estatico,foo-api --autor=diegomdrs --task=1111111 --mostrar-num-modificacao --mostrar-deletados
+            "type": "node",
+            "request": "launch",
             "name": "home init.js",
             "program": "${workspaceFolder}/init.js",
             "args": [

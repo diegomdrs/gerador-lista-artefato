@@ -65,23 +65,22 @@ describe('test foo', () => {
         const retorno = await gerador(params).gerarListaArtefato()
 
         console.log('listaArtefatoTarefaMesmoTipo ================================================')
-        for (const artefato of retorno.listaArtefatoComTarefaMesmoTipo) {
+        for (const artefato of retorno.listaArtefato) {
             console.log(artefato.nomeArtefato + ' ##########################')
             console.table(artefato.listaTarefa)
         }
 
-        // console.log('listaArtefatoTarefasIguais   ================================================')
-        // for (const artefato of retorno.listaArtefatoSemTarefaMesmoTipo) {
-        //     console.log(artefato.nomeArtefato + ' ##########################')
-        //     console.table(artefato.listaTarefa)
-        // }
+        console.log('listaArtefatoTarefasIguais   ================================================')
+        for (const tarefaFoo of retorno.listaTarefaFoo) {
+            console.table(tarefaFoo.listaArtefatoFoo)
+        }
 
         expect(retorno).toBeDefined()
     })
 
     afterEach(() => {
 
-        // fs.removeSync(PATH_TEST)
+        fs.removeSync(PATH_TEST)
     })
 })
 

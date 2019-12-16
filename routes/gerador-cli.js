@@ -11,43 +11,39 @@ module.exports = async function (params) {
 
         console.log('')
 
-        imprimirListaArtefatoComTarefaMesmoTipo(listaArtefato.listaArtefatoComTarefaMesmoTipo)
-        imprimirListaArtefatoSemTarefaMesmoTipo(listaArtefato.listaArtefatoSemTarefaMesmoTipo)
+        imprimirListaArtefatoComTarefaMesmoTipo(listaArtefato.listaArtefato)
+        imprimirListaTarefaFoo(listaArtefato.listaTarefaFoo)
     }
 
-    function imprimirListaArtefatoComTarefaMesmoTipo(listaArtefatoComTarefaMesmoTipo) {
-        listaArtefatoComTarefaMesmoTipo.forEach(artefato => {
+    function imprimirListaArtefatoComTarefaMesmoTipo(listaArtefato) {
+        listaArtefato.forEach(artefato => {
 
             const tarefas = artefato.listaTarefa.reduce((accum, tarefa) => {
                 accum.listaTarefa.push(tarefa.numTarefa)
-                params.mostrarNumModificacao && 
+                params.mostrarNumModificacao &&
                     (accum.totalModificacao += tarefa.numeroAlteracao)
 
                 return accum
             }, { totalModificacao: 0, listaTarefa: [] })
 
             console.log('Tarefas nº ' + tarefas.listaTarefa.join(', ') + '\n')
-            console.log('M\t' + 
+            console.log('M\t' +
                 (params.mostrarNumModificacao && tarefas.totalModificacao + '\t') +
                 artefato.nomeArtefato + '\n')
         })
     }
 
-    function imprimirListaArtefatoSemTarefaMesmoTipo(listaArtefatoSemTarefaMesmoTipo) {
+    function imprimirListaTarefaFoo(listaTarefaFoo) {
 
-        gerador.listaTarefaComSaida.forEach(tarefaParam => {
+        listaTarefaFoo.forEach(function (tarefaFoo) {
 
-            console.log('Tarefa nº ' + tarefaParam + '\n')
+            console.log('Tarefa nº ' + tarefaFoo.numTarefa + '\n')
 
-            listaArtefatoSemTarefaMesmoTipo.forEach(artefato => {
+            tarefaFoo.listaArtefatoFoo.forEach(function (artefatoFoo) {
 
-                artefato.listaTarefa.filter(tarefa =>
-                    tarefa.numTarefa === tarefaParam).forEach(tarefa => {
-
-                        console.log(tarefa.tipoAlteracao + '\t' +
-                            (params.mostrarNumModificacao && tarefa.numeroAlteracao + '\t') +
-                            artefato.nomeArtefato)
-                    })
+                console.log(artefatoFoo.tipoAlteracao + '\t' +
+                    (params.mostrarNumModificacao && artefatoFoo.numeroAlteracao + '\t') +
+                    artefatoFoo.nomeArtefato)
             })
 
             console.log('')
