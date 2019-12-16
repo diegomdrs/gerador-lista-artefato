@@ -9,12 +9,15 @@ async function init() {
     if (params.server) {
 
         const app = require('./config/express')
-        
+
         require('./config/http')(app)
         require('./routes/gerador-web')(app)
 
-    } else {
+    } else if (params.projeto && params.autor && params.task && params.diretorio) {
 
         require('./routes/gerador-cli')(params)
+    } else {
+
+        params.outputHelp()
     }
 }
