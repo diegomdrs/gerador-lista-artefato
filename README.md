@@ -6,7 +6,6 @@ Comando para listar os artefatos incluídos/alterados/renomeados para geração 
 
 ### Sistema
 
-- Node.js versão mínima v8.11.3
 - Git versão mínima v2.7.4
 
 ### Git
@@ -19,21 +18,34 @@ Comando para listar os artefatos incluídos/alterados/renomeados para geração 
 
 ## Instalação
 
-- Baixe o script `gerador-artefato.js` [aqui](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/gerador-artefato.js) e salve no seu computador
-- Abra um terminal e execute o script com o comando `node`
+- Baixe o script `gerador-lista-artefato-qas` e salve no seu computador
+
+### Linux 
+
+- Baixe [aqui](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas-linux)
+
+- Em seguida, execute o comando abaixo:
+
+``` console
+$ chmod +x gerador-lista-artefato-qas-linux
+```
+
+### Windows 
+
+- Baixe [aqui](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas-win.exe)
 
 ## Uso
 
 ### Linux
 
 ``` console
-$ node gerador-artefato.js --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
+$ ./gerador-lista-artefato-qas-linux --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
 ```
 
 ### Windows
 
 ``` console
-$ node gerador-artefato.js --diretorio=C:/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
+$ ./gerador-lista-artefato-qas-win.exe --diretorio=C:/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
 ```
 
 #### Onde:
