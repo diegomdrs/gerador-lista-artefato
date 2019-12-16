@@ -27,9 +27,8 @@ module.exports = async function (params) {
             }, { totalModificacao: 0, listaTarefa: [] })
 
             console.log('Tarefas nº ' + tarefas.listaTarefa.join(', ') + '\n')
-            console.log('M\t' +
-                (params.mostrarNumModificacao && tarefas.totalModificacao + '\t') +
-                artefato.nomeArtefato + '\n')
+            console.log(foo('M', tarefas.totalModificacao, artefato.nomeArtefato))
+            console.log('')
         })
     }
 
@@ -41,12 +40,23 @@ module.exports = async function (params) {
 
             tarefaFoo.listaArtefatoFoo.forEach(function (artefatoFoo) {
 
-                console.log(artefatoFoo.tipoAlteracao + '\t' +
-                    (params.mostrarNumModificacao && artefatoFoo.numeroAlteracao + '\t') +
-                    artefatoFoo.nomeArtefato)
+                console.log(foo(artefatoFoo.tipoAlteracao,
+                    artefatoFoo.numeroAlteracao, artefatoFoo.nomeArtefato))
             })
 
             console.log('')
         })
+    }
+
+    function foo(tipoAlteracao, numeroAlteracao, nomeArtefato) {
+
+        let retorno = tipoAlteracao + '\t'
+
+        params.mostrarNumModificacao && (
+            retorno = retorno.concat(numeroAlteracao + '\t'))
+        
+        retorno = retorno.concat(nomeArtefato)
+
+        return retorno
     }
 }
