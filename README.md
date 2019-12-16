@@ -46,7 +46,7 @@ $ ./gerador-lista-artefato-qas-linux --diretorio=/kdi/git --projeto=foo-estatico
 $ ./gerador-lista-artefato-qas-win.exe --diretorio=C:/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
 ```
 
-### Parâmetros:
+## Parâmetros
 
 - -d, --diretorio <type>     Diretório raiz dos projetos Git
 - -p, --projeto <type>       Lista de projetos Git (podem ser passados vários projetos separados por vírgula)
