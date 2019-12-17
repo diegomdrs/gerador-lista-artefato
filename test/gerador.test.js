@@ -32,18 +32,29 @@ describe('test foo', () => {
             {
                 repo: {},
                 nomeProjeto: 'crm-patrimonio-estatico',
-                listaArtefato: [{
-                    pathArtefato: 'crm-patrimonio-estatico',
-                    nomeArtefato: 'package.json',
-                    listaTarefa: [
-                        { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                        { numTarefa: '1199211', numAlteracao: 1, tipoAlteracao: 'M' },
-                        { numTarefa: '1203082', numAlteracao: 2, tipoAlteracao: 'M' },
-                        { numTarefa: '1203670', numAlteracao: 1, tipoAlteracao: 'M' },
-                        { numTarefa: '1207175', numAlteracao: 2, tipoAlteracao: 'M' },
-                        { numTarefa: '1210684', numAlteracao: 2, tipoAlteracao: 'M' }
-                    ]
-                }]
+                listaArtefato: [
+                    {
+                        pathArtefato: 'crm-patrimonio-estatico/src/app/spas/imovel/documentos',
+                        nomeArtefato: 'lista-documentos.tpl.html',
+                        listaTarefa: [
+                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numTarefa: '1203670', numAlteracao: 1, tipoAlteracao: 'M' },
+                            { numTarefa: '1210684', numAlteracao: 1, tipoAlteracao: 'M' }
+                        ]
+                    },
+                    {
+                        pathArtefato: 'crm-patrimonio-estatico',
+                        nomeArtefato: 'package.json',
+                        listaTarefa: [
+                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numTarefa: '1199211', numAlteracao: 1, tipoAlteracao: 'M' },
+                            { numTarefa: '1203082', numAlteracao: 2, tipoAlteracao: 'M' },
+                            { numTarefa: '1203670', numAlteracao: 1, tipoAlteracao: 'M' },
+                            { numTarefa: '1207175', numAlteracao: 2, tipoAlteracao: 'M' },
+                            { numTarefa: '1210684', numAlteracao: 2, tipoAlteracao: 'M' }
+                        ]
+                    }
+                ]
             }
         ]
 
@@ -62,9 +73,13 @@ describe('test foo', () => {
         expect(lista[0].listaArtefatoFoo[0].numeroAlteracao).toBe(2)
         expect(lista[0].listaArtefatoFoo[0].tipoAlteracao).toBe('M')
 
-        expect(lista[1].listaNumTarefa).toHaveLength(5)
-        expect(lista[1].listaArtefatoFoo[0].numeroAlteracao).toBe(8)
+        expect(lista[1].listaNumTarefa).toHaveLength(2)
+        expect(lista[1].listaArtefatoFoo[0].numeroAlteracao).toBe(2)
         expect(lista[1].listaArtefatoFoo[0].tipoAlteracao).toBe('M')
+
+        expect(lista[2].listaNumTarefa).toHaveLength(5)
+        expect(lista[2].listaArtefatoFoo[0].numeroAlteracao).toBe(8)
+        expect(lista[2].listaArtefatoFoo[0].tipoAlteracao).toBe('M')
     })
 
     afterEach(() => {
