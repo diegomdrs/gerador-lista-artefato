@@ -7,25 +7,21 @@ const crypto = require('crypto')
 const NAME_APP = app.name
 const PATH_TEST = '/tmp/' + NAME_APP
 
-let git = {}
-
 describe('test foo', () => {
 
     beforeEach(async () => {
 
-        await createRepo('/apc-estatico')
-        // await createRepo('/crm-patrimonio-estatico')
     })
 
     it('test one', async () => {
 
-        await createFile('0000000', '/apc-estatico', 'package.json')
+        const repoApcEstatico = await createRepo('/apc-estatico')
+        const repoCrmPatrimonioEstatico = await createRepo('/crm-patrimonio-estatico')
 
-        await modifieFile('1207175', '/apc-estatico', 'package.json')
-        await modifieFile('1212444', '/apc-estatico', 'package.json')
+        await createFile(repoApcEstatico, '0000000', '/apc-estatico', 'package.json')
 
-        // await modifieFile('1111111', '/crm-patrimonio-estatico/src/app/spas/imovel/documentos',
-        //     'lista-documentos.tpl.html')
+        await modifieFile(repoApcEstatico, '1207175', '/apc-estatico', 'package.json')
+        await modifieFile(repoApcEstatico, '1212444', '/apc-estatico', 'package.json')
 
         const params = new Param({
             diretorio: PATH_TEST,
@@ -65,27 +61,31 @@ async function createRepo(path) {
 
     fs.mkdirsSync(PATH_TEST + path)
 
-    git = require('simple-git/promise')(PATH_TEST + path)
+    const git = require('simple-git/promise')(PATH_TEST + path)
+
     await git.init()
     await git.addConfig('user.name', 'fulano')
     await git.addConfig('user.email', 'fulano@fulano.com')
+
+    return git
 }
 
-async function createFile(task, path, fileName) {
+async function createFile(git, task, path, fileName) {
 
     fs.mkdirsSync(PATH_TEST + path)
     fs.writeFileSync(PATH_TEST + path + '/' + fileName, randomValueHex(12))
 
-    await commitFile(task, path, fileName)
+    await commitFile(git, task, path, fileName)
 }
 
-async function modifieFile(task, path, fileName) {
+async function modifieFile(git, task, path, fileName) {
 
     fs.writeFileSync(PATH_TEST + path + '/' + fileName, randomValueHex(12))
-    await commitFile(task, path, fileName)
+
+    await commitFile(git, task, path, fileName)
 }
 
-async function commitFile(task, path, fileName) {
+async function commitFile(git, task, path, fileName) {
 
     await git.add(PATH_TEST + path + '/' + fileName)
     await git.commit('task ' + task + ' commit')
