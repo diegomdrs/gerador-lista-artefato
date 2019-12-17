@@ -53,6 +53,25 @@ describe('test foo', () => {
                             { numTarefa: '1207175', numAlteracao: 2, tipoAlteracao: 'M' },
                             { numTarefa: '1210684', numAlteracao: 2, tipoAlteracao: 'M' }
                         ]
+                    },
+                    {
+                        pathArtefato: 'crm-patrimonio-estatico',
+                        nomeArtefato: 'Gruntfile.js',
+                        listaTarefa: [
+                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numTarefa: '1199211', numAlteracao: 1, tipoAlteracao: 'M' },
+                            { numTarefa: '1203670', numAlteracao: 1, tipoAlteracao: 'M' },
+                            { numTarefa: '1210684', numAlteracao: 1, tipoAlteracao: 'M' }
+                        ]
+                    },
+                    {
+                        pathArtefato: 'crm-patrimonio-estatico/src/app/spas/imovel/documentos',
+                        nomeArtefato: 'lista-documentos-controllers.js',
+                        listaTarefa: [
+                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numTarefa: '1203670', numAlteracao: 4, tipoAlteracao: 'M' },
+                            { numTarefa: '1210684', numAlteracao: 5, tipoAlteracao: 'M' }
+                        ]
                     }
                 ]
             }
@@ -80,6 +99,14 @@ describe('test foo', () => {
         expect(lista[2].listaNumTarefa).toHaveLength(5)
         expect(lista[2].listaArtefatoFoo[0].numeroAlteracao).toBe(8)
         expect(lista[2].listaArtefatoFoo[0].tipoAlteracao).toBe('M')
+
+        expect(lista[3].listaNumTarefa).toHaveLength(3)
+        expect(lista[3].listaArtefatoFoo[0].numeroAlteracao).toBe(3)
+        expect(lista[3].listaArtefatoFoo[0].tipoAlteracao).toBe('M')
+
+        expect(lista[4].listaNumTarefa).toHaveLength(2)
+        expect(lista[4].listaArtefatoFoo[0].numeroAlteracao).toBe(9)
+        expect(lista[4].listaArtefatoFoo[0].tipoAlteracao).toBe('M')        
     })
 
     afterEach(() => {
