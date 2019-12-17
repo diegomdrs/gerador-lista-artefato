@@ -46,6 +46,20 @@ describe('test foo', () => {
         expect(lista[1].listaArtefatoFoo[0].tipoAlteracao).toBe('A')
     })
 
+    it('test one', async () => {
+
+        const params = new Param({
+            diretorio: PATH_TEST,
+            autor: "fulano",
+            projeto: ["apc-estatico", "crm-patrimonio-estatico"],
+            task: ["2222222"]
+        })
+
+        const lista = await gerador(params).gerarListaArtefato()
+
+        expect(lista).toHaveLength(0)
+    })
+
     afterEach(() => {
 
         fs.removeSync(PATH_TEST)
@@ -53,8 +67,7 @@ describe('test foo', () => {
 })
 
 function randomValueHex(len) {
-    return crypto
-        .randomBytes(Math.ceil(len / 2))
+    return crypto.randomBytes(Math.ceil(len / 2))
         .toString('hex')
         .slice(0, len)
 }
@@ -70,17 +83,20 @@ async function createRepo(path) {
 }
 
 async function createFile(task, path, fileName) {
+    
     fs.mkdirsSync(PATH_TEST + path)
     fs.writeFileSync(PATH_TEST + path + '/' + fileName, randomValueHex(12))
     await commitFile(task, path, fileName)
 }
 
 async function modifieFile(task, path, fileName) {
+    
     fs.writeFileSync(PATH_TEST + path + '/' + fileName, randomValueHex(12))
     await commitFile(task, path, fileName)
 }
 
-async function commitFile(task, path, fileName) {W
+async function commitFile(task, path, fileName) {
+
     await git.add(PATH_TEST + path + '/' + fileName)
     await git.commit('task ' + task + ' commit')
 }
