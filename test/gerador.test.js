@@ -18,16 +18,35 @@ describe('test foo', () => {
         const repoApcEstatico = await createRepo('/apc-estatico')
         const repoCrmPatrimonioEstatico = await createRepo('/crm-patrimonio-estatico')
 
-        await createFile(repoApcEstatico, '0000000', '/apc-estatico', 'package.json')
-
+        //  apc-estatico/package.json
+        await createFile(repoApcEstatico,  '0000000', '/apc-estatico', 'package.json')
         await modifieFile(repoApcEstatico, '1207175', '/apc-estatico', 'package.json')
         await modifieFile(repoApcEstatico, '1212444', '/apc-estatico', 'package.json')
+
+        // crm-patrimonio-estatico/src/app/spas/imovel/documentos/lista-documentos.tpl.html
+        await createFile(repoCrmPatrimonioEstatico,  '000000',
+            '/crm-patrimonio-estatico/src/app/spas/imovel/documentos', 'lista-documentos.tpl.html')
+        await modifieFile(repoCrmPatrimonioEstatico, '1203670',
+            '/crm-patrimonio-estatico/src/app/spas/imovel/documentos', 'lista-documentos.tpl.html')
+        await modifieFile(repoCrmPatrimonioEstatico, '1210684',
+            '/crm-patrimonio-estatico/src/app/spas/imovel/documentos', 'lista-documentos.tpl.html')
+
+        // crm-patrimonio-estatico/package.json  
+        await createFile( repoCrmPatrimonioEstatico, '0000000', '/crm-patrimonio-estatico', 'package.json')
+        await modifieFile(repoCrmPatrimonioEstatico, '1199211', '/crm-patrimonio-estatico', 'package.json')
+        await modifieFile(repoCrmPatrimonioEstatico, '1199211', '/crm-patrimonio-estatico', 'package.json')
+        await modifieFile(repoCrmPatrimonioEstatico, '1203082', '/crm-patrimonio-estatico', 'package.json')
+        await modifieFile(repoCrmPatrimonioEstatico, '1203082', '/crm-patrimonio-estatico', 'package.json')
+        await modifieFile(repoCrmPatrimonioEstatico, '1203670', '/crm-patrimonio-estatico', 'package.json')
+        await modifieFile(repoCrmPatrimonioEstatico, '1203670', '/crm-patrimonio-estatico', 'package.json')
+        await modifieFile(repoCrmPatrimonioEstatico, '1207175', '/crm-patrimonio-estatico', 'package.json')
+        await modifieFile(repoCrmPatrimonioEstatico, '1210684', '/crm-patrimonio-estatico', 'package.json')
 
         const params = new Param({
             diretorio: PATH_TEST,
             autor: "fulano",
-            projeto: ["apc-estatico"],
-            task: ["1207175", "1212444"]
+            projeto: ["apc-estatico", "crm-patrimonio-estatico"],
+            task: [1199211, 1203082, 1203670, 1207175, 1210684, 1210658, 1212262, 1212444]
         })
 
         const lista = await gerador(params).gerarListaArtefato()
@@ -36,13 +55,13 @@ describe('test foo', () => {
         expect(lista[0].listaArtefatoFoo[0].numeroAlteracao).toBe(2)
         expect(lista[0].listaArtefatoFoo[0].tipoAlteracao).toBe('M')
 
-        // expect(lista[0].listaNumTarefa).toHaveLength(2)
-        // expect(lista[0].listaArtefatoFoo[0].numeroAlteracao).toBe(2)
-        // expect(lista[0].listaArtefatoFoo[0].tipoAlteracao).toBe('M')
+        expect(lista[1].listaNumTarefa).toHaveLength(2)
+        expect(lista[1].listaArtefatoFoo[0].numeroAlteracao).toBe(2)
+        expect(lista[1].listaArtefatoFoo[0].tipoAlteracao).toBe('M')
 
-        // expect(lista[1].listaNumTarefa).toHaveLength(1)
-        // expect(lista[1].listaArtefatoFoo[0].numeroAlteracao).toBe(1)
-        // expect(lista[1].listaArtefatoFoo[0].tipoAlteracao).toBe('A')
+        expect(lista[2].listaNumTarefa).toHaveLength(5)
+        expect(lista[2].listaArtefatoFoo[0].numeroAlteracao).toBe(8)
+        expect(lista[2].listaArtefatoFoo[0].tipoAlteracao).toBe('M')
     })
 
     afterEach(() => {
