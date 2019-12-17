@@ -13,7 +13,7 @@ describe('test foo', () => {
 
     })
 
-    it('test one', async () => {
+    it('test', async () => {
 
         const listaFoo = [
             {
@@ -28,27 +28,31 @@ describe('test foo', () => {
                         { numTarefa: '1212444', numAlteracao: 1, tipoAlteracao: 'M' }
                     ]
                 }]
+            },
+            {
+                repo: {},
+                nomeProjeto: 'crm-patrimonio-estatico',
+                listaArtefato: [{
+                    pathArtefato: 'crm-patrimonio-estatico',
+                    nomeArtefato: 'package.json',
+                    listaTarefa: [
+                        { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                        { numTarefa: '1199211', numAlteracao: 1, tipoAlteracao: 'M' },
+                        { numTarefa: '1203082', numAlteracao: 2, tipoAlteracao: 'M' },
+                        { numTarefa: '1203670', numAlteracao: 1, tipoAlteracao: 'M' },
+                        { numTarefa: '1207175', numAlteracao: 2, tipoAlteracao: 'M' },
+                        { numTarefa: '1210684', numAlteracao: 2, tipoAlteracao: 'M' }
+                    ]
+                }]
             }
         ]
 
-        for (const foo of listaFoo) {
-
-            foo.repo = await createRepo(foo.nomeProjeto)
-
-            for (const artefato of foo.listaArtefato) {
-
-                for (const tarefa of artefato.listaTarefa) {
-
-                    await fooFile(foo.repo, tarefa.tipoAlteracao, tarefa.numTarefa, 
-                        artefato.pathArtefato, artefato.nomeArtefato)
-                }
-            }
-        }
+        await bar(listaFoo)
 
         const params = new Param({
             diretorio: PATH_TEST,
             autor: "fulano",
-            projeto: ["apc-estatico"],
+            projeto: ["apc-estatico", "crm-patrimonio-estatico"],
             task: [1199211, 1203082, 1203670, 1207175, 1210684, 1210658, 1212262, 1212444]
         })
 
@@ -57,6 +61,10 @@ describe('test foo', () => {
         expect(lista[0].listaNumTarefa).toHaveLength(2)
         expect(lista[0].listaArtefatoFoo[0].numeroAlteracao).toBe(2)
         expect(lista[0].listaArtefatoFoo[0].tipoAlteracao).toBe('M')
+
+        expect(lista[1].listaNumTarefa).toHaveLength(5)
+        expect(lista[1].listaArtefatoFoo[0].numeroAlteracao).toBe(8)
+        expect(lista[1].listaArtefatoFoo[0].tipoAlteracao).toBe('M')
     })
 
     afterEach(() => {
@@ -69,6 +77,26 @@ function randomValueHex(len) {
     return crypto.randomBytes(Math.ceil(len / 2))
         .toString('hex')
         .slice(0, len)
+}
+
+async function bar(listaFoo) {
+
+    for (const foo of listaFoo) {
+
+        foo.repo = await createRepo(foo.nomeProjeto)
+
+        for (const artefato of foo.listaArtefato) {
+
+            for (const tarefa of artefato.listaTarefa) {
+
+                for (let i = 0; i < tarefa.numAlteracao; i++) {
+
+                    await fooFile(foo.repo, tarefa.tipoAlteracao, tarefa.numTarefa,
+                        artefato.pathArtefato, artefato.nomeArtefato)
+                }
+            }
+        }
+    }
 }
 
 async function createRepo(path) {
@@ -84,26 +112,10 @@ async function createRepo(path) {
     return git
 }
 
-
 async function fooFile(git, tipoAlteracao, task, path, fileName) {
 
     tipoAlteracao === 'A' && fs.mkdirsSync(PATH_TEST + '/' + path)
-    fs.writeFileSync(PATH_TEST + '/' +  path + '/' + fileName, randomValueHex(12))
-
-    await commitFile(git, task, path, fileName)
-}
-
-async function createFile(git, task, path, fileName) {
-
-    fs.mkdirsSync(PATH_TEST + path)
-    fs.writeFileSync(PATH_TEST + path + '/' + fileName, randomValueHex(12))
-
-    await commitFile(git, task, path, fileName)
-}
-
-async function modifieFile(git, task, path, fileName) {
-
-    fs.writeFileSync(PATH_TEST + path + '/' + fileName, randomValueHex(12))
+    fs.writeFileSync(PATH_TEST + '/' + path + '/' + fileName, randomValueHex(12))
 
     await commitFile(git, task, path, fileName)
 }
