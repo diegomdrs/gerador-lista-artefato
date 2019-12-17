@@ -3,9 +3,10 @@ const Param = require('../models/param')
 const fs = require('fs-extra')
 const app = require('../package.json')
 const crypto = require('crypto')
+const path = require('path')
 
 const NAME_APP = app.name
-const PATH_TEST = '/tmp/' + NAME_APP
+const PATH_TEST = __dirname + path.sep + NAME_APP
 
 describe('test foo', () => {
 
@@ -61,18 +62,55 @@ describe('test foo', () => {
                         ]
                     },
                     {
+                        pathArtefato: 'src/app/spas/imovel/pagamentos-pendentes/lista-pagamentos-pendentes-controllers.js',
+                        listaTarefa: [
+                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numTarefa: '1199211', numAlteracao: 2, tipoAlteracao: 'M' },
+                            { numTarefa: '1203082', numAlteracao: 3, tipoAlteracao: 'M' },
+                            { numTarefa: '1207175', numAlteracao: 3, tipoAlteracao: 'M' }
+                        ]
+                    },
+                    {
                         pathArtefato: 'src/app/spas/imovel/documentos/lista-documentos-controllers.js',
                         listaTarefa: [
                             { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
                             { numTarefa: '1203670', numAlteracao: 4, tipoAlteracao: 'M' },
                             { numTarefa: '1210684', numAlteracao: 5, tipoAlteracao: 'M' }
                         ]
+                    },
+                    {
+                        pathArtefato: 'src/app/spas/imovel/inclusao-ocupante-imovel/inclusao-ocupante-imovel.tpl.html',
+                        listaTarefa: [
+                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numTarefa: '1199211', numAlteracao: 2, tipoAlteracao: 'M' }
+                        ]
+                    },
+                    {
+                        pathArtefato: 'src/app/spas/imovel/pagamentos-pendentes/lista-pagamentos-pendentes.tpl.html',
+                        listaTarefa: [
+                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numTarefa: '1199211', numAlteracao: 4, tipoAlteracao: 'M' }
+                        ]
+                    },
+                    {
+                        pathArtefato: 'src/app/crm/crm-constantes.js',
+                        listaTarefa: [
+                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numTarefa: '1199211', numAlteracao: 2, tipoAlteracao: 'M' }
+                        ]
+                    },
+                    {
+                        pathArtefato: 'src/styles/crm.css',
+                        listaTarefa: [
+                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numTarefa: '1199211', numAlteracao: 1, tipoAlteracao: 'M' }
+                        ]
                     }
                 ]
             }
         ]
 
-        await bar(listaFoo)
+        await criarEstrutura(listaFoo)
 
         const params = new Param({
             diretorio: PATH_TEST,
@@ -99,9 +137,19 @@ describe('test foo', () => {
         expect(lista[3].listaArtefatoFoo[0].numeroAlteracao).toBe(3)
         expect(lista[3].listaArtefatoFoo[0].tipoAlteracao).toBe('M')
 
-        expect(lista[4].listaNumTarefa).toHaveLength(2)
-        expect(lista[4].listaArtefatoFoo[0].numeroAlteracao).toBe(9)
+        expect(lista[4].listaNumTarefa).toHaveLength(3)
+        expect(lista[4].listaArtefatoFoo[0].numeroAlteracao).toBe(8)
         expect(lista[4].listaArtefatoFoo[0].tipoAlteracao).toBe('M')
+
+        expect(lista[5].listaNumTarefa).toHaveLength(2)
+        expect(lista[5].listaArtefatoFoo[0].numeroAlteracao).toBe(9)
+        expect(lista[5].listaArtefatoFoo[0].tipoAlteracao).toBe('M')
+
+        expect(lista[6].listaNumTarefa).toHaveLength(1)
+        expect(lista[6].listaArtefatoFoo[0].numeroAlteracao).toBe(2)
+        expect(lista[6].listaArtefatoFoo[1].numeroAlteracao).toBe(4)
+        expect(lista[6].listaArtefatoFoo[2].numeroAlteracao).toBe(2)
+        expect(lista[6].listaArtefatoFoo[3].numeroAlteracao).toBe(1)
     })
 
     afterEach(() => {
@@ -116,30 +164,31 @@ function randomValueHex(len) {
         .slice(0, len)
 }
 
-async function bar(listaFoo) {
+async function criarEstrutura(listaFoo) {
 
     for (const foo of listaFoo) {
 
-        foo.repo = await createRepo(foo.nomeProjeto)
+        foo.repo = await criarRepo(foo.nomeProjeto)
 
         for (const artefato of foo.listaArtefato) {
 
             for (const tarefa of artefato.listaTarefa) {
 
                 for (let i = 0; i < tarefa.numAlteracao; i++) {
-
-                    await fooFile(foo.repo, foo.nomeProjeto, tarefa.numTarefa, artefato.pathArtefato)
+                    await criarArquivo(foo, tarefa.numTarefa, artefato.pathArtefato)
                 }
             }
         }
     }
 }
 
-async function createRepo(path) {
+async function criarRepo(nomeProjeto) {
 
-    fs.mkdirsSync(PATH_TEST + '/' + path)
+    const pathProjeto = PATH_TEST + '/' + nomeProjeto
 
-    const git = require('simple-git/promise')(PATH_TEST + '/' + path)
+    fs.mkdirsSync(pathProjeto)
+
+    const git = require('simple-git/promise')(pathProjeto)
 
     await git.init()
     await git.addConfig('user.name', 'fulano')
@@ -148,16 +197,19 @@ async function createRepo(path) {
     return git
 }
 
-async function fooFile(git, nomeProjeto, task, path) {
+async function criarArquivo(git, task, pathArquivo) {
 
-    fs.outputFileSync(PATH_TEST + '/' + nomeProjeto +
-        '/' + path, randomValueHex(12))
+    fs.outputFileSync(obterCaminhoArquivo(git, pathArquivo), randomValueHex(12))
 
-    await commitFile(git, nomeProjeto, task, path)
+    await commitarArquivo(git, task, pathArquivo)
 }
 
-async function commitFile(git, nomeProjeto, task, path) {
+async function commitarArquivo(git, task, pathArquivo) {
 
-    await git.add(PATH_TEST + '/' + nomeProjeto + '/' + path)
-    await git.commit('task ' + task + ' commit')
+    await git.repo.add(obterCaminhoArquivo(git, pathArquivo))
+    await git.repo.commit('task ' + task + ' commit')
+}
+
+function obterCaminhoArquivo(git, pathArquivo) {
+    return PATH_TEST + path.sep + git.nomeProjeto + path.sep + pathArquivo
 }
