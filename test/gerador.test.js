@@ -13,77 +13,37 @@ describe('test foo', () => {
 
     beforeEach(async () => {
 
-        // if (fs.pathExistsSync(PATH_TEST)) {
-        //     fs.removeSync(PATH_TEST)
-        // }
-
         await createRepo('/apc-estatico')
         await createRepo('/crm-patrimonio-estatico')
-
-        createFile('/crm-patrimonio-estatico/src/app/spas/imovel/documentos',
-            'lista-documentos.tpl.html')
-        commitFile('0000000', '/crm-patrimonio-estatico/src/app/spas/imovel/documentos',
-            'lista-documentos.tpl.html')
-
-        // modifieFile('/crm-patrimonio-estatico/src/app/spas/imovel/documentos',
-        //     'lista-documentos.tpl.html')
-        // commitFile('0000000', '/crm-patrimonio-estatico/src/app/spas/imovel/documentos',
-        //     'lista-documentos.tpl.html')
-
-        // // Criação
-        // fs.outputFileSync(PATH_TEST + '/arquivo1.txt')
-        // await git.add('./arquivo1.txt')
-        // await git.commit("task 1111111 commit")
-
-        // // Criação
-        // fs.outputFileSync(PATH_TEST + '/arquivo2.txt')
-        // await git.add('./arquivo2.txt')
-        // await git.commit("task 2222222 commit")
-
-        // // Criação
-        // fs.outputFileSync(PATH_TEST + '/arquivo3.txt')
-        // await git.add('./arquivo3.txt')
-        // await git.commit("task 2222222 commit")
-
-        // // Modificação
-        // fs.outputFileSync(PATH_TEST + '/arquivo1.txt', randomValueHex(12))
-        // await git.add('./arquivo1.txt')
-        // await git.commit("task 1111111 commit")
-
-        // // Modificação
-        // fs.outputFileSync(PATH_TEST + '/arquivo1.txt', randomValueHex(12))
-        // await git.add('./arquivo1.txt')
-        // await git.commit("task 2222222 commit")
-
-        // // Modificação
-        // fs.outputFileSync(PATH_TEST + '/arquivo1.txt', randomValueHex(12))
-        // await git.add('./arquivo1.txt')
-        // await git.commit("task 2222222 commit")
     })
 
     it('test one', async () => {
 
-        // const params = new Param({
-        //     diretorio: "/tmp",
-        //     autor: "diegomdrs",
-        //     projeto: NAME_APP,
-        //     task: ["1111111", "2222222"]
-        // })
+        await createFile('0000000', '/crm-patrimonio-estatico/src/app/spas/imovel/documentos',
+            'lista-documentos.tpl.html')
 
-        // const retorno = await gerador(params).gerarListaArtefato()
+        await modifieFile('0000000', '/crm-patrimonio-estatico/src/app/spas/imovel/documentos',
+            'lista-documentos.tpl.html')
 
-        // console.log('listaArtefatoTarefaMesmoTipo ================================================')
-        // for (const artefato of retorno.listaArtefato) {
-        //     console.log(artefato.nomeArtefato + ' ##########################')
-        //     console.table(artefato.listaTarefa)
-        // }
+        await modifieFile('1111111', '/crm-patrimonio-estatico/src/app/spas/imovel/documentos',
+            'lista-documentos.tpl.html')
 
-        // console.log('listaArtefatoTarefasIguais   ================================================')
-        // for (const tarefaFoo of retorno.listaTarefaFoo) {
-        //     console.table(tarefaFoo.listaArtefatoFoo)
-        // }
+        const params = new Param({
+            diretorio: PATH_TEST,
+            autor: "fulano",
+            projeto: ["apc-estatico", "crm-patrimonio-estatico"],
+            task: ["0000000", "1111111"]
+        })
 
-        // expect(retorno).toBeDefined()
+        const lista = await gerador(params).gerarListaArtefato()
+
+        expect(lista[0].listaNumTarefa).toHaveLength(2)
+        expect(lista[0].listaArtefatoFoo[0].numeroAlteracao).toBe(2)
+        expect(lista[0].listaArtefatoFoo[0].tipoAlteracao).toBe('M')
+
+        expect(lista[1].listaNumTarefa).toHaveLength(1)
+        expect(lista[1].listaArtefatoFoo[0].numeroAlteracao).toBe(1)
+        expect(lista[1].listaArtefatoFoo[0].tipoAlteracao).toBe('A')
     })
 
     afterEach(() => {
@@ -105,21 +65,22 @@ async function createRepo(path) {
 
     git = require('simple-git/promise')(PATH_TEST + path)
     await git.init()
+    await git.addConfig('user.name', 'fulano')
+    await git.addConfig('user.email', 'fulano@fulano.com')
 }
 
-async function createFile(path, fileName) {
-
+async function createFile(task, path, fileName) {
     fs.mkdirsSync(PATH_TEST + path)
-    fs.outputFileSync(PATH_TEST + path + '/' + fileName)
+    fs.writeFileSync(PATH_TEST + path + '/' + fileName, randomValueHex(12))
+    await commitFile(task, path, fileName)
 }
 
-async function modifieFile(path, fileName) {
-
-    fs.outputFileSync(PATH_TEST + path + '/' + fileName, randomValueHex(12))
+async function modifieFile(task, path, fileName) {
+    fs.writeFileSync(PATH_TEST + path + '/' + fileName, randomValueHex(12))
+    await commitFile(task, path, fileName)
 }
 
-async function commitFile(task, path, fileName) {
-
+async function commitFile(task, path, fileName) {W
     await git.add(PATH_TEST + path + '/' + fileName)
     await git.commit('task ' + task + ' commit')
 }
