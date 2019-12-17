@@ -20,8 +20,7 @@ describe('test foo', () => {
                 repo: {},
                 nomeProjeto: 'apc-estatico',
                 listaArtefato: [{
-                    pathArtefato: 'apc-estatico',
-                    nomeArtefato: 'package.json',
+                    pathArtefato: 'package.json',
                     listaTarefa: [
                         { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
                         { numTarefa: '1207175', numAlteracao: 1, tipoAlteracao: 'M' },
@@ -34,8 +33,7 @@ describe('test foo', () => {
                 nomeProjeto: 'crm-patrimonio-estatico',
                 listaArtefato: [
                     {
-                        pathArtefato: 'crm-patrimonio-estatico/src/app/spas/imovel/documentos',
-                        nomeArtefato: 'lista-documentos.tpl.html',
+                        pathArtefato: 'src/app/spas/imovel/documentos/lista-documentos.tpl.html',
                         listaTarefa: [
                             { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
                             { numTarefa: '1203670', numAlteracao: 1, tipoAlteracao: 'M' },
@@ -43,8 +41,7 @@ describe('test foo', () => {
                         ]
                     },
                     {
-                        pathArtefato: 'crm-patrimonio-estatico',
-                        nomeArtefato: 'package.json',
+                        pathArtefato: 'package.json',
                         listaTarefa: [
                             { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
                             { numTarefa: '1199211', numAlteracao: 1, tipoAlteracao: 'M' },
@@ -55,8 +52,7 @@ describe('test foo', () => {
                         ]
                     },
                     {
-                        pathArtefato: 'crm-patrimonio-estatico',
-                        nomeArtefato: 'Gruntfile.js',
+                        pathArtefato: 'Gruntfile.js',
                         listaTarefa: [
                             { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
                             { numTarefa: '1199211', numAlteracao: 1, tipoAlteracao: 'M' },
@@ -65,8 +61,7 @@ describe('test foo', () => {
                         ]
                     },
                     {
-                        pathArtefato: 'crm-patrimonio-estatico/src/app/spas/imovel/documentos',
-                        nomeArtefato: 'lista-documentos-controllers.js',
+                        pathArtefato: 'src/app/spas/imovel/documentos/lista-documentos-controllers.js',
                         listaTarefa: [
                             { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
                             { numTarefa: '1203670', numAlteracao: 4, tipoAlteracao: 'M' },
@@ -106,7 +101,7 @@ describe('test foo', () => {
 
         expect(lista[4].listaNumTarefa).toHaveLength(2)
         expect(lista[4].listaArtefatoFoo[0].numeroAlteracao).toBe(9)
-        expect(lista[4].listaArtefatoFoo[0].tipoAlteracao).toBe('M')        
+        expect(lista[4].listaArtefatoFoo[0].tipoAlteracao).toBe('M')
     })
 
     afterEach(() => {
@@ -133,8 +128,7 @@ async function bar(listaFoo) {
 
                 for (let i = 0; i < tarefa.numAlteracao; i++) {
 
-                    await fooFile(foo.repo, tarefa.tipoAlteracao, tarefa.numTarefa,
-                        artefato.pathArtefato, artefato.nomeArtefato)
+                    await fooFile(foo.repo, foo.nomeProjeto, tarefa.numTarefa, artefato.pathArtefato)
                 }
             }
         }
@@ -154,16 +148,16 @@ async function createRepo(path) {
     return git
 }
 
-async function fooFile(git, tipoAlteracao, task, path, fileName) {
+async function fooFile(git, nomeProjeto, task, path) {
 
-    tipoAlteracao === 'A' && fs.mkdirsSync(PATH_TEST + '/' + path)
-    fs.writeFileSync(PATH_TEST + '/' + path + '/' + fileName, randomValueHex(12))
+    fs.outputFileSync(PATH_TEST + '/' + nomeProjeto +
+        '/' + path, randomValueHex(12))
 
-    await commitFile(git, task, path, fileName)
+    await commitFile(git, nomeProjeto, task, path)
 }
 
-async function commitFile(git, task, path, fileName) {
+async function commitFile(git, nomeProjeto, task, path) {
 
-    await git.add(PATH_TEST + '/' + path + '/' + fileName)
+    await git.add(PATH_TEST + '/' + nomeProjeto + '/' + path)
     await git.commit('task ' + task + ' commit')
 }
