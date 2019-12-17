@@ -14,25 +14,24 @@ describe('test foo', () => {
     beforeEach(async () => {
 
         await createRepo('/apc-estatico')
-        await createRepo('/crm-patrimonio-estatico')
+        // await createRepo('/crm-patrimonio-estatico')
     })
 
     it('test one', async () => {
 
-        await createFile('0000000', '/crm-patrimonio-estatico/src/app/spas/imovel/documentos',
-            'lista-documentos.tpl.html')
+        await createFile('0000000', '/apc-estatico', 'package.json')
 
-        await modifieFile('0000000', '/crm-patrimonio-estatico/src/app/spas/imovel/documentos',
-            'lista-documentos.tpl.html')
+        await modifieFile('1207175', '/apc-estatico', 'package.json')
+        await modifieFile('1212444', '/apc-estatico', 'package.json')
 
-        await modifieFile('1111111', '/crm-patrimonio-estatico/src/app/spas/imovel/documentos',
-            'lista-documentos.tpl.html')
+        // await modifieFile('1111111', '/crm-patrimonio-estatico/src/app/spas/imovel/documentos',
+        //     'lista-documentos.tpl.html')
 
         const params = new Param({
             diretorio: PATH_TEST,
             autor: "fulano",
-            projeto: ["apc-estatico", "crm-patrimonio-estatico"],
-            task: ["0000000", "1111111"]
+            projeto: ["apc-estatico"],
+            task: ["1207175", "1212444"]
         })
 
         const lista = await gerador(params).gerarListaArtefato()
@@ -41,23 +40,13 @@ describe('test foo', () => {
         expect(lista[0].listaArtefatoFoo[0].numeroAlteracao).toBe(2)
         expect(lista[0].listaArtefatoFoo[0].tipoAlteracao).toBe('M')
 
-        expect(lista[1].listaNumTarefa).toHaveLength(1)
-        expect(lista[1].listaArtefatoFoo[0].numeroAlteracao).toBe(1)
-        expect(lista[1].listaArtefatoFoo[0].tipoAlteracao).toBe('A')
-    })
+        // expect(lista[0].listaNumTarefa).toHaveLength(2)
+        // expect(lista[0].listaArtefatoFoo[0].numeroAlteracao).toBe(2)
+        // expect(lista[0].listaArtefatoFoo[0].tipoAlteracao).toBe('M')
 
-    it('test one', async () => {
-
-        const params = new Param({
-            diretorio: PATH_TEST,
-            autor: "fulano",
-            projeto: ["apc-estatico", "crm-patrimonio-estatico"],
-            task: ["2222222"]
-        })
-
-        const lista = await gerador(params).gerarListaArtefato()
-
-        expect(lista).toHaveLength(0)
+        // expect(lista[1].listaNumTarefa).toHaveLength(1)
+        // expect(lista[1].listaArtefatoFoo[0].numeroAlteracao).toBe(1)
+        // expect(lista[1].listaArtefatoFoo[0].tipoAlteracao).toBe('A')
     })
 
     afterEach(() => {
@@ -83,14 +72,15 @@ async function createRepo(path) {
 }
 
 async function createFile(task, path, fileName) {
-    
+
     fs.mkdirsSync(PATH_TEST + path)
     fs.writeFileSync(PATH_TEST + path + '/' + fileName, randomValueHex(12))
+
     await commitFile(task, path, fileName)
 }
 
 async function modifieFile(task, path, fileName) {
-    
+
     fs.writeFileSync(PATH_TEST + path + '/' + fileName, randomValueHex(12))
     await commitFile(task, path, fileName)
 }
