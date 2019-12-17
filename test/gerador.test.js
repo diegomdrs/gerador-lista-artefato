@@ -105,6 +105,33 @@ describe('test foo', () => {
                             { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
                             { numTarefa: '1199211', numAlteracao: 1, tipoAlteracao: 'M' }
                         ]
+                    },
+                    {
+                        pathArtefato: 'spec/inclusao-ocupante-imovel-controllers-spec.js',
+                        listaTarefa: [
+                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numTarefa: '1203082', numAlteracao: 2, tipoAlteracao: 'M' }
+                        ]
+                    },
+                    {
+                        pathArtefato: 'spec/lista-pagamentos-pendentes-controllers-spec.js',
+                        listaTarefa: [
+                            { numTarefa: '1203082', numAlteracao: 1, tipoAlteracao: 'A' }
+                        ]
+                    },
+                    {
+                        pathArtefato: 'src/app/spas/imovel/documentos/includes/tabela-documentosObrigatorios.tpl.html',
+                        listaTarefa: [
+                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numTarefa: '1203670', numAlteracao: 5, tipoAlteracao: 'M' }
+                        ]
+                    },
+                    {
+                        pathArtefato: 'src/app/spas/imovel/documentos/includes/tabela-documentos.tpl.html',
+                        listaTarefa: [
+                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numTarefa: '1203670', numAlteracao: 1, tipoAlteracao: 'M' }
+                        ]
                     }
                 ]
             }
@@ -150,6 +177,18 @@ describe('test foo', () => {
         expect(lista[6].listaArtefatoFoo[1].numeroAlteracao).toBe(4)
         expect(lista[6].listaArtefatoFoo[2].numeroAlteracao).toBe(2)
         expect(lista[6].listaArtefatoFoo[3].numeroAlteracao).toBe(1)
+
+        expect(lista[7].listaNumTarefa).toHaveLength(1)
+        expect(lista[7].listaArtefatoFoo[0].numeroAlteracao).toBe(2)
+        expect(lista[7].listaArtefatoFoo[0].tipoAlteracao).toBe('M')
+        expect(lista[7].listaArtefatoFoo[1].numeroAlteracao).toBe(1)
+        expect(lista[7].listaArtefatoFoo[1].tipoAlteracao).toBe('A')
+
+        expect(lista[8].listaNumTarefa).toHaveLength(1)
+        expect(lista[8].listaArtefatoFoo[0].numeroAlteracao).toBe(5)
+        expect(lista[8].listaArtefatoFoo[0].tipoAlteracao).toBe('M')
+        expect(lista[8].listaArtefatoFoo[1].numeroAlteracao).toBe(1)
+        expect(lista[8].listaArtefatoFoo[1].tipoAlteracao).toBe('M')        
     })
 
     afterEach(() => {
