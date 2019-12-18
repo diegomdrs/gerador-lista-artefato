@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "bin": {
-    "gerador-lista-artefato": "./init.js"
+    "gerador-lista-artefato": "./app.js"
   },
   "scripts": {
     "start": "node init -s",

@@ -27,8 +27,8 @@
             // node init --diretorio=/home/foo/Documents --projeto=foo-estatico,foo-api --autor=diegomdrs --task=1111111 --mostrar-num-modificacao --mostrar-deletados
             "type": "node",
             "request": "launch",
-            "name": "home test init.js",
-            "program": "${workspaceFolder}/init.js",
+            "name": "home test app.js",
+            "program": "${workspaceFolder}/app.js",
             "args": [
                 "--diretorio=/tmp",
                 "--projeto=gerador-lista-artefato-qas",
@@ -42,8 +42,8 @@
             // node init --diretorio=/home/foo/Documents --projeto=foo-estatico,foo-api --autor=diegomdrs --task=1111111 --mostrar-num-modificacao --mostrar-deletados
             "type": "node",
             "request": "launch",
-            "name": "home init.js",
-            "program": "${workspaceFolder}/init.js",
+            "name": "home app.js",
+            "program": "${workspaceFolder}/app.js",
             "args": [
                 "--diretorio=/home/foo/Documents",
                 "--projeto=foo-estatico,foo-api",
@@ -58,8 +58,8 @@
             // node init --diretorio=/kdi/git --projeto=apc-estatico,apc-api,crm-patrimonio-estatico,crm-patrimonio-api --autor=c1299072 --task=1199211,1203082,1203670,1207175,1210684,1210658,1212262,1212444
             "type": "node",
             "request": "launch",
-            "name": "bb init.js",
-            "program": "${workspaceFolder}/init.js",
+            "name": "bb app.js",
+            "program": "${workspaceFolder}/app.js",
             "args": [
                 "--diretorio=/kdi/git",
                 "--projeto=apc-estatico,apc-api,crm-patrimonio-estatico,crm-patrimonio-api",
