@@ -6,8 +6,8 @@
     "gerador-lista-artefato": "./app.js"
   },
   "scripts": {
-    "start": "node init -s",
-    "dev": "node --inspect init -s",
+    "start": "node app -s",
+    "dev": "node --inspect app -s",
     "test": "jest"
   },
   "keywords": [],

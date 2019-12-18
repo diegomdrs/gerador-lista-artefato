@@ -5,22 +5,22 @@ module.exports = async function (params) {
 
     const listaFoo = await gerador.gerarListaArtefato()
 
-    imprimirListaFoo(listaFoo)
+    imprimirListaSaida(listaFoo)
 
-    function imprimirListaFoo(listaFoo) {
+    function imprimirListaSaida(listaSaida) {
 
         console.log('')
 
-        for (const foo of listaFoo) {
+        for (const saida of listaSaida) {
 
-            if (foo.listaNumTarefa.length === 1)
-                console.log('Tarefa nº ' + foo.listaNumTarefa[0] + '\n')
-            else if (foo.listaNumTarefa.length > 1) {
-                console.log('Tarefas nº ' + foo.listaNumTarefa.join(', ') + '\n')
+            if (saida.listaNumTarefaSaida.length === 1)
+                console.log('Tarefa nº ' + saida.listaNumTarefaSaida[0] + '\n')
+            else if (saida.listaNumTarefaSaida.length > 1) {
+                console.log('Tarefas nº ' + saida.listaNumTarefaSaida.join(', ') + '\n')
             }
 
-            for (const artefato of foo.listaArtefatoFoo) {
-                console.log(imprimirFoo(artefato.tipoAlteracao,
+            for (const artefato of saida.listaArtefatoSaida) {
+                console.log(imprimirSaida(artefato.tipoAlteracao,
                     artefato.numeroAlteracao, artefato.nomeArtefato))
             }
 
@@ -28,7 +28,7 @@ module.exports = async function (params) {
         }
     }
 
-    function imprimirFoo(tipoAlteracao, numeroAlteracao, nomeArtefato) {
+    function imprimirSaida(tipoAlteracao, numeroAlteracao, nomeArtefato) {
 
         let retorno = tipoAlteracao + '\t'
 
