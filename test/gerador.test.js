@@ -16,7 +16,7 @@ describe('test foo', () => {
 
     it('test', async () => {
 
-        const listaFoo = [
+        const listaEstrutura = [
             {
                 repo: {},
                 nomeProjeto: 'apc-estatico',
@@ -137,7 +137,7 @@ describe('test foo', () => {
             }
         ]
 
-        await criarEstrutura(listaFoo)
+        await criarEstrutura(listaEstrutura)
 
         const params = new Param({
             diretorio: PATH_TEST,
@@ -204,9 +204,9 @@ function randomValueHex(len) {
         .slice(0, len)
 }
 
-async function criarEstrutura(listaFoo) {
+async function criarEstrutura(listaEstrutura) {
 
-    for (const foo of listaFoo) {
+    for (const foo of listaEstrutura) {
 
         foo.repo = await criarRepo(foo.nomeProjeto)
 
