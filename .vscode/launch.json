@@ -45,10 +45,10 @@
             "name": "home app.js",
             "program": "${workspaceFolder}/app.js",
             "args": [
-                "--diretorio=/home/foo/Documents",
-                "--projeto=foo-estatico,foo-api",
-                "--autor=diegomdrs",
-                "--task=1111111",
+                "--diretorio=${workspaceFolder}/test/gerador-lista-artefato-qas",
+                "--projeto=apc-estatico,crm-patrimonio-estatico",
+                "--autor=fulano",
+                "--task=1199211,1203082,1203670,1207175,1210684,1210658,1212262,1212444",
                 "--mostrar-num-modificacao",
                 "--mostrar-deletados"
             ]
