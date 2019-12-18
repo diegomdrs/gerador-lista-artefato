@@ -132,9 +132,58 @@ describe('test foo', () => {
                             { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
                             { numTarefa: '1203670', numAlteracao: 1, tipoAlteracao: 'M' }
                         ]
-                    }
+                    },
+                    {
+                        pathArtefato: 'src/app/spas/imovel/despacho-pagamento/lista-contrato-locacao-fase-cronograma-controller.js',
+                        listaTarefa: [
+                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numTarefa: '1207175', numAlteracao: 1, tipoAlteracao: 'M' }
+                        ]
+                    },
+                    {
+                        pathArtefato: 'src/app/spas/imovel/despacho-pagamento/modal-lista-fornecedor/modal-detalha-credor/detalhe-credor-controller.js',
+                        listaTarefa: [
+                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numTarefa: '1207175', numAlteracao: 1, tipoAlteracao: 'M' }
+                        ]
+                    },
+                    {
+                        pathArtefato: 'src/app/spas/imovel/despacho-pagamento/despacho-services.js',
+                        listaTarefa: [
+                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numTarefa: '1207175', numAlteracao: 1, tipoAlteracao: 'M' }
+                        ]
+                    },
+                    {
+                        pathArtefato: 'src/app/spas/imovel/despacho-pagamento/modal-lista-fornecedor/lista-fornecedor-controllers.js',
+                        listaTarefa: [
+                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numTarefa: '1207175', numAlteracao: 1, tipoAlteracao: 'M' }
+                        ]
+                    },
                 ]
-            }
+            }, {
+                repo: {},
+                nomeProjeto: 'apc-api',
+                listaArtefato: [{
+                    pathArtefato: 'pom.xml',
+                    listaTarefa: [
+                        { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                        { numTarefa: '1207175', numAlteracao: 1, tipoAlteracao: 'M' }
+                    ]
+                }]
+            },
+            {
+                repo: {},
+                nomeProjeto: 'crm-patrimonio-api',
+                listaArtefato: [{
+                    pathArtefato: 'pom.xml',
+                    listaTarefa: [
+                        { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                        { numTarefa: '1207175', numAlteracao: 1, tipoAlteracao: 'M' }
+                    ]
+                }]
+            },
         ]
 
         await criarEstrutura(listaEstrutura)
@@ -142,7 +191,7 @@ describe('test foo', () => {
         const params = new Param({
             diretorio: PATH_TEST,
             autor: "fulano",
-            projeto: ["apc-estatico", "crm-patrimonio-estatico"],
+            projeto: ["apc-estatico", "apc-api", "crm-patrimonio-estatico", "crm-patrimonio-api"],
             task: ["1199211", "1203082", "1203670", "1207175", "1210684",
                 "1210658", "1212262", "1212444"]
         })
@@ -190,6 +239,21 @@ describe('test foo', () => {
         expect(lista[8].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
         expect(lista[8].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
         expect(lista[8].listaArtefatoSaida[1].tipoAlteracao).toBe('M')
+
+        expect(lista[9].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[9].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[9].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
+        expect(lista[9].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+        expect(lista[9].listaArtefatoSaida[1].tipoAlteracao).toBe('M')
+        expect(lista[9].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
+        expect(lista[9].listaArtefatoSaida[2].tipoAlteracao).toBe('M')
+        expect(lista[9].listaArtefatoSaida[3].numeroAlteracao).toBe(1)
+        expect(lista[9].listaArtefatoSaida[3].tipoAlteracao).toBe('M')
+        expect(lista[9].listaArtefatoSaida[4].numeroAlteracao).toBe(1)
+        expect(lista[9].listaArtefatoSaida[4].tipoAlteracao).toBe('M')
+        expect(lista[9].listaArtefatoSaida[5].numeroAlteracao).toBe(1)
+        expect(lista[9].listaArtefatoSaida[5].tipoAlteracao).toBe('M')
+        
     })
 
     afterEach(() => {
