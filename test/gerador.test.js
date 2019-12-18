@@ -143,7 +143,8 @@ describe('test foo', () => {
             diretorio: PATH_TEST,
             autor: "fulano",
             projeto: ["apc-estatico", "crm-patrimonio-estatico"],
-            task: [1199211, 1203082, 1203670, 1207175, 1210684, 1210658, 1212262, 1212444]
+            task: ["1199211", "1203082", "1203670", "1207175", "1210684", 
+                "1210658", "1212262", "1212444"]
         })
 
         const lista = await gerador(params).gerarListaArtefato()
