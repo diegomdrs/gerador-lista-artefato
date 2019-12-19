@@ -35,10 +35,8 @@ module.exports = class {
     }
 }
 
-function randomValueHex(len) {
-    return crypto.randomBytes(Math.ceil(len / 2))
-        .toString('hex')
-        .slice(0, len)
+function randomValueHex() {
+    return crypto.randomBytes(12).toString('hex')
 }
 
 async function criarRepo(nomeProjeto) {
@@ -66,7 +64,7 @@ async function criarArquivo(git, task, pathArquivo, tipoAlteracao) {
 
         } else {
 
-            fs.outputFileSync(obterCaminhoArquivo(git, pathArquivo), randomValueHex(12))
+            fs.outputFileSync(obterCaminhoArquivo(git, pathArquivo), randomValueHex())
         }
 
         await commitarArquivo(git, task, pathArquivo)
@@ -74,7 +72,7 @@ async function criarArquivo(git, task, pathArquivo, tipoAlteracao) {
 
         if (tipoAlteracao === 'R') {
 
-            fs.outputFileSync(obterCaminhoArquivo(git, pathArquivo.origem), randomValueHex(12))
+            fs.outputFileSync(obterCaminhoArquivo(git, pathArquivo.origem), randomValueHex())
             await commitarArquivo(git, task.origem, pathArquivo.origem)
 
             await git.repo.mv(pathArquivo.origem, pathArquivo.destino)
