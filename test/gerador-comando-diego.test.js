@@ -143,7 +143,7 @@ describe('test foo', () => {
                     pathArtefato: 'src/app/spas/contrato/contrato.app.html',
                     listaTarefa: [
                         { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                        { numTarefa: '1168815', numAlteracao: 1, tipoAlteracao: 'M' },
+                        { numTarefa: '1155478', numAlteracao: 1, tipoAlteracao: 'M' },
                         { numTarefa: '1150152', numAlteracao: 1, tipoAlteracao: 'M' }
                     ]
                 },
