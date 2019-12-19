@@ -1,22 +1,14 @@
 const gerador = require('../lib/gerador')
 const Param = require('../models/param')
-const fs = require('fs-extra')
-const app = require('../package.json')
-const crypto = require('crypto')
-const path = require('path')
+const geradorUtilTest = require('./gerador-util-test')
 
-const NAME_APP = app.name
-const PATH_TEST = __dirname + path.sep + NAME_APP
+let listaEstrutura = []
 
 describe('test foo', () => {
 
     beforeEach(async () => {
 
-    })
-
-    it('test', async () => {
-
-        const listaEstrutura = [
+        listaEstrutura = [
             {
                 repo: {},
                 nomeProjeto: 'apc-estatico',
@@ -207,10 +199,14 @@ describe('test foo', () => {
             },
         ]
 
-        await criarEstrutura(listaEstrutura)
+    })
+
+    it('test', async () => {
+
+        await geradorUtilTest.criarEstrutura(listaEstrutura)
 
         const params = new Param({
-            diretorio: PATH_TEST,
+            diretorio: geradorUtilTest.pathTest(),
             autor: "fulano",
             projeto: ["apc-estatico", "apc-api", "crm-patrimonio-estatico", "crm-patrimonio-api"],
             task: ["1199211", "1203082", "1203670", "1207175", "1210684",
@@ -274,7 +270,7 @@ describe('test foo', () => {
         expect(lista[9].listaArtefatoSaida[4].tipoAlteracao).toBe('M')
         expect(lista[9].listaArtefatoSaida[5].numeroAlteracao).toBe(1)
         expect(lista[9].listaArtefatoSaida[5].tipoAlteracao).toBe('M')
-        
+
         expect(lista[10].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[10].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[10].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
@@ -283,67 +279,11 @@ describe('test foo', () => {
         expect(lista[11].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[11].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
         expect(lista[11].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-        expect(lista[11].listaArtefatoSaida[1].tipoAlteracao).toBe('M')    
+        expect(lista[11].listaArtefatoSaida[1].tipoAlteracao).toBe('M')
     })
 
     afterEach(() => {
 
-        fs.removeSync(PATH_TEST)
+        geradorUtilTest.removerDiretorioTest()
     })
 })
-
-function randomValueHex(len) {
-    return crypto.randomBytes(Math.ceil(len / 2))
-        .toString('hex')
-        .slice(0, len)
-}
-
-async function criarEstrutura(listaEstrutura) {
-
-    for (const foo of listaEstrutura) {
-
-        foo.repo = await criarRepo(foo.nomeProjeto)
-
-        for (const artefato of foo.listaArtefato) {
-
-            for (const tarefa of artefato.listaTarefa) {
-
-                for (let i = 0; i < tarefa.numAlteracao; i++) {
-                    await criarArquivo(foo, tarefa.numTarefa, artefato.pathArtefato)
-                }
-            }
-        }
-    }
-}
-
-async function criarRepo(nomeProjeto) {
-
-    const pathProjeto = PATH_TEST + '/' + nomeProjeto
-
-    fs.mkdirsSync(pathProjeto)
-
-    const git = require('simple-git/promise')(pathProjeto)
-
-    await git.init()
-    await git.addConfig('user.name', 'fulano')
-    await git.addConfig('user.email', 'fulano@fulano.com')
-
-    return git
-}
-
-async function criarArquivo(git, task, pathArquivo) {
-
-    fs.outputFileSync(obterCaminhoArquivo(git, pathArquivo), randomValueHex(12))
-
-    await commitarArquivo(git, task, pathArquivo)
-}
-
-async function commitarArquivo(git, task, pathArquivo) {
-
-    await git.repo.add(obterCaminhoArquivo(git, pathArquivo))
-    await git.repo.commit('task ' + task + ' commit')
-}
-
-function obterCaminhoArquivo(git, pathArquivo) {
-    return PATH_TEST + path.sep + git.nomeProjeto + path.sep + pathArquivo
-}
