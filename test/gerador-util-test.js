@@ -23,7 +23,7 @@ module.exports = class {
                 for (const tarefa of artefato.listaTarefa) {
 
                     for (let i = 0; i < tarefa.numAlteracao; i++) {
-                        await criarArquivo(estrutura, tarefa.numTarefa, artefato.pathArtefato)
+                        await criarArquivo(estrutura, tarefa.numTarefa, artefato.pathArtefato, tarefa.tipoAlteracao)
                     }
                 }
             }
@@ -56,9 +56,16 @@ async function criarRepo(nomeProjeto) {
     return git
 }
 
-async function criarArquivo(git, task, pathArquivo) {
+async function criarArquivo(git, task, pathArquivo, tipoAlteracao) {
 
-    fs.outputFileSync(obterCaminhoArquivo(git, pathArquivo), randomValueHex(12))
+    if(tipoAlteracao === 'D') {
+
+        fs.removeSync(obterCaminhoArquivo(git, pathArquivo))
+
+    } else {
+
+        fs.outputFileSync(obterCaminhoArquivo(git, pathArquivo), randomValueHex(12))
+    }
 
     await commitarArquivo(git, task, pathArquivo)
 }
