@@ -58,16 +58,29 @@ async function criarRepo(nomeProjeto) {
 
 async function criarArquivo(git, task, pathArquivo, tipoAlteracao) {
 
-    if(tipoAlteracao === 'D') {
+    if (tipoAlteracao !== 'R') {
 
-        fs.removeSync(obterCaminhoArquivo(git, pathArquivo))
+        if (tipoAlteracao === 'D') {
 
+            fs.removeSync(obterCaminhoArquivo(git, pathArquivo))
+
+        } else {
+
+            fs.outputFileSync(obterCaminhoArquivo(git, pathArquivo), randomValueHex(12))
+        }
+
+        await commitarArquivo(git, task, pathArquivo)
     } else {
 
-        fs.outputFileSync(obterCaminhoArquivo(git, pathArquivo), randomValueHex(12))
-    }
+        if (tipoAlteracao === 'R') {
 
-    await commitarArquivo(git, task, pathArquivo)
+            fs.outputFileSync(obterCaminhoArquivo(git, pathArquivo.origem), randomValueHex(12))
+            await commitarArquivo(git, task.origem, pathArquivo.origem)
+
+            await git.repo.mv(pathArquivo.origem, pathArquivo.destino)
+            await commitarArquivo(git, task.destino, pathArquivo.destino)
+        }
+    }
 }
 
 async function commitarArquivo(git, task, pathArquivo) {

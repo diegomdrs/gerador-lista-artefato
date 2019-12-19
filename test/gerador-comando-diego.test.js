@@ -90,13 +90,16 @@ describe('test foo', () => {
                         { numTarefa: '1150152', numAlteracao: 1, tipoAlteracao: 'M' }
                     ]
                 },
-                // {
-                //     pathArtefato: 'apc-api/src/main/java/br/com/bb/apc/api/v1/contrato/gateway/GatewayListarFornecedoresCredoresContratosLocacaoImoveis.java apc-api/src/main/java/br/com/bb/apc/api/v1/contrato/gateway/GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java',
-                //     listaTarefa: [
-                //         { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                //         { numTarefa: '1150152', numAlteracao: 1, tipoAlteracao: 'R' }
-                //     ]
-                // }
+                {
+                    pathArtefato: {
+                        origem: 'src/main/java/br/com/bb/apc/api/v1/contrato/gateway/GatewayListarFornecedoresCredoresContratosLocacaoImoveis.java',
+                        destino: 'src/main/java/br/com/bb/apc/api/v1/contrato/gateway/GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java'
+                    },
+                    listaTarefa: [
+                        { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                        { numTarefa: { origem: '0000000', destino: '1150152' }, numAlteracao: 1, tipoAlteracao: 'R' }
+                    ]
+                }
                 ]
             }, {
                 repo: {},
@@ -314,7 +317,7 @@ describe('test foo', () => {
         const params = new Param({
             diretorio: geradorUtilTest.pathTest(),
             autor: "fulano",
-            projeto: ["apc-estatico","apc-api","crm-patrimonio-estatico","crm-patrimonio-api"],
+            projeto: ["apc-estatico", "apc-api", "crm-patrimonio-estatico", "crm-patrimonio-api"],
             task: [1168815, 1172414, 1168800, 1167319, 1163642, 1155478, 1150152, 1161422]
         })
 
