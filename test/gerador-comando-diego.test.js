@@ -315,7 +315,7 @@ describe('test foo', () => {
             diretorio: geradorUtilTest.pathTest(),
             autor: "fulano",
             projeto: ["apc-estatico", "apc-api", "crm-patrimonio-estatico", "crm-patrimonio-api"],
-            task: [1168815, 1172414, 1168800, 1167319, 1163642, 1155478, 1150152, 1161422],
+            task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"],
             mostrarNumModificacao: true,
             mostrarDeletados: true
         })
