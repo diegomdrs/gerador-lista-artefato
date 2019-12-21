@@ -342,6 +342,16 @@ describe('test comando diego', () => {
 
     function testarLista(lista) {
 
+        expect(lista[0].listaNumTarefaSaida).toHaveLength(2)
+        expect(lista[0].listaNumTarefaSaida).toEqual(
+            expect.arrayContaining(['1150152', '1155478']))
+        expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(9)
+
+        expect(lista[2].listaNumTarefaSaida).toHaveLength(5)
+        expect(lista[2].listaNumTarefaSaida).toEqual(
+            expect.arrayContaining(['1172414', '1168800', '1163642', '1155478', '1150152']))
+        expect(lista[2].listaArtefatoSaida[0].numeroAlteracao).toBe(10)
+
         expect(lista[16].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[16].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[16].listaArtefatoSaida[0].tipoAlteracao).toBe('D')
