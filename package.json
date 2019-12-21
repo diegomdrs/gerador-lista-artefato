@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node app -s",
     "dev": "node --inspect app -s",
-    "test": "jest --runInBand"
+    "test": "jest --runInBand --verbose"
   },
   "keywords": [],
   "author": "",
