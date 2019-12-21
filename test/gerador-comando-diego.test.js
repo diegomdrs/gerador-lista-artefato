@@ -3,7 +3,7 @@ const geradorUtilTest = require('./gerador-util-test')
 
 let params = {}
 
-describe('test foo', () => {
+describe('test comando diego', () => {
 
     beforeAll(async () => {
 
@@ -317,33 +317,31 @@ describe('test foo', () => {
         await geradorUtilTest.criarEstrutura(listaEstrutura)
     })
 
-    it('test gerador new comando diego', async () => {
-
-        const gerador = require('../lib/gerador-new')
-
-        const lista = await gerador(params).gerarListaArtefato()
-
-        expect(lista[16].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[16].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-        expect(lista[16].listaArtefatoSaida[0].tipoAlteracao).toBe('D')
-        expect(lista[16].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-        expect(lista[16].listaArtefatoSaida[1].tipoAlteracao).toBe('D')
-
-        expect(lista[19].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[19].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-        expect(lista[19].listaArtefatoSaida[1].tipoAlteracao).toBe('D')
-
-        expect(lista[20].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[20].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
-        expect(lista[20].listaArtefatoSaida[2].tipoAlteracao).toBe('R')
-    })
-
     it('test gerador comando diego', async () => {
 
         const gerador = require('../lib/gerador')
 
         const lista = await gerador(params).gerarListaArtefato()
 
+        testarLista(lista)
+    })
+
+    it('test gerador new comando diego', async () => {
+
+        const gerador = require('../lib/gerador-new')
+
+        const lista = await gerador(params).gerarListaArtefato()
+
+        testarLista(lista)
+    })
+
+    afterAll(() => {
+
+        geradorUtilTest.removerDiretorioTest()
+    })
+
+    function testarLista(lista) {
+
         expect(lista[16].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[16].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[16].listaArtefatoSaida[0].tipoAlteracao).toBe('D')
@@ -357,10 +355,5 @@ describe('test foo', () => {
         expect(lista[20].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[20].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
         expect(lista[20].listaArtefatoSaida[2].tipoAlteracao).toBe('R')
-    })
-
-    afterAll(() => {
-
-        geradorUtilTest.removerDiretorioTest()
-    })
+    }
 })

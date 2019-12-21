@@ -1,12 +1,21 @@
-const gerador = require('../lib/gerador')
 const Param = require('../models/param')
 const geradorUtilTest = require('./gerador-util-test')
 
-let listaEstrutura = []
+let params = {}
 
-describe('test foo', () => {
+describe('test comando fernando', () => {
 
-    beforeEach(async () => {
+    beforeAll(async () => {
+
+        jest.setTimeout(10000)
+
+        params = new Param({
+            diretorio: geradorUtilTest.pathTest(),
+            autor: "fulano",
+            projeto: ["apc-estatico", "apc-api", "crm-patrimonio-estatico", "crm-patrimonio-api"],
+            task: ["1199211", "1203082", "1203670", "1207175", "1210684",
+                "1210658", "1212262", "1212444"]
+        })
 
         listaEstrutura = [
             {
@@ -199,21 +208,33 @@ describe('test foo', () => {
             },
         ]
 
+        await geradorUtilTest.criarEstrutura(listaEstrutura)
     })
 
-    it('test', async () => {
+    it('test gerador comando fernando', async () => {
 
-        await geradorUtilTest.criarEstrutura(listaEstrutura)
-
-        const params = new Param({
-            diretorio: geradorUtilTest.pathTest(),
-            autor: "fulano",
-            projeto: ["apc-estatico", "apc-api", "crm-patrimonio-estatico", "crm-patrimonio-api"],
-            task: ["1199211", "1203082", "1203670", "1207175", "1210684",
-                "1210658", "1212262", "1212444"]
-        })
+        const gerador = require('../lib/gerador')
 
         const lista = await gerador(params).gerarListaArtefato()
+
+        testarLista(lista)
+    })
+
+    it('test gerador new comando fernando', async () => {
+
+        const gerador = require('../lib/gerador-new')
+
+        const lista = await gerador(params).gerarListaArtefato()
+
+        testarLista(lista)
+    })
+
+    afterAll(() => {
+
+        geradorUtilTest.removerDiretorioTest()
+    })
+
+    function testarLista(lista) {
 
         expect(lista[0].listaNumTarefaSaida).toHaveLength(2)
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
@@ -280,10 +301,5 @@ describe('test foo', () => {
         expect(lista[11].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
         expect(lista[11].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
         expect(lista[11].listaArtefatoSaida[1].tipoAlteracao).toBe('M')
-    })
-
-    afterEach(() => {
-
-        geradorUtilTest.removerDiretorioTest()
-    })
+    }
 })
