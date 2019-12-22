@@ -217,7 +217,7 @@ describe('test comando fernando', () => {
 
         const lista = await gerador(params).gerarListaArtefato()
 
-        // testarLista(lista)
+        testarLista(lista)
     })
 
     it('test gerador new comando fernando', async () => {
