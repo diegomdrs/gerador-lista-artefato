@@ -211,6 +211,15 @@ describe('test comando fernando', () => {
         await geradorUtilTest.criarEstrutura(listaEstrutura)
     })
 
+    it('test gerador new promise comando fernando', async () => {
+
+        const gerador = require('../lib/gerador-new-promise')
+
+        const lista = await gerador(params).gerarListaArtefato()
+
+        testarLista(lista)
+    })
+
     it('test gerador comando fernando', async () => {
 
         const gerador = require('../lib/gerador')
@@ -228,6 +237,8 @@ describe('test comando fernando', () => {
 
         testarLista(lista)
     })
+
+
 
     afterAll(() => {
 
