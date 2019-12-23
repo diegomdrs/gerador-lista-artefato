@@ -238,8 +238,6 @@ describe('test comando fernando', () => {
         testarLista(lista)
     })
 
-
-
     afterAll(() => {
 
         geradorUtilTest.removerDiretorioTest()
