@@ -3,9 +3,19 @@ module.exports = async function (params) {
 
     const gerador = require('../lib/gerador')(params)
 
-    const listaSaida = await gerador.gerarListaArtefato()
+    init()
 
-    imprimirListaSaida(listaSaida)
+    async function init() {
+
+        try {
+            const listaSaida = await gerador.gerarListaArtefato()
+            imprimirListaSaida(listaSaida)
+
+        } catch ({message}) {
+
+            console.log(message)
+        }
+    }
 
     function imprimirListaSaida(listaSaida) {
 
