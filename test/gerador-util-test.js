@@ -77,7 +77,7 @@ module.exports = class {
                 fs.outputFileSync(obterCaminhoArquivo(git, pathArquivo.origem), randomValueHex())
                 await commitarArquivo(git, nomeProjeto, task.origem, pathArquivo.origem)
     
-                await git.repo.mv(pathArquivo.origem, pathArquivo.destino)
+                await git.mv(pathArquivo.origem, pathArquivo.destino)
                 await commitarArquivo(git, nomeProjeto, task.destino, pathArquivo.destino)
             }
         }
