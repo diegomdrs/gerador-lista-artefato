@@ -20,11 +20,40 @@ describe('test comando diego', () => {
             projeto: ["foo"],
             task: ["1111111"]
         })
-
     })
 
+    it('test listagem de artefatos com projeto inválido', () => {
+
+        const gerador = require('../lib/gerador-new-promise')
+        const paramsError = new Param({
+            diretorio: geradorUtilTest.pathTest(),
+            autor: "fulano",
+            projeto: ["bar"],
+            task: ["1111111"]
+        })
+
+        expect.assertions(1);
+        return expect(gerador(paramsError).gerarListaArtefato()).rejects.toEqual(
+            new Error('Projeto \'' + paramsError.projeto[0] + '\' não encontrado'));
+    });
+
+    it('test listagem de artefatos com diretorio inválido', () => {
+
+        const gerador = require('../lib/gerador-new-promise')
+        const paramsError = new Param({
+            diretorio: 'tmp',
+            autor: "fulano",
+            projeto: ["bar"],
+            task: ["1111111"]
+        })
+
+        expect.assertions(1);
+        return expect(gerador(paramsError).gerarListaArtefato()).rejects.toEqual(
+            new Error('Diretório \'' + paramsError.diretorio + '\' não encontrado'));
+    });
+
     it('test listagem de artefatos commitados em branches diferentes', async () => {
-        
+
         await geradorUtilTest.checkoutBranch(git, 'branchFoo')
         await geradorUtilTest.criarArquivo(git, nomeProjeto, '1111111', 'arquivoFoo.txt', 'A')
 
