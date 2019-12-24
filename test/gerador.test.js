@@ -22,6 +22,11 @@ describe('test comando diego', () => {
         })
     })
 
+    it('test parâmetros inválidos', () => {
+
+       
+    });
+
     it('test listagem de artefatos com projeto inválido', () => {
 
         const gerador = require('../lib/gerador-new-promise')
