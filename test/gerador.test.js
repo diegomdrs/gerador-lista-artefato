@@ -2,19 +2,17 @@ const Param = require('../models/param')
 const geradorUtilTest = require('./gerador-util-test')
 const fs = require('fs-extra')
 
+let git = {}
 let params = {}
+let gerador = {}
+const nomeProjeto = 'foo'
 
 describe('test comando diego', () => {
 
     beforeAll(async () => {
 
-    })
-
-    it('test listagem de artefatos commitados em branches', async () => {
-        
-        const nomeProjeto = 'foo'
-        const git = await geradorUtilTest.criarRepo(nomeProjeto)
-        const gerador = require('../lib/gerador-new-promise')
+        git = await geradorUtilTest.criarRepo(nomeProjeto)
+        gerador = require('../lib/gerador-new-promise')
 
         params = new Param({
             diretorio: geradorUtilTest.pathTest(),
@@ -23,28 +21,36 @@ describe('test comando diego', () => {
             task: ["1111111"]
         })
 
+    })
+
+    it('test listagem de artefatos commitados em branches diferentes', async () => {
+        
         await geradorUtilTest.checkoutBranch(git, 'branchFoo')
-        await geradorUtilTest.criarArquivo(git, nomeProjeto, '1111111', 'arquivo.txt', 'A')
+        await geradorUtilTest.criarArquivo(git, nomeProjeto, '1111111', 'arquivoFoo.txt', 'A')
+
+        await geradorUtilTest.checkoutBranch(git, 'branchBar')
+        await geradorUtilTest.criarArquivo(git, nomeProjeto, '1111111', 'arquivoBar.txt', 'A')
+
         await geradorUtilTest.checkoutBranch(git, 'master')
 
         const lista = await gerador(params).gerarListaArtefato()
 
         expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[0].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('A')
+        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe(
+            nomeProjeto + '/arquivoFoo.txt')
+
+        expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+        expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe('A')
+        expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe(
+            nomeProjeto + '/arquivoBar.txt')
     })
 
     afterAll(() => {
 
         geradorUtilTest.removerDiretorioTest()
     })
-
-    function testarLista(lista) {
-
-        expect(lista[0].listaNumTarefaSaida).toHaveLength(2)
-        expect(lista[0].listaNumTarefaSaida).toEqual(
-            expect.arrayContaining(['1150152', '1155478']))
-        expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(9)
-    }
 })
