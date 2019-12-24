@@ -1,0 +1,34 @@
+const Param = require('../models/param')
+const geradorUtilTest = require('./gerador-util-test')
+const fs = require('fs-extra')
+
+let params = {}
+
+describe('test comando diego', () => {
+
+    beforeAll(async () => {
+
+    })
+
+    it('test listagem de artefatos com branches', async () => {
+
+        const git = await geradorUtilTest.criarRepo('foo')
+
+        geradorUtilTest.checkoutBranch(git, 'branchFoo')
+
+        geradorUtilTest.criarArquivo(git,'1111111','arquivo.txt','A')
+    })
+
+    afterAll(() => {
+
+        // geradorUtilTest.removerDiretorioTest()
+    })
+
+    function testarLista(lista) {
+
+        expect(lista[0].listaNumTarefaSaida).toHaveLength(2)
+        expect(lista[0].listaNumTarefaSaida).toEqual(
+            expect.arrayContaining(['1150152', '1155478']))
+        expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(9)
+    }
+})

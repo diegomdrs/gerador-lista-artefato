@@ -14,16 +14,18 @@ module.exports = class {
 
     static async criarEstrutura(listaEstrutura) {
 
-        for (const estrutura of listaEstrutura) {
+        for (let estrutura of listaEstrutura) {
 
-            estrutura.repo = await criarRepo(estrutura.nomeProjeto)
+            const git = await this.criarRepo(estrutura.nomeProjeto)
 
             for (const artefato of estrutura.listaArtefato) {
 
                 for (const tarefa of artefato.listaTarefa) {
 
                     for (let i = 0; i < tarefa.numAlteracao; i++) {
-                        await criarArquivo(estrutura, tarefa.numTarefa, artefato.pathArtefato, tarefa.tipoAlteracao)
+
+                        await this.criarArquivo(git, estrutura.nomeProjeto, 
+                            tarefa.numTarefa, artefato.pathArtefato, tarefa.tipoAlteracao)
                     }
                 }
             }
@@ -33,60 +35,65 @@ module.exports = class {
     static removerDiretorioTest() {
         fs.removeSync(PATH_TEST)
     }
+
+    static async checkoutBranch(git, nomeBranch) {
+    
+        await git.checkoutLocalBranch(nomeBranch)
+    }
+
+    static async criarRepo(nomeProjeto) {
+
+        const pathProjeto = PATH_TEST + '/' + nomeProjeto
+    
+        fs.mkdirsSync(pathProjeto)
+    
+        const git = require('simple-git/promise')(pathProjeto)
+    
+        await git.init()
+        await git.addConfig('user.name', 'fulano')
+        await git.addConfig('user.email', 'fulano@fulano.com')
+    
+        return git
+    }
+
+    static async criarArquivo(git, nomeProjeto, task, pathArquivo, tipoAlteracao) {
+
+        if (tipoAlteracao !== 'R') {
+    
+            if (tipoAlteracao === 'D') {
+    
+                fs.removeSync(obterCaminhoArquivo(nomeProjeto, pathArquivo))
+    
+            } else {
+    
+                fs.outputFileSync(obterCaminhoArquivo(nomeProjeto, pathArquivo), randomValueHex())
+            }
+    
+            await commitarArquivo(git, nomeProjeto, task, pathArquivo)
+        } else {
+    
+            if (tipoAlteracao === 'R') {
+    
+                fs.outputFileSync(obterCaminhoArquivo(git, pathArquivo.origem), randomValueHex())
+                await commitarArquivo(git, nomeProjeto, task.origem, pathArquivo.origem)
+    
+                await git.repo.mv(pathArquivo.origem, pathArquivo.destino)
+                await commitarArquivo(git, nomeProjeto, task.destino, pathArquivo.destino)
+            }
+        }
+    }
 }
 
 function randomValueHex() {
     return crypto.randomBytes(12).toString('hex')
 }
 
-async function criarRepo(nomeProjeto) {
+async function commitarArquivo(git, nomeProjeto, task, pathArquivo) {
 
-    const pathProjeto = PATH_TEST + '/' + nomeProjeto
-
-    fs.mkdirsSync(pathProjeto)
-
-    const git = require('simple-git/promise')(pathProjeto)
-
-    await git.init()
-    await git.addConfig('user.name', 'fulano')
-    await git.addConfig('user.email', 'fulano@fulano.com')
-
-    return git
+    await git.add(obterCaminhoArquivo(nomeProjeto, pathArquivo))
+    await git.commit('task ' + task + ' commit')
 }
 
-async function criarArquivo(git, task, pathArquivo, tipoAlteracao) {
-
-    if (tipoAlteracao !== 'R') {
-
-        if (tipoAlteracao === 'D') {
-
-            fs.removeSync(obterCaminhoArquivo(git, pathArquivo))
-
-        } else {
-
-            fs.outputFileSync(obterCaminhoArquivo(git, pathArquivo), randomValueHex())
-        }
-
-        await commitarArquivo(git, task, pathArquivo)
-    } else {
-
-        if (tipoAlteracao === 'R') {
-
-            fs.outputFileSync(obterCaminhoArquivo(git, pathArquivo.origem), randomValueHex())
-            await commitarArquivo(git, task.origem, pathArquivo.origem)
-
-            await git.repo.mv(pathArquivo.origem, pathArquivo.destino)
-            await commitarArquivo(git, task.destino, pathArquivo.destino)
-        }
-    }
-}
-
-async function commitarArquivo(git, task, pathArquivo) {
-
-    await git.repo.add(obterCaminhoArquivo(git, pathArquivo))
-    await git.repo.commit('task ' + task + ' commit')
-}
-
-function obterCaminhoArquivo(git, pathArquivo) {
-    return PATH_TEST + path.sep + git.nomeProjeto + path.sep + pathArquivo
+function obterCaminhoArquivo(nomeProjeto, pathArquivo) {
+    return PATH_TEST + path.sep + nomeProjeto + path.sep + pathArquivo
 }

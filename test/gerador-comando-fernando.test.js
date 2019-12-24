@@ -19,7 +19,6 @@ describe('test comando fernando', () => {
 
         listaEstrutura = [
             {
-                repo: {},
                 nomeProjeto: 'apc-estatico',
                 listaArtefato: [{
                     pathArtefato: 'package.json',
@@ -45,7 +44,6 @@ describe('test comando fernando', () => {
                 }]
             },
             {
-                repo: {},
                 nomeProjeto: 'crm-patrimonio-estatico',
                 listaArtefato: [
                     {
@@ -185,7 +183,6 @@ describe('test comando fernando', () => {
                     },
                 ]
             }, {
-                repo: {},
                 nomeProjeto: 'apc-api',
                 listaArtefato: [{
                     pathArtefato: 'pom.xml',
@@ -196,7 +193,6 @@ describe('test comando fernando', () => {
                 }]
             },
             {
-                repo: {},
                 nomeProjeto: 'crm-patrimonio-api',
                 listaArtefato: [{
                     pathArtefato: 'pom.xml',
