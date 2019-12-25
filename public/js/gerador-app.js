@@ -1,10 +1,18 @@
 angular
-	.module('gerador', ['ngRoute', 'ngResource'])
+	.module('geradorApp', [
+		'ngRoute',
+		'ngResource']
+	)
 	.config(configure);
 
-configure.$inject = ['$routeProvider', '$locationProvider'];
+configure.$inject = [
+	'$routeProvider', 
+	'$locationProvider'
+];
 
-function configure($routeProvider, $locationProvider) {
+function configure(
+	$routeProvider, 
+	$locationProvider) {
 
 	$locationProvider.html5Mode(true)
 

@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = function (app) {
 
-    app.post('/gerador', async function (req, resp) {
+    app.post('/gerarListaArtefato', async function (req, resp) {
 
         const BAD_REQUEST_CODE = 400
 
