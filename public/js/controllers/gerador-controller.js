@@ -10,6 +10,7 @@ function GeradorController(geradorService) {
     vm.listaSaida = []
 
     vm.init = init
+    vm.obterNumero = obterNumero
 
     function init() {
 
@@ -23,7 +24,21 @@ function GeradorController(geradorService) {
         geradorService.gerarListaArtefato(req)
             .then(function (resposta) {
                 vm.listaSaida = resposta.data
+            }, function (error) {
 
+                vm.messages = [error.data.message]
             })
+    }
+
+    function obterNumero(saida) {
+
+        if (saida.listaArtefatoSaida.length === 1) {
+
+            return saida.listaNumTarefaSaida.length
+            
+        } else {
+            
+            return saida.listaArtefatoSaida.length
+        }
     }
 }
