@@ -1,25 +1,14 @@
 const Param = require('../models/param')
 const geradorUtilTest = require('./gerador-util-test')
-const fs = require('fs-extra')
 
-let git = {}
-let params = {}
-let gerador = {}
 const nomeProjeto = 'foo'
+let git = {}
 
 describe('test comando diego', () => {
 
     beforeAll(async () => {
 
         git = await geradorUtilTest.criarRepo(nomeProjeto)
-        gerador = require('../lib/gerador-new-promise')
-
-        params = new Param({
-            diretorio: geradorUtilTest.pathTest(),
-            autor: "fulano",
-            projeto: ["foo"],
-            task: ["1111111"]
-        })
     })
 
     it('test parâmetros inválidos', () => {
@@ -58,6 +47,14 @@ describe('test comando diego', () => {
     });
 
     it('test listagem de artefatos commitados em branches diferentes', async () => {
+
+        const gerador = require('../lib/gerador-new-promise')
+        const params = new Param({
+            diretorio: geradorUtilTest.pathTest(),
+            autor: "fulano",
+            projeto: ["foo"],
+            task: ["1111111"]
+        })
 
         await geradorUtilTest.checkoutBranch(git, 'branchFoo')
         await geradorUtilTest.criarArquivo(git, nomeProjeto, '1111111', 'arquivoFoo.txt', 'A')
