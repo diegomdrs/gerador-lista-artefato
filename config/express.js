@@ -6,8 +6,10 @@ const app = express()
 app.use(express.json())
 
 app.use(express.static('./public'))
-app.use(express.static('./node_modules/angular'))
-app.use(express.static('./node_modules/bootstrap/dist/css'))
+app.use('/css', express.static('./node_modules/bootstrap/dist/css'))
+
+app.use('/js/lib', express.static('./node_modules/angular'))
+app.use('/js/lib', express.static('./node_modules/angular-route'))
 
 app.use(express.urlencoded({ extended: false }))
 app.use(bodyParser.json())

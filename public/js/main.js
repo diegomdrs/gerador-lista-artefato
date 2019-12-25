@@ -1,5 +1,5 @@
 angular
-	.module('gerador', [])
+	.module('gerador', ['ngRoute'])
 	.config(configure);
 
 configure.$inject = ['$routeProvider', '$locationProvider'];
