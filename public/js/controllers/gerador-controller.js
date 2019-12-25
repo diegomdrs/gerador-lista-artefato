@@ -5,11 +5,13 @@ angular
 GeradorController.$inject = ['geradorService'];
 
 function GeradorController(geradorService) {
-    var vm = this;
+    var vm = this
+
+    vm.listaSaida = []
 
     vm.init = init
 
-    async function init() {
+    function init() {
 
         const req = {
             diretorio: "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas",
@@ -18,8 +20,10 @@ function GeradorController(geradorService) {
             task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"]
         }
 
-        const resposta = await geradorService.gerarListaArtefato(req)
+        geradorService.gerarListaArtefato(req)
+            .then(function (resposta) {
+                vm.listaSaida = resposta.data
 
-        console.log(resposta)
+            })
     }
 }

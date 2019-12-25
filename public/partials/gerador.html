@@ -1,7 +1,7 @@
 <div ng-controller="GeradorController as vm" ng-init="vm.init()">
 
 	<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-		<h5 class="my-0 mr-md-auto font-weight-normal">Nome da companhia</h5>
+		<h5 class="my-0 mr-md-auto font-weight-normal">Gerador de Artefatos</h5>
 	</div>
 
 	<div class="container">
@@ -103,30 +103,14 @@
 				<table class="table">
 					<thead class="thead-light">
 						<tr>
-							<th scope="col">#</th>
 							<th scope="col">First</th>
 							<th scope="col">Last</th>
-							<th scope="col">Handle</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>Otto</td>
-							<td>@mdo</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Jacob</td>
-							<td>Thornton</td>
-							<td>@fat</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>@twitter</td>
+						<tr ng-repeat="saida in vm.listaSaida">
+							<td>{{saida.listaNumTarefaSaida.length}}</td>
+							<td>{{saida.listaArtefatoSaida.length}}</td>
 						</tr>
 					</tbody>
 				</table>
