@@ -7,7 +7,7 @@ GeradorController.$inject = ['geradorService'];
 function GeradorController(geradorService) {
     var vm = this;
 
-    init()
+    vm.init = init
 
     async function init() {
 
