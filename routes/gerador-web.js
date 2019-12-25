@@ -1,3 +1,4 @@
+const path = require('path')
 
 module.exports = function (app) {
 
@@ -8,7 +9,7 @@ module.exports = function (app) {
         try {
             const Param = require('../models/param')
             const params = new Param(req.body)
-            const gerador = require('../lib/gerador')(params)
+            const gerador = require('../lib/gerador-new-promise')(params)
 
             resp.json(await gerador.gerarListaArtefato())
 
@@ -17,4 +18,9 @@ module.exports = function (app) {
             resp.status(BAD_REQUEST_CODE).send({ message: error.message })
         }
     })
+
+    // AngularJS html5mode com Node.js e Express
+    app.all('/*', function (req, res) {
+        res.sendFile(path.resolve('public/index.html'));
+    });
 }
