@@ -6,4 +6,13 @@ table {
 thead {
     background-color: #0038A8;
     color: white;
-} 
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+    background-color: #0038A8;
+    border-color: white;
+}
