@@ -2,3 +2,8 @@ table {
     table-layout: fixed;
     word-wrap: break-word;
 }
+
+thead {
+    background-color: #0038A8;
+    color: white;
+} 
