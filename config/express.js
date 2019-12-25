@@ -10,6 +10,7 @@ app.use('/css', express.static('./node_modules/bootstrap/dist/css'))
 
 app.use('/js/lib', express.static('./node_modules/angular'))
 app.use('/js/lib', express.static('./node_modules/angular-route'))
+app.use('/js/lib', express.static('./node_modules/angular-resource'))
 
 app.use(express.urlencoded({ extended: false }))
 app.use(bodyParser.json())
