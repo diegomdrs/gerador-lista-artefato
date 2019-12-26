@@ -17,7 +17,33 @@
 
 			<div class="col">
 
-				<table class="table" style="margin-bottom: 0rem;" >
+				<div class="input-group mb-3">
+					<input type="text" class="form-control" 
+						placeholder="Adicione uma task"
+						aria-describedby="basic-addon2">
+					<div class="input-group-append">
+						<button class="btn btn-primary" type="button">Adicionar</button>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="col">
+
+				<div class="custom-file">
+					<input type="file" class="custom-file-input" id="customFile">
+					<label class="custom-file-label" for="customFile">Selecione um projeto</label>
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="row pt-2">
+
+			<div class="col">
+
+				<table class="table" style="margin-bottom: 0rem;">
 					<thead>
 						<tr>
 							<th style="width:80%">Task</th>
@@ -28,8 +54,7 @@
 
 				<div style="height: 15rem; overflow-y:scroll;">
 
-					<table class="table table-striped table-bordered table-hover"
-						style="margin-bottom: 1rem;">
+					<table class="table table-striped table-bordered table-hover" style="margin-bottom: 1rem;">
 						<tbody>
 							<tr ng-repeat="task in vm.req.task">
 								<td style="width:80%">{{task}}</td>
@@ -45,7 +70,7 @@
 
 			<div class="col">
 
-				<table class="table" style="margin-bottom: 0rem;" >
+				<table class="table" style="margin-bottom: 0rem;">
 					<thead>
 						<tr>
 							<th style="width:80%">Projeto</th>
@@ -56,8 +81,7 @@
 
 				<div style="height: 15rem; overflow-y:scroll;">
 
-					<table class="table table-striped table-bordered table-hover"
-						style="margin-bottom: 1rem;">
+					<table class="table table-striped table-bordered table-hover" style="margin-bottom: 1rem;">
 						<tbody>
 							<tr ng-repeat="projeto in vm.req.projeto">
 								<td style="width:80%">{{projeto}}</td>
@@ -76,9 +100,7 @@
 		<div class="row d-flex flex-row-reverse pt-2 pb-2">
 
 			<div class="p-2">
-				<button class="btn btn-block btn-primary">
-					<i class="mdi mdi-attachment mdi-lg"></i> Gerar Lista
-				</button>
+				<button class="btn btn-block btn-primary">Gerar Lista</button>
 			</div>
 
 			<div class="p-2">
