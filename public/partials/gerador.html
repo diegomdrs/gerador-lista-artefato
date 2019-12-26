@@ -18,10 +18,13 @@
 			<div class="col">
 
 				<div class="input-group mb-3">
-					<input type="text" class="form-control" placeholder="Adicione uma task"
-						aria-describedby="basic-addon2">
+					<input type="text" class="form-control" 
+						placeholder="Adicione uma task"
+						aria-describedby="basic-addon2"
+						ng-model='vm.task'>
 					<div class="input-group-append">
-						<button class="btn btn-primary" type="button">Adicionar</button>
+						<button class="btn btn-primary" type="button"
+						ng-click="vm.adicionarTask()">Adicionar</button>
 					</div>
 				</div>
 
@@ -32,9 +35,11 @@
 				<div class="input-group mb-3">
 					<input type="text" class="form-control" 
 						placeholder="Adicione o caminho do diretório"
-						aria-describedby="basic-addon2">
+						aria-describedby="basic-addon2"
+						ng-model='vm.caminhoProjeto'>
 					<div class="input-group-append">
-						<button class="btn btn-primary" type="button">Adicionar</button>
+						<button class="btn btn-primary" type="button"
+						ng-click="vm.adicionarCaminhoProjeto()">Adicionar</button>
 					</div>
 				</div>
 
@@ -61,7 +66,7 @@
 							<tr ng-repeat="task in vm.req.task">
 								<td style="width:80%">{{task}}</td>
 								<td style="width:20%">
-									<a href="">Remover</a>
+									<a href ng-click="vm.removerTask(task)">Remover</a>
 								</td>
 							</tr>
 						</tbody>
@@ -85,10 +90,10 @@
 
 					<table class="table table-striped table-bordered table-hover" style="margin-bottom: 1rem;">
 						<tbody>
-							<tr ng-repeat="projeto in vm.req.projeto">
-								<td style="width:80%">{{projeto}}</td>
+							<tr ng-repeat="caminhoProjeto in vm.req.projeto">
+								<td style="width:80%">{{caminhoProjeto}}</td>
 								<td style="width:20%">
-									<a href="">Remover</a>
+									<a href ng-click="vm.removerCaminhoProjeto(caminhoProjeto)">Remover</a>
 								</td>
 							</tr>
 						</tbody>

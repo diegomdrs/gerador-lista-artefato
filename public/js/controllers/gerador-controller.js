@@ -12,6 +12,10 @@ function GeradorController(geradorService) {
 
     vm.init = init
     vm.obterNumero = obterNumero
+    vm.adicionarCaminhoProjeto = adicionarCaminhoProjeto
+    vm.removerCaminhoProjeto = removerCaminhoProjeto
+    vm.adicionarTask = adicionarTask
+    vm.removerTask = removerTask
 
     vm.req = {
         diretorio: "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas",
@@ -36,10 +40,39 @@ function GeradorController(geradorService) {
         if (saida.listaArtefatoSaida.length === 1) {
 
             return saida.listaNumTarefaSaida.length
-            
+
         } else {
-            
+
             return saida.listaArtefatoSaida.length
         }
+    }
+
+    function adicionarTask() {
+
+        if (vm.task) {
+            vm.req.task.push(vm.task)
+            delete vm.task
+        }
+    }
+
+    function removerTask(taskRemocao) {
+
+        vm.req.task = vm.req.task.filter(task =>
+            task !== taskRemocao)
+    }
+
+    function adicionarCaminhoProjeto() {
+
+        if (vm.caminhoProjeto) {
+
+            vm.req.projeto.push(vm.caminhoProjeto)
+            delete vm.caminhoProjeto
+        }
+    }
+
+    function removerCaminhoProjeto(caminhoRemocao) {
+
+        vm.req.projeto = vm.req.projeto.filter(caminho =>
+            caminho !== caminhoRemocao)
     }
 }
