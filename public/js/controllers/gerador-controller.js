@@ -11,6 +11,9 @@ function GeradorController(geradorService) {
     vm.req = {}
 
     vm.init = init
+    vm.listarArtefatos = listarArtefatos
+    vm.limparFiltros = limparFiltros
+
     vm.obterNumero = obterNumero
     vm.adicionarCaminhoProjeto = adicionarCaminhoProjeto
     vm.removerCaminhoProjeto = removerCaminhoProjeto
@@ -24,24 +27,34 @@ function GeradorController(geradorService) {
     //     task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"]
     // }
 
-    vm.req = {
-        diretorio: "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas",
-        autor: "fulano",
-        projeto: [],
-        task: []
-    }
-
     function init() {
 
         limparMessages()
+        limparFiltros()
+    }
 
-        geradorService.gerarListaArtefato(vm.req)
-            .then(function (resposta) {
-                vm.listaSaida = resposta.data
-            }, function (error) {
+    function listarArtefatos() {
 
-                vm.messages = [error.data.message]
-            })
+        limparMessages()
+
+        if (vm.req.task.length && vm.req.projeto.length) {
+
+            geradorService.gerarListaArtefato(vm.req)
+                .then(function (resposta) {
+                    vm.listaSaida = resposta.data
+                }, function (error) {
+
+                    vm.messages = [error.data.message]
+                })
+
+        } else {
+
+            !vm.req.task.length && adicionarMensagem
+                ('Adicione ao menos uma task ao filtro')
+
+            !vm.req.projeto.length && adicionarMensagem
+                ('Adicione ao menos um projeto ao filtro')
+        }
     }
 
     function obterNumero(saida) {
@@ -75,7 +88,7 @@ function GeradorController(geradorService) {
 
             if (lista.length) {
 
-                vm.messages = ['A tarefa ' + vm.task + ' já existe na lista']
+                adicionarMensagem('A tarefa ' + vm.task + ' já existe na lista')
 
             } else {
 
@@ -95,7 +108,7 @@ function GeradorController(geradorService) {
 
             if (lista.length) {
 
-                vm.messages = ['O caminho ' + vm.caminhoProjeto + ' já existe na lista de projeto']
+                adicionarMensagem('O caminho ' + vm.caminhoProjeto + ' já existe na lista de projeto')
 
             } else {
 
@@ -116,5 +129,22 @@ function GeradorController(geradorService) {
     function limparMessages() {
 
         vm.messages = []
+    }
+
+    function adicionarMensagem(mensagem) {
+        vm.messages.push(mensagem)
+    }
+
+    function limparFiltros() {
+
+        vm.req = {
+            diretorio: "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas",
+            autor: "fulano",
+            projeto: [],
+            task: []
+        }
+
+        delete vm.caminhoProjeto
+        delete vm.task
     }
 }
