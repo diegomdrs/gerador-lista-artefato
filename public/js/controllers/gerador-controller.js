@@ -136,10 +136,10 @@ function GeradorController(geradorService) {
         vm.req = {
             autor: "fulano",
             projeto: [
-                "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas/apc-estatico", 
-                "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas/apc-api", 
-                "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas/crm-patrimonio-estatico", 
-                "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas/crm-patrimonio-api"
+                "/tmp/gerador-lista-artefato-qas/apc-estatico", 
+                "/tmp/gerador-lista-artefato-qas/apc-api", 
+                "/tmp/gerador-lista-artefato-qas/crm-patrimonio-estatico", 
+                "/tmp/gerador-lista-artefato-qas/crm-patrimonio-api"
             ],
             task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"]
         }
