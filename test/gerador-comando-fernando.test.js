@@ -10,12 +10,13 @@ describe('test comando fernando', () => {
         jest.setTimeout(10000)
 
         params = new Param({
-            diretorio: geradorUtilTest.pathTest(),
             autor: "fulano",
             projeto: ["apc-estatico", "apc-api", "crm-patrimonio-estatico", "crm-patrimonio-api"],
             task: ["1199211", "1203082", "1203670", "1207175", "1210684",
                 "1210658", "1212262", "1212444"]
         })
+
+        params.diretorio = geradorUtilTest.pathTest(),
 
         listaEstrutura = [
             {
@@ -226,6 +227,18 @@ describe('test comando fernando', () => {
     })
 
     it('test gerador new comando promise', async () => {
+
+        const params = new Param({
+            autor: "fulano",
+            projeto: [
+                geradorUtilTest.pathTest() + "/apc-estatico", 
+                geradorUtilTest.pathTest() + "/apc-api", 
+                geradorUtilTest.pathTest() + "/crm-patrimonio-estatico", 
+                geradorUtilTest.pathTest() + "/crm-patrimonio-api"
+            ],
+            task: ["1199211", "1203082", "1203670", "1207175", "1210684",
+                "1210658", "1212262", "1212444"]
+        })
 
         const gerador = require('../lib/gerador-new-promise')
 

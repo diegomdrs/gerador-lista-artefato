@@ -10,13 +10,14 @@ describe('test comando diego', () => {
         jest.setTimeout(10000)
 
         params = new Param({
-            diretorio: geradorUtilTest.pathTest(),
             autor: "fulano",
             projeto: ["apc-estatico", "apc-api", "crm-patrimonio-estatico", "crm-patrimonio-api"],
             task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"],
             mostrarNumModificacao: true,
             mostrarDeletados: true
         })
+
+        params.diretorio = geradorUtilTest.pathTest()
 
         const listaEstrutura = [
             {
@@ -338,7 +339,6 @@ describe('test comando diego', () => {
     it('test gerador new comando promise', async () => {
 
         const params = new Param({
-            diretorio: geradorUtilTest.pathTest(),
             autor: "fulano",
             projeto: [
                 geradorUtilTest.pathTest() + "/apc-estatico", 

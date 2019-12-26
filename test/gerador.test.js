@@ -4,7 +4,7 @@ const geradorUtilTest = require('./gerador-util-test')
 const nomeProjeto = 'foo'
 let git = {}
 
-describe('test comando diego', () => {
+describe('test gerais', () => {
 
     beforeAll(async () => {
 
@@ -25,7 +25,6 @@ describe('test comando diego', () => {
 
         const gerador = require('../lib/gerador-new-promise')
         const paramsError = new Param({
-            diretorio: geradorUtilTest.pathTest(),
             autor: "fulano",
             projeto: ["bar"],
             task: ["1111111"]
@@ -36,28 +35,14 @@ describe('test comando diego', () => {
             new Error('Projeto \'' + paramsError.projeto[0] + '\' não encontrado'));
     });
 
-    it('test listagem de artefatos com diretorio inválido', () => {
-
-        const gerador = require('../lib/gerador-new-promise')
-        const paramsError = new Param({
-            diretorio: 'tmp',
-            autor: "fulano",
-            projeto: ["bar"],
-            task: ["1111111"]
-        })
-
-        expect.assertions(1);
-        return expect(gerador(paramsError).gerarListaArtefato()).rejects.toEqual(
-            new Error('Diretório \'' + paramsError.diretorio + '\' não encontrado'));
-    });
-
     it('test listagem de artefatos commitados em branches diferentes', async () => {
 
         const gerador = require('../lib/gerador-new-promise')
         const params = new Param({
-            diretorio: geradorUtilTest.pathTest(),
             autor: "fulano",
-            projeto: ["foo"],
+            projeto: [
+                geradorUtilTest.pathTest() + "/foo"
+            ],
             task: ["1111111"]
         })
 
