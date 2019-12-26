@@ -33,6 +33,8 @@ function GeradorController(geradorService) {
 
     function init() {
 
+        limparMessages()
+
         geradorService.gerarListaArtefato(vm.req)
             .then(function (resposta) {
                 vm.listaSaida = resposta.data
@@ -54,32 +56,65 @@ function GeradorController(geradorService) {
         }
     }
 
-    function adicionarTask() {
-
-        if (vm.task) {
-            vm.req.task.push(vm.task)
-            delete vm.task
-        }
-    }
-
     function removerTask(taskRemocao) {
+
+        limparMessages()
 
         vm.req.task = vm.req.task.filter(task =>
             task !== taskRemocao)
     }
 
+
+    function adicionarTask() {
+
+        limparMessages()
+
+        if (vm.task) {
+
+            const lista = vm.req.task.filter((task) => task === vm.task)
+
+            if(lista.length) {
+
+                vm.messages = ['A tarefa ' + vm.task + ' já existe na lista' ]
+
+            } else {
+    
+                vm.req.task.push(vm.task)
+                delete vm.task   
+            }
+        }
+    }
+
     function adicionarCaminhoProjeto() {
+
+        limparMessages()
 
         if (vm.caminhoProjeto) {
 
-            vm.req.projeto.push(vm.caminhoProjeto)
-            delete vm.caminhoProjeto
+            const lista = vm.req.projeto.filter((projeto) => projeto === vm.caminhoProjeto)
+
+            if(lista.length) {
+
+                vm.messages = ['O caminho ' + vm.caminhoProjeto + ' já existe na lista de projeto' ]
+
+            } else {
+    
+                vm.req.projeto.push(vm.caminhoProjeto)
+                delete vm.caminhoProjeto   
+            }
         }
     }
 
     function removerCaminhoProjeto(caminhoRemocao) {
 
+        limparMessages()
+
         vm.req.projeto = vm.req.projeto.filter(caminho =>
             caminho !== caminhoRemocao)
+    }
+
+    function limparMessages() {
+
+        vm.messages = []
     }
 }

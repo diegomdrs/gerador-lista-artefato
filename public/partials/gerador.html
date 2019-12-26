@@ -112,7 +112,7 @@
 				<button class="btn btn-block btn-primary">Gerar Lista</button>
 			</div>
 
-			<div class="p-2">
+			<div class="p-2" ng-if="vm.listaSaida.length">
 				<button type="button" class="btn btn-block btn-success">Copiar Resultado</button>
 			</div>
 
@@ -123,7 +123,7 @@
 
 		</div>
 
-		<div class="row pt-2 border-top">
+		<div class="row pt-2 border-top" ng-if="vm.listaSaida.length">
 
 			<div class="col">
 
