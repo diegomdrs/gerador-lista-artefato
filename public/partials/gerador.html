@@ -17,53 +17,67 @@
 
 			<div class="col">
 
-				<table class="table table-striped table-bordered table-hover">
+				<table class="table" style="margin-bottom: 0rem;" >
 					<thead>
 						<tr>
-							<th style="width:80%">Tarefa</th>
+							<th style="width:80%">Task</th>
 							<th style="width:20%" class="text-center"></th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr ng-repeat="task in vm.req.task">
-							<td>{{task}}</td>
-							<td>
-								<a href="">Remover</a>
-							</td>
-						</tr>
-					</tbody>
 				</table>
 
+				<div style="height: 15rem; overflow-y:scroll;">
+
+					<table class="table table-striped table-bordered table-hover"
+						style="margin-bottom: 1rem;">
+						<tbody>
+							<tr ng-repeat="task in vm.req.task">
+								<td style="width:80%">{{task}}</td>
+								<td style="width:20%">
+									<a href="">Remover</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
 			</div>
 
 			<div class="col">
 
-				<table class="table table-striped table-bordered table-hover">
+				<table class="table" style="margin-bottom: 0rem;" >
 					<thead>
 						<tr>
 							<th style="width:80%">Projeto</th>
 							<th style="width:20%" class="text-center"></th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr ng-repeat="projeto in vm.req.projeto">
-							<td>{{projeto}}</td>
-							<td>
-								<a href="">Remover</a>
-							</td>
-						</tr>
-					</tbody>
 				</table>
 
+				<div style="height: 15rem; overflow-y:scroll;">
+
+					<table class="table table-striped table-bordered table-hover"
+						style="margin-bottom: 1rem;">
+						<tbody>
+							<tr ng-repeat="projeto in vm.req.projeto">
+								<td style="width:80%">{{projeto}}</td>
+								<td style="width:20%">
+									<a href="">Remover</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
 			</div>
 
 		</div>
 
-		<div class="row d-flex flex-row-reverse pt-2 pb-2 border-top">
+		<div class="row d-flex flex-row-reverse pt-2 pb-2">
 
 			<div class="p-2">
 				<button class="btn btn-block btn-primary">
-					<i class="mdi mdi-attachment mdi-lg"></i> Gerar Lista  
+					<i class="mdi mdi-attachment mdi-lg"></i> Gerar Lista
 				</button>
 			</div>
 
@@ -81,13 +95,13 @@
 					<thead>
 						<tr>
 							<th style="width:10%" class="text-right">Número</th>
-							<th style="width:70%" >Artefato</th>
-							<th style="width:20%" >Tarefa</th>
+							<th style="width:70%">Artefato</th>
+							<th style="width:20%">Tarefa</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr ng-repeat="saida in vm.listaSaida">
-							
+
 							<td class="text-right">
 								<span>
 									{{vm.obterNumero(saida)}}
@@ -95,15 +109,13 @@
 							</td>
 
 							<td>
-								<li ng-repeat="artefato in saida.listaArtefatoSaida"
-									class="list-unstyled">
+								<li ng-repeat="artefato in saida.listaArtefatoSaida" class="list-unstyled">
 									{{artefato.nomeArtefato}}
 								</li>
 							</td>
 
 							<td>
-								<li ng-repeat="tarefa in saida.listaNumTarefaSaida"
-									class="list-unstyled">
+								<li ng-repeat="tarefa in saida.listaNumTarefaSaida" class="list-unstyled">
 									Tarefa nº {{tarefa}}
 								</li>
 							</td>
