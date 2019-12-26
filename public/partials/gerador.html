@@ -18,10 +18,15 @@
 			<div class="col">
 
 				<div class="input-group mb-3">
-					<input type="text" class="form-control" 
+
+					<input type="text" 
+						class="form-control" 
 						placeholder="Adicione uma task"
 						aria-describedby="basic-addon2"
-						ng-model='vm.task'>
+						ng-model='vm.task'
+						maxlength="20"
+						number-only>
+
 					<div class="input-group-append">
 						<button class="btn btn-primary" type="button"
 						ng-click="vm.adicionarTask()">Adicionar</button>

@@ -1,6 +1,6 @@
 angular
     .module('geradorApp')
-    .controller('GeradorController', GeradorController);
+    .controller('GeradorController', GeradorController)
 
 GeradorController.$inject = ['geradorService'];
 
@@ -73,14 +73,14 @@ function GeradorController(geradorService) {
 
             const lista = vm.req.task.filter((task) => task === vm.task)
 
-            if(lista.length) {
+            if (lista.length) {
 
-                vm.messages = ['A tarefa ' + vm.task + ' já existe na lista' ]
+                vm.messages = ['A tarefa ' + vm.task + ' já existe na lista']
 
             } else {
-    
+
                 vm.req.task.push(vm.task)
-                delete vm.task   
+                delete vm.task
             }
         }
     }
@@ -93,14 +93,14 @@ function GeradorController(geradorService) {
 
             const lista = vm.req.projeto.filter((projeto) => projeto === vm.caminhoProjeto)
 
-            if(lista.length) {
+            if (lista.length) {
 
-                vm.messages = ['O caminho ' + vm.caminhoProjeto + ' já existe na lista de projeto' ]
+                vm.messages = ['O caminho ' + vm.caminhoProjeto + ' já existe na lista de projeto']
 
             } else {
-    
+
                 vm.req.projeto.push(vm.caminhoProjeto)
-                delete vm.caminhoProjeto   
+                delete vm.caminhoProjeto
             }
         }
     }
