@@ -121,7 +121,11 @@
 					<table class='table table-striped table-bordered table-hover' style='margin-bottom: 0rem;'>
 						<tbody>
 							<tr ng-repeat='caminhoProjeto in vm.req.projeto'>
-								<td style='width:80%'>{{caminhoProjeto}}</td>
+								<td style='width:80%'>
+									<span>
+										.../{{vm.obterNomeProjeto(caminhoProjeto)}}
+									</span>
+								</td>
 								<td style='width:20%'>
 									<a href ng-click='vm.removerCaminhoProjeto(caminhoProjeto)'>Remover</a>
 								</td>
@@ -181,7 +185,7 @@
 
 							<td>
 								<li ng-repeat='artefato in saida.listaArtefatoSaida' class='list-unstyled'>
-									{{artefato.nomeArtefato}}
+									{{artefato.tipoAlteracao}} - {{artefato.nomeArtefato}}
 								</li>
 							</td>
 

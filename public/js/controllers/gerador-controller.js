@@ -19,6 +19,7 @@ function GeradorController(geradorService) {
     vm.removerCaminhoProjeto = removerCaminhoProjeto
     vm.adicionarTask = adicionarTask
     vm.removerTask = removerTask
+    vm.obterNomeProjeto = obterNomeProjeto
 
     function init() {
 
@@ -146,5 +147,11 @@ function GeradorController(geradorService) {
 
         delete vm.caminhoProjeto
         delete vm.task
+    }
+
+    function obterNomeProjeto(caminhoProjeto) {
+
+        var segmentos = caminhoProjeto.split('/')
+        return segmentos[segmentos.length-1]
     }
 }
