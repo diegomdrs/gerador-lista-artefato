@@ -4,7 +4,8 @@ const path = require('path')
 const fs = require('fs-extra')
 
 const NAME_APP = app.name
-const PATH_TEST = __dirname + path.sep + NAME_APP
+// const PATH_TEST = __dirname + path.sep + NAME_APP
+const PATH_TEST = '/tmp' + path.sep + NAME_APP
 
 module.exports = class {
 

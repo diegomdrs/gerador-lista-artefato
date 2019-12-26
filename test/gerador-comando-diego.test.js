@@ -337,6 +337,20 @@ describe('test comando diego', () => {
 
     it('test gerador new comando promise', async () => {
 
+        const params = new Param({
+            diretorio: geradorUtilTest.pathTest(),
+            autor: "fulano",
+            projeto: [
+                geradorUtilTest.pathTest() + "/apc-estatico", 
+                geradorUtilTest.pathTest() + "/apc-api", 
+                geradorUtilTest.pathTest() + "/crm-patrimonio-estatico", 
+                geradorUtilTest.pathTest() + "/crm-patrimonio-api"
+            ],
+            task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"],
+            mostrarNumModificacao: true,
+            mostrarDeletados: true
+        })
+
         const gerador = require('../lib/gerador-new-promise')
 
         const lista = await gerador(params).gerarListaArtefato()

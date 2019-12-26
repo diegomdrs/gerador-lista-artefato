@@ -134,9 +134,13 @@ function GeradorController(geradorService) {
         limparMessages()
 
         vm.req = {
-            diretorio: "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas",
             autor: "fulano",
-            projeto: ["apc-estatico", "apc-api", "crm-patrimonio-estatico", "crm-patrimonio-api"],
+            projeto: [
+                "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas/apc-estatico", 
+                "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas/apc-api", 
+                "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas/crm-patrimonio-estatico", 
+                "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas/crm-patrimonio-api"
+            ],
             task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"]
         }
 
