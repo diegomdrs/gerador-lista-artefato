@@ -137,6 +137,8 @@ function GeradorController(geradorService) {
 
     function limparFiltros() {
 
+        limparMessages()
+
         vm.req = {
             diretorio: "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas",
             autor: "fulano",
