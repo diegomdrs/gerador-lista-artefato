@@ -20,13 +20,6 @@ function GeradorController(geradorService) {
     vm.adicionarTask = adicionarTask
     vm.removerTask = removerTask
 
-    // vm.req = {
-    //     diretorio: "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas",
-    //     autor: "fulano",
-    //     projeto: ["apc-estatico", "apc-api", "crm-patrimonio-estatico", "crm-patrimonio-api"],
-    //     task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"]
-    // }
-
     function init() {
 
         limparMessages()
@@ -45,6 +38,7 @@ function GeradorController(geradorService) {
                 }, function (error) {
 
                     vm.messages = [error.data.message]
+                    vm.listaSaida = []
                 })
 
         } else {
@@ -142,8 +136,8 @@ function GeradorController(geradorService) {
         vm.req = {
             diretorio: "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas",
             autor: "fulano",
-            projeto: [],
-            task: []
+            projeto: ["apc-estatico", "apc-api", "crm-patrimonio-estatico", "crm-patrimonio-api"],
+            task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"]
         }
 
         delete vm.caminhoProjeto

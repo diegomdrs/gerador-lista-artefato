@@ -17,27 +17,60 @@
 
 			<div class='col'>
 
-				<div class='input-group mb-3'>
+				<div class="form-group">
+					<label>Matrícula do Autor</label>
 
-					<input type='text' class='form-control' placeholder='Adicione uma task'
-						aria-describedby='basic-addon2' ng-model='vm.task' maxlength='20' number-only>
+					<div class='input-group mb-3'>
 
-					<div class='input-group-append'>
-						<button class='btn btn-primary' type='button' ng-click='vm.adicionarTask()'>Adicionar</button>
+						<input type='text' class='form-control' 
+							aria-describedby='basic-addon2' 
+							ng-model='vm.req.autor' 
+							maxlength='20'>
+
 					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class='row pt-2'>
+
+			<div class='col'>
+
+				<div class="form-group">
+					<label >Número da Tarefa</label>
+
+					<div class='input-group mb-3'>
+
+						<input type='text' class='form-control' placeholder='Adicione uma task'
+							aria-describedby='basic-addon2' ng-model='vm.task' maxlength='20' number-only>
+
+						<div class='input-group-append'>
+							<button class='btn btn-primary' type='button'
+								ng-click='vm.adicionarTask()'>Adicionar</button>
+						</div>
+					</div>
+
 				</div>
 
 			</div>
 
 			<div class='col'>
 
-				<div class='input-group mb-3'>
-					<input type='text' class='form-control' placeholder='Adicione o caminho do projeto'
-						aria-describedby='basic-addon2' ng-model='vm.caminhoProjeto' maxlength='300'>
-					<div class='input-group-append'>
-						<button class='btn btn-primary' type='button'
-							ng-click='vm.adicionarCaminhoProjeto()'>Adicionar</button>
+				<div class="form-group">
+					<label >Caminho do Projeto Git</label>
+
+					<div class='input-group mb-3'>
+						<input type='text' class='form-control' placeholder='Adicione o caminho do projeto'
+							aria-describedby='basic-addon2' ng-model='vm.caminhoProjeto' maxlength='300'>
+						<div class='input-group-append'>
+							<button class='btn btn-primary' type='button'
+								ng-click='vm.adicionarCaminhoProjeto()'>Adicionar</button>
+						</div>
 					</div>
+
 				</div>
 
 			</div>
