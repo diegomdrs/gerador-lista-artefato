@@ -29,34 +29,19 @@
 
 			<div class="col">
 
-				<!-- <div class="input-group mb-3">
-					<input 
-						class="form-control" 
-						placeholder="Selecione um projeto"
-						aria-describedby="basic-addon2"
-						disabled>
-					<div class="input-group-append">
-						<button type='file' class="btn btn-primary">Selecionar</button>
-					</div>
-					<div class="input-group-append">
-						<button class="btn btn-primary" type="button" disabled>Adicionar</button>
-					</div>
-				</div> -->
-
 				<div class="input-group">
 					<div class="custom-file">
 						<input type="file" class="custom-file-input" id="inputGroupFile01"
 							aria-describedby="inputGroupFileAddon01">
-						<label class="custom-file-label" for="inputGroupFile01">Selecione o diretório do projeto</label>
+						<label class="custom-file-label" for="inputGroupFile01" data-browse="Selecione">Selecione o
+							diretório do projeto</label>
 					</div>
 					<div class="input-group-prepend">
-						<span class="input-group-text" id="inputGroupFileAddon01">Adicionar</span>
+						<button class="btn btn-primary" id="inputGroupFileAddon01">Adicionar</button>
 					</div>
 
 				</div>
-
 			</div>
-
 		</div>
 
 		<div class="row pt-2">
@@ -124,8 +109,13 @@
 			</div>
 
 			<div class="p-2">
+				<button type="button" class="btn btn-block btn-success">Copiar Resultado</button>
+			</div>
+
+			<div class="p-2">
 				<button type="button" class="btn btn-block btn-danger">Limpar</button>
 			</div>
+
 
 		</div>
 
