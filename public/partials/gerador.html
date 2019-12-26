@@ -25,9 +25,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1150152</td>
-
+						<tr ng-repeat="task in vm.req.task">
+							<td>{{task}}</td>
 							<td>
 								<a href="">Remover</a>
 							</td>
@@ -47,8 +46,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>apc-api</td>
+						<tr ng-repeat="projeto in vm.req.projeto">
+							<td>{{projeto}}</td>
 							<td>
 								<a href="">Remover</a>
 							</td>
