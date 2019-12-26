@@ -31,7 +31,7 @@
             "name": "bb app.js",
             "program": "${workspaceFolder}/app.js",
             "args": [
-                "--diretorio=/tmp/gerador-lista-artefato-qas",
+                "--diretorio=test/gerador-lista-artefato-qas",
                 "--projeto=apc-estatico,apc-api,crm-patrimonio-estatico,crm-patrimonio-api",
                 "--autor=fulano",
                 "--task=1168815,1172414,1168800,1167319,1163642,1155478,1150152,1161422",
