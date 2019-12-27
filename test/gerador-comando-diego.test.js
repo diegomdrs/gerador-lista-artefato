@@ -387,9 +387,7 @@ describe('test comando diego', () => {
 
         expect(lista[20].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1150152']))
         expect(lista[20].listaArtefatoSaida).toHaveLength(4)
-        expect(lista[20].listaArtefatoSaida).toEqual(
-            expect.arrayContaining([
-                expect.objectContaining({ tipoAlteracao: 'R' })
-            ]))
+        expect(lista[20].listaArtefatoSaida.filter((artefato) => 
+            artefato.tipoAlteracao === 'R')).toHaveLength(1)
     }
 })
