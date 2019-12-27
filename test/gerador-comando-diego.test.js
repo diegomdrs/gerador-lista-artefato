@@ -341,9 +341,9 @@ describe('test comando diego', () => {
         const params = new Param({
             autor: "fulano",
             projeto: [
-                geradorUtilTest.pathTest() + "/apc-estatico", 
-                geradorUtilTest.pathTest() + "/apc-api", 
-                geradorUtilTest.pathTest() + "/crm-patrimonio-estatico", 
+                geradorUtilTest.pathTest() + "/apc-estatico",
+                geradorUtilTest.pathTest() + "/apc-api",
+                geradorUtilTest.pathTest() + "/crm-patrimonio-estatico",
                 geradorUtilTest.pathTest() + "/crm-patrimonio-api"
             ],
             task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"],
@@ -385,8 +385,11 @@ describe('test comando diego', () => {
         expect(lista[19].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
         expect(lista[19].listaArtefatoSaida[1].tipoAlteracao).toBe('D')
 
-        expect(lista[20].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[20].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
-        expect(lista[20].listaArtefatoSaida[2].tipoAlteracao).toBe('R')
+        expect(lista[20].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1150152']))
+        expect(lista[20].listaArtefatoSaida).toHaveLength(4)
+        expect(lista[20].listaArtefatoSaida).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({ tipoAlteracao: 'R' })
+            ]))
     }
 })
