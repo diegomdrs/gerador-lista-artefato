@@ -36,22 +36,25 @@ module.exports = async function (params) {
             }
 
             for (const artefato of saida.listaArtefatoSaida) {
-                console.log(imprimirSaida(artefato.tipoAlteracao,
-                    artefato.numeroAlteracao, artefato.nomeArtefato))
+                console.log(imprimirSaida(artefato))
             }
 
             console.log('')
         }
     }
 
-    function imprimirSaida(tipoAlteracao, numeroAlteracao, nomeArtefato) {
+    function imprimirSaida(artefato) {
 
-        let retorno = tipoAlteracao + '\t'
+        let retorno = artefato.tipoAlteracao + '\t'
 
         params.mostrarNumModificacao && (
-            retorno = retorno.concat(numeroAlteracao + '\t'))
+            retorno = retorno.concat(artefato.numeroAlteracao + '\t'))
 
-        retorno = retorno.concat(nomeArtefato)
+        if(artefato.tipoAlteracao === 'R') {
+            retorno = retorno.concat(artefato.nomeArtefato + '\t' + artefato.novoNomeArtefato)
+        } else {
+            retorno = retorno.concat(artefato.nomeArtefato)
+        }
 
         return retorno
     }
