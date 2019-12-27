@@ -1,5 +1,9 @@
 class Artefato {
-    constructor(nomeArtefato, nomeProjeto, listaTarefa) {
+    constructor(nomeArtefato, nomeNovoArtefato, 
+            nomeAntigoArtefato, nomeProjeto, listaTarefa) {
+                
+        this.nomeNovoArtefato = nomeNovoArtefato,
+        this.nomeAntigoArtefato = nomeAntigoArtefato,
         this.nomeArtefato = nomeArtefato,
         this.nomeProjeto = nomeProjeto,
         this.listaTarefa = listaTarefa
