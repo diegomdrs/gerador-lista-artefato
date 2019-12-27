@@ -51,7 +51,7 @@ module.exports = async function (params) {
             retorno = retorno.concat(artefato.numeroAlteracao + '\t'))
 
         if(artefato.tipoAlteracao === 'R') {
-            retorno = retorno.concat(artefato.nomeArtefato + '\t' + artefato.novoNomeArtefato)
+            retorno = retorno.concat(artefato.nomeAntigoArtefato + '\t' + artefato.nomeNovoArtefato)
         } else {
             retorno = retorno.concat(artefato.nomeArtefato)
         }
