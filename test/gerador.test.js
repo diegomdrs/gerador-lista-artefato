@@ -62,7 +62,7 @@ describe('test gerais', () => {
             }, 'R')
 
         await geradorUtilTest.criarArquivo(git, nomeProjeto, '1111111',
-            'arquivoFoo.txt', 'M')
+            'arquivoQux.txt', 'M')
 
         const lista = await gerador(params).gerarListaArtefato()
 
