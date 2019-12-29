@@ -53,12 +53,10 @@ describe('test gerais', () => {
 
         await geradorUtilTest.criarArquivo(git, nomeProjeto,
             {
-                origem: '1111111',
-                destino: '1111111'
+                origem: '1111111', destino: '1111111'
             },
             {
-                origem: 'arquivoFoo.txt',
-                destino: 'arquivoQux.txt'
+                origem: 'arquivoFoo.txt', destino: 'arquivoQux.txt'
             }, 'R')
 
         await geradorUtilTest.criarArquivo(git, nomeProjeto, '1111111',

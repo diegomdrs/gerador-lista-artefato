@@ -7,6 +7,7 @@ class Tarefa {
 
     isTipoAlteracaoModificacao() { return this.tipoAlteracao === 'M' }
     isTipoAlteracaoDelecao() { return this.tipoAlteracao === 'D' }
+    isTipoAlteracaoRenomear() { return this.tipoAlteracao === 'R' }
 }
 
 module.exports = Tarefa
