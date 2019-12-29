@@ -13,7 +13,7 @@ describe('test gerais', () => {
         params = new Param({
             autor: "fulano",
             projeto: [
-                geradorUtilTest.pathTest() + "/foo"
+                geradorUtilTest.pathTest() + "/" + nomeProjeto
             ],
             task: ["1111111"]
         })
