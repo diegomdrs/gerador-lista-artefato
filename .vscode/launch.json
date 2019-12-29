@@ -7,13 +7,22 @@
         {	
             "type": "node",	
             "request": "attach",	
-            "name": "server",	
+            "name": "server attach",	
             "processId": "${command:PickProcess}",	
             "protocol": "inspector",	
             "restart": true	
         },
+        // https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_launch-configuration-attributes
+        {	
+            "type": "node",	
+            "request": "launch",	
+            "name": "server launch",	
+            "program": "${workspaceFolder}/app.js --server",
+            "protocol": "inspector",	
+            "restart": true	
+        },
         {
-            // node init --diretorio=/home/foo/Documents --projeto=foo-estatico,foo-api --autor=diegomdrs --task=1111111 --mostrar-num-modificacao --mostrar-deletados
+            // node app --diretorio=/home/foo/Documents --projeto=foo-estatico,foo-api --autor=diegomdrs --task=1111111 --mostrar-num-modificacao --mostrar-deletados
             "type": "node",
             "request": "launch",
             "name": "jest",
@@ -34,6 +43,21 @@
                 "--projeto=apc-estatico,apc-api,crm-patrimonio-estatico,crm-patrimonio-api",
                 "--autor=fulano",
                 "--task=1168815,1172414,1168800,1167319,1163642,1155478,1150152,1161422",
+                "--mostrar-num-modificacao",
+                "--mostrar-deletados"
+            ]
+        },
+        {
+            // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo --autor=fulano --task=1111111 --mostrar-num-modificacao --mostrar-deletados
+            "type": "node",
+            "request": "launch",
+            "name": "test app.js",
+            "program": "${workspaceFolder}/app.js",
+            "args": [
+                "--diretorio=/tmp/gerador-lista-artefato-qas",
+                "--projeto=foo",
+                "--autor=fulano",
+                "--task=1111111",
                 "--mostrar-num-modificacao",
                 "--mostrar-deletados"
             ]

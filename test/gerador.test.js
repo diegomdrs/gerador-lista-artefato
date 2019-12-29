@@ -48,20 +48,31 @@ describe('test gerais', () => {
         await geradorUtilTest.criarArquivo(git, nomeProjeto, '1111111',
             'arquivoFoo.txt', 'A')
 
-        await geradorUtilTest.criarArquivo(git, nomeProjeto, '1111111', {
-            origem: 'arquivoFoo.txt',
-            destino: 'arquivoQux.txt'
-        }, 'R')
+        await geradorUtilTest.criarArquivo(git, nomeProjeto, '1111111',
+            'arquivoFoo.txt', 'M')
+
+        await geradorUtilTest.criarArquivo(git, nomeProjeto,
+            {
+                origem: '1111111',
+                destino: '1111111'
+            },
+            {
+                origem: 'arquivoFoo.txt',
+                destino: 'arquivoQux.txt'
+            }, 'R')
+
+        await geradorUtilTest.criarArquivo(git, nomeProjeto, '1111111',
+            'arquivoFoo.txt', 'M')
 
         const lista = await gerador(params).gerarListaArtefato()
 
         expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
 
-        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('A')
-        // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('R')
+        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
 
-        expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe('R')
+        expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe('A')
         expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoQux.txt')
     })
 
