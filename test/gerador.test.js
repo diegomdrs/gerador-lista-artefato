@@ -2,16 +2,24 @@ const Param = require('../models/param')
 const geradorUtilTest = require('./gerador-util-test')
 
 const nomeProjeto = 'foo'
-let git = {}
+let git, gerador, params = {}
 
 describe('test gerais', () => {
 
-    beforeAll(async () => {
+    beforeEach(async () => {
 
         git = await geradorUtilTest.criarRepo(nomeProjeto)
+        gerador = require('../lib/gerador-new-promise')
+        params = new Param({
+            autor: "fulano",
+            projeto: [
+                geradorUtilTest.pathTest() + "/foo"
+            ],
+            task: ["1111111"]
+        })
     })
 
-    it('test parâmetros inválidos', () => {
+    xit('test parâmetros inválidos', () => {
 
         // const req = {
         //     diretorio: "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas",
@@ -21,9 +29,8 @@ describe('test gerais', () => {
         // }
     });
 
-    it('test listagem de artefatos com projeto inválido', () => {
+    xit('test listagem de artefatos com projeto inválido', () => {
 
-        const gerador = require('../lib/gerador-new-promise')
         const paramsError = new Param({
             autor: "fulano",
             projeto: ["bar"],
@@ -35,16 +42,30 @@ describe('test gerais', () => {
             new Error('Projeto \'' + paramsError.projeto[0] + '\' não encontrado'));
     });
 
-    it('test listagem de artefatos commitados em branches diferentes', async () => {
 
-        const gerador = require('../lib/gerador-new-promise')
-        const params = new Param({
-            autor: "fulano",
-            projeto: [
-                geradorUtilTest.pathTest() + "/foo"
-            ],
-            task: ["1111111"]
-        })
+    it('test listagem de artefatos renomeados', async () => {
+
+        await geradorUtilTest.criarArquivo(git, nomeProjeto, '1111111',
+            'arquivoFoo.txt', 'A')
+
+        await geradorUtilTest.criarArquivo(git, nomeProjeto, '1111111', {
+            origem: 'arquivoFoo.txt',
+            destino: 'arquivoQux.txt'
+        }, 'R')
+
+        const lista = await gerador(params).gerarListaArtefato()
+
+        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
+
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('A')
+        // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
+
+        expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe('R')
+        expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoQux.txt')
+    })
+
+    xit('test listagem de artefatos commitados em branches diferentes', async () => {
 
         await geradorUtilTest.checkoutBranch(git, 'branchFoo')
         await geradorUtilTest.criarArquivo(git, nomeProjeto, '1111111', 'arquivoFoo.txt', 'A')
@@ -70,8 +91,8 @@ describe('test gerais', () => {
             nomeProjeto + '/arquivoBar.txt')
     })
 
-    afterAll(() => {
+    afterEach(() => {
 
-        geradorUtilTest.removerDiretorioTest()
+        // geradorUtilTest.removerDiretorioTest()
     })
 })
