@@ -7,11 +7,13 @@ class Commit {
         if (this.isTipoAlteracaoRenomear()) {
 
             this.nomeAntigoArquivo = arquivo.nomeArquivo
-            this.nomeNovoArquivo = arquivo.nomeArquivo.match(/[^\s]*.$/g)[0]
+            this.nomeNovoArquivo = retorno.match(/[^\s]*.$/g)[0]
                 .replace(/^/g, arquivo.nomeProjeto + '/')
         }
     }
 
+    isTipoAlteracaoModificacao() { return this.tipoAlteracao === 'M' }
+    isTipoAlteracaoDelecao() { return this.tipoAlteracao === 'D' }
     isTipoAlteracaoRenomear() { return this.tipoAlteracao === 'R' }
 }
 
