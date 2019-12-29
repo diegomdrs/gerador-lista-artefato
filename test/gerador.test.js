@@ -9,7 +9,7 @@ describe('test gerais', () => {
     beforeEach(async () => {
 
         git = await geradorUtilTest.criarRepo(nomeProjeto)
-        gerador = require('../lib/gerador-new-promise')
+        gerador = require('../lib/gerador')
         params = new Param({
             autor: "fulano",
             projeto: [

@@ -208,23 +208,23 @@ describe('test comando fernando', () => {
         await geradorUtilTest.criarEstrutura(listaEstrutura)
     })
 
-    xit('test gerador comando', async () => {
+    // xit('test gerador comando', async () => {
 
-        const gerador = require('../lib/gerador')
+    //     const gerador = require('../lib/gerador')
 
-        const lista = await gerador(params).gerarListaArtefato()
+    //     const lista = await gerador(params).gerarListaArtefato()
 
-        testarLista(lista)
-    })
+    //     testarLista(lista)
+    // })
 
-    xit('test gerador new comando', async () => {
+    // xit('test gerador new comando', async () => {
 
-        const gerador = require('../lib/gerador-new')
+    //     const gerador = require('../lib/gerador-new')
 
-        const lista = await gerador(params).gerarListaArtefato()
+    //     const lista = await gerador(params).gerarListaArtefato()
 
-        testarLista(lista)
-    })
+    //     testarLista(lista)
+    // })
 
     xit('test gerador new comando promise', async () => {
 
@@ -240,7 +240,7 @@ describe('test comando fernando', () => {
                 "1210658", "1212262", "1212444"]
         })
 
-        const gerador = require('../lib/gerador-new-promise')
+        const gerador = require('../lib/gerador')
 
         const lista = await gerador(params).gerarListaArtefato()
 
