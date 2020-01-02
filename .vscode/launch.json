@@ -36,7 +36,7 @@
             // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=apc-estatico,apc-api,crm-patrimonio-estatico,crm-patrimonio-api --autor=fulano --task=1168815,1172414,1168800,1167319,1163642,1155478,1150152,1161422 --mostrar-num-modificacao --mostrar-deletados
             "type": "node",
             "request": "launch",
-            "name": "bb app.js",
+            "name": "comando bb app.js",
             "program": "${workspaceFolder}/app.js",
             "args": [
                 "--diretorio=/tmp/gerador-lista-artefato-qas",
@@ -51,7 +51,7 @@
             // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo --autor=fulano --task=1111111 --mostrar-num-modificacao --mostrar-deletados
             "type": "node",
             "request": "launch",
-            "name": "test app.js",
+            "name": "comando test app.js",
             "program": "${workspaceFolder}/app.js",
             "args": [
                 "--diretorio=/tmp/gerador-lista-artefato-qas",

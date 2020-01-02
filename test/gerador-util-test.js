@@ -25,7 +25,7 @@ module.exports = class {
 
                     for (let i = 0; i < tarefa.numAlteracao; i++) {
 
-                        await this.criarArquivo(git, estrutura.nomeProjeto, 
+                        await this.manipularArquivo(git, estrutura.nomeProjeto, 
                             tarefa.numTarefa, artefato.pathArtefato, tarefa.tipoAlteracao)
                     }
                 }
@@ -57,7 +57,7 @@ module.exports = class {
         return git
     }
 
-    static async criarArquivo(git, nomeProjeto, task, pathArquivo, tipoAlteracao) {
+    static async manipularArquivo(git, nomeProjeto, task, pathArquivo, tipoAlteracao) {
 
         if (tipoAlteracao !== 'R') {
     

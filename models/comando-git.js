@@ -4,7 +4,7 @@ class ComandoGit {
         this.caminhoProjeto = caminhoProjeto
         this.autor = autor
         this.comando = 'git -C ' + this.caminhoProjeto +
-            ' log --regexp-ignore-case --no-merges --author=' +
+            ' log --reverse --regexp-ignore-case --no-merges --author=' +
             this.autor + ' --all --name-status --pretty=format:\'%s\' -C'
 
         for (const task of listaTask) {

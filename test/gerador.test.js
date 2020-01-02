@@ -42,24 +42,19 @@ describe('test gerais', () => {
             new Error('Projeto \'' + paramsError.projeto[0] + '\' não encontrado'));
     });
 
+    xit('test listagem de artefatos renomeados', async () => {
 
-    it('test listagem de artefatos renomeados', async () => {
-
-        await geradorUtilTest.criarArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
             'arquivoFoo.txt', 'A')
 
-        await geradorUtilTest.criarArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
             'arquivoFoo.txt', 'M')
 
-        await geradorUtilTest.criarArquivo(git, nomeProjeto,
-            {
-                origem: '1111111', destino: '1111111'
-            },
-            {
-                origem: 'arquivoFoo.txt', destino: 'arquivoQux.txt'
-            }, 'R')
+        await geradorUtilTest.manipularArquivo(git, nomeProjeto,
+            { origem: '1111111', destino: '1111111' },
+            { origem: 'arquivoFoo.txt', destino: 'arquivoQux.txt' }, 'R')
 
-        await geradorUtilTest.criarArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
             'arquivoQux.txt', 'M')
 
         const lista = await gerador(params).gerarListaArtefato()
@@ -67,20 +62,54 @@ describe('test gerais', () => {
         expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
 
-        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('R')
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
 
-        expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe('A')
+        expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe('R')
         expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoQux.txt')
+
+        expect(lista[0].listaArtefatoSaida[2].tipoAlteracao).toBe('A')
+        expect(lista[0].listaArtefatoSaida[2].nomeArtefato).toBe('foo/arquivoQux.txt')
+    })
+
+    it('test listagem de artefatos renomeados 2 vezes ou mais', async () => {
+
+        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+            'arquivoFoo.txt', 'A')
+
+        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+            'arquivoFoo.txt', 'M')
+
+        await geradorUtilTest.manipularArquivo(git, nomeProjeto,
+            { origem: '1111111', destino: '1111111' },
+            { origem: 'arquivoFoo.txt', destino: 'arquivoQux.txt' }, 'R')
+
+        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+            'arquivoQux.txt', 'M')
+
+        await geradorUtilTest.manipularArquivo(git, nomeProjeto,
+            { origem: '1111111', destino: '1111111' },
+            { origem: 'arquivoQux.txt', destino: 'arquivoBar.txt' }, 'R')
+
+        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+            'arquivoBar.txt', 'M')
+
+        const lista = await gerador(params).gerarListaArtefato()
+
+        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
+
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
+        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 
     xit('test listagem de artefatos commitados em branches diferentes', async () => {
 
         await geradorUtilTest.checkoutBranch(git, 'branchFoo')
-        await geradorUtilTest.criarArquivo(git, nomeProjeto, '1111111', 'arquivoFoo.txt', 'A')
+        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111', 'arquivoFoo.txt', 'A')
 
         await geradorUtilTest.checkoutBranch(git, 'branchBar')
-        await geradorUtilTest.criarArquivo(git, nomeProjeto, '1111111', 'arquivoBar.txt', 'A')
+        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111', 'arquivoBar.txt', 'A')
 
         await geradorUtilTest.checkoutBranch(git, 'master')
 
@@ -101,7 +130,6 @@ describe('test gerais', () => {
     })
 
     afterEach(() => {
-
         // geradorUtilTest.removerDiretorioTest()
     })
 })
