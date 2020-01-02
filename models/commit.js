@@ -7,7 +7,7 @@ class Commit {
         if (this.isTipoAlteracaoRenomear()) {
 
             this.nomeAntigoArquivo = arquivo.nomeArquivo
-            this.nomeNovoArquivo = retorno.match(/[^\s]*.$/g)[0]
+            this.nomeNovoArquivo = retorno.match(/[^\s]*.[^\r]$/g)[0]
                 .replace(/^/g, arquivo.nomeProjeto + '/')
         }
     }
