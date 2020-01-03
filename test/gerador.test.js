@@ -19,7 +19,7 @@ describe('test gerais', () => {
         })
     })
 
-    xit('test parâmetros inválidos', () => {
+    it('test parâmetros inválidos', () => {
 
         // const req = {
         //     diretorio: "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas",
@@ -29,7 +29,7 @@ describe('test gerais', () => {
         // }
     });
 
-    xit('test listagem de artefatos com projeto inválido', () => {
+    it('test listagem de artefatos com projeto inválido', () => {
 
         const paramsError = new Param({
             autor: "fulano",
@@ -42,7 +42,7 @@ describe('test gerais', () => {
             new Error('Projeto \'' + paramsError.projeto[0] + '\' não encontrado'));
     });
 
-    xit('test listagem de artefatos renomeados', async () => {
+    it('test listagem de artefatos renomeados', async () => {
 
         await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
             'arquivoFoo.txt', 'A')
@@ -75,7 +75,7 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
     })
 
-    xit('test listagem de artefatos renomeados 2 vezes ou mais', async () => {
+    it('test listagem de artefatos renomeados 2 vezes ou mais', async () => {
 
         await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
             'arquivoFoo.txt', 'A')
@@ -156,7 +156,7 @@ describe('test gerais', () => {
             nomeProjeto + '/arquivoBar.txt')
     })
 
-    xit('test listagem de artefatos commitados em branches diferentes', async () => {
+    it('test listagem de artefatos commitados em branches diferentes', async () => {
 
         await geradorUtilTest.checkoutBranch(git, 'branchFoo')
         await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111', 'arquivoFoo.txt', 'A')
