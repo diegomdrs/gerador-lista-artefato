@@ -208,25 +208,25 @@ describe('test comando fernando', () => {
         await geradorUtilTest.criarEstrutura(listaEstrutura)
     })
 
-    // it('test gerador comando', async () => {
+    it('test gerador sync old', async () => {
 
-    //     const gerador = require('../lib/gerador')
+        const gerador = require('../lib/gerador-sync-old')
 
-    //     const lista = await gerador(params).gerarListaArtefato()
+        const lista = await gerador(params).gerarListaArtefato()
 
-    //     testarLista(lista)
-    // })
+        testarLista(lista)
+    })
 
-    // it('test gerador new comando', async () => {
+    it('test gerador sync new', async () => {
 
-    //     const gerador = require('../lib/gerador-new')
+        const gerador = require('../lib/gerador-sync-new')
 
-    //     const lista = await gerador(params).gerarListaArtefato()
+        const lista = await gerador(params).gerarListaArtefato()
 
-    //     testarLista(lista)
-    // })
+        testarLista(lista)
+    })
 
-    it('test gerador new comando promise', async () => {
+    it('test gerador async', async () => {
 
         const params = new Param({
             autor: "fulano",
