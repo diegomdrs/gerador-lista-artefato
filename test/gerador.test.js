@@ -8,6 +8,8 @@ describe('test gerais', () => {
 
     beforeEach(async () => {
 
+        geradorUtilTest.removerDiretorioTest()
+
         git = await geradorUtilTest.criarRepo(nomeProjeto)
         gerador = require('../lib/gerador')
         params = new Param({
@@ -180,9 +182,5 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe('A')
         expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe(
             nomeProjeto + '/arquivoBar.txt')
-    })
-
-    afterEach(() => {
-        geradorUtilTest.removerDiretorioTest()
     })
 })
