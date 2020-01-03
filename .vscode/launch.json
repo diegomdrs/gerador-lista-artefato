@@ -4,22 +4,22 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        {	
-            "type": "node",	
-            "request": "attach",	
-            "name": "server attach",	
-            "processId": "${command:PickProcess}",	
-            "protocol": "inspector",	
-            "restart": true	
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "server attach",
+            "processId": "${command:PickProcess}",
+            "protocol": "inspector",
+            "restart": true
         },
         // https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_launch-configuration-attributes
-        {	
-            "type": "node",	
-            "request": "launch",	
-            "name": "server launch",	
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "server launch",
             "program": "${workspaceFolder}/app.js --server",
-            "protocol": "inspector",	
-            "restart": true	
+            "protocol": "inspector",
+            "restart": true
         },
         {
             // node app --diretorio=/home/foo/Documents --projeto=foo-estatico,foo-api --autor=diegomdrs --task=1111111 --mostrar-num-modificacao --mostrar-deletados
@@ -33,10 +33,11 @@
             "internalConsoleOptions": "openOnSessionStart"
         },
         {
+            // node_modules/jest/bin/jest.js --runInBand --verbose test/gerador-comando-diego.test.js
             // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=apc-estatico,apc-api,crm-patrimonio-estatico,crm-patrimonio-api --autor=fulano --task=1168815,1172414,1168800,1167319,1163642,1155478,1150152,1161422 --mostrar-num-modificacao --mostrar-deletados
             "type": "node",
             "request": "launch",
-            "name": "comando bb app.js",
+            "name": "comando diego app.js",
             "program": "${workspaceFolder}/app.js",
             "args": [
                 "--diretorio=/tmp/gerador-lista-artefato-qas",
@@ -48,6 +49,23 @@
             ]
         },
         {
+            // node_modules/jest/bin/jest.js --runInBand --verbose test/gerador-comando-fernando.test.js
+            // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=apc-estatico,apc-api,crm-patrimonio-estatico,crm-patrimonio-api --autor=fulano --task=1199211,1203082,1203670,1207175,1210684,1210658,1212262,1212444 --mostrar-num-modificacao --mostrar-deletados
+            "type": "node",
+            "request": "launch",
+            "name": "comando fernando app.js",
+            "program": "${workspaceFolder}/app.js",
+            "args": [
+                "--diretorio=/tmp/gerador-lista-artefato-qas",
+                "--projeto=apc-estatico,apc-api,crm-patrimonio-estatico,crm-patrimonio-api",
+                "--autor=fulano",
+                "--task=1199211,1203082,1203670,1207175,1210684,1210658,1212262,1212444",
+                "--mostrar-num-modificacao",
+                "--mostrar-deletados"
+            ]
+        },
+        {
+            // node_modules/jest/bin/jest.js --runInBand --verbose test/gerador.test.js
             // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo --autor=fulano --task=1111111 --mostrar-num-modificacao --mostrar-deletados
             "type": "node",
             "request": "launch",

@@ -7,6 +7,8 @@ describe('test comando diego', () => {
 
     beforeAll(async () => {
 
+        geradorUtilTest.removerDiretorioTest()
+
         jest.setTimeout(10000)
 
         params = new Param({
@@ -356,11 +358,6 @@ describe('test comando diego', () => {
         const lista = await gerador(params).gerarListaArtefato()
 
         testarLista(lista)
-    })
-
-    afterAll(() => {
-
-        geradorUtilTest.removerDiretorioTest()
     })
 
     function testarLista(lista) {
