@@ -19,7 +19,7 @@ describe('test gerais', () => {
         })
     })
 
-    xit('test parâmetros inválidos', () => {
+    it('test parâmetros inválidos', () => {
 
         // const req = {
         //     diretorio: "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas",
@@ -29,7 +29,7 @@ describe('test gerais', () => {
         // }
     });
 
-    xit('test listagem de artefatos com projeto inválido', () => {
+    it('test listagem de artefatos com projeto inválido', () => {
 
         const paramsError = new Param({
             autor: "fulano",
@@ -42,7 +42,7 @@ describe('test gerais', () => {
             new Error('Projeto \'' + paramsError.projeto[0] + '\' não encontrado'));
     });
 
-    xit('test listagem de artefatos renomeados', async () => {
+    it('test listagem de artefatos renomeados', async () => {
 
         await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
             'arquivoFoo.txt', 'A')
@@ -62,14 +62,17 @@ describe('test gerais', () => {
         expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
 
-        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('A')
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
+        expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
 
-        expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe('R')
+        expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe('M')
         expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoQux.txt')
+        expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(2)
 
-        expect(lista[0].listaArtefatoSaida[2].tipoAlteracao).toBe('A')
+        expect(lista[0].listaArtefatoSaida[2].tipoAlteracao).toBe('R')
         expect(lista[0].listaArtefatoSaida[2].nomeArtefato).toBe('foo/arquivoQux.txt')
+        expect(lista[0].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
     })
 
     it('test listagem de artefatos renomeados 2 vezes ou mais', async () => {
@@ -99,11 +102,20 @@ describe('test gerais', () => {
         expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
 
-        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('A')
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
+        expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+
+        expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe('M')
+        expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoBar.txt')
+        expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(3)
+        
+        expect(lista[0].listaArtefatoSaida[2].tipoAlteracao).toBe('R')
+        expect(lista[0].listaArtefatoSaida[2].nomeArtefato).toBe('foo/arquivoBar.txt')
+        expect(lista[0].listaArtefatoSaida[2].numeroAlteracao).toBe(2)  
     })
 
-    xit('test listagem de artefatos commitados em branches diferentes', async () => {
+    it('test listagem de artefatos commitados em branches diferentes', async () => {
 
         await geradorUtilTest.checkoutBranch(git, 'branchFoo')
         await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111', 'arquivoFoo.txt', 'A')
@@ -130,6 +142,6 @@ describe('test gerais', () => {
     })
 
     afterEach(() => {
-        // geradorUtilTest.removerDiretorioTest()
+        geradorUtilTest.removerDiretorioTest()
     })
 })
