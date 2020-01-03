@@ -146,9 +146,14 @@ describe('test gerais', () => {
         const lista = await gerador(params).gerarListaArtefato()
 
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('A')
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('D')
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe(
-            nomeProjeto + '/arquivoFoo.txt')
+            nomeProjeto + '/arquivoBar.txt')
+
+        expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+        expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe('A')
+        expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe(
+            nomeProjeto + '/arquivoBar.txt')
     })
 
     xit('test listagem de artefatos commitados em branches diferentes', async () => {
@@ -178,6 +183,6 @@ describe('test gerais', () => {
     })
 
     afterEach(() => {
-        // geradorUtilTest.removerDiretorioTest()
+        geradorUtilTest.removerDiretorioTest()
     })
 })
