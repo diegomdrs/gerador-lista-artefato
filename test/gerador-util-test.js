@@ -25,7 +25,7 @@ module.exports = class {
 
                     for (let i = 0; i < tarefa.numAlteracao; i++) {
 
-                        await this.manipularArquivo(git, estrutura.nomeProjeto, 
+                        await this.manipularArquivo(git, estrutura.nomeProjeto,
                             tarefa.numTarefa, artefato.pathArtefato, tarefa.tipoAlteracao)
                     }
                 }
@@ -38,46 +38,46 @@ module.exports = class {
     }
 
     static async checkoutBranch(git, nomeBranch) {
-    
+
         await git.checkoutLocalBranch(nomeBranch)
     }
 
     static async criarRepo(nomeProjeto) {
 
         const pathProjeto = PATH_TEST + '/' + nomeProjeto
-    
+
         fs.mkdirsSync(pathProjeto)
-    
+
         const git = require('simple-git/promise')(pathProjeto)
-    
+
         await git.init()
         await git.addConfig('user.name', 'fulano')
         await git.addConfig('user.email', 'fulano@fulano.com')
-    
+
         return git
     }
 
     static async manipularArquivo(git, nomeProjeto, task, pathArquivo, tipoAlteracao) {
 
         if (tipoAlteracao !== 'R') {
-    
+
             if (tipoAlteracao === 'D') {
-    
+
                 fs.removeSync(obterCaminhoArquivo(nomeProjeto, pathArquivo))
-    
+
             } else {
-    
+
                 fs.outputFileSync(obterCaminhoArquivo(nomeProjeto, pathArquivo), randomValueHex())
             }
-    
+
             await commitarArquivo(git, nomeProjeto, task, pathArquivo)
         } else {
-    
+
             if (tipoAlteracao === 'R') {
-    
+
                 fs.outputFileSync(obterCaminhoArquivo(git, pathArquivo.origem), randomValueHex())
                 await commitarArquivo(git, nomeProjeto, task.origem, pathArquivo.origem)
-    
+
                 await git.mv(pathArquivo.origem, pathArquivo.destino)
                 await commitarArquivo(git, nomeProjeto, task.destino, pathArquivo.destino)
             }

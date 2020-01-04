@@ -23,7 +23,7 @@ describe('test gerais', () => {
         })
     })
 
-    it('test parâmetros inválidos', () => {
+    xit('test parâmetros inválidos', () => {
 
         // const req = {
         //     diretorio: "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas",
@@ -76,10 +76,12 @@ describe('test gerais', () => {
 
         expect(lista[0].listaArtefatoSaida[2].tipoAlteracao).toBe('R')
         expect(lista[0].listaArtefatoSaida[2].nomeArtefato).toBe('foo/arquivoQux.txt')
+        expect(lista[0].listaArtefatoSaida[2].nomeAntigoArtefato).toBe('foo/arquivoFoo.txt')
+        expect(lista[0].listaArtefatoSaida[2].nomeNovoArtefato).toBe('foo/arquivoQux.txt')
         expect(lista[0].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
     })
 
-    it('test listagem de artefatos renomeados 2 vezes ou mais', async () => {
+    it('test listagem de artefatos renomeados 2 vezes', async () => {
 
         await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
             'arquivoFoo.txt', 'A')
@@ -116,6 +118,8 @@ describe('test gerais', () => {
 
         expect(lista[0].listaArtefatoSaida[2].tipoAlteracao).toBe('R')
         expect(lista[0].listaArtefatoSaida[2].nomeArtefato).toBe('foo/arquivoBar.txt')
+        expect(lista[0].listaArtefatoSaida[2].nomeAntigoArtefato).toBe('foo/arquivoQux.txt')
+        expect(lista[0].listaArtefatoSaida[2].nomeNovoArtefato).toBe('foo/arquivoBar.txt')
         expect(lista[0].listaArtefatoSaida[2].numeroAlteracao).toBe(2)
     })
 
@@ -151,13 +155,11 @@ describe('test gerais', () => {
 
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('D')
-        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe(
-            nomeProjeto + '/arquivoBar.txt')
+        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
 
         expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe('A')
-        expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe(
-            nomeProjeto + '/arquivoBar.txt')
+        expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 
     it('test listagem de artefatos commitados em branches diferentes', async () => {
@@ -177,12 +179,10 @@ describe('test gerais', () => {
 
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('A')
-        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe(
-            nomeProjeto + '/arquivoFoo.txt')
+        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoFoo.txt')
 
         expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe('A')
-        expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe(
-            nomeProjeto + '/arquivoBar.txt')
+        expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 })
