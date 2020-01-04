@@ -8,7 +8,7 @@ class Commit {
 
             this.nomeAntigoArquivo = arquivo.nomeArquivo
             this.nomeNovoArquivo = retorno.match(/[^\s]*.[^\r]$/g)[0]
-                .replace(/^/g, arquivo.nomeProjeto + '/')
+                .replace(/^/g, arquivo.nomeProjeto + '/').trim()
         }
     }
 
