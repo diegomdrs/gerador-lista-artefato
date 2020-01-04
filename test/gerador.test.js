@@ -46,7 +46,7 @@ describe('test gerais', () => {
             new Error('Projeto \'' + paramsError.projeto[0] + '\' não encontrado'));
     });
 
-    it('test listagem de artefatos renomeados', async () => {
+    xit('test listagem de artefatos renomeados', async () => {
 
         await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
             'arquivoFoo.txt', 'A')
@@ -81,7 +81,7 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
     })
 
-    it('test listagem de artefatos renomeados 2 vezes', async () => {
+    xit('test listagem de artefatos renomeados 2 vezes', async () => {
 
         await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
             'arquivoFoo.txt', 'A')
@@ -123,7 +123,7 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[2].numeroAlteracao).toBe(2)
     })
 
-    it('test listagem de artefato renomeado, deletado e criado novamente', async () => {
+    xit('test listagem de artefato renomeado, deletado e criado novamente', async () => {
 
         await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
             'arquivoFoo.txt', 'A')
@@ -162,7 +162,24 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 
-    it('test listagem de artefatos commitados em branches diferentes', async () => {
+    it('test ', async () => {
+
+        // node_modules/jest/bin/jest.js --runInBand --verbose test/gerador.test.js ; node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo --autor=fulano --task=1111111 --mostrar-num-modificacao --mostrar-deletados
+
+        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+            'arquivoBar.txt', 'A')
+
+        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+            'arquivoBar.txt', 'M')
+
+        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+            'arquivoBar.txt', 'D')
+
+        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+            'arquivoBar.txt', 'A')
+    })
+
+    xit('test listagem de artefatos commitados em branches diferentes', async () => {
 
         await geradorUtilTest.checkoutBranch(git, 'branchFoo')
         await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111', 'arquivoFoo.txt', 'A')
