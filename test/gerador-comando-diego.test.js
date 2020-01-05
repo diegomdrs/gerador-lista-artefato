@@ -320,9 +320,9 @@ describe('test comando diego', () => {
         await geradorUtilTest.criarEstrutura(listaEstrutura)
     })
 
-    it('test gerador sync old', async () => {
+    it('test gerador sync master', async () => {
 
-        const gerador = require('../lib/gerador-sync-old')
+        const gerador = require('../lib/gerador-sync-master')
 
         const lista = await gerador(params).gerarListaArtefato()
 
