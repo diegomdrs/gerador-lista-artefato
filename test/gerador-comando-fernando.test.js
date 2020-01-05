@@ -251,70 +251,140 @@ describe('test comando fernando', () => {
 
     function testarLista(lista) {
 
+        expect(lista).toHaveLength(12)
+
         expect(lista[0].listaNumTarefaSaida).toHaveLength(2)
-        expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
+        expect(lista[0].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1207175', '1212444']))
+        expect(lista[0].listaArtefatoSaida).toHaveLength(1)
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
+        expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
+        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*apc-estatico\/package.json$/g)
 
         expect(lista[1].listaNumTarefaSaida).toHaveLength(2)
-        expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
+        expect(lista[1].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1203670', '1210684']))
+        expect(lista[1].listaArtefatoSaida).toHaveLength(1)
         expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
+        expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
+        expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*lista-documentos.tpl.html$/g)
 
         expect(lista[2].listaNumTarefaSaida).toHaveLength(5)
-        expect(lista[2].listaArtefatoSaida[0].numeroAlteracao).toBe(8)
+        expect(lista[2].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1199211', '1203082', '1203670', '1207175', '1210684']))
+        expect(lista[2].listaArtefatoSaida).toHaveLength(1)
         expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
+        expect(lista[2].listaArtefatoSaida[0].numeroAlteracao).toBe(8)
+        expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*crm-patrimonio-estatico\/package.json$/g)
 
         expect(lista[3].listaNumTarefaSaida).toHaveLength(3)
-        expect(lista[3].listaArtefatoSaida[0].numeroAlteracao).toBe(3)
+        expect(lista[3].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1199211', '1203670', '1210684']))
+        expect(lista[3].listaArtefatoSaida).toHaveLength(1)
         expect(lista[3].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
+        expect(lista[3].listaArtefatoSaida[0].numeroAlteracao).toBe(3)
+        expect(lista[3].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*crm-patrimonio-estatico\/Gruntfile.js$/g)
 
         expect(lista[4].listaNumTarefaSaida).toHaveLength(3)
-        expect(lista[4].listaArtefatoSaida[0].numeroAlteracao).toBe(8)
+        expect(lista[4].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1199211', '1203082', '1207175']))
+        expect(lista[4].listaArtefatoSaida).toHaveLength(1)
         expect(lista[4].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
+        expect(lista[4].listaArtefatoSaida[0].numeroAlteracao).toBe(8)
+        expect(lista[4].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*lista-pagamentos-pendentes-controllers.js$/g)
 
         expect(lista[5].listaNumTarefaSaida).toHaveLength(2)
-        expect(lista[5].listaArtefatoSaida[0].numeroAlteracao).toBe(9)
+        expect(lista[5].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1203670', '1210684']))
+        expect(lista[5].listaArtefatoSaida).toHaveLength(1)
         expect(lista[5].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
+        expect(lista[5].listaArtefatoSaida[0].numeroAlteracao).toBe(9)
+        expect(lista[5].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*lista-documentos-controllers.js$/g)
 
         expect(lista[6].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[6].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1199211']))
+        expect(lista[6].listaArtefatoSaida).toHaveLength(4)
+
+        expect(lista[6].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
         expect(lista[6].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
+        expect(lista[6].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*inclusao-ocupante-imovel.tpl.html$/g)
+
+        expect(lista[6].listaArtefatoSaida[1].tipoAlteracao).toBe('M')
         expect(lista[6].listaArtefatoSaida[1].numeroAlteracao).toBe(4)
+        expect(lista[6].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*lista-pagamentos-pendentes.tpl.html$/g)
+
+        expect(lista[6].listaArtefatoSaida[2].tipoAlteracao).toBe('M')
         expect(lista[6].listaArtefatoSaida[2].numeroAlteracao).toBe(2)
+        expect(lista[6].listaArtefatoSaida[2].nomeArtefato).toMatch(/.*crm-constantes.js$/g)
+        
+        expect(lista[6].listaArtefatoSaida[3].tipoAlteracao).toBe('M')
         expect(lista[6].listaArtefatoSaida[3].numeroAlteracao).toBe(1)
+        expect(lista[6].listaArtefatoSaida[3].nomeArtefato).toMatch(/.*crm.css$/g)        
 
         expect(lista[7].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[7].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
+        expect(lista[7].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1203082']))
+        expect(lista[7].listaArtefatoSaida).toHaveLength(2)
+
         expect(lista[7].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
-        expect(lista[7].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+        expect(lista[7].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
+        expect(lista[7].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*inclusao-ocupante-imovel-controllers-spec.js$/g)
+
         expect(lista[7].listaArtefatoSaida[1].tipoAlteracao).toBe('A')
+        expect(lista[7].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+        expect(lista[7].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*lista-pagamentos-pendentes-controllers-spec.js$/g)
 
         expect(lista[8].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[8].listaArtefatoSaida[0].numeroAlteracao).toBe(5)
+        expect(lista[8].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1203670']))
+        expect(lista[8].listaArtefatoSaida).toHaveLength(2)
+
         expect(lista[8].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
-        expect(lista[8].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+        expect(lista[8].listaArtefatoSaida[0].numeroAlteracao).toBe(5)
+        expect(lista[8].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*tabela-documentosObrigatorios.tpl.html$/g)
+
         expect(lista[8].listaArtefatoSaida[1].tipoAlteracao).toBe('M')
+        expect(lista[8].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+        expect(lista[8].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*tabela-documentos.tpl.html$/g)
 
         expect(lista[9].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[9].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[9].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1207175']))
+        expect(lista[9].listaArtefatoSaida).toHaveLength(6)
+
         expect(lista[9].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
-        expect(lista[9].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+        expect(lista[9].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[9].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*apc-api\/pom.xml$/g)
+
         expect(lista[9].listaArtefatoSaida[1].tipoAlteracao).toBe('M')
-        expect(lista[9].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
+        expect(lista[9].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+        expect(lista[9].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*crm-patrimonio-api\/pom.xml$/g)
+
         expect(lista[9].listaArtefatoSaida[2].tipoAlteracao).toBe('M')
-        expect(lista[9].listaArtefatoSaida[3].numeroAlteracao).toBe(1)
+        expect(lista[9].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
+        expect(lista[9].listaArtefatoSaida[2].nomeArtefato).toMatch(/.*lista-contrato-locacao-fase-cronograma-controller.js$/g)
+
         expect(lista[9].listaArtefatoSaida[3].tipoAlteracao).toBe('M')
-        expect(lista[9].listaArtefatoSaida[4].numeroAlteracao).toBe(1)
+        expect(lista[9].listaArtefatoSaida[3].numeroAlteracao).toBe(1)
+        expect(lista[9].listaArtefatoSaida[3].nomeArtefato).toMatch(/.*detalhe-credor-controller.js$/g)
+
         expect(lista[9].listaArtefatoSaida[4].tipoAlteracao).toBe('M')
-        expect(lista[9].listaArtefatoSaida[5].numeroAlteracao).toBe(1)
+        expect(lista[9].listaArtefatoSaida[4].numeroAlteracao).toBe(1)
+        expect(lista[9].listaArtefatoSaida[4].nomeArtefato).toMatch(/.*despacho-services.js$/g) 
+        
         expect(lista[9].listaArtefatoSaida[5].tipoAlteracao).toBe('M')
+        expect(lista[9].listaArtefatoSaida[5].numeroAlteracao).toBe(1)
+        expect(lista[9].listaArtefatoSaida[5].nomeArtefato).toMatch(/.*lista-fornecedor-controllers.js$/g)          
 
         expect(lista[10].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[10].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[10].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1210658']))
+        expect(lista[10].listaArtefatoSaida).toHaveLength(1)
+
         expect(lista[10].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
+        expect(lista[10].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[10].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*lista-documentos-controllers-spec.js$/g)
 
         expect(lista[11].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[11].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[11].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1212444']))
+        expect(lista[11].listaArtefatoSaida).toHaveLength(2)
+
         expect(lista[11].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
-        expect(lista[11].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+        expect(lista[11].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[11].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*detalha-cronograma-parcela.tpl.html$/g)
+
         expect(lista[11].listaArtefatoSaida[1].tipoAlteracao).toBe('M')
+        expect(lista[11].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+        expect(lista[11].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*detalha-cronograma-parcela-controllers.js$/g)        
     }
 })
