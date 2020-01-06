@@ -20,6 +20,7 @@ function GeradorController(geradorService) {
     vm.adicionarTask = adicionarTask
     vm.removerTask = removerTask
     vm.obterNomeProjeto = obterNomeProjeto
+    vm.obterNomeArtefato = obterNomeArtefato
 
     function init() {
 
@@ -137,9 +138,9 @@ function GeradorController(geradorService) {
         vm.req = {
             autor: "fulano",
             projeto: [
-                "/tmp/gerador-lista-artefato-qas/apc-estatico", 
-                "/tmp/gerador-lista-artefato-qas/apc-api", 
-                "/tmp/gerador-lista-artefato-qas/crm-patrimonio-estatico", 
+                "/tmp/gerador-lista-artefato-qas/apc-estatico",
+                "/tmp/gerador-lista-artefato-qas/apc-api",
+                "/tmp/gerador-lista-artefato-qas/crm-patrimonio-estatico",
                 "/tmp/gerador-lista-artefato-qas/crm-patrimonio-api"
             ],
             task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"]
@@ -152,6 +153,18 @@ function GeradorController(geradorService) {
     function obterNomeProjeto(caminhoProjeto) {
 
         var segmentos = caminhoProjeto.split('/')
-        return segmentos[segmentos.length-1]
+        return segmentos[segmentos.length - 1]
+    }
+
+    function obterNomeArtefato(artefato) {
+
+        if (artefato.tipoAlteracao === 'R') {
+
+            return artefato.nomeAntigoArtefato + ' ' + artefato.nomeNovoArtefato
+
+        } else {
+
+            return artefato.nomeArtefato
+        }
     }
 }
