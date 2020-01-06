@@ -1,13 +1,13 @@
 class Commit {
-    constructor(arquivo, retorno) {
+    constructor(arquivo, numTarefa, linhaArquivo) {
 
-        this.tipoAlteracao = retorno.match(/[^\r\n]+/g)[1].match(/^\w{1}/g)[0]
-        this.numTarefa = retorno.match(/[^\r\n]+/g)[0].match(/\d+/)[0]
+        this.numTarefa = numTarefa
+        this.tipoAlteracao = linhaArquivo.match(/^\w{1}/g)[0]
 
         if (this.isTipoAlteracaoRenomear()) {
 
             this.nomeAntigoArquivo = arquivo.nomeArquivo
-            this.nomeNovoArquivo = retorno.match(/[^\s]*.[^\r]$/g)[0]
+            this.nomeNovoArquivo = linhaArquivo.match(/[^\s]*.[^\r]$/g)[0]
                 .replace(/^/g, arquivo.nomeProjeto + '/').trim()
         }
     }
