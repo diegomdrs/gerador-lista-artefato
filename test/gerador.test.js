@@ -49,17 +49,17 @@ describe('test gerais', () => {
 
     it('teste de listagem de artefatos renomeados', async () => {
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoFoo.txt', 'A')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoFoo.txt', 'M')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto,
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto,
             { origem: '1111111', destino: '1111111' },
             { origem: 'arquivoFoo.txt', destino: 'arquivoQux.txt' }, 'R')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoQux.txt', 'M')
 
         const lista = await gerador(params).gerarListaArtefato()
@@ -88,24 +88,24 @@ describe('test gerais', () => {
 
     it('teste de listagem de artefatos renomeados 2 vezes', async () => {
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoFoo.txt', 'A')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoFoo.txt', 'M')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto,
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto,
             { origem: '1111111', destino: '1111111' },
             { origem: 'arquivoFoo.txt', destino: 'arquivoQux.txt' }, 'R')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoQux.txt', 'M')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto,
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto,
             { origem: '1111111', destino: '1111111' },
             { origem: 'arquivoQux.txt', destino: 'arquivoBar.txt' }, 'R')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', 'M')
 
         const lista = await gerador(params).gerarListaArtefato()
@@ -134,30 +134,30 @@ describe('test gerais', () => {
 
     it('teste de listagem de artefato A, R, D e A novamente', async () => {
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoFoo.txt', 'A')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoFoo.txt', 'M')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto,
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto,
             { origem: '1111111', destino: '1111111' },
             { origem: 'arquivoFoo.txt', destino: 'arquivoQux.txt' }, 'R')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoQux.txt', 'M')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto,
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto,
             { origem: '1111111', destino: '1111111' },
             { origem: 'arquivoQux.txt', destino: 'arquivoBar.txt' }, 'R')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', 'M')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', 'D')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoFoo.txt', 'A')
 
         const lista = await gerador(params).gerarListaArtefato()
@@ -180,16 +180,16 @@ describe('test gerais', () => {
 
     it('teste de listagem de artefato A, M, D e A com mesmo nome, COM opção de mostrar deletados', async () => {
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', 'A')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', 'M')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', 'D')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', 'A')
 
         const lista = await gerador(params).gerarListaArtefato()
@@ -212,16 +212,16 @@ describe('test gerais', () => {
 
     it('teste de listagem de artefato A, M, D e A com mesmo nome, SEM opção de mostrar deletados', async () => {
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', 'A')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', 'M')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', 'D')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', 'A')
 
         params.mostrarDeletados = false
@@ -242,13 +242,13 @@ expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
 
     it('teste de listagem de artefato A, M, D COM opção de mostrar deletados', async () => {
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', 'A')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', 'M')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', 'D')
 
         const lista = await gerador(params).gerarListaArtefato()
@@ -267,13 +267,13 @@ expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
 
     it('teste de listagem de artefato A, M, D SEM opção de mostrar deletados', async () => {
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', 'A')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', 'M')
 
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto, '1111111',
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', 'D')
 
         params.mostrarDeletados = false
@@ -286,11 +286,11 @@ expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
     it('teste de listagem de artefatos criados em branches diferentes', async () => {
 
         await geradorUtilTest.checkoutBranch(git, 'branchFoo')
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto,
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto,
             '1111111', 'arquivoFoo.txt', 'A')
 
         await geradorUtilTest.checkoutBranch(git, 'branchBar')
-        await geradorUtilTest.manipularArquivo(git, nomeProjeto,
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto,
             '1111111', 'arquivoBar.txt', 'A')
 
         await geradorUtilTest.checkoutBranch(git, 'master')
