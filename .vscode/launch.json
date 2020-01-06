@@ -82,15 +82,15 @@
         },
         {
             // node_modules/jest/bin/jest.js --runInBand --verbose test/gerador-comando-bb.test.js
-            // node app --diretorio=/kdi/git --projeto=crm-patrimonio-estatico --autor=c1282036 --task=1221786 --mostrar-deletados
+            // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=crm-patrimonio-estatico --autor=fulano --task=1221786 --mostrar-deletados
             "type": "node",
             "request": "launch",
             "name": "comando bb 1221786 app.js",
             "program": "${workspaceFolder}/app.js",
             "args": [
-                "--diretorio=/kdi/git",
+                "--diretorio=/tmp/gerador-lista-artefato-qas",
                 "--projeto=crm-patrimonio-estatico",
-                "--autor=c1282036",
+                "--autor=fulano",
                 "--task=1221786",
                 "--mostrar-num-modificacao",
                 "--mostrar-deletados"

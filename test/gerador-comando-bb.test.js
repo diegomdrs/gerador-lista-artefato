@@ -75,5 +75,17 @@ describe('test comando bb', () => {
         await geradorUtilTest.manipularArquivoSemCommit(git, nomeProjeto, listaCommit3[2], 'D')
 
         await geradorUtilTest.commitarProjeto(git, nomeProjeto, '1221786', listaCommit3)
+
+        // params = new Param({
+        //     autor: "fulano",
+        //     projeto: [
+        //         geradorUtilTest.pathTest() + "/" + nomeProjeto
+        //     ],
+        //     task: ["1221786"],
+        //     mostrarNumModificacao: true,
+        //     mostrarDeletados: true
+        // })
+
+        // const lista = await gerador(params).gerarListaArtefato()
     });
 })
