@@ -78,19 +78,20 @@ function GeradorController(geradorService) {
 
         limparMessages()
 
-        if (vm.task) {
+        if (vm.tarefa) {
 
-            const lista = vm.req.task.filter((task) => task === vm.task)
+            const listaTarefa = vm.tarefa.split(',')
 
-            if (lista.length) {
+            for (const tarefa of listaTarefa) {
 
-                adicionarMensagem('A tarefa ' + vm.task + ' já existe na lista')
+                const contemTarefa = vm.req.task.some((task) => {
+                    task === tarefa
+                })
 
-            } else {
-
-                vm.req.task.push(vm.task)
-                delete vm.task
+                !contemTarefa && vm.req.task.push(tarefa)
             }
+
+            delete vm.tarefa
         }
     }
 
@@ -100,17 +101,18 @@ function GeradorController(geradorService) {
 
         if (vm.caminhoProjeto) {
 
-            const lista = vm.req.projeto.filter((projeto) => projeto === vm.caminhoProjeto)
+            const listaProjeto = vm.caminhoProjeto.split(',')
 
-            if (lista.length) {
+            for (const projeto of listaProjeto) {
 
-                adicionarMensagem('O caminho ' + vm.caminhoProjeto + ' já existe na lista de projeto')
+                const contemProjeto = vm.req.projeto.some((projetoSome) => {
+                    projeto === projetoSome
+                })
 
-            } else {
-
-                vm.req.projeto.push(vm.caminhoProjeto)
-                delete vm.caminhoProjeto
+                !contemProjeto && vm.req.projeto.push(projeto)
             }
+
+            delete vm.caminhoProjeto
         }
     }
 
@@ -147,7 +149,7 @@ function GeradorController(geradorService) {
         }
 
         delete vm.caminhoProjeto
-        delete vm.task
+        delete vm.tarefa
     }
 
     function obterNomeProjeto(caminhoProjeto) {

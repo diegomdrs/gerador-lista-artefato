@@ -1,6 +1,6 @@
 angular
     .module('geradorApp')
-    .directive('numberOnly', numberOnly)
+    .directive('numberOnlyAndComma', numberOnly)
 
 function numberOnly() {
     return {
@@ -9,7 +9,7 @@ function numberOnly() {
         link: function (scope, element, attrs, ctrl) {
             ctrl.$parsers.push(function (input) {
                 if (input == undefined) return ''
-                var inputNumber = input.toString().replace(/[^0-9]/g, '')
+                var inputNumber = input.toString().replace(/[^0-9,]/g, '')
                 if (inputNumber != input) {
                     ctrl.$setViewValue(inputNumber)
                     ctrl.$render()
