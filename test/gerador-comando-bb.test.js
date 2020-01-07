@@ -1,4 +1,7 @@
 const geradorUtilTest = require('./gerador-util-test')
+const gerador = require('../lib/gerador')
+
+const Param = require('../models/param')
 
 const nomeProjeto = 'crm-patrimonio-estatico'
 let git, params = {}
@@ -11,21 +14,18 @@ describe('test comando bb', () => {
 
         jest.setTimeout(10000)
 
-        params.diretorio = geradorUtilTest.pathTest()
+        params = new Param({
+            autor: "fulano",
+            projeto: [
+                geradorUtilTest.pathTest() + "/" + nomeProjeto
+            ],
+            diretorio: geradorUtilTest.pathTest(),
+            task: ["1221786"],
+            mostrarNumModificacao: true,
+            mostrarDeletados: true
+        })
 
         git = await geradorUtilTest.criarRepo(nomeProjeto)
-        gerador = require('../lib/gerador')
-    })
-
-    it('test gerador sync master', async () => {
-
-        await geradorUtilTest.manipularArquivoSemCommit(git, nomeProjeto, 'src/app/spas/inventario/bem-services.js', 'A')
-        await geradorUtilTest.manipularArquivoSemCommit(git, nomeProjeto, 'Gruntfile.js', 'A')
-        await geradorUtilTest.manipularArquivoSemCommit(git, nomeProjeto, 'spec/inclusao-ocupante-imovel-controllers-spec.js', 'A')
-        await geradorUtilTest.manipularArquivoSemCommit(git, nomeProjeto, 'src/app/spas/imovel/cadastro/alterar-imovel.tpl.html', 'A')
-        await geradorUtilTest.manipularArquivoSemCommit(git, nomeProjeto, 'src/app/spas/imovel/cadastro/cadastro-imovel-controllers.js', 'A')
-        await geradorUtilTest.manipularArquivoSemCommit(git, nomeProjeto, 'src/app/spas/imovel/cadastro/cadastro-imovel.tpl.html', 'A')
-        await geradorUtilTest.manipularArquivoSemCommit(git, nomeProjeto, 'src/app/spas/imovel/inclusao-ocupante-imovel/inclusao-ocupante-imovel-controllers.js', 'A')
 
         const lista = [
             'src/app/spas/inventario/bem-services.js',
@@ -34,8 +34,12 @@ describe('test comando bb', () => {
             'src/app/spas/imovel/cadastro/alterar-imovel.tpl.html',
             'src/app/spas/imovel/cadastro/cadastro-imovel-controllers.js',
             'src/app/spas/imovel/cadastro/cadastro-imovel.tpl.html',
-            'src/app/spas/imovel/inclusao-ocupante-imovel/inclusao-ocupante-imovel-controllers.js'
+            'src/app/spas/imovel/inclusao-ocupante-imovel/inclusao-ocupante-imovel-controllers.js',
         ]
+
+        for (const commit of lista) {
+            await geradorUtilTest.manipularArquivoSemCommit(git, nomeProjeto, commit, 'A')
+        }
 
         await geradorUtilTest.commitarProjeto(git, nomeProjeto, '1111111', lista)
 
@@ -48,7 +52,7 @@ describe('test comando bb', () => {
         ]
 
         for (const commit of listaCommit1) {
-            await geradorUtilTest.manipularArquivoSemCommit(git, nomeProjeto, commit, 'M')    
+            await geradorUtilTest.manipularArquivoSemCommit(git, nomeProjeto, commit, 'M')
         }
 
         await geradorUtilTest.commitarProjeto(git, nomeProjeto, '1221786', listaCommit1)
@@ -59,7 +63,7 @@ describe('test comando bb', () => {
         ]
 
         for (const commit of listaCommit2) {
-            await geradorUtilTest.manipularArquivoSemCommit(git, nomeProjeto, commit, 'M')    
+            await geradorUtilTest.manipularArquivoSemCommit(git, nomeProjeto, commit, 'M')
         }
 
         await geradorUtilTest.commitarProjeto(git, nomeProjeto, '1221786', listaCommit2)
@@ -76,16 +80,11 @@ describe('test comando bb', () => {
 
         await geradorUtilTest.commitarProjeto(git, nomeProjeto, '1221786', listaCommit3)
 
-        // params = new Param({
-        //     autor: "fulano",
-        //     projeto: [
-        //         geradorUtilTest.pathTest() + "/" + nomeProjeto
-        //     ],
-        //     task: ["1221786"],
-        //     mostrarNumModificacao: true,
-        //     mostrarDeletados: true
-        // })
+    })
 
-        // const lista = await gerador(params).gerarListaArtefato()
+    it('test gerador sync master', async () => {
+
+
+        const lista = await gerador(params).gerarListaArtefato()
     });
 })
