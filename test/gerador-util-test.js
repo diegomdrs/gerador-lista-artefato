@@ -26,7 +26,7 @@ module.exports = class {
                     for (let i = 0; i < tarefa.numAlteracao; i++) {
 
                         await this.manipularArquivoComCommit(git, estrutura.nomeProjeto,
-                            tarefa.numTarefa, artefato.pathArtefato, tarefa.tipoAlteracao)
+                            tarefa.numeroTarefa, artefato.pathArtefato, tarefa.tipoAlteracao)
                     }
                 }
             }

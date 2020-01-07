@@ -2,7 +2,7 @@
 const Commit = require('../models/commit')
 
 class Arquivo {
-    constructor(nomeProjeto, numTarefa, linhaArquivo) {
+    constructor(nomeProjeto, numeroTarefa, linhaArquivo) {
 
         this.nomeProjeto = nomeProjeto
 
@@ -10,7 +10,7 @@ class Arquivo {
         this.nomeArquivo = this.nomeArquivo.match(/^[^\s]*/g)[0]
             .replace(/^/g, this.nomeProjeto + '/')
 
-        this.commit = new Commit(this, numTarefa, linhaArquivo)
+        this.commit = new Commit(this, numeroTarefa, linhaArquivo)
     }
 }
 

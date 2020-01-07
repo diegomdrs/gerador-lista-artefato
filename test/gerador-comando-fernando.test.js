@@ -26,23 +26,23 @@ describe('test comando fernando', () => {
                 listaArtefato: [{
                     pathArtefato: 'package.json',
                     listaTarefa: [
-                        { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                        { numTarefa: '1207175', numAlteracao: 1, tipoAlteracao: 'M' },
-                        { numTarefa: '1212444', numAlteracao: 1, tipoAlteracao: 'M' }
+                        { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                        { numeroTarefa: '1207175', numAlteracao: 1, tipoAlteracao: 'M' },
+                        { numeroTarefa: '1212444', numAlteracao: 1, tipoAlteracao: 'M' }
                     ]
                 },
                 {
                     pathArtefato: 'src/app/spas/contrato/consulta/detalhaContrato/cronogramaParcelas/detalha-cronograma-parcela.tpl.html',
                     listaTarefa: [
-                        { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                        { numTarefa: '1212444', numAlteracao: 1, tipoAlteracao: 'M' }
+                        { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                        { numeroTarefa: '1212444', numAlteracao: 1, tipoAlteracao: 'M' }
                     ]
                 },
                 {
                     pathArtefato: 'src/app/spas/contrato/consulta/detalhaContrato/cronogramaParcelas/detalha-cronograma-parcela-controllers.js',
                     listaTarefa: [
-                        { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                        { numTarefa: '1212444', numAlteracao: 1, tipoAlteracao: 'M' }
+                        { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                        { numeroTarefa: '1212444', numAlteracao: 1, tipoAlteracao: 'M' }
                     ]
                 }]
             },
@@ -52,136 +52,136 @@ describe('test comando fernando', () => {
                     {
                         pathArtefato: 'src/app/spas/imovel/documentos/lista-documentos.tpl.html',
                         listaTarefa: [
-                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                            { numTarefa: '1203670', numAlteracao: 1, tipoAlteracao: 'M' },
-                            { numTarefa: '1210684', numAlteracao: 1, tipoAlteracao: 'M' }
+                            { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numeroTarefa: '1203670', numAlteracao: 1, tipoAlteracao: 'M' },
+                            { numeroTarefa: '1210684', numAlteracao: 1, tipoAlteracao: 'M' }
                         ]
                     },
                     {
                         pathArtefato: 'package.json',
                         listaTarefa: [
-                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                            { numTarefa: '1199211', numAlteracao: 1, tipoAlteracao: 'M' },
-                            { numTarefa: '1203082', numAlteracao: 2, tipoAlteracao: 'M' },
-                            { numTarefa: '1203670', numAlteracao: 1, tipoAlteracao: 'M' },
-                            { numTarefa: '1207175', numAlteracao: 2, tipoAlteracao: 'M' },
-                            { numTarefa: '1210684', numAlteracao: 2, tipoAlteracao: 'M' }
+                            { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numeroTarefa: '1199211', numAlteracao: 1, tipoAlteracao: 'M' },
+                            { numeroTarefa: '1203082', numAlteracao: 2, tipoAlteracao: 'M' },
+                            { numeroTarefa: '1203670', numAlteracao: 1, tipoAlteracao: 'M' },
+                            { numeroTarefa: '1207175', numAlteracao: 2, tipoAlteracao: 'M' },
+                            { numeroTarefa: '1210684', numAlteracao: 2, tipoAlteracao: 'M' }
                         ]
                     },
                     {
                         pathArtefato: 'Gruntfile.js',
                         listaTarefa: [
-                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                            { numTarefa: '1199211', numAlteracao: 1, tipoAlteracao: 'M' },
-                            { numTarefa: '1203670', numAlteracao: 1, tipoAlteracao: 'M' },
-                            { numTarefa: '1210684', numAlteracao: 1, tipoAlteracao: 'M' }
+                            { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numeroTarefa: '1199211', numAlteracao: 1, tipoAlteracao: 'M' },
+                            { numeroTarefa: '1203670', numAlteracao: 1, tipoAlteracao: 'M' },
+                            { numeroTarefa: '1210684', numAlteracao: 1, tipoAlteracao: 'M' }
                         ]
                     },
                     {
                         pathArtefato: 'src/app/spas/imovel/pagamentos-pendentes/lista-pagamentos-pendentes-controllers.js',
                         listaTarefa: [
-                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                            { numTarefa: '1199211', numAlteracao: 2, tipoAlteracao: 'M' },
-                            { numTarefa: '1203082', numAlteracao: 3, tipoAlteracao: 'M' },
-                            { numTarefa: '1207175', numAlteracao: 3, tipoAlteracao: 'M' }
+                            { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numeroTarefa: '1199211', numAlteracao: 2, tipoAlteracao: 'M' },
+                            { numeroTarefa: '1203082', numAlteracao: 3, tipoAlteracao: 'M' },
+                            { numeroTarefa: '1207175', numAlteracao: 3, tipoAlteracao: 'M' }
                         ]
                     },
                     {
                         pathArtefato: 'src/app/spas/imovel/documentos/lista-documentos-controllers.js',
                         listaTarefa: [
-                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                            { numTarefa: '1203670', numAlteracao: 4, tipoAlteracao: 'M' },
-                            { numTarefa: '1210684', numAlteracao: 5, tipoAlteracao: 'M' }
+                            { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numeroTarefa: '1203670', numAlteracao: 4, tipoAlteracao: 'M' },
+                            { numeroTarefa: '1210684', numAlteracao: 5, tipoAlteracao: 'M' }
                         ]
                     },
                     {
                         pathArtefato: 'src/app/spas/imovel/inclusao-ocupante-imovel/inclusao-ocupante-imovel.tpl.html',
                         listaTarefa: [
-                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                            { numTarefa: '1199211', numAlteracao: 2, tipoAlteracao: 'M' }
+                            { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numeroTarefa: '1199211', numAlteracao: 2, tipoAlteracao: 'M' }
                         ]
                     },
                     {
                         pathArtefato: 'src/app/spas/imovel/pagamentos-pendentes/lista-pagamentos-pendentes.tpl.html',
                         listaTarefa: [
-                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                            { numTarefa: '1199211', numAlteracao: 4, tipoAlteracao: 'M' }
+                            { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numeroTarefa: '1199211', numAlteracao: 4, tipoAlteracao: 'M' }
                         ]
                     },
                     {
                         pathArtefato: 'src/app/crm/crm-constantes.js',
                         listaTarefa: [
-                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                            { numTarefa: '1199211', numAlteracao: 2, tipoAlteracao: 'M' }
+                            { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numeroTarefa: '1199211', numAlteracao: 2, tipoAlteracao: 'M' }
                         ]
                     },
                     {
                         pathArtefato: 'src/styles/crm.css',
                         listaTarefa: [
-                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                            { numTarefa: '1199211', numAlteracao: 1, tipoAlteracao: 'M' }
+                            { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numeroTarefa: '1199211', numAlteracao: 1, tipoAlteracao: 'M' }
                         ]
                     },
                     {
                         pathArtefato: 'spec/inclusao-ocupante-imovel-controllers-spec.js',
                         listaTarefa: [
-                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                            { numTarefa: '1203082', numAlteracao: 2, tipoAlteracao: 'M' }
+                            { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numeroTarefa: '1203082', numAlteracao: 2, tipoAlteracao: 'M' }
                         ]
                     },
                     {
                         pathArtefato: 'spec/lista-pagamentos-pendentes-controllers-spec.js',
                         listaTarefa: [
-                            { numTarefa: '1203082', numAlteracao: 1, tipoAlteracao: 'A' }
+                            { numeroTarefa: '1203082', numAlteracao: 1, tipoAlteracao: 'A' }
                         ]
                     },
                     {
                         pathArtefato: 'src/app/spas/imovel/documentos/includes/tabela-documentosObrigatorios.tpl.html',
                         listaTarefa: [
-                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                            { numTarefa: '1203670', numAlteracao: 5, tipoAlteracao: 'M' }
+                            { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numeroTarefa: '1203670', numAlteracao: 5, tipoAlteracao: 'M' }
                         ]
                     },
                     {
                         pathArtefato: 'src/app/spas/imovel/documentos/includes/tabela-documentos.tpl.html',
                         listaTarefa: [
-                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                            { numTarefa: '1203670', numAlteracao: 1, tipoAlteracao: 'M' }
+                            { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numeroTarefa: '1203670', numAlteracao: 1, tipoAlteracao: 'M' }
                         ]
                     },
                     {
                         pathArtefato: 'src/app/spas/imovel/despacho-pagamento/lista-contrato-locacao-fase-cronograma-controller.js',
                         listaTarefa: [
-                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                            { numTarefa: '1207175', numAlteracao: 1, tipoAlteracao: 'M' }
+                            { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numeroTarefa: '1207175', numAlteracao: 1, tipoAlteracao: 'M' }
                         ]
                     },
                     {
                         pathArtefato: 'src/app/spas/imovel/despacho-pagamento/modal-lista-fornecedor/modal-detalha-credor/detalhe-credor-controller.js',
                         listaTarefa: [
-                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                            { numTarefa: '1207175', numAlteracao: 1, tipoAlteracao: 'M' }
+                            { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numeroTarefa: '1207175', numAlteracao: 1, tipoAlteracao: 'M' }
                         ]
                     },
                     {
                         pathArtefato: 'src/app/spas/imovel/despacho-pagamento/despacho-services.js',
                         listaTarefa: [
-                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                            { numTarefa: '1207175', numAlteracao: 1, tipoAlteracao: 'M' }
+                            { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numeroTarefa: '1207175', numAlteracao: 1, tipoAlteracao: 'M' }
                         ]
                     },
                     {
                         pathArtefato: 'src/app/spas/imovel/despacho-pagamento/modal-lista-fornecedor/lista-fornecedor-controllers.js',
                         listaTarefa: [
-                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                            { numTarefa: '1207175', numAlteracao: 1, tipoAlteracao: 'M' }
+                            { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numeroTarefa: '1207175', numAlteracao: 1, tipoAlteracao: 'M' }
                         ]
                     },
                     {
                         pathArtefato: 'spec/lista-documentos-controllers-spec.js',
                         listaTarefa: [
-                            { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                            { numTarefa: '1210658', numAlteracao: 1, tipoAlteracao: 'M' }
+                            { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                            { numeroTarefa: '1210658', numAlteracao: 1, tipoAlteracao: 'M' }
                         ]
                     },
                 ]
@@ -190,8 +190,8 @@ describe('test comando fernando', () => {
                 listaArtefato: [{
                     pathArtefato: 'pom.xml',
                     listaTarefa: [
-                        { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                        { numTarefa: '1207175', numAlteracao: 1, tipoAlteracao: 'M' }
+                        { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                        { numeroTarefa: '1207175', numAlteracao: 1, tipoAlteracao: 'M' }
                     ]
                 }]
             },
@@ -200,8 +200,8 @@ describe('test comando fernando', () => {
                 listaArtefato: [{
                     pathArtefato: 'pom.xml',
                     listaTarefa: [
-                        { numTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
-                        { numTarefa: '1207175', numAlteracao: 1, tipoAlteracao: 'M' }
+                        { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: 'A' },
+                        { numeroTarefa: '1207175', numAlteracao: 1, tipoAlteracao: 'M' }
                     ]
                 }]
             },

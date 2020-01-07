@@ -1,6 +1,6 @@
 class Tarefa {
-    constructor(numTarefa, tipoAlteracao) {
-        this.numTarefa = numTarefa,
+    constructor(numeroTarefa, tipoAlteracao) {
+        this.numeroTarefa = numeroTarefa,
         this.tipoAlteracao = tipoAlteracao,
         this.numeroAlteracao = 1
     }
