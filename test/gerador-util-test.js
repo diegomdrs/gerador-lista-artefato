@@ -73,14 +73,11 @@ module.exports = class {
             await this.commitarArquivo(git, nomeProjeto, task, pathArquivo)
         } else {
 
-            if (tipoAlteracao === 'R') {
+            fs.outputFileSync(obterCaminhoArquivo(git, pathArquivo.origem), randomValueHex())
+            await this.commitarArquivo(git, nomeProjeto, task.origem, pathArquivo.origem)
 
-                fs.outputFileSync(obterCaminhoArquivo(git, pathArquivo.origem), randomValueHex())
-                await this.commitarArquivo(git, nomeProjeto, task.origem, pathArquivo.origem)
-
-                await git.mv(pathArquivo.origem, pathArquivo.destino)
-                await this.commitarArquivo(git, nomeProjeto, task.destino, pathArquivo.destino)
-            }
+            await git.mv(pathArquivo.origem, pathArquivo.destino)
+            await this.commitarArquivo(git, nomeProjeto, task.destino, pathArquivo.destino)
         }
     }
 
@@ -98,12 +95,8 @@ module.exports = class {
             }
         } else {
 
-            if (tipoAlteracao === 'R') {
-
-                fs.outputFileSync(obterCaminhoArquivo(git, pathArquivo.origem), randomValueHex())
-
-                await git.mv(pathArquivo.origem, pathArquivo.destino)
-            }
+            fs.outputFileSync(obterCaminhoArquivo(git, pathArquivo.origem), randomValueHex())
+            await git.mv(pathArquivo.origem, pathArquivo.destino)
         }
     }
 
@@ -115,10 +108,10 @@ module.exports = class {
 
     static async commitarProjeto(git, nomeProjeto, task, listaArquivo) {
 
-        for (const pathArquivo of listaArquivo) {
-            await git.add(obterCaminhoArquivo(nomeProjeto, pathArquivo))   
+        for (const arquivo of listaArquivo) {
+            await git.add(obterCaminhoArquivo(nomeProjeto, arquivo.pathArquivo))
         }
-        
+
         await git.commit('task ' + task + ' commit')
     }
 }
@@ -126,8 +119,6 @@ module.exports = class {
 function randomValueHex() {
     return crypto.randomBytes(12).toString('hex')
 }
-
-
 
 function obterCaminhoArquivo(nomeProjeto, pathArquivo) {
     return PATH_TEST + path.sep + nomeProjeto + path.sep + pathArquivo
