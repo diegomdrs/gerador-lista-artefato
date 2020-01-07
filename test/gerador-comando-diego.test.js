@@ -426,6 +426,28 @@ describe('test comando diego', () => {
         expect(lista[20].listaArtefatoSaida[3].nomeArtefato).toMatch(/.*apc.css$/g)
     })
 
+    it('test gerador async new', async () => {
+
+        const params = new Param({
+            autor: "fulano",
+            projeto: [
+                geradorUtilTest.pathTest() + "/apc-estatico",
+                geradorUtilTest.pathTest() + "/apc-api",
+                geradorUtilTest.pathTest() + "/crm-patrimonio-estatico",
+                geradorUtilTest.pathTest() + "/crm-patrimonio-api"
+            ],
+            task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"],
+            mostrarNumModificacao: true,
+            mostrarDeletados: true
+        })
+
+        const gerador = require('../lib/gerador-async-new')
+
+        const lista = await gerador(params).gerarListaArtefato()
+
+        
+    })
+
     function testarLista(lista) {
 
         expect(lista).toHaveLength(22)
