@@ -11,7 +11,9 @@ module.exports = function (app) {
             const params = new Param(req.body)
             const gerador = require('../lib/gerador-async-new')(params)
 
-            resp.json(await gerador.gerarListaArtefato())
+            const retorno = await gerador.gerarListaArtefato()
+            
+            resp.json(retorno)
 
         } catch (error) {
 

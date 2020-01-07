@@ -12,6 +12,8 @@ module.exports = async function (params) {
                 return path.join(params.diretorio, nomeProjeto)
             })
 
+            delete params.diretorio
+
             const gerador = require('../lib/gerador-async-new')(params)
 
             const listaSaida = await gerador.gerarListaArtefato()

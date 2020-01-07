@@ -10,6 +10,13 @@ function GeradorController(geradorService) {
     vm.listaSaida = []
     vm.req = {}
 
+    vm.TIPO_MODIFICACAO = {
+        A: 'Criação',
+        M: 'Alteração',
+        R: 'Renomeado',
+        D: 'Deletado'
+    }
+
     vm.init = init
     vm.listarArtefatos = listarArtefatos
     vm.limparFiltros = limparFiltros
@@ -139,19 +146,9 @@ function GeradorController(geradorService) {
 
         vm.req = {
             projeto: [],
-            task: []
+            task: [],
+            mostrarDeletados: true
         }
-
-        // vm.req = {
-        //     autor: "fulano",
-        //     projeto: [
-        //         "/tmp/gerador-lista-artefato-qas/apc-estatico",
-        //         "/tmp/gerador-lista-artefato-qas/apc-api",
-        //         "/tmp/gerador-lista-artefato-qas/crm-patrimonio-estatico",
-        //         "/tmp/gerador-lista-artefato-qas/crm-patrimonio-api"
-        //     ],
-        //     task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"]
-        // }
 
         delete vm.caminhoProjeto
         delete vm.tarefa
