@@ -46,7 +46,7 @@ function GeradorController(geradorService) {
         } else {
 
             !vm.req.task.length && adicionarMensagem
-                ('Adicione ao menos uma task ao filtro')
+                ('Adicione ao menos uma tarefa ao filtro')
 
             !vm.req.projeto.length && adicionarMensagem
                 ('Adicione ao menos um projeto ao filtro')
@@ -106,10 +106,10 @@ function GeradorController(geradorService) {
             for (const projeto of listaProjeto) {
 
                 const contemProjeto = vm.req.projeto.some((projetoSome) => {
-                    projeto === projetoSome
+                    projeto.trim() === projetoSome
                 })
 
-                !contemProjeto && vm.req.projeto.push(projeto)
+                !contemProjeto && vm.req.projeto.push(projeto.trim())
             }
 
             delete vm.caminhoProjeto
@@ -138,15 +138,20 @@ function GeradorController(geradorService) {
         limparMessages()
 
         vm.req = {
-            autor: "fulano",
-            projeto: [
-                "/tmp/gerador-lista-artefato-qas/apc-estatico",
-                "/tmp/gerador-lista-artefato-qas/apc-api",
-                "/tmp/gerador-lista-artefato-qas/crm-patrimonio-estatico",
-                "/tmp/gerador-lista-artefato-qas/crm-patrimonio-api"
-            ],
-            task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"]
+            projeto: [],
+            task: []
         }
+
+        // vm.req = {
+        //     autor: "fulano",
+        //     projeto: [
+        //         "/tmp/gerador-lista-artefato-qas/apc-estatico",
+        //         "/tmp/gerador-lista-artefato-qas/apc-api",
+        //         "/tmp/gerador-lista-artefato-qas/crm-patrimonio-estatico",
+        //         "/tmp/gerador-lista-artefato-qas/crm-patrimonio-api"
+        //     ],
+        //     task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"]
+        // }
 
         delete vm.caminhoProjeto
         delete vm.tarefa

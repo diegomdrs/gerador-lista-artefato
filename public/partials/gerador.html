@@ -22,9 +22,7 @@
 
 					<div class='input-group mb-3'>
 
-						<input type='text' class='form-control' 
-							aria-describedby='basic-addon2' 
-							ng-model='vm.req.autor' 
+						<input type='text' class='form-control' aria-describedby='basic-addon2' ng-model='vm.req.autor'
 							maxlength='20'>
 
 					</div>
@@ -40,20 +38,16 @@
 			<div class='col'>
 
 				<div class="form-group">
-					<label >Número da Tarefa</label>
+					<label>Número da Tarefa</label>
 
 					<div class='input-group mb-3'>
 
-						<input type='text' class='form-control' 
+						<input type='text' class='form-control'
 							placeholder='Adicione uma ou mais tarefas separadas por vírgula'
-							aria-describedby='basic-addon2' 
-							ng-model='vm.tarefa' 
-							maxlength='300' 
-							number-only-and-comma>
+							aria-describedby='basic-addon2' ng-model='vm.tarefa' maxlength='300' number-only-and-comma>
 
 						<div class='input-group-append'>
-							<button class='btn btn-primary'
-								ng-click='vm.adicionarTask()'>Adicionar</button>
+							<button class='btn btn-primary' ng-click='vm.adicionarTask()'>Adicionar</button>
 						</div>
 					</div>
 
@@ -64,15 +58,12 @@
 			<div class='col'>
 
 				<div class="form-group">
-					<label >Caminho do Projeto Git</label>
+					<label>Caminho do Projeto Git</label>
 
 					<div class='input-group mb-3'>
 
-						<input type='text' class='form-control' 
-							placeholder='Adicione o caminho do projeto'
-							aria-describedby='basic-addon2' 
-							ng-model='vm.caminhoProjeto' 
-							maxlength='300'>
+						<input type='text' class='form-control' placeholder='Adicione o caminho do projeto'
+							aria-describedby='basic-addon2' ng-model='vm.caminhoProjeto' maxlength='300'>
 
 						<div class='input-group-append'>
 							<button class='btn btn-primary' type='button'
@@ -102,6 +93,13 @@
 
 					<table class='table table-striped table-bordered table-hover' style='margin-bottom: 0rem;'>
 						<tbody>
+
+							<tr ng-if="vm.req.task.length === 0">
+								<td colspan="6" style="text-align: center;">
+									<strong>Nenhuma tarefa selecionada</strong>
+								</td>
+							</tr>
+
 							<tr ng-repeat='task in vm.req.task'>
 								<td style='width:80%'>{{task}}</td>
 								<td style='width:20%'>
@@ -129,6 +127,13 @@
 
 					<table class='table table-striped table-bordered table-hover' style='margin-bottom: 0rem;'>
 						<tbody>
+
+							<tr ng-if="vm.req.projeto.length === 0">
+								<td colspan="6" style="text-align: center;">
+									<strong>Nenhum projeto selecionado</strong>
+								</td>
+							</tr>
+
 							<tr ng-repeat='caminhoProjeto in vm.req.projeto'>
 								<td style='width:80%' title='{{caminhoProjeto}}'>
 									<span>
@@ -151,10 +156,6 @@
 
 			<div class='p-2'>
 				<button class='btn btn-block btn-primary' ng-click='vm.listarArtefatos()'>Gerar Lista</button>
-			</div>
-
-			<div class='p-2' ng-if='vm.listaSaida.length'>
-				<button type='button' class='btn btn-block btn-success'>Copiar Resultado</button>
 			</div>
 
 			<div class='p-2'>
