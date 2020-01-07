@@ -147,7 +147,8 @@ function GeradorController(geradorService) {
         vm.req = {
             projeto: [],
             task: [],
-            mostrarDeletados: true
+            mostrarDeletados: false,
+            mostrarRenomeados: false
         }
 
         delete vm.caminhoProjeto
