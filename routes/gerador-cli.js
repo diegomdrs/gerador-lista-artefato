@@ -12,7 +12,7 @@ module.exports = async function (params) {
                 return path.join(params.diretorio, nomeProjeto)
             })
 
-            const gerador = require('../lib/gerador')(params)
+            const gerador = require('../lib/gerador-async-new')(params)
 
             const listaSaida = await gerador.gerarListaArtefato()
             imprimirListaSaida(listaSaida)
