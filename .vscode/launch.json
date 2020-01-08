@@ -82,22 +82,6 @@
                 "--mostrar-num-modificacao",
                 "--mostrar-deletados"
             ]
-        },
-        {
-            // node_modules/jest/bin/jest.js --runInBand --verbose test/gerador-comando-bb.test.js
-            // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=crm-patrimonio-estatico --autor=fulano --task=1221786 --mostrar-num-modificacao --mostrar-deletados
-            "type": "node",
-            "request": "launch",
-            "name": "comando bb 1221786 app.js",
-            "program": "${workspaceFolder}/app.js",
-            "args": [
-                "--diretorio=/tmp/gerador-lista-artefato-qas",
-                "--projeto=crm-patrimonio-estatico",
-                "--autor=fulano",
-                "--task=1221786",
-                "--mostrar-num-modificacao",
-                "--mostrar-deletados"
-            ]
         }
     ]
 }

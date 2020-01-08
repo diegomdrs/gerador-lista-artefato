@@ -22,7 +22,8 @@ describe('test gerais', () => {
             ],
             task: ["1111111"],
             mostrarNumModificacao: true,
-            mostrarDeletados: true
+            mostrarDeletados: true,
+            mostrarRenomeados: true
         })
     })
 
@@ -36,7 +37,7 @@ describe('test gerais', () => {
         // }
     });
 
-    ('teste de listagem de artefatos com projeto inválido', () => {
+    xit('teste de listagem de artefatos com projeto inválido', () => {
 
         const paramsError = new Param({
             autor: "fulano",
@@ -66,29 +67,36 @@ describe('test gerais', () => {
 
         const lista = await gerador(params).gerarListaArtefato()
 
-        expect(lista).toHaveLength(1)
+        expect(lista).toHaveLength(3)
 
         expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
-
-        expect(lista[0].listaArtefatoSaida).toHaveLength(3)
+        expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('A')
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
 
-        expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe('M')
-        expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(2)
-        expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoQux.txt')
+        expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[1].listaNumTarefaSaida[0]).toBe('1111111')
+        expect(lista[1].listaArtefatoSaida).toHaveLength(1)
 
-        expect(lista[0].listaArtefatoSaida[2].tipoAlteracao).toBe('R')
-        expect(lista[0].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
-        expect(lista[0].listaArtefatoSaida[2].nomeArtefato).toBe('foo/arquivoQux.txt')
-        expect(lista[0].listaArtefatoSaida[2].nomeAntigoArtefato).toBe('foo/arquivoFoo.txt')
-        expect(lista[0].listaArtefatoSaida[2].nomeNovoArtefato).toBe('foo/arquivoQux.txt')
+        expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
+        expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
+        expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
+
+        expect(lista[2].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[2].listaNumTarefaSaida[0]).toBe('1111111')
+        expect(lista[2].listaArtefatoSaida).toHaveLength(1)
+
+        expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe('R')
+        expect(lista[2].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
+        expect(lista[2].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('foo/arquivoFoo.txt')
+        expect(lista[2].listaArtefatoSaida[0].nomeNovoArtefato).toBe('foo/arquivoQux.txt')
     })
 
-    xit('teste de listagem de artefatos renomeados 2 vezes', async () => {
+    it('teste de listagem de artefatos renomeados 2 vezes', async () => {
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoFoo.txt', 'A')
@@ -111,6 +119,8 @@ describe('test gerais', () => {
             'arquivoBar.txt', 'M')
 
         const lista = await gerador(params).gerarListaArtefato()
+
+        console.log(lista)
 
         expect(lista).toHaveLength(1)
 
@@ -315,7 +325,7 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 
-    it('teste de listagem de artefatos commitados de uma vez', async () => {
+    xit('teste de listagem de artefatos commitados de uma vez', async () => {
 
         await geradorUtilTest.foo(git, '0000000', nomeProjeto, [
             { tipoAlteracao: 'A', pathArquivo: 'src/app/spas/inventario/bem-services.js' },

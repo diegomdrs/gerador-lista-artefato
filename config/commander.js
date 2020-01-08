@@ -10,6 +10,7 @@ program
     .option('-t, --task <type>', 'Lista de tarefas (podem ser passadas várias tarefas separadas por vírgula)', commaSeparatedList)
     .option('--mostrar-num-modificacao', 'Nº de modificações do artefato na tarefa ou tarefas (Opcional)')
     .option('--mostrar-deletados', 'Mostra artefatos deletados na tarefa (Opcional)')
+    .option('--mostrar-renomeados', 'Mostra artefatos renomeados na tarefa (Opcional)')
     .option('-s, --server', 'Inicia a versão server e ignora os outros parâmetros')
     .version(package.version, '-v, --version', 'Mostra a versão do programa')
 

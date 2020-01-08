@@ -4,7 +4,8 @@ class Param {
     this.autor = this.getAttrRequired('autor', body.autor)
     this.task = this.getAttrRequired('task', Param.getList(body.task))
     this.projeto = this.getAttrRequired('projeto', Param.getList(body.projeto))
-    this.mostrarDeletados = body.mostrarDeletados
+    this.mostrarDeletados = body.mostrarDeletados,
+    this.mostrarRenomeados = body.mostrarRenomeados,
     this.mostrarNumModificacao = body.mostrarNumModificacao
   }
 
