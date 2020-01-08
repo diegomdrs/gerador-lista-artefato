@@ -352,36 +352,6 @@ describe('test comando diego', () => {
         expect(lista[20].listaArtefatoSaida[3].nomeArtefato).toMatch(/.*apc.css$/g)
     })
 
-    it('test gerador sync new', async () => {
-
-        const gerador = require('../lib/gerador-sync-new')
-
-        const lista = await gerador(params).gerarListaArtefato()
-
-        testarLista(lista)
-
-        expect(lista[20].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[20].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1150152']))
-        expect(lista[20].listaArtefatoSaida).toHaveLength(4)
-
-        expect(lista[20].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        expect(lista[20].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
-        expect(lista[20].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*ContratoResource.java$/g)
-
-        expect(lista[20].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        expect(lista[20].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-        expect(lista[20].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosLocacaoImoveis.java$/g)
-
-        expect(lista[20].listaArtefatoSaida[2].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
-        expect(lista[20].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
-        expect(lista[20].listaArtefatoSaida[2].nomeArtefato).toBe('apc-api/src/main/java/br/com/bb/apc/api/v1/contrato/gateway/GatewayListarFornecedoresCredoresContratosLocacaoImoveis.java ' +
-            'apc-api/src/main/java/br/com/bb/apc/api/v1/contrato/gateway/GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java')
-
-        expect(lista[20].listaArtefatoSaida[3].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        expect(lista[20].listaArtefatoSaida[3].numeroAlteracao).toBe(1)
-        expect(lista[20].listaArtefatoSaida[3].nomeArtefato).toMatch(/.*apc.css$/g)
-    })
-
     it('test gerador async', async () => {
 
         const params = new Param({

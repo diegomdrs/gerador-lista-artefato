@@ -219,15 +219,6 @@ describe('test comando fernando', () => {
         testarLista(lista)
     })
 
-    it('test gerador sync new', async () => {
-
-        const gerador = require('../lib/gerador-sync-new')
-
-        const lista = await gerador(params).gerarListaArtefato()
-
-        testarLista(lista)
-    })
-
     it('test gerador async', async () => {
 
         const params = new Param({
