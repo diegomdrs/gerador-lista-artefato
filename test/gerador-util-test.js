@@ -114,6 +114,15 @@ module.exports = class {
 
         await git.commit('task ' + task + ' commit')
     }
+
+    static async foo(git, tarefa, nomeProjeto, listaArquivo) {
+        for (const arquivo of listaArquivo) {
+            await this.manipularArquivoSemCommit(git, nomeProjeto,
+                arquivo.pathArquivo, arquivo.tipoAlteracao)
+        }
+
+        await this.commitarProjeto(git, nomeProjeto, tarefa, listaArquivo)
+    }
 }
 
 function randomValueHex() {

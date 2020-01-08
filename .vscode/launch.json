@@ -28,7 +28,10 @@
             "name": "jest",
             "program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
             "args": [
-                "-i"
+                "-i",
+                "--runInBand",
+                "--verbose",
+                "test/gerador.test.js"
             ],
             "internalConsoleOptions": "openOnSessionStart"
         },
@@ -82,7 +85,7 @@
         },
         {
             // node_modules/jest/bin/jest.js --runInBand --verbose test/gerador-comando-bb.test.js
-            // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=crm-patrimonio-estatico --autor=fulano --task=1221786 --mostrar-deletados
+            // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=crm-patrimonio-estatico --autor=fulano --task=1221786 --mostrar-num-modificacao --mostrar-deletados
             "type": "node",
             "request": "launch",
             "name": "comando bb 1221786 app.js",
