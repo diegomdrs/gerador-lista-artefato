@@ -2,9 +2,9 @@ angular
     .module('geradorApp')
     .controller('GeradorController', GeradorController)
 
-GeradorController.$inject = ['geradorService'];
+GeradorController.$inject = ['geradorService', 'blockUI'];
 
-function GeradorController(geradorService) {
+function GeradorController(geradorService, blockUI) {
     var vm = this
 
     vm.listaSaida = []
@@ -41,13 +41,20 @@ function GeradorController(geradorService) {
 
         if (vm.req.task.length && vm.req.projeto.length) {
 
+            blockUI.start()
+
             geradorService.gerarListaArtefato(vm.req)
                 .then(function (resposta) {
+                    
                     vm.listaSaida = resposta.data
-                }, function (error) {
+                }).catch(function (error) {
 
                     vm.messages = [error.data.message]
                     vm.listaSaida = []
+
+                }).finally(function () {
+
+                    blockUI.stop()
                 })
 
         } else {

@@ -1,7 +1,8 @@
 angular
 	.module('geradorApp', [
 		'ngRoute',
-		'ngResource']
+		'ngResource',
+		'blockUI']
 	)
 	.config(configure);
 

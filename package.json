@@ -23,6 +23,7 @@
   "homepage": "https://github.com/diegomdrs/gerador-lista-artefato-qas#readme",
   "dependencies": {
     "angular": "^1.7.9",
+    "angular-block-ui": "^0.2.2",
     "angular-resource": "^1.7.9",
     "angular-route": "^1.7.9",
     "body-parser": "^1.19.0",
