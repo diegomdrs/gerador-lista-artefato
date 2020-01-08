@@ -8,12 +8,14 @@ angular
 
 configure.$inject = [
 	'$routeProvider', 
-	'$locationProvider'
+	'$locationProvider',
+	'blockUIConfig'
 ];
 
 function configure(
 	$routeProvider, 
-	$locationProvider) {
+	$locationProvider,
+	blockUIConfig) {
 
 	$locationProvider.html5Mode(true)
 
@@ -23,4 +25,6 @@ function configure(
 	})
 
 	$routeProvider.otherwise({ redirectTo: '/gerador' })
+
+	blockUIConfig.message = 'Aguarde';
 }
