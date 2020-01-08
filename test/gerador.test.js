@@ -120,28 +120,33 @@ describe('test gerais', () => {
 
         const lista = await gerador(params).gerarListaArtefato()
 
-        console.log(lista)
-
-        expect(lista).toHaveLength(1)
+        expect(lista).toHaveLength(3)
 
         expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
-
-        expect(lista[0].listaArtefatoSaida).toHaveLength(3)
+        expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('A')
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
 
-        expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe('M')
-        expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(3)
-        expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoBar.txt')
+        expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[1].listaNumTarefaSaida[0]).toBe('1111111')
+        expect(lista[1].listaArtefatoSaida).toHaveLength(1)
 
-        expect(lista[0].listaArtefatoSaida[2].tipoAlteracao).toBe('R')
-        expect(lista[0].listaArtefatoSaida[2].numeroAlteracao).toBe(2)
-        expect(lista[0].listaArtefatoSaida[2].nomeArtefato).toBe('foo/arquivoBar.txt')
-        expect(lista[0].listaArtefatoSaida[2].nomeAntigoArtefato).toBe('foo/arquivoQux.txt')
-        expect(lista[0].listaArtefatoSaida[2].nomeNovoArtefato).toBe('foo/arquivoBar.txt')
+        expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
+        expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(3)
+        expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
+
+        expect(lista[2].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[2].listaNumTarefaSaida[0]).toBe('1111111')
+        expect(lista[2].listaArtefatoSaida).toHaveLength(1)
+
+        expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe('R')
+        expect(lista[2].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
+        expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
+        expect(lista[2].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('foo/arquivoQux.txt')
+        expect(lista[2].listaArtefatoSaida[0].nomeNovoArtefato).toBe('foo/arquivoBar.txt')
     })
 
     xit('teste de listagem de artefato A, R, D e A novamente', async () => {
