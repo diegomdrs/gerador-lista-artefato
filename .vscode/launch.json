@@ -82,6 +82,22 @@
                 "--mostrar-num-modificacao",
                 "--mostrar-deletados"
             ]
+        },
+        {
+            // node app --diretorio=/kdi/git --projeto=apc-api,apc-estatico,crm-patrimonio-estatico,crm-patrimonio-api,fti-estatico --autor=c1282036 --task=1239662,1221786,1234921,1229100,1227471,1226285,1221172,1217966,1215554 --mostrar-num-modificacao --mostrar-deletados --mostrar-renomeados
+            "type": "node",
+            "request": "launch",
+            "name": "comando bb test app.js",
+            "program": "${workspaceFolder}/app.js",
+            "args": [
+                "--diretorio=/kdi/git",
+                "--projeto=apc-api,apc-estatico,crm-patrimonio-estatico,crm-patrimonio-api,fti-estatico",
+                "--autor=c1282036",
+                "--task=1239662,1221786,1234921,1229100,1227471,1226285,1221172,1217966,1215554",
+                "--mostrar-num-modificacao",
+                "--mostrar-deletados",
+                "--mostrar-renomeados"
+            ]
         }
     ]
 }
