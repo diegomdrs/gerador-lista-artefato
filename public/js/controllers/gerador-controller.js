@@ -11,8 +11,8 @@ function GeradorController(geradorService, blockUI) {
     vm.req = {}
 
     vm.TIPO_MODIFICACAO = {
-        A: 'Criação',
-        M: 'Alteração',
+        A: 'Criado',
+        M: 'Alterado',
         R: 'Renomeado',
         D: 'Deletado'
     }
