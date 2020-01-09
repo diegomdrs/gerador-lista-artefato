@@ -5,6 +5,9 @@
   "bin": {
     "gerador-lista-artefato": "./app.js"
   },
+  "pkg": {
+    "assets": "./public"
+  },
   "scripts": {
     "start": "node app -s",
     "dev": "node --inspect app -s",
