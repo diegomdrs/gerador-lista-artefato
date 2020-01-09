@@ -7,7 +7,6 @@ module.exports = async function (params) {
     async function init() {
 
         try {
-
             params.projeto = params.projeto.map(function(nomeProjeto){
                 return path.join(params.diretorio, nomeProjeto)
             })

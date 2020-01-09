@@ -155,8 +155,7 @@ function GeradorController(geradorService, blockUI) {
             projeto: [],
             task: [],
             mostrarDeletados: false,
-            mostrarRenomeados: false,
-            mostrarCommitsLocais: false
+            mostrarRenomeados: false
         }
 
         delete vm.caminhoProjeto

@@ -7,7 +7,6 @@ class Param {
     this.mostrarDeletados = body.mostrarDeletados,
     this.mostrarRenomeados = body.mostrarRenomeados,
     this.mostrarNumModificacao = body.mostrarNumModificacao
-    this.mostrarCommitsLocais = body.mostrarCommitsLocais
   }
 
   getAttrRequired(paramName, attr) {

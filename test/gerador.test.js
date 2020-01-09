@@ -23,9 +23,10 @@ describe('test gerais', () => {
             task: ["1111111"],
             mostrarNumModificacao: true,
             mostrarDeletados: true,
-            mostrarRenomeados: true,
-            mostrarCommitsLocais: true
+            mostrarRenomeados: true
         })
+
+        params.mostrarCommitsLocais = true
     })
 
     it('test parâmetros inválidos', () => {
