@@ -23,11 +23,12 @@ describe('test gerais', () => {
             task: ["1111111"],
             mostrarNumModificacao: true,
             mostrarDeletados: true,
-            mostrarRenomeados: true
+            mostrarRenomeados: true,
+            mostrarCommitsLocais: true
         })
     })
 
-    xit('test parâmetros inválidos', () => {
+    it('test parâmetros inválidos', () => {
 
         // const req = {
         //     diretorio: "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas",
@@ -406,5 +407,40 @@ describe('test gerais', () => {
         expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
         expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*bem-services.js$/g)
+    })
+
+    it('teste ignorar stashes na listagem de artefatos', async () => {
+
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
+            'arquivoBar.txt', 'A')
+
+        await geradorUtilTest.manipularArquivoSemCommit(git, nomeProjeto, 
+            'arquivoBar.txt', 'M')
+
+        await git.stash()
+
+        const lista = await gerador(params).gerarListaArtefato()
+
+        expect(lista).toHaveLength(1)
+
+        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[0].listaArtefatoSaida).toHaveLength(1)
+
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+        expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*arquivoBar.txt$/g)
+    })
+
+    it('teste ignorar commits locais na listagem de artefatos', async () => {
+
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
+            'arquivoBar.txt', 'A')
+
+        params.mostrarCommitsLocais = false
+
+        const lista = await gerador(params).gerarListaArtefato()
+
+        expect(lista).toHaveLength(0)
     })
 })

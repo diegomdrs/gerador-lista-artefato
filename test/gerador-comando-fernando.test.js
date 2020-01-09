@@ -11,15 +11,6 @@ describe('test comando fernando', () => {
 
         jest.setTimeout(10000)
 
-        params = new Param({
-            autor: "fulano",
-            projeto: ["apc-estatico", "apc-api", "crm-patrimonio-estatico", "crm-patrimonio-api"],
-            task: ["1199211", "1203082", "1203670", "1207175", "1210684",
-                "1210658", "1212262", "1212444"]
-        })
-
-        params.diretorio = geradorUtilTest.pathTest(),
-
         listaEstrutura = [
             {
                 nomeProjeto: 'apc-estatico',
@@ -213,6 +204,15 @@ describe('test comando fernando', () => {
     it('test gerador sync master', async () => {
 
         const gerador = require('../lib/gerador-sync-master')
+        
+        const params = new Param({
+            autor: "fulano",
+            projeto: ["apc-estatico", "apc-api", "crm-patrimonio-estatico", "crm-patrimonio-api"],
+            task: ["1199211", "1203082", "1203670", "1207175", "1210684",
+                "1210658", "1212262", "1212444"]
+        })
+
+        params.diretorio = geradorUtilTest.pathTest()
 
         const lista = await gerador(params).gerarListaArtefato()
 
@@ -220,6 +220,8 @@ describe('test comando fernando', () => {
     })
 
     it('test gerador async', async () => {
+
+        const gerador = require('../lib/gerador-async-new')
 
         const params = new Param({
             autor: "fulano",
@@ -233,11 +235,9 @@ describe('test comando fernando', () => {
                 "1210658", "1212262", "1212444"]
         })
 
-        const gerador = require('../lib/gerador')
-
         const lista = await gerador(params).gerarListaArtefato()
 
-        testarLista(lista)
+        // testarLista(lista)
     })
 
     function testarLista(lista) {
