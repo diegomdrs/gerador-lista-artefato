@@ -30,7 +30,7 @@ Comando para listar os artefatos incluídos/alterados/renomeados para geração 
 
 ### Linux
 
-Na primeira utilização, deverá ser executado:
+Na primeira utilização da versão Linux, executado:
 
 ``` console
 $ chmod +x gerador-lista-artefato-qas
@@ -49,11 +49,13 @@ $ ./gerador-lista-artefato-qas.exe --diretorio=C:/kdi/git --projeto=foo-estatico
 
 ## Utilização modo Web
 
-Para utilizar a versão Web, deverá ser executado:
+Para utilizar a versão Web, execute o comando com o parâmetro `-s` ou `--server`, como no exemplo abaixo:
 
 ``` console
-$ ./gerador-lista-artefato-qas --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
+$ ./gerador-lista-artefato-qas -s
 ```
+
+Em seguida, acesse a url [http://localhost:3333/gerador](http://localhost:3333/gerador):
 
 ## Parâmetros
 
