@@ -81,11 +81,20 @@ Tarefa nº 900089
 
 M   2   foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayConsultarFoo.java
 M   3   foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayIncluirFoo.java
-A   1   foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayIncluirFoo.java
 M   1   foo-estatico/Gruntfile.js
 M   1   foo-estatico/karma.conf.js
 M   1   foo-estatico/package.json
+
+Tarefa nº 900089
+
+A   1   foo-api/src/main/java/br/com/foo/api/v1/foo/gateway/GatewayIncluirFoo.java
+
+Tarefa nº 900089
+
 R   1   foo-estatico/foo.json foo-estatico/bar.json
+
+Tarefa nº 900089
+
 D   1   foo-estatico/src/app/spas/foo/detalha-foo.tpl.html
 
 ```
