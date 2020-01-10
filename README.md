@@ -49,7 +49,7 @@ $ ./gerador-lista-artefato-qas.exe --diretorio=C:/kdi/git --projeto=foo-estatico
 
 ## Utilização modo Web
 
-Para utilizar a versão Web, execute o comando com o parâmetro `-s` ou `--server`, como no exemplo abaixo:
+Para utilizar a versão Web, em ambas versões para Linux e Windows, execute o comando `gerador-lista-artefato-qas` com o parâmetro `-s` ou `--server`, como no exemplo abaixo:
 
 ``` console
 $ ./gerador-lista-artefato-qas -s
