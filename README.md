@@ -37,13 +37,13 @@ $ chmod +x gerador-lista-artefato-qas-linux
 ### Linux
 
 ``` console
-$ ./gerador-lista-artefato-qas-linux --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
+$ ./gerador-lista-artefato-qas --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
 ```
 
 ### Windows
 
 ``` console
-$ ./gerador-lista-artefato-qas-win.exe --diretorio=C:/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
+$ ./gerador-lista-artefato-qas.exe --diretorio=C:/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
 ```
 
 ## Parâmetros
@@ -64,7 +64,7 @@ $ ./gerador-lista-artefato-qas-win.exe --diretorio=C:/kdi/git --projeto=foo-esta
 ## Saida do gerador
 
 ``` console
-$ node gerador-artefato.js --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081 --mostrar-deletados --mostrar-num-modificacao --mostrar-deletados --mostrar-renomeados
+$ ./gerador-lista-artefato-qas --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081 --mostrar-deletados --mostrar-num-modificacao --mostrar-deletados --mostrar-renomeados
 
 Tarefa nº 900089
 
@@ -87,7 +87,7 @@ Onde:
 ## Exemplo de uso
 
 ``` console
-$ node gerador-artefato.js --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900077,900079
+$ ./gerador-lista-artefato-qas --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900077,900079
 
 Tarefas nº 900077, 900079
 
