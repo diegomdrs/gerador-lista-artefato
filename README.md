@@ -20,11 +20,11 @@ Comando para listar os artefatos incluídos/alterados/renomeados para geração 
 
 ### Linux 
 
-- Baixe [aqui](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/desenv-cli-web/dist/gerador-lista-artefato-qas) a versão Linux e salve no seu computador
+- [gerador-lista-artefato-qas](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/desenv-cli-web/dist/gerador-lista-artefato-qas)
 
 ### Windows 
 
-- Baixe [aqui](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/desenv-cli-web/dist/gerador-lista-artefato-qas.exe) a versão Windows e salve no seu computador
+- [gerador-lista-artefato-qas.exe](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/desenv-cli-web/dist/gerador-lista-artefato-qas.exe)
 
 ## Utilização
 
