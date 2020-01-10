@@ -16,15 +16,27 @@ Comando para listar os artefatos incluídos/alterados/renomeados para geração 
 - Verificar se os merges estão sendo realizados de maneira correta
 - Utilizar o comando `git mv` para renomear os artefatos
 
-## Download
+## Instalação 
 
 ### Linux 
 
-- [gerador-lista-artefato-qas](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas)
+- Baixe o arquivo [gerador-lista-artefato-qas](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas)
 
 ### Windows 
 
-- [gerador-lista-artefato-qas.exe](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas.exe)
+- Baixe o arquivo [gerador-lista-artefato-qas.exe](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas.exe)
+
+### Repositório Github
+
+- Para instalar o gerador a partir do repositório Github, execute:
+
+``` console
+$ git clone https://github.com/diegomdrs/gerador-lista-artefato-qas.git
+$ cd gerador-lista-artefato-qas
+$ npm i -g
+```
+
+-Dessa forma o executável `gerador-lista-artefato-qas` estará disponível em todo sistema
 
 ## Utilização do modo CLI
 
