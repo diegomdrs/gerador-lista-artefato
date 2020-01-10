@@ -26,7 +26,7 @@ Comando para listar os artefatos incluídos/alterados/renomeados para geração 
 
 - [gerador-lista-artefato-qas.exe](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/desenv-cli-web/dist/gerador-lista-artefato-qas.exe)
 
-## Utilização
+## Utilização modo CLI
 
 ### Linux
 
@@ -45,6 +45,14 @@ $ ./gerador-lista-artefato-qas --diretorio=/kdi/git --projeto=foo-estatico,foo-a
 
 ``` console
 $ ./gerador-lista-artefato-qas.exe --diretorio=C:/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
+```
+
+## Utilização modo Web
+
+Para utilizar a versão Web, deverá ser executado:
+
+``` console
+$ ./gerador-lista-artefato-qas --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
 ```
 
 ## Parâmetros
@@ -106,4 +114,3 @@ M       foo-api/pom.xml
 M       foo-api/operacoes.xml
 
 ```
-
