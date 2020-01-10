@@ -13,7 +13,7 @@ module.exports = async function (params) {
 
             delete params.diretorio
 
-            const gerador = require('../lib/gerador-async-new')(params)
+            const gerador = require('../lib/gerador')(params)
 
             const listaSaida = await gerador.gerarListaArtefato()
             imprimirListaSaida(listaSaida)

@@ -354,7 +354,7 @@ describe('test comando diego', () => {
 
     it('test gerador async', async () => {
 
-        const gerador = require('../lib/gerador-async-new')
+        const gerador = require('../lib/gerador')
 
         const params = new Param({
             autor: "fulano",
@@ -398,7 +398,7 @@ describe('test comando diego', () => {
 
     it('test gerador async new', async () => {
 
-        const gerador = require('../lib/gerador-async-new')
+        const gerador = require('../lib/gerador')
 
         const params = new Param({
             autor: "fulano",

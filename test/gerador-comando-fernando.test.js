@@ -221,7 +221,7 @@ describe('test comando fernando', () => {
 
     it('test gerador async', async () => {
 
-        const gerador = require('../lib/gerador-async-new')
+        const gerador = require('../lib/gerador')
 
         const params = new Param({
             autor: "fulano",

@@ -13,7 +13,7 @@ describe('test gerais', () => {
         geradorUtilTest.removerDiretorioTest()
 
         git = await geradorUtilTest.criarRepo(nomeProjeto)
-        gerador = require('../lib/gerador-async-new')
+        gerador = require('../lib/gerador')
 
         params = new Param({
             autor: "fulano",

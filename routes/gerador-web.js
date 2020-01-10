@@ -9,7 +9,7 @@ module.exports = function (app) {
         try {
             const Param = require('../models/param')
             const params = new Param(req.body)
-            const gerador = require('../lib/gerador-async-new')(params)
+            const gerador = require('../lib/gerador')(params)
 
             const retorno = await gerador.gerarListaArtefato()
             

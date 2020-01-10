@@ -6,6 +6,9 @@ geradorService.$inject = ['$http']
 
 function geradorService($http) {
 
+    const PORT = 3333
+    const HOST = 'localhost'
+
     const service = {
         gerarListaArtefato: gerarListaArtefato
     }
@@ -14,7 +17,7 @@ function geradorService($http) {
 
         return $http({
             method: 'POST',
-            url: 'http://localhost:3000/gerarListaArtefato',
+            url: `http://${HOST}:${PORT}/gerarListaArtefato`,
             data: req
         })
     }
