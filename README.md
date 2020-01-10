@@ -30,6 +30,13 @@ Comando para listar os artefatos incluídos/alterados/renomeados para geração 
 
 ### Linux
 
+Na primeira utilização, deverá ser executado:
+
+``` console
+$ chmod +x gerador-lista-artefato-qas
+```
+Em seguida, execute o comando:
+
 ``` console
 $ ./gerador-lista-artefato-qas --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
 ```
