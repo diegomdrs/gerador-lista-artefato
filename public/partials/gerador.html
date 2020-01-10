@@ -82,7 +82,7 @@
 
 						<input type='text' class='form-control'
 							placeholder='Adicione uma ou mais tarefas separadas por vírgula'
-							aria-describedby='basic-addon2' ng-model='vm.tarefa' maxlength='300' number-only-and-comma>
+							ng-model='vm.tarefa' maxlength='300' number-only-and-comma>
 
 						<div class='input-group-append'>
 							<button class='btn btn-primary' ng-click='vm.adicionarTask()'>Adicionar</button>
@@ -100,8 +100,9 @@
 
 					<div class='input-group mb-3'>
 
-						<input type='text' class='form-control' placeholder='Adicione o caminho do projeto'
-							aria-describedby='basic-addon2' ng-model='vm.caminhoProjeto' maxlength='300'>
+						<input type='text' class='form-control' 
+							placeholder='Adicione o caminho do projeto ou mais separados por vírgula'
+							ng-model='vm.caminhoProjeto' maxlength='300'>
 
 						<div class='input-group-append'>
 							<button class='btn btn-primary' type='button'
