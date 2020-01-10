@@ -16,7 +16,7 @@ Comando para listar os artefatos incluídos/alterados/renomeados para geração 
 - Verificar se os merges estão sendo realizados de maneira correta
 - Utilizar o comando `git mv` para renomear os artefatos
 
-## Instalação
+## Download
 
 ### Linux 
 
