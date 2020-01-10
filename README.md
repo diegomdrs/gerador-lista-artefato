@@ -106,8 +106,11 @@ M      foo-estatico/Gruntfile.js
 
 Tarefa nº 900077
 
-M      foo-estatico/src/app/spas/foo/inclusao-foo.tpl.html
 A      foo-estatico/src/app/spas/foo/inclusao-foo.tpl.html
+
+Tarefa nº 900077
+
+M      foo-estatico/src/app/spas/foo/inclusao-foo.tpl.html
 M      foo-estatico/src/app/spas/foo/altera-foo.tpl.html
 
 Tarefa nº 900079
