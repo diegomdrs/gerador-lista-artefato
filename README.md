@@ -55,7 +55,7 @@ Para utilizar a versão Web, em ambas versões para Linux e Windows, execute o c
 $ ./gerador-lista-artefato-qas -s
 ```
 
-Em seguida, acesse a url [http://localhost:3333/gerador](http://localhost:3333/gerador):
+Em seguida, acesse a url [http://localhost:3333/gerador](http://localhost:3333/gerador)
 
 ## Parâmetros
 
