@@ -22,12 +22,6 @@ Comando para listar os artefatos incluídos/alterados/renomeados para geração 
 
 - Baixe [aqui](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/desenv-cli-web/dist/gerador-lista-artefato-qas) a versão Linux e salve no seu computador
 
-- Em seguida, execute o comando abaixo:
-
-``` console
-$ chmod +x gerador-lista-artefato-qas-linux
-```
-
 ### Windows 
 
 - Baixe [aqui](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/desenv-cli-web/dist/gerador-lista-artefato-qas.exe) a versão Windows e salve no seu computador
