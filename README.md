@@ -30,7 +30,7 @@ Comando para listar os artefatos incluídos/alterados/renomeados para geração 
 
 ### Linux
 
-Na primeira utilização da versão Linux, executado:
+Na primeira utilização da versão Linux, execute:
 
 ``` console
 $ chmod +x gerador-lista-artefato-qas
