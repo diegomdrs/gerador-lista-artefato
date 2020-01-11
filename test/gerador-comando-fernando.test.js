@@ -201,24 +201,6 @@ describe('test comando fernando', () => {
         await geradorUtilTest.criarEstrutura(listaEstrutura)
     })
 
-    it('test gerador sync master', async () => {
-
-        const gerador = require('../lib/gerador-sync-master')
-        
-        const params = new Param({
-            autor: "fulano",
-            projeto: ["apc-estatico", "apc-api", "crm-patrimonio-estatico", "crm-patrimonio-api"],
-            task: ["1199211", "1203082", "1203670", "1207175", "1210684",
-                "1210658", "1212262", "1212444"]
-        })
-
-        params.diretorio = geradorUtilTest.pathTest()
-
-        const lista = await gerador(params).gerarListaArtefato()
-
-        testarLista(lista)
-    })
-
     it('test gerador async', async () => {
 
         const gerador = require('../lib/gerador')
