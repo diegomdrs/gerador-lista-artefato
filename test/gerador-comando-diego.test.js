@@ -316,16 +316,16 @@ describe('test comando diego', () => {
 
         const params = new Param({
             autor: "fulano",
+            task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"],
             projeto: [
                 geradorUtilTest.pathTest() + "/apc-estatico",
                 geradorUtilTest.pathTest() + "/apc-api",
                 geradorUtilTest.pathTest() + "/crm-patrimonio-estatico",
                 geradorUtilTest.pathTest() + "/crm-patrimonio-api"
             ],
-            task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"],
-            mostrarNumModificacao: true,
             mostrarDeletados: true,
-
+            mostrarRenomeados: true,
+            mostrarNumModificacao: true
         })
 
         params.mostrarCommitsLocais = true
@@ -337,7 +337,7 @@ describe('test comando diego', () => {
 
     function testarLista(lista) {
 
-        expect(lista).toHaveLength(22)
+        expect(lista).toHaveLength(25)
 
         expect(lista[0].listaNumTarefaSaida).toHaveLength(2)
         expect(lista[0].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1150152', '1155478']))
@@ -369,56 +369,68 @@ describe('test comando diego', () => {
 
         expect(lista[16].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[16].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1172414']))
-        expect(lista[16].listaArtefatoSaida).toHaveLength(3)
+        expect(lista[16].listaArtefatoSaida).toHaveLength(1)
 
-        expect(lista[16].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
-        expect(lista[16].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-        expect(lista[16].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*SwaggerBootstrap.java$/g)
+        expect(lista[16].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[16].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
+        expect(lista[16].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*web.xml$/g)
 
-        expect(lista[16].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
-        expect(lista[16].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-        expect(lista[16].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*SwaggerBootstrapTest.java$/g)
+        expect(lista[17].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[17].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1172414']))
+        expect(lista[17].listaArtefatoSaida).toHaveLength(2)
 
-        expect(lista[16].listaArtefatoSaida[2].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        expect(lista[16].listaArtefatoSaida[2].numeroAlteracao).toBe(2)
-        expect(lista[16].listaArtefatoSaida[2].nomeArtefato).toMatch(/.*web.xml$/g)
+        expect(lista[17].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
+        expect(lista[17].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[17].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*SwaggerBootstrap.java$/g)
 
-        expect(lista[19].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[19].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1155478']))
-        expect(lista[19].listaArtefatoSaida).toHaveLength(3)
-
-        expect(lista[19].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        expect(lista[19].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-        expect(lista[19].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*GatewayRegistrarCredorContratoArrendamento.java$/g)
-
-        expect(lista[19].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
-        expect(lista[19].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-        expect(lista[19].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*GatewayListarParametroFormaPagamento.java$/g)
-
-        expect(lista[19].listaArtefatoSaida[2].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        expect(lista[19].listaArtefatoSaida[2].numeroAlteracao).toBe(3)
-        expect(lista[19].listaArtefatoSaida[2].nomeArtefato).toMatch(/.*apc-utils.js$/g)
+        expect(lista[17].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
+        expect(lista[17].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+        expect(lista[17].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*SwaggerBootstrapTest.java$/g)
 
         expect(lista[20].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[20].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1150152']))
-        expect(lista[20].listaArtefatoSaida).toHaveLength(4)
+        expect(lista[20].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1155478']))
+        expect(lista[20].listaArtefatoSaida).toHaveLength(2)
 
         expect(lista[20].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        expect(lista[20].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
-        expect(lista[20].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*ContratoResource.java$/g)
+        expect(lista[20].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[20].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*GatewayRegistrarCredorContratoArrendamento.java$/g)
 
         expect(lista[20].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        expect(lista[20].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-        expect(lista[20].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java$/g)
+        expect(lista[20].listaArtefatoSaida[1].numeroAlteracao).toBe(3)
+        expect(lista[20].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*apc-utils.js$/g)
 
-        expect(lista[20].listaArtefatoSaida[2].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
-        expect(lista[20].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
-        expect(lista[20].listaArtefatoSaida[2].nomeArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java$/g)
-        expect(lista[20].listaArtefatoSaida[2].nomeAntigoArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosLocacaoImoveis.java$/g)
-        expect(lista[20].listaArtefatoSaida[2].nomeNovoArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java$/g)
+        expect(lista[21].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[21].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1155478']))
+        expect(lista[21].listaArtefatoSaida).toHaveLength(1)
 
-        expect(lista[20].listaArtefatoSaida[3].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        expect(lista[20].listaArtefatoSaida[3].numeroAlteracao).toBe(1)
-        expect(lista[20].listaArtefatoSaida[3].nomeArtefato).toMatch(/.*apc.css$/g)
+        expect(lista[21].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
+        expect(lista[21].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[21].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*GatewayListarParametroFormaPagamento.java$/g)
+
+        expect(lista[22].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[22].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1150152']))
+        expect(lista[22].listaArtefatoSaida).toHaveLength(3)
+
+        expect(lista[22].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[22].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
+        expect(lista[22].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*ContratoResource.java$/g)
+
+        expect(lista[22].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[22].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+        expect(lista[22].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java$/g)
+
+        expect(lista[22].listaArtefatoSaida[2].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[22].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
+        expect(lista[22].listaArtefatoSaida[2].nomeArtefato).toMatch(/.*apc.css$/g)
+
+        expect(lista[23].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[23].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1150152']))
+        expect(lista[23].listaArtefatoSaida).toHaveLength(1)
+
+        expect(lista[23].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
+        expect(lista[23].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[23].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java$/g)
+        expect(lista[23].listaArtefatoSaida[0].nomeAntigoArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosLocacaoImoveis.java$/g)
+        expect(lista[23].listaArtefatoSaida[0].nomeNovoArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java$/g)
     }
 })

@@ -37,7 +37,7 @@
         },
         {
             // node_modules/jest/bin/jest.js --runInBand --verbose test/gerador-comando-diego.test.js
-            // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=apc-estatico,apc-api,crm-patrimonio-estatico,crm-patrimonio-api --autor=fulano --task=1168815,1172414,1168800,1167319,1163642,1155478,1150152,1161422 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
+            // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=apc-estatico,apc-api,crm-patrimonio-estatico,crm-patrimonio-api --autor=fulano --task=1168815,1172414,1168800,1167319,1163642,1155478,1150152,1161422 --mostrar-num-modificacao --mostrar-renomeados --mostrar-deletados --mostrar-commits-locais
             "type": "node",
             "request": "launch",
             "name": "comando diego app.js",
