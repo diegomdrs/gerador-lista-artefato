@@ -70,21 +70,21 @@ describe('test comando diego', () => {
                     ]
                 },
                 {
-                    pathArtefato: 'src/main/java/br/com/foo/bar/api/v1/fornecedor/gateway/GatewayListarParametroFormaPagamento.java',
+                    pathArtefato: 'src/main/java/br/com/foo/bar/api/v1/fornecedor/gateway/GatewayListarParametroFormaCorge.java',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1155478', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.DELETED }
                     ]
                 },
                 {
-                    pathArtefato: 'src/main/java/br/com/foo/bar/api/v1/contrato/resources/ContratoResource.java',
+                    pathArtefato: 'src/main/java/br/com/foo/bar/api/v1/waldo/resources/ContratoResource.java',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1150152', numAlteracao: 2, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED }
                     ]
                 },
                 {
-                    pathArtefato: 'src/main/java/br/com/foo/bar/api/v1/contrato/gateway/GatewayListarFornecedoresCredoresContratosLocacaoImoveis.java',
+                    pathArtefato: 'src/main/java/br/com/foo/bar/api/v1/waldo/gateway/GatewayListarFornecedoresCredoresContratosLocacaoImoveis.java',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1150152', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED }
@@ -92,8 +92,8 @@ describe('test comando diego', () => {
                 },
                 {
                     pathArtefato: {
-                        origem: 'src/main/java/br/com/foo/bar/api/v1/contrato/gateway/GatewayListarFornecedoresCredoresContratosLocacaoImoveis.java',
-                        destino: 'src/main/java/br/com/foo/bar/api/v1/contrato/gateway/GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java'
+                        origem: 'src/main/java/br/com/foo/bar/api/v1/waldo/gateway/GatewayListarFornecedoresCredoresContratosLocacaoImoveis.java',
+                        destino: 'src/main/java/br/com/foo/bar/api/v1/waldo/gateway/GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java'
                     },
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
@@ -105,7 +105,7 @@ describe('test comando diego', () => {
                 repo: {},
                 nomeProjeto: 'bar-estatico',
                 listaArtefato: [{
-                    pathArtefato: 'src/app/spas/contrato/consulta/detalhaContrato/detalha-contrato.tpl.html',
+                    pathArtefato: 'src/app/spas/waldo/consulta/detalhaContrato/detalha-waldo.tpl.html',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1168815', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED },
@@ -113,7 +113,7 @@ describe('test comando diego', () => {
                     ]
                 },
                 {
-                    pathArtefato: 'src/app/spas/contrato/consulta/detalhaContrato/fornecedor/lista-fornecedor.tpl.html',
+                    pathArtefato: 'src/app/spas/waldo/consulta/detalhaContrato/fornecedor/lista-fornecedor.tpl.html',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1168815', numAlteracao: 4, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED },
@@ -125,7 +125,7 @@ describe('test comando diego', () => {
                     ]
                 },
                 {
-                    pathArtefato: 'src/app/spas/contrato/consulta/detalhaContrato/fornecedor/modalDadosFornecedor/manter-fornecedor.tpl.html',
+                    pathArtefato: 'src/app/spas/waldo/consulta/detalhaContrato/fornecedor/modalDadosFornecedor/manter-fornecedor.tpl.html',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1168800', numAlteracao: 7, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED },
@@ -135,7 +135,7 @@ describe('test comando diego', () => {
                     ]
                 },
                 {
-                    pathArtefato: 'src/app/spas/contrato/consulta/detalhaContrato/abas-detalha-contrato.html',
+                    pathArtefato: 'src/app/spas/waldo/consulta/detalhaContrato/abas-detalha-waldo.html',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1168815', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED },
@@ -143,7 +143,7 @@ describe('test comando diego', () => {
                     ]
                 },
                 {
-                    pathArtefato: 'src/app/spas/contrato/contrato.app.html',
+                    pathArtefato: 'src/app/spas/waldo/waldo.app.html',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1155478', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED },
@@ -161,7 +161,7 @@ describe('test comando diego', () => {
                     ]
                 },
                 {
-                    pathArtefato: 'spec/app/spas/contrato/consulta/detalhaContrato/fornecedor/lista-fornecedor-controllers-spec.js',
+                    pathArtefato: 'spec/app/spas/waldo/consulta/detalhaContrato/fornecedor/lista-fornecedor-controllers-spec.js',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1168800', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED },
@@ -178,7 +178,7 @@ describe('test comando diego', () => {
                     ]
                 },
                 {
-                    pathArtefato: 'src/app/spas/contrato/contrato-app.js',
+                    pathArtefato: 'src/app/spas/waldo/waldo-app.js',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1168815', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED },
@@ -187,7 +187,7 @@ describe('test comando diego', () => {
                     ]
                 },
                 {
-                    pathArtefato: 'src/app/spas/contrato/consulta/detalhaContrato/fornecedor/modalDadosFornecedor/manter-fornecedor-controller.js',
+                    pathArtefato: 'src/app/spas/waldo/consulta/detalhaContrato/fornecedor/modalDadosFornecedor/manter-fornecedor-controller.js',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1168800', numAlteracao: 7, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED },
@@ -197,7 +197,7 @@ describe('test comando diego', () => {
                     ]
                 },
                 {
-                    pathArtefato: 'src/app/spas/contrato/contrato-services.js',
+                    pathArtefato: 'src/app/spas/waldo/waldo-services.js',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1163642', numAlteracao: 3, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED },
@@ -206,7 +206,7 @@ describe('test comando diego', () => {
                     ]
                 },
                 {
-                    pathArtefato: 'src/app/spas/contrato/consulta/detalhaContrato/fornecedor/lista-fornecedor-controllers.js',
+                    pathArtefato: 'src/app/spas/waldo/consulta/detalhaContrato/fornecedor/lista-fornecedor-controllers.js',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1168800', numAlteracao: 5, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED },
@@ -217,7 +217,7 @@ describe('test comando diego', () => {
                     ]
                 },
                 {
-                    pathArtefato: 'src/app/spas/pagamento/despachoPagamento/modal-detalha-cronograma-contrato/detalha-cronograma-contrato.tpl.html',
+                    pathArtefato: 'src/app/spas/pagamento/garplyCorge/modal-detalha-cronograma-waldo/detalha-cronograma-waldo.tpl.html',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1168800', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED }
@@ -269,21 +269,21 @@ describe('test comando diego', () => {
                 nomeProjeto: 'qux-api',
                 listaArtefato: [
                     {
-                        pathArtefato: 'src/main/java/br/com/foo/qux/api/v1/despachoPagamento/resource/DespachoPagamentoResource.java',
+                        pathArtefato: 'src/main/java/br/com/foo/qux/api/v1/garplyCorge/resource/garplyCorgeResource.java',
                         listaTarefa: [
                             { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                             { numeroTarefa: '1161422', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED }
                         ]
                     },
                     {
-                        pathArtefato: 'src/main/java/br/com/foo/qux/api/v1/despachoPagamento/gateway/GatewayListarContratosArrendamentoFaseCronogramaFinanceiro.java',
+                        pathArtefato: 'src/main/java/br/com/foo/qux/api/v1/garplyCorge/gateway/GatewayListarContratosArrendamentoFaseCronogramaFinanceiro.java',
                         listaTarefa: [
                             { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                             { numeroTarefa: '1161422', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED }
                         ]
                     },
                     {
-                        pathArtefato: 'src/test/java/br/com/foo/qux/api/v1/resources/DespachoPagamentoResourceTest.java',
+                        pathArtefato: 'src/test/java/br/com/foo/qux/api/v1/resources/garplyCorgeResourceTest.java',
                         listaTarefa: [
                             { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                             { numeroTarefa: '1161422', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED }
@@ -405,7 +405,7 @@ describe('test comando diego', () => {
 
         expect(lista[21].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
         expect(lista[21].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-        expect(lista[21].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*GatewayListarParametroFormaPagamento.java$/g)
+        expect(lista[21].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*GatewayListarParametroFormaCorge.java$/g)
 
         expect(lista[22].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[22].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1150152']))
