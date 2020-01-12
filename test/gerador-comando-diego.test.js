@@ -419,6 +419,6 @@ describe('test comando diego', () => {
 
         expect(lista[20].listaArtefatoSaida[3].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
         expect(lista[20].listaArtefatoSaida[3].numeroAlteracao).toBe(1)
-        expect(lista[20].listaArtefatoSaida[3].nomeArtefato).toMatch(/.*apc.css$/g)        
+        expect(lista[20].listaArtefatoSaida[3].nomeArtefato).toMatch(/.*apc.css$/g)
     }
 })
