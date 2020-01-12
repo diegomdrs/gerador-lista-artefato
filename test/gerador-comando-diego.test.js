@@ -14,16 +14,16 @@ describe('test comando diego', () => {
         const listaEstrutura = [
             {
                 repo: {},
-                nomeProjeto: 'apc-api',
+                nomeProjeto: 'bar-api',
                 listaArtefato: [{
-                    pathArtefato: 'src/main/java/br/com/bb/apc/api/v1/fornecedor/resource/FornecedorResource.java',
+                    pathArtefato: 'src/main/java/br/com/foo/bar/api/v1/fornecedor/resource/FornecedorResource.java',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1155478', numAlteracao: 4, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED },
                         { numeroTarefa: '1150152', numAlteracao: 5, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED }
                     ]
                 }, {
-                    pathArtefato: 'src/test/java/br/com/bb/apc/api/v1/resources/test/FornecedorResourceTest.java',
+                    pathArtefato: 'src/test/java/br/com/foo/bar/api/v1/resources/test/FornecedorResourceTest.java',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1155478', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED },
@@ -42,14 +42,14 @@ describe('test comando diego', () => {
                     ]
                 },
                 {
-                    pathArtefato: 'src/main/java/br/com/bb/apc/infra/SwaggerBootstrap.java',
+                    pathArtefato: 'src/main/java/br/com/foo/bar/infra/SwaggerBootstrap.java',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1172414', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.DELETED }
                     ]
                 },
                 {
-                    pathArtefato: 'src/test/java/br/com/bb/apc/api/v1/outros/test/SwaggerBootstrapTest.java',
+                    pathArtefato: 'src/test/java/br/com/foo/bar/api/v1/outros/test/SwaggerBootstrapTest.java',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1172414', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.DELETED }
@@ -63,28 +63,28 @@ describe('test comando diego', () => {
                     ]
                 },
                 {
-                    pathArtefato: 'src/main/java/br/com/bb/apc/api/v1/fornecedor/gateway/GatewayRegistrarCredorContratoArrendamento.java',
+                    pathArtefato: 'src/main/java/br/com/foo/bar/api/v1/fornecedor/gateway/GatewayRegistrarCredorContratoArrendamento.java',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1155478', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED }
                     ]
                 },
                 {
-                    pathArtefato: 'src/main/java/br/com/bb/apc/api/v1/fornecedor/gateway/GatewayListarParametroFormaPagamento.java',
+                    pathArtefato: 'src/main/java/br/com/foo/bar/api/v1/fornecedor/gateway/GatewayListarParametroFormaPagamento.java',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1155478', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.DELETED }
                     ]
                 },
                 {
-                    pathArtefato: 'src/main/java/br/com/bb/apc/api/v1/contrato/resources/ContratoResource.java',
+                    pathArtefato: 'src/main/java/br/com/foo/bar/api/v1/contrato/resources/ContratoResource.java',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1150152', numAlteracao: 2, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED }
                     ]
                 },
                 {
-                    pathArtefato: 'src/main/java/br/com/bb/apc/api/v1/contrato/gateway/GatewayListarFornecedoresCredoresContratosLocacaoImoveis.java',
+                    pathArtefato: 'src/main/java/br/com/foo/bar/api/v1/contrato/gateway/GatewayListarFornecedoresCredoresContratosLocacaoImoveis.java',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1150152', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED }
@@ -92,8 +92,8 @@ describe('test comando diego', () => {
                 },
                 {
                     pathArtefato: {
-                        origem: 'src/main/java/br/com/bb/apc/api/v1/contrato/gateway/GatewayListarFornecedoresCredoresContratosLocacaoImoveis.java',
-                        destino: 'src/main/java/br/com/bb/apc/api/v1/contrato/gateway/GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java'
+                        origem: 'src/main/java/br/com/foo/bar/api/v1/contrato/gateway/GatewayListarFornecedoresCredoresContratosLocacaoImoveis.java',
+                        destino: 'src/main/java/br/com/foo/bar/api/v1/contrato/gateway/GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java'
                     },
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
@@ -103,7 +103,7 @@ describe('test comando diego', () => {
                 ]
             }, {
                 repo: {},
-                nomeProjeto: 'apc-estatico',
+                nomeProjeto: 'bar-estatico',
                 listaArtefato: [{
                     pathArtefato: 'src/app/spas/contrato/consulta/detalhaContrato/detalha-contrato.tpl.html',
                     listaTarefa: [
@@ -224,21 +224,21 @@ describe('test comando diego', () => {
                     ]
                 },
                 {
-                    pathArtefato: 'src/app/scripts/apc-constantes.js',
+                    pathArtefato: 'src/app/scripts/bar-constantes.js',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1168800', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED }
                     ]
                 },
                 {
-                    pathArtefato: 'src/app/scripts/apc-utils.js',
+                    pathArtefato: 'src/app/scripts/bar-utils.js',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1155478', numAlteracao: 3, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED }
                     ]
                 },
                 {
-                    pathArtefato: 'src/app/styles/apc.css',
+                    pathArtefato: 'src/app/styles/bar.css',
                     listaTarefa: [
                         { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                         { numeroTarefa: '1150152', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED }
@@ -247,7 +247,7 @@ describe('test comando diego', () => {
             },
             {
                 repo: {},
-                nomeProjeto: 'crm-patrimonio-estatico',
+                nomeProjeto: 'qux-estatico',
                 listaArtefato: [
                     {
                         pathArtefato: 'package.json',
@@ -266,31 +266,31 @@ describe('test comando diego', () => {
             },
             {
                 repo: {},
-                nomeProjeto: 'crm-patrimonio-api',
+                nomeProjeto: 'qux-api',
                 listaArtefato: [
                     {
-                        pathArtefato: 'src/main/java/br/com/bb/crm/api/v1/despachoPagamento/resource/DespachoPagamentoResource.java',
+                        pathArtefato: 'src/main/java/br/com/foo/qux/api/v1/despachoPagamento/resource/DespachoPagamentoResource.java',
                         listaTarefa: [
                             { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                             { numeroTarefa: '1161422', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED }
                         ]
                     },
                     {
-                        pathArtefato: 'src/main/java/br/com/bb/crm/api/v1/despachoPagamento/gateway/GatewayListarContratosArrendamentoFaseCronogramaFinanceiro.java',
+                        pathArtefato: 'src/main/java/br/com/foo/qux/api/v1/despachoPagamento/gateway/GatewayListarContratosArrendamentoFaseCronogramaFinanceiro.java',
                         listaTarefa: [
                             { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                             { numeroTarefa: '1161422', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED }
                         ]
                     },
                     {
-                        pathArtefato: 'src/test/java/br/com/bb/crm/api/v1/resources/DespachoPagamentoResourceTest.java',
+                        pathArtefato: 'src/test/java/br/com/foo/qux/api/v1/resources/DespachoPagamentoResourceTest.java',
                         listaTarefa: [
                             { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                             { numeroTarefa: '1161422', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED }
                         ]
                     },
                     {
-                        pathArtefato: 'src/test/java/br/com/bb/crm/api/v1/gateway/GatewayListarContratosCronogramaFaseTest.java',
+                        pathArtefato: 'src/test/java/br/com/foo/qux/api/v1/gateway/GatewayListarContratosCronogramaFaseTest.java',
                         listaTarefa: [
                             { numeroTarefa: '0000000', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.ADDED },
                             { numeroTarefa: '1161422', numAlteracao: 1, tipoAlteracao: TIPO_MODIFICACAO.MODIFIED }
@@ -318,10 +318,10 @@ describe('test comando diego', () => {
             autor: "fulano",
             task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"],
             projeto: [
-                geradorUtilTest.pathTest() + "/apc-estatico",
-                geradorUtilTest.pathTest() + "/apc-api",
-                geradorUtilTest.pathTest() + "/crm-patrimonio-estatico",
-                geradorUtilTest.pathTest() + "/crm-patrimonio-api"
+                geradorUtilTest.pathTest() + "/bar-estatico",
+                geradorUtilTest.pathTest() + "/bar-api",
+                geradorUtilTest.pathTest() + "/qux-estatico",
+                geradorUtilTest.pathTest() + "/qux-api"
             ],
             mostrarDeletados: true,
             mostrarRenomeados: true,
@@ -397,7 +397,7 @@ describe('test comando diego', () => {
 
         expect(lista[20].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
         expect(lista[20].listaArtefatoSaida[1].numeroAlteracao).toBe(3)
-        expect(lista[20].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*apc-utils.js$/g)
+        expect(lista[20].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*bar-utils.js$/g)
 
         expect(lista[21].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[21].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1155478']))
@@ -421,7 +421,7 @@ describe('test comando diego', () => {
 
         expect(lista[22].listaArtefatoSaida[2].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
         expect(lista[22].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
-        expect(lista[22].listaArtefatoSaida[2].nomeArtefato).toMatch(/.*apc.css$/g)
+        expect(lista[22].listaArtefatoSaida[2].nomeArtefato).toMatch(/.*bar.css$/g)
 
         expect(lista[23].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[23].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1150152']))
