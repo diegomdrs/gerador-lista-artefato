@@ -48,7 +48,8 @@
                 "--autor=fulano",
                 "--task=1168815,1172414,1168800,1167319,1163642,1155478,1150152,1161422",
                 "--mostrar-num-modificacao",
-                "--mostrar-deletados"
+                "--mostrar-deletados",
+                "--mostrar-commits-locais"
             ]
         },
         {
@@ -64,7 +65,8 @@
                 "--autor=fulano",
                 "--task=1199211,1203082,1203670,1207175,1210684,1210658,1212262,1212444",
                 "--mostrar-num-modificacao",
-                "--mostrar-deletados"
+                "--mostrar-deletados",
+                "--mostrar-commits-locais"
             ]
         },
         {
@@ -81,7 +83,8 @@
                 "--task=1111111",
                 "--mostrar-num-modificacao",
                 "--mostrar-deletados",
-                "--mostrar-renomeados"
+                "--mostrar-renomeados",
+                "--mostrar-commits-locais"
             ]
         },
         {
@@ -97,7 +100,8 @@
                 "--task=1239662,1221786,1234921,1229100,1227471,1226285,1221172,1217966,1215554",
                 "--mostrar-num-modificacao",
                 "--mostrar-deletados",
-                "--mostrar-renomeados"
+                "--mostrar-renomeados",
+                "--mostrar-commits-locais"
             ]
         }
     ]
