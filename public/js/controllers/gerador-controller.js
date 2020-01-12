@@ -164,8 +164,7 @@ function GeradorController(geradorService, blockUI) {
 
     function obterNomeProjeto(caminhoProjeto) {
 
-        var segmentos = caminhoProjeto.split('/')
-        return segmentos[segmentos.length - 1]
+        return caminhoProjeto.match(/([^/|\\]*)$/g)[0]
     }
 
     function obterNomeArtefato(artefato) {

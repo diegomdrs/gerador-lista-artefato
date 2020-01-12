@@ -312,7 +312,7 @@ describe('test comando diego', () => {
         await geradorUtilTest.criarEstrutura(listaEstrutura)
     })
 
-    it('test gerador async', async () => {
+    it('test gerador', async () => {
 
         const gerador = require('../lib/gerador')
 
@@ -331,50 +331,29 @@ describe('test comando diego', () => {
 
         const lista = await gerador(params).gerarListaArtefato()
 
-        // testarLista(lista)
+        testarLista(lista)
 
-        // expect(lista[20].listaNumTarefaSaida).toHaveLength(1)
-        // expect(lista[20].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1150152']))
-        // expect(lista[20].listaArtefatoSaida).toHaveLength(4)
+        expect(lista[20].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[20].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1150152']))
+        expect(lista[20].listaArtefatoSaida).toHaveLength(4)
 
-        // expect(lista[20].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        // expect(lista[20].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
-        // expect(lista[20].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*ContratoResource.java$/g)
+        expect(lista[20].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[20].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
+        expect(lista[20].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*ContratoResource.java$/g)
 
-        // expect(lista[20].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        // expect(lista[20].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-        // expect(lista[20].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java$/g)
+        expect(lista[20].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[20].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+        expect(lista[20].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java$/g)
 
-        // expect(lista[20].listaArtefatoSaida[2].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
-        // expect(lista[20].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
-        // expect(lista[20].listaArtefatoSaida[2].nomeArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java$/g)
-        // expect(lista[20].listaArtefatoSaida[2].nomeAntigoArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosLocacaoImoveis.java$/g)
-        // expect(lista[20].listaArtefatoSaida[2].nomeNovoArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java$/g)
+        expect(lista[20].listaArtefatoSaida[2].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
+        expect(lista[20].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
+        expect(lista[20].listaArtefatoSaida[2].nomeArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java$/g)
+        expect(lista[20].listaArtefatoSaida[2].nomeAntigoArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosLocacaoImoveis.java$/g)
+        expect(lista[20].listaArtefatoSaida[2].nomeNovoArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java$/g)
 
-        // expect(lista[20].listaArtefatoSaida[3].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        // expect(lista[20].listaArtefatoSaida[3].numeroAlteracao).toBe(1)
-        // expect(lista[20].listaArtefatoSaida[3].nomeArtefato).toMatch(/.*apc.css$/g)
-    })
-
-    it('test gerador async new', async () => {
-
-        const gerador = require('../lib/gerador')
-
-        const params = new Param({
-            autor: "fulano",
-            projeto: [
-                geradorUtilTest.pathTest() + "/apc-estatico",
-                geradorUtilTest.pathTest() + "/apc-api",
-                geradorUtilTest.pathTest() + "/crm-patrimonio-estatico",
-                geradorUtilTest.pathTest() + "/crm-patrimonio-api"
-            ],
-            task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"],
-            mostrarNumModificacao: true,
-            mostrarDeletados: true,
-            mostrarCommitsLocais: false
-        })
-
-        const lista = await gerador(params).gerarListaArtefato()
+        expect(lista[20].listaArtefatoSaida[3].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[20].listaArtefatoSaida[3].numeroAlteracao).toBe(1)
+        expect(lista[20].listaArtefatoSaida[3].nomeArtefato).toMatch(/.*apc.css$/g)
     })
 
     function testarLista(lista) {
