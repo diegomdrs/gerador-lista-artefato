@@ -22,7 +22,7 @@
             "restart": true
         },
         {
-            // node app --diretorio=/home/foo/Documents --projeto=foo-estatico,foo-api --autor=diegomdrs --task=1111111 --mostrar-num-modificacao --mostrar-deletados
+            // node app --diretorio=/home/foo/Documents --projeto=foo-estatico,foo-api --autor=diegomdrs --task=1111111 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
             "type": "node",
             "request": "launch",
             "name": "jest",
@@ -37,7 +37,7 @@
         },
         {
             // node_modules/jest/bin/jest.js --runInBand --verbose test/gerador-comando-diego.test.js
-            // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=apc-estatico,apc-api,crm-patrimonio-estatico,crm-patrimonio-api --autor=fulano --task=1168815,1172414,1168800,1167319,1163642,1155478,1150152,1161422 --mostrar-num-modificacao --mostrar-deletados
+            // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=apc-estatico,apc-api,crm-patrimonio-estatico,crm-patrimonio-api --autor=fulano --task=1168815,1172414,1168800,1167319,1163642,1155478,1150152,1161422 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
             "type": "node",
             "request": "launch",
             "name": "comando diego app.js",
@@ -54,7 +54,7 @@
         },
         {
             // node_modules/jest/bin/jest.js --runInBand --verbose test/gerador-comando-fernando.test.js
-            // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=apc-estatico,apc-api,crm-patrimonio-estatico,crm-patrimonio-api --autor=fulano --task=1199211,1203082,1203670,1207175,1210684,1210658,1212262,1212444 --mostrar-num-modificacao --mostrar-deletados
+            // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=apc-estatico,apc-api,crm-patrimonio-estatico,crm-patrimonio-api --autor=fulano --task=1199211,1203082,1203670,1207175,1210684,1210658,1212262,1212444 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
             "type": "node",
             "request": "launch",
             "name": "comando fernando app.js",
@@ -71,7 +71,7 @@
         },
         {
             // node_modules/jest/bin/jest.js --runInBand --verbose test/gerador.test.js
-            // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo --autor=fulano --task=1111111 --mostrar-num-modificacao --mostrar-deletados
+            // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo --autor=fulano --task=1111111 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
             "type": "node",
             "request": "launch",
             "name": "comando test app.js",
