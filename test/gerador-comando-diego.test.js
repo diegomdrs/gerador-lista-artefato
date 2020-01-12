@@ -3,8 +3,6 @@ const geradorUtilTest = require('./gerador-util-test')
 
 const TIPO_MODIFICACAO = require('../lib/constants').TIPO_MODIFICACAO
 
-let params = {}
-
 describe('test comando diego', () => {
 
     beforeAll(async () => {
@@ -326,34 +324,15 @@ describe('test comando diego', () => {
             ],
             task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"],
             mostrarNumModificacao: true,
-            mostrarDeletados: true
+            mostrarDeletados: true,
+
         })
+
+        params.mostrarCommitsLocais = true
 
         const lista = await gerador(params).gerarListaArtefato()
 
         testarLista(lista)
-
-        expect(lista[20].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[20].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1150152']))
-        expect(lista[20].listaArtefatoSaida).toHaveLength(4)
-
-        expect(lista[20].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        expect(lista[20].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
-        expect(lista[20].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*ContratoResource.java$/g)
-
-        expect(lista[20].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        expect(lista[20].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-        expect(lista[20].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java$/g)
-
-        expect(lista[20].listaArtefatoSaida[2].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
-        expect(lista[20].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
-        expect(lista[20].listaArtefatoSaida[2].nomeArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java$/g)
-        expect(lista[20].listaArtefatoSaida[2].nomeAntigoArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosLocacaoImoveis.java$/g)
-        expect(lista[20].listaArtefatoSaida[2].nomeNovoArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java$/g)
-
-        expect(lista[20].listaArtefatoSaida[3].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        expect(lista[20].listaArtefatoSaida[3].numeroAlteracao).toBe(1)
-        expect(lista[20].listaArtefatoSaida[3].nomeArtefato).toMatch(/.*apc.css$/g)
     })
 
     function testarLista(lista) {
@@ -419,5 +398,27 @@ describe('test comando diego', () => {
         expect(lista[19].listaArtefatoSaida[2].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
         expect(lista[19].listaArtefatoSaida[2].numeroAlteracao).toBe(3)
         expect(lista[19].listaArtefatoSaida[2].nomeArtefato).toMatch(/.*apc-utils.js$/g)
+
+        expect(lista[20].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[20].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1150152']))
+        expect(lista[20].listaArtefatoSaida).toHaveLength(4)
+
+        expect(lista[20].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[20].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
+        expect(lista[20].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*ContratoResource.java$/g)
+
+        expect(lista[20].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[20].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+        expect(lista[20].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java$/g)
+
+        expect(lista[20].listaArtefatoSaida[2].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
+        expect(lista[20].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
+        expect(lista[20].listaArtefatoSaida[2].nomeArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java$/g)
+        expect(lista[20].listaArtefatoSaida[2].nomeAntigoArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosLocacaoImoveis.java$/g)
+        expect(lista[20].listaArtefatoSaida[2].nomeNovoArtefato).toMatch(/.*GatewayListarFornecedoresCredoresContratosArrendamentoImoveis.java$/g)
+
+        expect(lista[20].listaArtefatoSaida[3].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[20].listaArtefatoSaida[3].numeroAlteracao).toBe(1)
+        expect(lista[20].listaArtefatoSaida[3].nomeArtefato).toMatch(/.*apc.css$/g)        
     }
 })

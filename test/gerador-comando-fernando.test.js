@@ -217,9 +217,11 @@ describe('test comando fernando', () => {
                 "1210658", "1212262", "1212444"]
         })
 
+        params.mostrarCommitsLocais = true
+
         const lista = await gerador(params).gerarListaArtefato()
 
-        // testarLista(lista)
+        testarLista(lista)
     })
 
     function testarLista(lista) {
