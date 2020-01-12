@@ -36,7 +36,7 @@
             "internalConsoleOptions": "openOnSessionStart"
         },
         {
-            // node_modules/jest/bin/jest.js --runInBand --verbose test/gerador-comando-diego.test.js
+            // node_modules/jest/bin/jest.js --runInBand --verbose test/gerador-comando-fulano.test.js
             // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=bar-estatico,bar-api,qux-estatico,qux-api --autor=fulano --task=1168815,1172414,1168800,1167319,1163642,1155478,1150152,1161422 --mostrar-num-modificacao --mostrar-renomeados --mostrar-deletados --mostrar-commits-locais
             "type": "node",
             "request": "launch",
