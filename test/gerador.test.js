@@ -4,6 +4,8 @@ const geradorUtilTest = require('./gerador-util-test')
 const TIPO_MODIFICACAO = require('../lib/constants').TIPO_MODIFICACAO
 
 const nomeProjeto = 'foo'
+const autor = 'fulano'
+
 let git, gerador, params = {}
 
 describe('test gerais', () => {
@@ -12,7 +14,7 @@ describe('test gerais', () => {
 
         geradorUtilTest.removerDiretorioTest()
 
-        git = await geradorUtilTest.criarRepo(nomeProjeto)
+        git = await geradorUtilTest.criarRepo(nomeProjeto, autor)
         gerador = require('../lib/gerador')
 
         params = new Param({

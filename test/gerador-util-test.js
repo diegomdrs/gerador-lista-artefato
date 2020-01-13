@@ -13,11 +13,11 @@ module.exports = class {
         return PATH_TEST
     }
 
-    static async criarEstrutura(listaEstrutura) {
+    static async criarEstrutura(listaEstrutura, autor) {
 
         for (let estrutura of listaEstrutura) {
 
-            const git = await this.criarRepo(estrutura.nomeProjeto)
+            const git = await this.criarRepo(estrutura.nomeProjeto, autor)
 
             for (const artefato of estrutura.listaArtefato) {
 
@@ -42,7 +42,7 @@ module.exports = class {
         await git.checkoutLocalBranch(nomeBranch)
     }
 
-    static async criarRepo(nomeProjeto) {
+    static async criarRepo(nomeProjeto, autor) {
 
         const pathProjeto = PATH_TEST + '/' + nomeProjeto
 
@@ -51,8 +51,8 @@ module.exports = class {
         const git = require('simple-git/promise')(pathProjeto)
 
         await git.init()
-        await git.addConfig('user.name', 'fulano')
-        await git.addConfig('user.email', 'fulano@fulano.com')
+        await git.addConfig('user.name', autor)
+        await git.addConfig('user.email', `${autor}@${autor}.com`)
 
         return git
     }

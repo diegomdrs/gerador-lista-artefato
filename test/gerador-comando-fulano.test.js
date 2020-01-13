@@ -1,9 +1,11 @@
 const Param = require('../models/param')
 const geradorUtilTest = require('./gerador-util-test')
 
+const autor = 'fulano'
+
 const TIPO_MODIFICACAO = require('../lib/constants').TIPO_MODIFICACAO
 
-describe('test comando diego', () => {
+describe('test comando fulano', () => {
 
     beforeAll(async () => {
 
@@ -307,7 +309,7 @@ describe('test comando diego', () => {
 
         ]
 
-        await geradorUtilTest.criarEstrutura(listaEstrutura)
+        await geradorUtilTest.criarEstrutura(listaEstrutura, autor)
     })
 
     it('test gerador', async () => {
@@ -315,7 +317,7 @@ describe('test comando diego', () => {
         const gerador = require('../lib/gerador')
 
         const params = new Param({
-            autor: "fulano",
+            autor: autor,
             task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"],
             projeto: [
                 geradorUtilTest.pathTest() + "/bar-estatico",
