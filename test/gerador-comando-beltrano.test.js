@@ -5,7 +5,7 @@ const autor = 'beltrano'
 
 const TIPO_MODIFICACAO = require('../lib/constants').TIPO_MODIFICACAO
 
-describe('test comando fulano', () => {
+describe('test comando beltrano', () => {
 
     beforeAll(async () => {
 
