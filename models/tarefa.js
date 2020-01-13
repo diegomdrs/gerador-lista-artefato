@@ -1,3 +1,4 @@
+const TIPO_MODIFICACAO = require('../lib/constants').TIPO_MODIFICACAO
 class Tarefa {
     constructor(numeroTarefa, tipoAlteracao) {
         this.numeroTarefa = numeroTarefa,
@@ -5,9 +6,9 @@ class Tarefa {
         this.numeroAlteracao = 1
     }
 
-    isTipoAlteracaoModificacao() { return this.tipoAlteracao === 'M' }
-    isTipoAlteracaoDelecao() { return this.tipoAlteracao === 'D' }
-    isTipoAlteracaoRenomear() { return this.tipoAlteracao === 'R' }
+    isTipoAlteracaoModificacao() { return this.tipoAlteracao === TIPO_MODIFICACAO.MODIFIED }
+    isTipoAlteracaoDelecao() { return this.tipoAlteracao === TIPO_MODIFICACAO.DELETED }
+    isTipoAlteracaoRenomear() { return this.tipoAlteracao === TIPO_MODIFICACAO.RENAMED }
 }
 
 module.exports = Tarefa
