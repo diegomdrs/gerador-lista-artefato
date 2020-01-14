@@ -69,7 +69,7 @@ $ ./gerador-lista-artefato-qas -s
 
 Em seguida, acesse a url [http://localhost:3333/gerador](http://localhost:3333/gerador)
 
-## Parâmetros
+## Parâmetros do modo CLI
 
 ``` console
 -d, --diretorio <type>     Diretório raiz dos projetos Git
@@ -84,7 +84,7 @@ Em seguida, acesse a url [http://localhost:3333/gerador](http://localhost:3333/g
 -h, --help                 output usage information
 ```
 
-## Saida do gerador
+## Saida do gerador em modo CLI
 
 ``` console
 $ ./gerador-lista-artefato-qas --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081 --mostrar-deletados --mostrar-num-modificacao --mostrar-deletados --mostrar-renomeados
