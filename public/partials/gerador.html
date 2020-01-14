@@ -7,10 +7,9 @@
 
 	<div class='container'>
 
-		<div ng-repeat='message in vm.messages' class='alert alert-danger' role='alert'>
-			<span>
-				<i class='mdi mdi-info mdi-lg'></i> {{message}}
-			</span>
+		<div ng-repeat='message in vm.messages' class="alert alert-danger alert-dismissible">
+			<a href="#" class="close" data-dismiss="alert" ng-click="vm.closeMessage($index)">&times;</a>
+			{{message}}
 		</div>
 
 		<div class='row pt-2 border-top'>
@@ -81,8 +80,8 @@
 					<div class='input-group mb-3'>
 
 						<input type='text' class='form-control'
-							placeholder='Adicione uma ou mais tarefas separadas por vírgula'
-							ng-model='vm.tarefa' maxlength='300' number-only-and-comma>
+							placeholder='Adicione uma ou mais tarefas separadas por vírgula' ng-model='vm.tarefa'
+							maxlength='300' number-only-and-comma>
 
 						<div class='input-group-append'>
 							<button class='btn btn-primary' ng-click='vm.adicionarTask()'>Adicionar</button>
@@ -100,7 +99,7 @@
 
 					<div class='input-group mb-3'>
 
-						<input type='text' class='form-control' 
+						<input type='text' class='form-control'
 							placeholder='Adicione o caminho do projeto ou mais separados por vírgula'
 							ng-model='vm.caminhoProjeto' maxlength='300'>
 

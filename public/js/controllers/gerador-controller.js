@@ -20,6 +20,7 @@ function GeradorController(geradorService, blockUI) {
     vm.init = init
     vm.listarArtefatos = listarArtefatos
     vm.limparFiltros = limparFiltros
+    vm.closeMessage = closeMessage
 
     vm.obterNumero = obterNumero
     vm.adicionarCaminhoProjeto = adicionarCaminhoProjeto
@@ -47,6 +48,10 @@ function GeradorController(geradorService, blockUI) {
                 .then(function (resposta) {
                     
                     vm.listaSaida = resposta.data
+
+                    !vm.listaSaida.length && adicionarMensagem
+                        ('Nenhum resultado encontrado')
+
                 }).catch(function (error) {
 
                     vm.messages = [error.data.message]
@@ -158,6 +163,7 @@ function GeradorController(geradorService, blockUI) {
             mostrarRenomeados: false
         }
 
+        delete vm.listaSaida
         delete vm.caminhoProjeto
         delete vm.tarefa
     }
@@ -165,6 +171,10 @@ function GeradorController(geradorService, blockUI) {
     function obterNomeProjeto(caminhoProjeto) {
 
         return caminhoProjeto.match(/([^/|\\]*)$/g)[0]
+    }
+
+    function closeMessage(index) {
+        vm.messages.splice(index, 1);
     }
 
     function obterNomeArtefato(artefato) {
