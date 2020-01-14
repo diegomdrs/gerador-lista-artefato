@@ -69,6 +69,8 @@ $ ./gerador-lista-artefato-qas -s
 
 Em seguida, acesse a url [http://localhost:3333/gerador](http://localhost:3333/gerador)
 
+![Modo Web](https://github.com/diegomdrs/gerador-lista-artefato-qas/raw/master/web.png)
+
 ## Parâmetros do modo CLI
 
 ``` console
