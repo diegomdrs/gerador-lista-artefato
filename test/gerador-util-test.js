@@ -23,11 +23,9 @@ module.exports = class {
 
                 for (const tarefa of artefato.listaTarefa) {
 
-                    for (let i = 0; i < tarefa.numAlteracao; i++) {
-
+                    for (let i = 0; i < tarefa.numAlteracao; i++)
                         await this.manipularArquivoComCommit(git, estrutura.nomeProjeto,
                             tarefa.numeroTarefa, artefato.pathArtefato, tarefa.tipoAlteracao)
-                    }
                 }
             }
         }
@@ -115,11 +113,10 @@ module.exports = class {
         await git.commit('task ' + task + ' commit')
     }
 
-    static async foo(git, tarefa, nomeProjeto, listaArquivo) {
-        for (const arquivo of listaArquivo) {
+    static async manipularListaArquivoSemCommit(git, tarefa, nomeProjeto, listaArquivo) {
+        for (const arquivo of listaArquivo)
             await this.manipularArquivoSemCommit(git, nomeProjeto,
                 arquivo.pathArquivo, arquivo.tipoAlteracao)
-        }
 
         await this.commitarProjeto(git, nomeProjeto, tarefa, listaArquivo)
     }

@@ -342,7 +342,7 @@ describe('test gerais', () => {
 
     it('teste de listagem de artefatos commitados de uma vez', async () => {
 
-        await geradorUtilTest.foo(git, '0000000', nomeProjeto, [
+        await geradorUtilTest.manipularListaArquivoSemCommit(git, '0000000', nomeProjeto, [
             { tipoAlteracao: 'A', pathArquivo: 'src/app/spas/inventario/bem-services.js' },
             { tipoAlteracao: 'A', pathArquivo: 'Gruntfile.js' },
             { tipoAlteracao: 'A', pathArquivo: 'spec/inclusao-ocupante-imovel-controllers-spec.js' },
@@ -352,7 +352,7 @@ describe('test gerais', () => {
             { tipoAlteracao: 'A', pathArquivo: 'src/app/spas/imovel/inclusao-ocupante-imovel/inclusao-ocupante-imovel-controllers.js' }
         ])
 
-        await geradorUtilTest.foo(git, '1111111', nomeProjeto, [
+        await geradorUtilTest.manipularListaArquivoSemCommit(git, '1111111', nomeProjeto, [
             { tipoAlteracao: 'M', pathArquivo: 'Gruntfile.js' },
             { tipoAlteracao: 'M', pathArquivo: 'src/app/spas/imovel/cadastro/alterar-imovel.tpl.html' },
             { tipoAlteracao: 'M', pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel-controllers.js' },
@@ -360,12 +360,12 @@ describe('test gerais', () => {
             { tipoAlteracao: 'M', pathArquivo: 'src/app/spas/imovel/inclusao-ocupante-imovel/inclusao-ocupante-imovel-controllers.js' }
         ])
 
-        await geradorUtilTest.foo(git, '1111111', nomeProjeto, [
+        await geradorUtilTest.manipularListaArquivoSemCommit(git, '1111111', nomeProjeto, [
             { tipoAlteracao: 'M', pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel-controllers.js' },
             { tipoAlteracao: 'M', pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel.tpl.html' }
         ])
 
-        await geradorUtilTest.foo(git, '1111111', nomeProjeto, [
+        await geradorUtilTest.manipularListaArquivoSemCommit(git, '1111111', nomeProjeto, [
             { tipoAlteracao: 'M', pathArquivo: 'Gruntfile.js' },
             { tipoAlteracao: 'M', pathArquivo: 'spec/inclusao-ocupante-imovel-controllers-spec.js' },
             { tipoAlteracao: 'D', pathArquivo: 'src/app/spas/inventario/bem-services.js' }

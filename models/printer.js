@@ -19,9 +19,8 @@ module.exports = (params, listaSaida) => {
                     console.log('Tarefas nº ' + saida.listaNumTarefaSaida.join(', ') + '\n')
                 }
 
-                for (const artefato of saida.listaArtefatoSaida) {
+                for (const artefato of saida.listaArtefatoSaida)
                     console.log(imprimirSaida(artefato))
-                }
 
                 console.log('')
             }
