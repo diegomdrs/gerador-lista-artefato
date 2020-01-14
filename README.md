@@ -1,6 +1,6 @@
 # Gerador de listagem de artefatos do QAS
 
-Comando para listar os artefatos incluídos/alterados/renomeados para geração do QAS
+App para listar os artefatos incluídos/alterados/renomeados para geração do QAS
 
 ## Pré-requisitos 
 
@@ -69,7 +69,7 @@ $ ./gerador-lista-artefato-qas -s
 
 Em seguida, acesse a url [http://localhost:3333/gerador](http://localhost:3333/gerador)
 
-![Modo Web](https://github.com/diegomdrs/gerador-lista-artefato-qas/raw/master/web.png)
+![Modo Web](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/desenv-cli-web/web.png)
 
 ## Parâmetros do modo CLI
 
