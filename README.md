@@ -36,7 +36,7 @@ $ cd gerador-lista-artefato-qas
 $ npm i -g
 ```
 
--Dessa forma o executável `gerador-lista-artefato-qas` estará disponível em todo sistema
+- Dessa forma o executável `gerador-lista-artefato-qas` estará disponível em todo sistema
 
 ## Utilização do modo CLI
 
