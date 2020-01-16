@@ -1,22 +1,19 @@
-class ComandoGit {
+module.exports = (caminhoProjeto, autor, listaTask, mostrarCommitsLocais) => {
 
-    constructor(caminhoProjeto, autor, listaTask, mostrarCommitsLocais) {
-        this.caminhoProjeto = caminhoProjeto
-        this.autor = autor
+    let comando = `git -C ${caminhoProjeto} log --reverse --regexp-ignore-case --no-merges --author=${autor}`
 
-        this.comando = `git -C ${this.caminhoProjeto} log --reverse --regexp-ignore-case --no-merges --author=${this.autor}`
+    if (mostrarCommitsLocais)
+        comando = comando.concat(' --branches')
+    else
+        comando = comando.concat(' --remotes')
 
-        if (mostrarCommitsLocais)
-            this.comando = this.comando.concat(' --branches')
-        else
-            this.comando = this.comando.concat(' --remotes')
+    comando = comando.concat(
+        ' --name-status --pretty=format:\'%s\' -C')
 
-        this.comando = this.comando.concat(
-            ' --name-status --pretty=format:\'%s\' -C')
+    for (const task of listaTask)
+        comando = comando.concat(` --grep=${task}`)
 
-        for (const task of listaTask)
-            this.comando = this.comando.concat(` --grep=${task}`)
+    return {
+        obterComando: () => comando
     }
 }
-
-module.exports = ComandoGit
