@@ -18,7 +18,7 @@ module.exports = async function (params) {
 
             const listaSaida = await gerador.gerarListaArtefato()
 
-            const printer = require('../models/printer')(params, listaSaida)
+            const printer = require('../lib/printer')(params, listaSaida)
 
             printer.imprimirListaSaida(listaSaida)
 
