@@ -12,15 +12,6 @@
             "protocol": "inspector",
             "restart": true
         },
-        // https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_launch-configuration-attributes
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "server launch",
-            "program": "${workspaceFolder}/app.js --server",
-            "protocol": "inspector",
-            "restart": true
-        },
         {
             // node app --diretorio=/home/foo/Documents --projeto=foo-estatico,foo-api --autor=diegomdrs --task=1111111 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
             "type": "node",
@@ -81,23 +72,6 @@
                 "--projeto=foo",
                 "--autor=fulano",
                 "--task=1111111",
-                "--mostrar-num-modificacao",
-                "--mostrar-deletados",
-                "--mostrar-renomeados",
-                "--mostrar-commits-locais"
-            ]
-        },
-        {
-            // node app --diretorio=/kdi/git --projeto=apc-api,apc-estatico,crm-patrimonio-estatico,crm-patrimonio-api,fti-estatico --autor=c1282036 --task=1239662,1221786,1234921,1229100,1227471,1226285,1221172,1217966,1215554 --mostrar-num-modificacao --mostrar-deletados --mostrar-renomeados
-            "type": "node",
-            "request": "launch",
-            "name": "comando bb test app.js",
-            "program": "${workspaceFolder}/app.js",
-            "args": [
-                "--diretorio=/kdi/git",
-                "--projeto=apc-api,apc-estatico,crm-patrimonio-estatico,crm-patrimonio-api,fti-estatico",
-                "--autor=c1282036",
-                "--task=1239662,1221786,1234921,1229100,1227471,1226285,1221172,1217966,1215554",
                 "--mostrar-num-modificacao",
                 "--mostrar-deletados",
                 "--mostrar-renomeados",
