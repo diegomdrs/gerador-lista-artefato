@@ -13,7 +13,5 @@ module.exports = (caminhoProjeto, autor, listaTask, mostrarCommitsLocais) => {
     for (const task of listaTask)
         comando = comando.concat(` --grep=${task}`)
 
-    return {
-        obterComando: () => comando
-    }
+    return comando
 }
