@@ -1,11 +1,19 @@
-const Artefato = function (nomeArtefato, nomeNovoArtefato,
-    nomeAntigoArtefato, nomeProjeto, listaTarefa) {
-
+const Artefato = function ({
+    nomeArtefato,
+    nomeNovoArtefato,
+    nomeAntigoArtefato,
+    nomeProjeto,
+    listaTarefa,
+    tipoAlteracao,
+    numeroAlteracao,
+}) {
+    this.nomeArtefato = nomeArtefato
     this.nomeNovoArtefato = nomeNovoArtefato
     this.nomeAntigoArtefato = nomeAntigoArtefato
-    this.nomeArtefato = nomeArtefato
     this.nomeProjeto = nomeProjeto
     this.listaTarefa = listaTarefa
+    this.tipoAlteracao = tipoAlteracao
+    this.numeroAlteracao = numeroAlteracao
 
     this.getNomeArtefatoReverso = () =>
         this.nomeArtefato.split('').reverse().join('')
