@@ -7,13 +7,13 @@ const NAME_APP = app.name
 // const PATH_TEST = __dirname + path.sep + NAME_APP
 const PATH_TEST = '/tmp' + path.sep + NAME_APP
 
-module.exports = class {
+module.exports = {
 
-    static pathTest() {
+    pathTest() {
         return PATH_TEST
-    }
+    },
 
-    static async criarEstrutura(listaEstrutura, autor) {
+    async criarEstrutura(listaEstrutura, autor) {
 
         for (let estrutura of listaEstrutura) {
 
@@ -29,18 +29,17 @@ module.exports = class {
                 }
             }
         }
-    }
+    },
 
-    static removerDiretorioTest() {
+    async removerDiretorioTest() {
         fs.removeSync(PATH_TEST)
-    }
+    },
 
-    static async checkoutBranch(git, nomeBranch) {
-
+    async checkoutBranch(git, nomeBranch) {
         await git.checkoutLocalBranch(nomeBranch)
-    }
+    },
 
-    static async criarRepo(nomeProjeto, autor) {
+    async criarRepo(nomeProjeto, autor) {
 
         const pathProjeto = PATH_TEST + '/' + nomeProjeto
 
@@ -53,9 +52,9 @@ module.exports = class {
         await git.addConfig('user.email', `${autor}@${autor}.com`)
 
         return git
-    }
+    },
 
-    static async manipularArquivoComCommit(git, nomeProjeto, task, pathArquivo, tipoAlteracao) {
+    async manipularArquivoComCommit(git, nomeProjeto, task, pathArquivo, tipoAlteracao) {
 
         if (tipoAlteracao !== 'R') {
 
@@ -77,9 +76,9 @@ module.exports = class {
             await git.mv(pathArquivo.origem, pathArquivo.destino)
             await this.commitarArquivo(git, nomeProjeto, task.destino, pathArquivo.destino)
         }
-    }
+    },
 
-    static async manipularArquivoSemCommit(git, nomeProjeto, pathArquivo, tipoAlteracao) {
+    async manipularArquivoSemCommit(git, nomeProjeto, pathArquivo, tipoAlteracao) {
 
         if (tipoAlteracao !== 'R') {
 
@@ -96,24 +95,24 @@ module.exports = class {
             fs.outputFileSync(obterCaminhoArquivo(git, pathArquivo.origem), randomValueHex())
             await git.mv(pathArquivo.origem, pathArquivo.destino)
         }
-    }
+    },
 
-    static async commitarArquivo(git, nomeProjeto, task, pathArquivo) {
+    async commitarArquivo(git, nomeProjeto, task, pathArquivo) {
 
         await git.add(obterCaminhoArquivo(nomeProjeto, pathArquivo))
         await git.commit('task ' + task + ' commit')
-    }
+    },
 
-    static async commitarProjeto(git, nomeProjeto, task, listaArquivo) {
+    async commitarProjeto(git, nomeProjeto, task, listaArquivo) {
 
         for (const arquivo of listaArquivo) {
             await git.add(obterCaminhoArquivo(nomeProjeto, arquivo.pathArquivo))
         }
 
         await git.commit('task ' + task + ' commit')
-    }
+    },
 
-    static async manipularListaArquivoSemCommit(git, tarefa, nomeProjeto, listaArquivo) {
+    async manipularListaArquivoSemCommit(git, tarefa, nomeProjeto, listaArquivo) {
         for (const arquivo of listaArquivo)
             await this.manipularArquivoSemCommit(git, nomeProjeto,
                 arquivo.pathArquivo, arquivo.tipoAlteracao)
