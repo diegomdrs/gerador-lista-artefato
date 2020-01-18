@@ -1,24 +1,22 @@
-class Param {
+const Param = function (body) {
 
-  constructor(body) {
-    this.autor = this.getAttrRequired('autor', body.autor)
-    this.task = this.getAttrRequired('task', Param.getList(body.task))
-    this.projeto = this.getAttrRequired('projeto', Param.getList(body.projeto))
-    this.mostrarDeletados = body.mostrarDeletados,
-    this.mostrarRenomeados = body.mostrarRenomeados,
-    this.mostrarNumModificacao = body.mostrarNumModificacao
-  }
+  this.autor = getAttrRequired('autor', body.autor)
+  this.task = getAttrRequired('task', getList(body.task))
+  this.projeto = getAttrRequired('projeto', getList(body.projeto))
+  this.mostrarDeletados = body.mostrarDeletados
+  this.mostrarRenomeados = body.mostrarRenomeados
+  this.mostrarNumModificacao = body.mostrarNumModificacao
+}
 
-  getAttrRequired(paramName, attr) {
-    if (!attr) {
-      throw new Error('Paramêtro não encontrado: ' + paramName)
-    }
-    return attr
-  }
+function getList(param) {
+  return (!Array.isArray(param)) ? param.split() : param
+}
 
-  static getList(param) {
-    return (!Array.isArray(param)) ? param.split() : param
+function getAttrRequired(paramName, attr) {
+  if (!attr) {
+    throw new Error('Paramêtro não encontrado: ' + paramName)
   }
+  return attr
 }
 
 module.exports = Param

@@ -1,8 +1,9 @@
-class SaidaVO {
-    constructor() {
-        this.listaNumTarefaSaida = []
-        this.listaArtefatoSaida = []
-    }
+const SaidaVO = function () {
+
+    this.listaNumTarefaSaida = []
+    this.listaArtefatoSaida = []
+
+    return this
 }
 
 module.exports = SaidaVO
