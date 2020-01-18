@@ -1,3 +1,5 @@
+const TIPO_MODIFICACAO = require('../lib/constants').TIPO_MODIFICACAO
+
 const Commit = function (arquivo, numeroTarefa, linhaArquivo) {
 
     this.numeroTarefa = numeroTarefa
