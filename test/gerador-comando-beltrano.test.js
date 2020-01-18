@@ -203,13 +203,39 @@ describe('test comando beltrano', () => {
         await geradorUtilTest.criarEstrutura(listaEstrutura, autor)
     })
 
+
+    it('test gerador master async', async () => {
+
+        const gerador = require('../lib/gerador-master')
+
+        const params = new Param({
+            autor: autor,
+            task: ["1199211", "1203082", "1203670", "1207175", "1210684", "1210658", "1212262", "1212444"],
+            projeto: [
+                geradorUtilTest.pathTest() + "/bar-estatico",
+                geradorUtilTest.pathTest() + "/bar-api",
+                geradorUtilTest.pathTest() + "/qux-estatico",
+                geradorUtilTest.pathTest() + "/qux-api"
+            ],
+            mostrarDeletados: true,
+            mostrarRenomeados: true,
+            mostrarNumModificacao: true
+        })
+
+        params.mostrarCommitsLocais = true
+
+        const lista = await gerador(params).gerarListaArtefato()
+
+        testarLista(lista)
+    })
+
     it('test gerador async', async () => {
 
         const gerador = require('../lib/gerador')
 
         const params = new Param({
             autor: autor,
-            task: ["1199211", "1203082", "1203670", "1207175", "1210684","1210658", "1212262", "1212444"],
+            task: ["1199211", "1203082", "1203670", "1207175", "1210684", "1210658", "1212262", "1212444"],
             projeto: [
                 geradorUtilTest.pathTest() + "/bar-estatico",
                 geradorUtilTest.pathTest() + "/bar-api",
