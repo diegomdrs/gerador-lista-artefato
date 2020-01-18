@@ -1,20 +1,20 @@
-class Commit {
-    constructor(arquivo, numeroTarefa, linhaArquivo) {
+const Commit = function (arquivo, numeroTarefa, linhaArquivo) {
 
-        this.numeroTarefa = numeroTarefa
-        this.tipoAlteracao = linhaArquivo.match(/^\w{1}/g)[0]
+    this.numeroTarefa = numeroTarefa
+    this.tipoAlteracao = linhaArquivo.match(/^\w{1}/g)[0]
 
-        if (this.isTipoAlteracaoRenomear()) {
+    this.isTipoAlteracaoModificacao = () => this.tipoAlteracao === 'M'
+    this.isTipoAlteracaoDelecao = () => this.tipoAlteracao === 'D'
+    this.isTipoAlteracaoRenomear = () => this.tipoAlteracao === 'R'
 
-            this.nomeAntigoArquivo = arquivo.nomeArquivo
-            this.nomeNovoArquivo = linhaArquivo.match(/[^\s]*.[^\r]$/g)[0]
-                .replace(/^/g, arquivo.nomeProjeto + '/').trim()
-        }
+    if (this.isTipoAlteracaoRenomear()) {
+
+        this.nomeAntigoArquivo = arquivo.nomeArquivo
+        this.nomeNovoArquivo = linhaArquivo.match(/[^\s]*.[^\r]$/g)[0]
+            .replace(/^/g, arquivo.nomeProjeto + '/').trim()
     }
 
-    isTipoAlteracaoModificacao() { return this.tipoAlteracao === 'M' }
-    isTipoAlteracaoDelecao() { return this.tipoAlteracao === 'D' }
-    isTipoAlteracaoRenomear() { return this.tipoAlteracao === 'R' }
+    return this
 }
 
 module.exports = Commit

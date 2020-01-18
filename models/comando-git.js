@@ -1,4 +1,4 @@
-module.exports = (caminhoProjeto, autor, listaTask, mostrarCommitsLocais) => {
+const Comando = (caminhoProjeto, autor, listaTask, mostrarCommitsLocais) => {
 
     let comando = `git -C ${caminhoProjeto} log --reverse --regexp-ignore-case --no-merges --author=${autor}`
 
@@ -15,3 +15,5 @@ module.exports = (caminhoProjeto, autor, listaTask, mostrarCommitsLocais) => {
 
     return comando
 }
+
+module.exports = Comando
