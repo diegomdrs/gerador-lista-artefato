@@ -217,7 +217,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat='saida in vm.listaSaida'>
+						<tr ng-repeat='saida in vm.listaSaida' style='cursor: pointer;' ng-click='vm.foo(saida)'>
 
 							<!-- <td class='text-right'>
 								<span>
@@ -238,9 +238,24 @@
 							</td>
 
 							<td>
-								<li ng-repeat='tarefa in saida.listaNumTarefaSaida' class='list-unstyled'>
-									Tarefa nº {{tarefa}}
-								</li>
+								<div class="row">
+
+									<div class='col'>
+
+										<li ng-repeat='tarefa in saida.listaNumTarefaSaida' class='list-unstyled'>
+											Tarefa nº {{tarefa}}
+										</li>
+
+									</div>
+									<div class='col-3 d-flex flex-row-reverse align-items-center' >
+
+										<span class="clipboard">
+											<img style="width: 0.9em; height: 0.9em; opacity: 1;" src="icon/clipboard.svg">
+										</span>
+
+									</div>
+
+								</div>
 							</td>
 
 						</tr>
@@ -254,7 +269,8 @@
 	<footer class='container pt-2 pt-md-3 border-top'>
 
 		<div class="row justify-content-end">
-			<p class="text-muted">Desenvolvido por <a href="https://github.com/diegomdrs" target="_blank">diegomdrs</a></p>
+			<p class="text-muted">Desenvolvido por <a href="https://github.com/diegomdrs" target="_blank">diegomdrs</a>
+			</p>
 		</div>
 
 	</footer>

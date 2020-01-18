@@ -29,6 +29,7 @@ function GeradorController(geradorService, blockUI) {
     vm.removerTask = removerTask
     vm.obterNomeProjeto = obterNomeProjeto
     vm.obterNomeArtefato = obterNomeArtefato
+    vm.foo = foo
 
     function init() {
 
@@ -157,8 +158,9 @@ function GeradorController(geradorService, blockUI) {
         limparMessages()
 
         vm.req = {
-            projeto: [],
-            task: [],
+            autor: 'beltrano',
+            projeto: ['/tmp/gerador-lista-artefato-qas/bar-estatico','/tmp/gerador-lista-artefato-qas/bar-api','/tmp/gerador-lista-artefato-qas/qux-estatico','/tmp/gerador-lista-artefato-qas/qux-api'],
+            task: [1199211,1203082,1203670,1207175,1210684,1210658,1212262,1212444],
             mostrarDeletados: false,
             mostrarRenomeados: false
         }
@@ -187,5 +189,10 @@ function GeradorController(geradorService, blockUI) {
 
             return artefato.nomeArtefato
         }
+    }
+
+    function foo(saida) {
+
+        console.log(saida)
     }
 }

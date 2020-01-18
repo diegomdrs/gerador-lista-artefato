@@ -3,6 +3,20 @@ table {
     word-wrap: break-word;
 }
 
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.table .clipboard {
+    visibility: hidden;
+}
+
+.table tr:hover .clipboard {
+    visibility: visible;
+}
+
 thead {
     background-color: #0038A8;
     color: white;
