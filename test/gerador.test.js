@@ -51,23 +51,23 @@ describe('test gerais', () => {
 
         expect.assertions(1);
         return expect(gerador(paramsError).gerarListaArtefato()).rejects.toEqual(
-            new Error('Projeto \'' + paramsError.projeto[0] + '\' não encontrado'));
+            new Error(`Projeto ${paramsError.projeto[0]} não encontrado`));
     });
 
     it('teste de listagem de artefatos renomeados', async () => {
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoFoo.txt', 'A')
+            'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoFoo.txt', 'M')
+            'arquivoFoo.txt', TIPO_MODIFICACAO.MODIFIED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto,
             { origem: '1111111', destino: '1111111' },
-            { origem: 'arquivoFoo.txt', destino: 'arquivoQux.txt' }, 'R')
+            { origem: 'arquivoFoo.txt', destino: 'arquivoQux.txt' }, TIPO_MODIFICACAO.RENAMED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoQux.txt', 'M')
+            'arquivoQux.txt', TIPO_MODIFICACAO.MODIFIED)
 
         const lista = await gerador(params).gerarListaArtefato()
 
@@ -77,7 +77,7 @@ describe('test gerais', () => {
         expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
         expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
-        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('A')
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
 
@@ -85,7 +85,7 @@ describe('test gerais', () => {
         expect(lista[1].listaNumTarefaSaida[0]).toBe('1111111')
         expect(lista[1].listaArtefatoSaida).toHaveLength(1)
 
-        expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
+        expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
         expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
         expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
 
@@ -93,7 +93,7 @@ describe('test gerais', () => {
         expect(lista[2].listaNumTarefaSaida[0]).toBe('1111111')
         expect(lista[2].listaArtefatoSaida).toHaveLength(1)
 
-        expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe('R')
+        expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
         expect(lista[2].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
         expect(lista[2].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('foo/arquivoFoo.txt')
@@ -103,24 +103,24 @@ describe('test gerais', () => {
     it('teste de listagem de artefatos renomeados 2 vezes', async () => {
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoFoo.txt', 'A')
+            'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoFoo.txt', 'M')
+            'arquivoFoo.txt', TIPO_MODIFICACAO.MODIFIED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto,
             { origem: '1111111', destino: '1111111' },
-            { origem: 'arquivoFoo.txt', destino: 'arquivoQux.txt' }, 'R')
+            { origem: 'arquivoFoo.txt', destino: 'arquivoQux.txt' }, TIPO_MODIFICACAO.RENAMED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoQux.txt', 'M')
+            'arquivoQux.txt', TIPO_MODIFICACAO.MODIFIED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto,
             { origem: '1111111', destino: '1111111' },
-            { origem: 'arquivoQux.txt', destino: 'arquivoBar.txt' }, 'R')
+            { origem: 'arquivoQux.txt', destino: 'arquivoBar.txt' }, TIPO_MODIFICACAO.RENAMED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoBar.txt', 'M')
+            'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
         const lista = await gerador(params).gerarListaArtefato()
 
@@ -130,7 +130,7 @@ describe('test gerais', () => {
         expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
         expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
-        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('A')
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
 
@@ -138,7 +138,7 @@ describe('test gerais', () => {
         expect(lista[1].listaNumTarefaSaida[0]).toBe('1111111')
         expect(lista[1].listaArtefatoSaida).toHaveLength(1)
 
-        expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe('M')
+        expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
         expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(3)
         expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
 
@@ -146,7 +146,7 @@ describe('test gerais', () => {
         expect(lista[2].listaNumTarefaSaida[0]).toBe('1111111')
         expect(lista[2].listaArtefatoSaida).toHaveLength(1)
 
-        expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe('R')
+        expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
         expect(lista[2].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
         expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
         expect(lista[2].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('foo/arquivoQux.txt')
@@ -156,30 +156,30 @@ describe('test gerais', () => {
     it('teste de listagem de artefato A, R, D e A novamente', async () => {
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoFoo.txt', 'A')
+            'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoFoo.txt', 'M')
+            'arquivoFoo.txt', TIPO_MODIFICACAO.MODIFIED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto,
             { origem: '1111111', destino: '1111111' },
-            { origem: 'arquivoFoo.txt', destino: 'arquivoQux.txt' }, 'R')
+            { origem: 'arquivoFoo.txt', destino: 'arquivoQux.txt' }, TIPO_MODIFICACAO.RENAMED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoQux.txt', 'M')
+            'arquivoQux.txt', TIPO_MODIFICACAO.MODIFIED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto,
             { origem: '1111111', destino: '1111111' },
-            { origem: 'arquivoQux.txt', destino: 'arquivoBar.txt' }, 'R')
+            { origem: 'arquivoQux.txt', destino: 'arquivoBar.txt' }, TIPO_MODIFICACAO.RENAMED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoBar.txt', 'M')
+            'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', 'D')
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoFoo.txt', 'A')
+            'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
 
         const lista = await gerador(params).gerarListaArtefato()
 
@@ -189,7 +189,7 @@ describe('test gerais', () => {
         expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
         expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
-        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('A')
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
 
@@ -205,16 +205,16 @@ describe('test gerais', () => {
     it('teste de listagem de artefato A, M, D e A com mesmo nome, COM opção de mostrar deletados', async () => {
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoBar.txt', 'A')
+            'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoBar.txt', 'M')
+            'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', 'D')
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoBar.txt', 'A')
+            'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
         const lista = await gerador(params).gerarListaArtefato()
 
@@ -224,7 +224,7 @@ describe('test gerais', () => {
         expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
         expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
-        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('A')
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
 
@@ -240,16 +240,16 @@ describe('test gerais', () => {
     it('teste de listagem de artefato A, M, D e A com mesmo nome, SEM opção de mostrar deletados', async () => {
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoBar.txt', 'A')
+            'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoBar.txt', 'M')
+            'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', 'D')
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoBar.txt', 'A')
+            'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
         params.mostrarDeletados = false
 
@@ -262,7 +262,7 @@ describe('test gerais', () => {
 
         expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
-        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('A')
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
@@ -270,10 +270,10 @@ describe('test gerais', () => {
     it('teste de listagem de artefato A, M, D COM opção de mostrar deletados', async () => {
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoBar.txt', 'A')
+            'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoBar.txt', 'M')
+            'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', 'D')
@@ -295,10 +295,10 @@ describe('test gerais', () => {
     it('teste de listagem de artefato A, M, D SEM opção de mostrar deletados', async () => {
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoBar.txt', 'A')
+            'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoBar.txt', 'M')
+            'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', 'D')
@@ -314,11 +314,11 @@ describe('test gerais', () => {
 
         await geradorUtilTest.checkoutBranch(git, 'branchFoo')
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto,
-            '1111111', 'arquivoFoo.txt', 'A')
+            '1111111', 'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
 
         await geradorUtilTest.checkoutBranch(git, 'branchBar')
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto,
-            '1111111', 'arquivoBar.txt', 'A')
+            '1111111', 'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
         await geradorUtilTest.checkoutBranch(git, 'master')
 
@@ -331,11 +331,11 @@ describe('test gerais', () => {
 
         expect(lista[0].listaArtefatoSaida).toHaveLength(2)
 
-        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe('A')
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoFoo.txt')
 
-        expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe('A')
+        expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
@@ -343,31 +343,31 @@ describe('test gerais', () => {
     it('teste de listagem de artefatos commitados de uma vez', async () => {
 
         await geradorUtilTest.manipularListaArquivoSemCommit(git, '0000000', nomeProjeto, [
-            { tipoAlteracao: 'A', pathArquivo: 'src/app/spas/inventario/bem-services.js' },
-            { tipoAlteracao: 'A', pathArquivo: 'Gruntfile.js' },
-            { tipoAlteracao: 'A', pathArquivo: 'spec/inclusao-ocupante-imovel-controllers-spec.js' },
-            { tipoAlteracao: 'A', pathArquivo: 'src/app/spas/imovel/cadastro/alterar-imovel.tpl.html' },
-            { tipoAlteracao: 'A', pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel-controllers.js' },
-            { tipoAlteracao: 'A', pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel.tpl.html' },
-            { tipoAlteracao: 'A', pathArquivo: 'src/app/spas/imovel/inclusao-ocupante-imovel/inclusao-ocupante-imovel-controllers.js' }
+            { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'src/app/spas/inventario/bem-services.js' },
+            { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'Gruntfile.js' },
+            { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'spec/inclusao-ocupante-imovel-controllers-spec.js' },
+            { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'src/app/spas/imovel/cadastro/alterar-imovel.tpl.html' },
+            { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel-controllers.js' },
+            { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel.tpl.html' },
+            { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'src/app/spas/imovel/inclusao-ocupante-imovel/inclusao-ocupante-imovel-controllers.js' }
         ])
 
         await geradorUtilTest.manipularListaArquivoSemCommit(git, '1111111', nomeProjeto, [
-            { tipoAlteracao: 'M', pathArquivo: 'Gruntfile.js' },
-            { tipoAlteracao: 'M', pathArquivo: 'src/app/spas/imovel/cadastro/alterar-imovel.tpl.html' },
-            { tipoAlteracao: 'M', pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel-controllers.js' },
-            { tipoAlteracao: 'M', pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel.tpl.html' },
-            { tipoAlteracao: 'M', pathArquivo: 'src/app/spas/imovel/inclusao-ocupante-imovel/inclusao-ocupante-imovel-controllers.js' }
+            { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'Gruntfile.js' },
+            { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/imovel/cadastro/alterar-imovel.tpl.html' },
+            { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel-controllers.js' },
+            { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel.tpl.html' },
+            { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/imovel/inclusao-ocupante-imovel/inclusao-ocupante-imovel-controllers.js' }
         ])
 
         await geradorUtilTest.manipularListaArquivoSemCommit(git, '1111111', nomeProjeto, [
-            { tipoAlteracao: 'M', pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel-controllers.js' },
-            { tipoAlteracao: 'M', pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel.tpl.html' }
+            { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel-controllers.js' },
+            { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel.tpl.html' }
         ])
 
         await geradorUtilTest.manipularListaArquivoSemCommit(git, '1111111', nomeProjeto, [
-            { tipoAlteracao: 'M', pathArquivo: 'Gruntfile.js' },
-            { tipoAlteracao: 'M', pathArquivo: 'spec/inclusao-ocupante-imovel-controllers-spec.js' },
+            { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'Gruntfile.js' },
+            { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'spec/inclusao-ocupante-imovel-controllers-spec.js' },
             { tipoAlteracao: 'D', pathArquivo: 'src/app/spas/inventario/bem-services.js' }
         ])
 
@@ -415,10 +415,10 @@ describe('test gerais', () => {
     it('teste ignorar stashes na listagem de artefatos', async () => {
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoBar.txt', 'A')
+            'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
-        await geradorUtilTest.manipularArquivoSemCommit(git, nomeProjeto, 
-            'arquivoBar.txt', 'M')
+        await geradorUtilTest.manipularArquivoSemCommit(git, nomeProjeto,
+            'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
         await git.stash()
 
@@ -438,7 +438,7 @@ describe('test gerais', () => {
     it('teste ignorar commits locais na listagem de artefatos', async () => {
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
-            'arquivoBar.txt', 'A')
+            'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
         params.mostrarCommitsLocais = false
 
