@@ -3,9 +3,9 @@ const Commit = function (arquivo, numeroTarefa, linhaArquivo) {
     this.numeroTarefa = numeroTarefa
     this.tipoAlteracao = linhaArquivo.match(/^\w{1}/g)[0]
 
-    this.isTipoAlteracaoModificacao = () => this.tipoAlteracao === 'M'
-    this.isTipoAlteracaoDelecao = () => this.tipoAlteracao === 'D'
-    this.isTipoAlteracaoRenomear = () => this.tipoAlteracao === 'R'
+    this.isTipoAlteracaoModificacao = () => this.tipoAlteracao === TIPO_MODIFICACAO.MODIFIED
+    this.isTipoAlteracaoDelecao = () => this.tipoAlteracao === TIPO_MODIFICACAO.DELETED
+    this.isTipoAlteracaoRenomear = () => this.tipoAlteracao === TIPO_MODIFICACAO.RENAMED
 
     if (this.isTipoAlteracaoRenomear()) {
 
