@@ -15,7 +15,7 @@ const Artefato = function ({
     this.tipoAlteracao = tipoAlteracao
     this.numeroAlteracao = numeroAlteracao
 
-    this.getNomeArtefatoReverso = () =>
+    this.obterNomeArtefatoReverso = () =>
         this.nomeArtefato.split('').reverse().join('')
 
     return this
