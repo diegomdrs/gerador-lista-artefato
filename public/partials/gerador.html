@@ -196,14 +196,19 @@
 				<button class='btn btn-block btn-primary' ng-click='vm.listarArtefatos()'>Gerar Lista</button>
 			</div>
 
+			<div class='p-2' ng-if='vm.listaSaida.length'>
+				<button class='btn btn-block btn-success'
+					ng-if='vm.listaSaida.length'>Copiar Resultado</button>
+			</div>
+
 			<div class='p-2'>
-				<button type='button' class='btn btn-block btn-danger' ng-click='vm.limparFiltros()'>Limpar</button>
+				<button class='btn btn-block btn-danger' ng-click='vm.limparFiltros()'>Limpar</button>
 			</div>
 
 
 		</div>
 
-		<div ng-cloak class='row pt-2 border-top' ng-if='vm.listaSaida.length'>
+		<div class='row pt-2 border-top' ng-if='vm.listaSaida.length'>
 
 			<div class='col'>
 
@@ -249,8 +254,8 @@
 									</div>
 									<div class='col-3 d-flex flex-row-reverse align-items-center' >
 
-										<span class="clipboard">
-											<img style="width: 0.9em; height: 0.9em; opacity: 1;" src="icon/clipboard.svg">
+										<span class="clipboard" title='Copiar linha'>
+											<img style="width: 0.9em; height: 0.9em; opacity: .5;" src="icon/clipboard.svg">
 										</span>
 
 									</div>
