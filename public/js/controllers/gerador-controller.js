@@ -47,7 +47,7 @@ function GeradorController(geradorService, blockUI) {
 
             geradorService.gerarListaArtefato(vm.req)
                 .then(function (resposta) {
-                    
+
                     vm.listaSaida = resposta.data
 
                     !vm.listaSaida.length && adicionarMensagem
@@ -55,7 +55,7 @@ function GeradorController(geradorService, blockUI) {
 
                 }).catch(function (error) {
 
-                    vm.messages = [error.data.message]
+                    adicionarMensagem(error.data.message)
                     vm.listaSaida = []
 
                 }).finally(function () {
@@ -150,7 +150,7 @@ function GeradorController(geradorService, blockUI) {
     }
 
     function adicionarMensagem(mensagem) {
-        vm.messages.push(mensagem)
+        vm.messages.push({ class: 'alert-danger', text: mensagem })
     }
 
     function limparFiltros() {
@@ -159,8 +159,8 @@ function GeradorController(geradorService, blockUI) {
 
         vm.req = {
             autor: 'beltrano',
-            projeto: ['/tmp/gerador-lista-artefato-qas/bar-estatico','/tmp/gerador-lista-artefato-qas/bar-api','/tmp/gerador-lista-artefato-qas/qux-estatico','/tmp/gerador-lista-artefato-qas/qux-api'],
-            task: [1199211,1203082,1203670,1207175,1210684,1210658,1212262,1212444],
+            projeto: ['/tmp/gerador-lista-artefato-qas/bar-estatico', '/tmp/gerador-lista-artefato-qas/bar-api', '/tmp/gerador-lista-artefato-qas/qux-estatico', '/tmp/gerador-lista-artefato-qas/qux-api'],
+            task: [1199211, 1203082, 1203670, 1207175, 1210684, 1210658, 1212262, 1212444],
             mostrarDeletados: false,
             mostrarRenomeados: false
         }

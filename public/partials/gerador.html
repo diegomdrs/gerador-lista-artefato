@@ -7,9 +7,9 @@
 
 	<div class='container'>
 
-		<div ng-repeat='message in vm.messages' class="alert alert-danger alert-dismissible">
+		<div ng-repeat='message in vm.messages' class="alert {{message.class}} alert-dismissible">
 			<a href="#" class="close" data-dismiss="alert" ng-click="vm.closeMessage($index)">&times;</a>
-			{{message}}
+			{{message.text}}
 		</div>
 
 		<div class='row pt-2 border-top'>
