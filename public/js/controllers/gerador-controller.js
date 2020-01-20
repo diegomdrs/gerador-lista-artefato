@@ -2,9 +2,9 @@ angular
     .module('geradorApp')
     .controller('GeradorController', GeradorController)
 
-GeradorController.$inject = ['geradorService', 'blockUI'];
+GeradorController.$inject = ['geradorService', 'blockUI', '$timeout'];
 
-function GeradorController(geradorService, blockUI) {
+function GeradorController(geradorService, blockUI, $timeout) {
     var vm = this
 
     vm.listaSaida = []
@@ -150,7 +150,21 @@ function GeradorController(geradorService, blockUI) {
     }
 
     function adicionarMensagem(mensagem) {
-        vm.messages.push({ class: 'alert-danger', text: mensagem })
+
+        const message = {
+            class: 'alert-danger',
+            text: mensagem,
+            close: function () {
+                vm.messages.splice(
+                    vm.messages.indexOf(this), 1);
+            }
+        }
+
+        vm.messages.push(message)
+
+        $timeout(function () {
+            message.close();
+        }, 2000)
     }
 
     function limparFiltros() {

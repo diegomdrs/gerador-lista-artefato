@@ -7,15 +7,16 @@
 
 	<div class='container' style='padding-right: 0px; padding-left:0px;'>
 
+		<!-- https://coderwall.com/p/r_bvhg/angular-ui-bootstrap-alert-service-for-angular-js -->
 		<!-- https://codepen.io/leenawat/pen/ORPbqE -->
 		<div ng-repeat='message in vm.messages' class="container alert-top alert alert-success">
-			<a href="#" class="close" data-dismiss="alert" ng-click="vm.closeMessage($index)">&times;</a>
-			{{message.text}}
+			<a href="#" class="close" data-dismiss="alert" ng-click="message.close()">&times;</a>
+			&#10003 {{message.text}}
 		</div>
 
 		<div ng-repeat='message in vm.messages' class="alert alert {{message.class}} alert-dismissible">
-			<a href="#" class="close" data-dismiss="alert" ng-click="vm.closeMessage($index)">&times;</a>
-			{{message.text}}
+			<a href="#" class="close" data-dismiss="alert" ng-click="message.close()">&times;</a>
+			&#10003 {{message.text}}
 		</div>
 
 		<div class='row pt-2 border-top'>
