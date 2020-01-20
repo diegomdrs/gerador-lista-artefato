@@ -17,6 +17,11 @@ function GeradorController(geradorService, blockUI, $timeout) {
         D: 'Deletado'
     }
 
+    vm.TIPO_ALERTA = {
+        SUCCESS: { class: 'alert-success', icone: '✓' },
+        ERROR: { class: 'alert-danger', icone: '✗' },
+    }
+
     vm.init = init
     vm.listarArtefatos = listarArtefatos
     vm.limparFiltros = limparFiltros
@@ -29,7 +34,7 @@ function GeradorController(geradorService, blockUI, $timeout) {
     vm.removerTask = removerTask
     vm.obterNomeProjeto = obterNomeProjeto
     vm.obterNomeArtefato = obterNomeArtefato
-    vm.foo = foo
+    vm.copiarLinhaTabelaClipboard = copiarLinhaTabelaClipboard
 
     function init() {
 
@@ -151,17 +156,17 @@ function GeradorController(geradorService, blockUI, $timeout) {
     }
 
     function adicionarMensagemSucesso(mensagem, alerts) {
-        adicionarMensagem('alert-success', mensagem, alerts)
+        adicionarMensagem(vm.TIPO_ALERTA.SUCCESS, mensagem, alerts)
     }
 
     function adicionarMensagemErro(mensagem, alerts) {
-        adicionarMensagem('alert-danger', mensagem, alerts)
+        adicionarMensagem(vm.TIPO_ALERTA.ERROR, mensagem, alerts)
     }
 
-    function adicionarMensagem(classe, mensagem, alerts) {
+    function adicionarMensagem(tipoAlerta, mensagem, alerts) {
 
         const message = {
-            class: classe,
+            tipoAlerta: tipoAlerta,
             text: mensagem,
             close: function () {
                 alerts.splice(
@@ -214,12 +219,12 @@ function GeradorController(geradorService, blockUI, $timeout) {
         }
     }
 
-    function foo(saida) {
+    function copiarLinhaTabelaClipboard(saida) {
 
         limparMessages()
 
         console.log(saida)
 
-        adicionarMensagemSucesso('asdf', vm.alertsTop)
+        adicionarMensagemSucesso('Linha copiada', vm.alertsTop)
     }
 }
