@@ -223,8 +223,31 @@ function GeradorController(geradorService, blockUI, $timeout) {
 
         limparMessages()
 
-        console.log(saida)
+        // https://stackoverflow.com/questions/33855641/copy-output-of-a-javascript-variable-to-the-clipboard
 
-        adicionarMensagemSucesso('Linha copiada', vm.alertsTop)
+        var dummy = document.createElement("textarea");
+        
+        document.body.appendChild(dummy);
+        
+        dummy.value = obterSaidaClipboard(saida);
+        
+        dummy.select();
+        
+        document.execCommand("copy");
+        document.body.removeChild(dummy);
+
+        adicionarMensagemSucesso('Linha copiada para o clipboard', vm.alertsTop)
     }
+
+    function obterSaidaClipboard(saida) {
+
+        const tipoModificacao = vm.TIPO_MODIFICACAO[saida.listaArtefatoSaida[0].tipoAlteracao]
+        const listaArtefatoSaida = saida.listaArtefatoSaida.map((artefato) => 
+            artefato.nomeArtefato
+        ).join('\n')
+        const listaNumTarefaSaida = saida.listaNumTarefaSaida.join('\n')
+
+        return tipoModificacao + '\t' + listaArtefatoSaida + '\t' + listaNumTarefaSaida
+    }
+
 }

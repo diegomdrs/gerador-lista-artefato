@@ -218,7 +218,7 @@
 
 			<div class='col'>
 
-				<table class='table table-striped table-bordered table-hover'>
+				<table id='foo' class='table table-striped table-bordered table-hover'>
 					<thead>
 						<tr>
 							<!-- <th style='width:7%' class='text-right'>Qtde</th> -->
@@ -228,8 +228,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat='saida in vm.listaSaida' style='cursor: pointer;' 
-						ng-click='vm.copiarLinhaTabelaClipboard(saida)'>
+						<tr ng-repeat='saida in vm.listaSaida' style='cursor: pointer;'
+							ng-click='vm.copiarLinhaTabelaClipboard(saida)'>
 
 							<!-- <td class='text-right'>
 								<span>
