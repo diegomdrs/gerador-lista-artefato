@@ -50,12 +50,12 @@ function GeradorController(geradorService, blockUI, $timeout) {
 
                     vm.listaSaida = resposta.data
 
-                    !vm.listaSaida.length && adicionarMensagem
-                        ('Nenhum resultado encontrado')
+                    !vm.listaSaida.length && adicionarMensagemErro
+                        ('Nenhum resultado encontrado', vm.alerts)
 
                 }).catch(function (error) {
 
-                    adicionarMensagem(error.data.message)
+                    adicionarMensagemErro(error.data.message, vm.alerts)
                     vm.listaSaida = []
 
                 }).finally(function () {
@@ -65,11 +65,11 @@ function GeradorController(geradorService, blockUI, $timeout) {
 
         } else {
 
-            !vm.req.task.length && adicionarMensagem
-                ('Adicione ao menos uma tarefa ao filtro')
+            !vm.req.task.length && adicionarMensagemErro
+                ('Adicione ao menos uma tarefa ao filtro', vm.alerts)
 
-            !vm.req.projeto.length && adicionarMensagem
-                ('Adicione ao menos um projeto ao filtro')
+            !vm.req.projeto.length && adicionarMensagemErro
+                ('Adicione ao menos um projeto ao filtro', vm.alerts)
         }
     }
 
@@ -146,21 +146,30 @@ function GeradorController(geradorService, blockUI, $timeout) {
 
     function limparMessages() {
 
-        vm.messages = []
+        vm.alerts = []
+        vm.alertsTop = []
     }
 
-    function adicionarMensagem(mensagem) {
+    function adicionarMensagemSucesso(mensagem, alerts) {
+        adicionarMensagem('alert-success', mensagem, alerts)
+    }
+
+    function adicionarMensagemErro(mensagem, alerts) {
+        adicionarMensagem('alert-danger', mensagem, alerts)
+    }
+
+    function adicionarMensagem(classe, mensagem, alerts) {
 
         const message = {
-            class: 'alert-danger',
+            class: classe,
             text: mensagem,
             close: function () {
-                vm.messages.splice(
-                    vm.messages.indexOf(this), 1);
+                alerts.splice(
+                    alerts.indexOf(this), 1);
             }
         }
 
-        vm.messages.push(message)
+        alerts.push(message)
 
         $timeout(function () {
             message.close();
@@ -190,7 +199,7 @@ function GeradorController(geradorService, blockUI, $timeout) {
     }
 
     function closeMessage(index) {
-        vm.messages.splice(index, 1);
+        vm.alerts.splice(index, 1);
     }
 
     function obterNomeArtefato(artefato) {
@@ -211,6 +220,6 @@ function GeradorController(geradorService, blockUI, $timeout) {
 
         console.log(saida)
 
-        adicionarMensagem('asdf')
+        adicionarMensagemSucesso('asdf', vm.alertsTop)
     }
 }

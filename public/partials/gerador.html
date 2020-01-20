@@ -9,14 +9,14 @@
 
 		<!-- https://coderwall.com/p/r_bvhg/angular-ui-bootstrap-alert-service-for-angular-js -->
 		<!-- https://codepen.io/leenawat/pen/ORPbqE -->
-		<div ng-repeat='message in vm.messages' class="container alert-top alert alert-success">
-			<a href="#" class="close" data-dismiss="alert" ng-click="message.close()">&times;</a>
-			&#10003 {{message.text}}
+		<div ng-repeat='alert in vm.alertsTop' class="container alert-top alert alert-success">
+			<a href="#" class="close" data-dismiss="alert" ng-click="alert.close()">&times;</a>
+			&#10003 {{alert.text}}
 		</div>
 
-		<div ng-repeat='message in vm.messages' class="alert alert {{message.class}} alert-dismissible">
-			<a href="#" class="close" data-dismiss="alert" ng-click="message.close()">&times;</a>
-			&#10003 {{message.text}}
+		<div ng-repeat='alert in vm.alerts' class="alert alert {{alert.class}} alert-dismissible">
+			<a href="#" class="close" data-dismiss="alert" ng-click="alert.close()">&times;</a>
+			&#10003 {{alert.text}}
 		</div>
 
 		<div class='row pt-2 border-top'>
