@@ -193,6 +193,8 @@ function GeradorController(geradorService, blockUI) {
 
     function foo(saida) {
 
+        limparMessages()
+
         console.log(saida)
 
         adicionarMensagem('asdf')
