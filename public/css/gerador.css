@@ -22,6 +22,12 @@ thead {
     color: white;
 }
 
+.alert-top{
+    position: fixed;
+    top: 5px;
+    z-index: 999;
+}
+
 .btn-primary,
 .btn-primary:hover,
 .btn-primary:active,

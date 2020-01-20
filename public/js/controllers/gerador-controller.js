@@ -194,5 +194,7 @@ function GeradorController(geradorService, blockUI) {
     function foo(saida) {
 
         console.log(saida)
+
+        adicionarMensagem('asdf')
     }
 }

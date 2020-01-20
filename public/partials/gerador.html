@@ -7,7 +7,13 @@
 
 	<div class='container'>
 
-		<div ng-repeat='message in vm.messages' class="alert {{message.class}} alert-dismissible">
+		<!-- https://codepen.io/leenawat/pen/ORPbqE -->
+		<div ng-repeat='message in vm.messages' class="container alert-top alert alert-success">
+			<a href="#" class="close" data-dismiss="alert" ng-click="vm.closeMessage($index)">&times;</a>
+			{{message.text}}
+		</div>
+
+		<div ng-repeat='message in vm.messages' class="alert alert {{message.class}} alert-dismissible">
 			<a href="#" class="close" data-dismiss="alert" ng-click="vm.closeMessage($index)">&times;</a>
 			{{message.text}}
 		</div>
@@ -197,8 +203,7 @@
 			</div>
 
 			<div class='p-2' ng-if='vm.listaSaida.length'>
-				<button class='btn btn-block btn-success'
-					ng-if='vm.listaSaida.length'>Copiar Resultado</button>
+				<button class='btn btn-block btn-success' ng-if='vm.listaSaida.length'>Copiar Resultado</button>
 			</div>
 
 			<div class='p-2'>
@@ -252,10 +257,11 @@
 										</li>
 
 									</div>
-									<div class='col-3 d-flex flex-row-reverse align-items-center' >
+									<div class='col-3 d-flex flex-row-reverse align-items-center'>
 
 										<span class="clipboard" title='Copiar linha'>
-											<img style="width: 0.9em; height: 0.9em; opacity: .5;" src="icon/clipboard.svg">
+											<img style="width: 0.9em; height: 0.9em; opacity: .5;"
+												src="icon/clipboard.svg">
 										</span>
 
 									</div>
