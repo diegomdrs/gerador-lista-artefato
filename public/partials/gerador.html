@@ -9,12 +9,14 @@
 
 		<!-- https://coderwall.com/p/r_bvhg/angular-ui-bootstrap-alert-service-for-angular-js -->
 		<!-- https://codepen.io/leenawat/pen/ORPbqE -->
-		<div ng-repeat='alert in vm.alertsTop' class="container alert-top alert {{alert.tipoAlerta.class}}">
-			<a href="#" class="close" data-dismiss="alert" ng-click="alert.close()">&times;</a>
+		<div ng-repeat='alert in vm.alertsTop' class="container alert-top alert {{alert.tipoAlerta.class}}"
+			ng-click="alert.close()">
+			<a href="#" class="close" data-dismiss="alert">&times;</a>
 			{{alert.tipoAlerta.icone}} {{alert.text}}
 		</div>
 
-		<div ng-repeat='alert in vm.alerts' class="alert alert {{alert.tipoAlerta.class}} alert-dismissible">
+		<div ng-repeat='alert in vm.alerts' class="alert alert {{alert.tipoAlerta.class}} alert-dismissible"
+			ng-click="alert.close()">
 			<a href="#" class="close" data-dismiss="alert" ng-click="alert.close()">&times;</a>
 			{{alert.tipoAlerta.icone}} {{alert.text}}
 		</div>
@@ -204,7 +206,8 @@
 			</div>
 
 			<div class='p-2' ng-if='vm.listaSaida.length'>
-				<button class='btn btn-block btn-success' ng-if='vm.listaSaida.length'>Copiar Resultado</button>
+				<button class='btn btn-block btn-success' ng-if='vm.listaSaida.length'
+					ng-click='vm.copiarTabelaClipboard()'>Copiar Resultado</button>
 			</div>
 
 			<div class='p-2'>

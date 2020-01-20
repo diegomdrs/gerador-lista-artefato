@@ -22,6 +22,8 @@ function GeradorController(geradorService, blockUI, $timeout) {
         ERROR: { class: 'alert-danger', icone: '✗' },
     }
 
+    const TIMEOUT_ALERTA = 2500
+
     vm.init = init
     vm.listarArtefatos = listarArtefatos
     vm.limparFiltros = limparFiltros
@@ -35,6 +37,7 @@ function GeradorController(geradorService, blockUI, $timeout) {
     vm.obterNomeProjeto = obterNomeProjeto
     vm.obterNomeArtefato = obterNomeArtefato
     vm.copiarLinhaTabelaClipboard = copiarLinhaTabelaClipboard
+    vm.copiarTabelaClipboard = copiarTabelaClipboard
 
     function init() {
 
@@ -178,7 +181,7 @@ function GeradorController(geradorService, blockUI, $timeout) {
 
         $timeout(function () {
             message.close();
-        }, 2000)
+        }, TIMEOUT_ALERTA)
     }
 
     function limparFiltros() {
@@ -186,9 +189,19 @@ function GeradorController(geradorService, blockUI, $timeout) {
         limparMessages()
 
         vm.req = {
-            autor: 'beltrano',
-            projeto: ['/tmp/gerador-lista-artefato-qas/bar-estatico', '/tmp/gerador-lista-artefato-qas/bar-api', '/tmp/gerador-lista-artefato-qas/qux-estatico', '/tmp/gerador-lista-artefato-qas/qux-api'],
-            task: [1199211, 1203082, 1203670, 1207175, 1210684, 1210658, 1212262, 1212444],
+            autor: 'c1282036',
+            // projeto: ['/tmp/gerador-lista-artefato-qas/bar-estatico', '/tmp/gerador-lista-artefato-qas/bar-api', '/tmp/gerador-lista-artefato-qas/qux-estatico', '/tmp/gerador-lista-artefato-qas/qux-api'],
+
+            projeto: [
+                '/kdi/git/apc-api',
+                '/kdi/git/apc-estatico',
+                '/kdi/git/crm-patrimonio-estatico',
+                '/kdi/git/crm-patrimonio-api',
+                '/kdi/git/fti-estatico'
+            ],
+
+            // task: [1199211, 1203082, 1203670, 1207175, 1210684, 1210658, 1212262, 1212444],
+            task: [1239662, 1221786, 1234921, 1229100, 1227471, 1226285, 1221172, 1217966, 1215554],
             mostrarDeletados: false,
             mostrarRenomeados: false
         }
@@ -226,15 +239,36 @@ function GeradorController(geradorService, blockUI, $timeout) {
         // https://stackoverflow.com/questions/33855641/copy-output-of-a-javascript-variable-to-the-clipboard
 
         var dummy = document.createElement("textarea");
-        
+
         document.body.appendChild(dummy);
-        
+
         dummy.value = obterSaidaClipboard(saida);
-        
+
         dummy.select();
-        
+
         document.execCommand("copy");
         document.body.removeChild(dummy);
+
+        adicionarMensagemSucesso('Linha copiada para o clipboard', vm.alertsTop)
+    }
+
+    function copiarTabelaClipboard() {
+
+        limparMessages()
+
+        // https://codepen.io/rishabhp/pen/jAGjQV
+
+        var urlField = document.getElementById('foo')
+
+        // create a Range object
+        var range = document.createRange();
+        // set the Node to select the "range"
+        range.selectNode(urlField);
+        // add the Range to the set of window selections
+        window.getSelection().addRange(range);
+
+        // execute 'copy', can't 'cut' in this case
+        document.execCommand('copy');
 
         adicionarMensagemSucesso('Linha copiada para o clipboard', vm.alertsTop)
     }
@@ -242,12 +276,10 @@ function GeradorController(geradorService, blockUI, $timeout) {
     function obterSaidaClipboard(saida) {
 
         const tipoModificacao = vm.TIPO_MODIFICACAO[saida.listaArtefatoSaida[0].tipoAlteracao]
-        const listaArtefatoSaida = saida.listaArtefatoSaida.map((artefato) => 
-            artefato.nomeArtefato
-        ).join('\n')
-        const listaNumTarefaSaida = saida.listaNumTarefaSaida.join('\n')
+        const listaArtefatoSaida = saida.listaArtefatoSaida.map((artefato) =>
+            artefato.nomeArtefato).join('<br>')
+        const listaNumTarefaSaida = saida.listaNumTarefaSaida.join('<br>')
 
         return tipoModificacao + '\t' + listaArtefatoSaida + '\t' + listaNumTarefaSaida
     }
-
 }
