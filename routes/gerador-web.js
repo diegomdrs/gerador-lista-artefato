@@ -1,4 +1,5 @@
 const path = require('path')
+const Param = require('../models/param')
 
 module.exports = function (app) {
 
@@ -7,7 +8,6 @@ module.exports = function (app) {
         const BAD_REQUEST_CODE = 400
 
         try {
-            const Param = require('../models/param')
             const params = new Param(req.body)
 
             const gerador = require('../lib/gerador')(params)
