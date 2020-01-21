@@ -2,9 +2,9 @@ angular
     .module('geradorApp')
     .controller('GeradorController', GeradorController)
 
-GeradorController.$inject = ['geradorService', 'blockUI', '$timeout', 'geradorUtil'];
+GeradorController.$inject = ['geradorService', 'blockUI', '$timeout', 'geradorUtil', 'geradorConstants'];
 
-function GeradorController(geradorService, blockUI, $timeout, geradorUtil) {
+function GeradorController(geradorService, blockUI, $timeout, geradorUtil, geradorConstants) {
     var vm = this
 
     vm.listaSaida = []
@@ -14,6 +14,8 @@ function GeradorController(geradorService, blockUI, $timeout, geradorUtil) {
         SUCCESS: { class: 'alert-success', icone: '✓' },
         ERROR: { class: 'alert-danger', icone: '✗' },
     }
+
+    vm.TIPO_MODIFICACAO = geradorConstants.TIPO_MODIFICACAO
 
     const TIMEOUT_ALERTA = 2500
 
