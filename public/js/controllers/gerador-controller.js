@@ -189,19 +189,19 @@ function GeradorController(geradorService, blockUI, $timeout) {
         limparMessages()
 
         vm.req = {
-            autor: 'c1282036',
-            // projeto: ['/tmp/gerador-lista-artefato-qas/bar-estatico', '/tmp/gerador-lista-artefato-qas/bar-api', '/tmp/gerador-lista-artefato-qas/qux-estatico', '/tmp/gerador-lista-artefato-qas/qux-api'],
+            autor: 'beltrano',
+            projeto: ['/tmp/gerador-lista-artefato-qas/bar-estatico', '/tmp/gerador-lista-artefato-qas/bar-api', '/tmp/gerador-lista-artefato-qas/qux-estatico', '/tmp/gerador-lista-artefato-qas/qux-api'],
 
-            projeto: [
-                '/kdi/git/apc-api',
-                '/kdi/git/apc-estatico',
-                '/kdi/git/crm-patrimonio-estatico',
-                '/kdi/git/crm-patrimonio-api',
-                '/kdi/git/fti-estatico'
-            ],
+            // projeto: [
+            //     '/kdi/git/apc-api',
+            //     '/kdi/git/apc-estatico',
+            //     '/kdi/git/crm-patrimonio-estatico',
+            //     '/kdi/git/crm-patrimonio-api',
+            //     '/kdi/git/fti-estatico'
+            // ],
 
-            // task: [1199211, 1203082, 1203670, 1207175, 1210684, 1210658, 1212262, 1212444],
-            task: [1239662, 1221786, 1234921, 1229100, 1227471, 1226285, 1221172, 1217966, 1215554],
+            task: [1199211, 1203082, 1203670, 1207175, 1210684, 1210658, 1212262, 1212444],
+            // task: [1239662, 1221786, 1234921, 1229100, 1227471, 1226285, 1221172, 1217966, 1215554],
             mostrarDeletados: false,
             mostrarRenomeados: false
         }
@@ -232,6 +232,91 @@ function GeradorController(geradorService, blockUI, $timeout) {
         }
     }
 
+    function copiarTabelaClipboard() {
+
+        limparMessages()
+
+        var range = document.createRange()
+        var table = document.createElement("table");
+        var tbody = document.createElement('tbody')
+
+        for (const saida of vm.listaSaida) {
+
+            var tr = document.createElement('tr')
+            var tdAtividade = document.createElement('td')
+            var tdArtefato = document.createElement('td')
+            var tdTarefa = document.createElement('td')
+
+            tdAtividade.appendChild(document.createTextNode(
+                vm.TIPO_MODIFICACAO[saida.listaArtefatoSaida[0].tipoAlteracao]))
+
+            var ulArtefato = document.createElement('ul')
+
+            for (const artefato of saida.listaArtefatoSaida) {
+                var li = document.createElement('li')
+
+                li.appendChild(document.createTextNode(artefato.nomeArtefato))
+
+                ulArtefato.appendChild(li)
+            }
+
+            var ulTarefa = document.createElement('ul')
+
+            for (const tarefa of saida.listaNumTarefaSaida) {
+                var li = document.createElement('li')
+
+                li.appendChild(document.createTextNode(tarefa))
+
+                ulTarefa.appendChild(li)
+            }
+
+            tdArtefato.appendChild(ulArtefato)
+            tdTarefa.appendChild(ulTarefa)
+
+            tr.appendChild(tdAtividade)
+            tr.appendChild(tdArtefato)
+            tr.appendChild(tdTarefa)
+
+            tbody.appendChild(tr)
+        }
+
+        table.appendChild(tbody);
+        document.body.appendChild(table)
+
+        range.selectNode(table)
+
+        window.getSelection().addRange(range)
+
+        document.execCommand("copy")
+        document.body.removeChild(table)
+
+        adicionarMensagemSucesso('Linha copiada para o clipboard', vm.alertsTop)
+    }
+
+    function copiarTabelaClipboardFoo() {
+
+        limparMessages()
+
+        // https://codepen.io/rishabhp/pen/jAGjQV
+
+        var urlField = document.getElementById('foo')
+
+        // create a Range object
+        var range = document.createRange();
+
+        // set the Node to select the "range"
+        range.selectNode(urlField);
+
+        // add the Range to the set of window selections
+        window.getSelection().addRange(range);
+
+        // execute 'copy', can't 'cut' in this case
+        document.execCommand('copy');
+
+        adicionarMensagemSucesso('Linha copiada para o clipboard', vm.alertsTop)
+    }
+
+
     function copiarLinhaTabelaClipboard(saida) {
 
         limparMessages()
@@ -248,27 +333,6 @@ function GeradorController(geradorService, blockUI, $timeout) {
 
         document.execCommand("copy");
         document.body.removeChild(dummy);
-
-        adicionarMensagemSucesso('Linha copiada para o clipboard', vm.alertsTop)
-    }
-
-    function copiarTabelaClipboard() {
-
-        limparMessages()
-
-        // https://codepen.io/rishabhp/pen/jAGjQV
-
-        var urlField = document.getElementById('foo')
-
-        // create a Range object
-        var range = document.createRange();
-        // set the Node to select the "range"
-        range.selectNode(urlField);
-        // add the Range to the set of window selections
-        window.getSelection().addRange(range);
-
-        // execute 'copy', can't 'cut' in this case
-        document.execCommand('copy');
 
         adicionarMensagemSucesso('Linha copiada para o clipboard', vm.alertsTop)
     }
