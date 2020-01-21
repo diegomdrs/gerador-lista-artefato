@@ -4,20 +4,20 @@ init()
 
 async function init() {
 
-    const params = require('./config/commander')
+    const commander = require('./config/commander')
 
-    if (params.server) {
+    if (commander.server) {
 
         const app = require('./config/express')
 
         require('./config/http')(app)
         require('./routes/gerador-web')(app)
 
-    } else if (params.projeto && params.autor && params.task && params.diretorio) {
+    } else if (commander.projeto && commander.autor && commander.task && commander.diretorio) {
 
-        require('./routes/gerador-cli')(params)
+        require('./routes/gerador-cli')(commander)
     } else {
 
-        params.outputHelp()
+        commander.outputHelp()
     }
 }

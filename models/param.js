@@ -1,11 +1,11 @@
-const Param = function (body) {
+const Param = function ({ autor, task, projeto, mostrarDeletados, mostrarRenomeados, mostrarNumModificacao }) {
 
-  this.autor = getAttrRequired('autor', body.autor)
-  this.task = getAttrRequired('task', getList(body.task))
-  this.projeto = getAttrRequired('projeto', getList(body.projeto))
-  this.mostrarDeletados = body.mostrarDeletados
-  this.mostrarRenomeados = body.mostrarRenomeados
-  this.mostrarNumModificacao = body.mostrarNumModificacao
+  this.autor = getAttrRequired('autor', autor)
+  this.task = getAttrRequired('task', getList(task))
+  this.projeto = getAttrRequired('projeto', getList(projeto))
+  this.mostrarDeletados = mostrarDeletados
+  this.mostrarRenomeados = mostrarRenomeados
+  this.mostrarNumModificacao = mostrarNumModificacao
 }
 
 function getList(param) {

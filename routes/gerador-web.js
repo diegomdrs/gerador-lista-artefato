@@ -9,11 +9,11 @@ module.exports = function (app) {
         try {
             const Param = require('../models/param')
             const params = new Param(req.body)
-            const gerador = require('../lib/gerador')(params)
 
-            const retorno = await gerador.gerarListaArtefato()
-            
-            resp.json(retorno)
+            const gerador = require('../lib/gerador')(params)
+            const listaSaida = await gerador.gerarListaArtefato()
+ 
+            resp.json(listaSaida)
 
         } catch (error) {
 

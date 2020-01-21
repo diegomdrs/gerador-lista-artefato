@@ -1,23 +1,23 @@
 const path = require('path')
+const Param = require('../models/param')
 
-module.exports = async function (params) {
+module.exports = async function (commander) {
 
     init()
 
     async function init() {
 
         try {
-
-            params.projeto = params.projeto.map(function (nomeProjeto) {
-                return path.join(params.diretorio, nomeProjeto)
+            commander.projeto = commander.projeto.map(function (nomeProjeto) {
+                return path.join(commander.diretorio, nomeProjeto)
             })
 
-            delete params.diretorio
+            delete commander.diretorio
+
+            const params = new Param(commander)
 
             const gerador = require('../lib/gerador')(params)
-
             const listaSaida = await gerador.gerarListaArtefato()
-
             const printer = require('../lib/printer')(params, listaSaida)
 
             printer.imprimirListaSaida(listaSaida)
