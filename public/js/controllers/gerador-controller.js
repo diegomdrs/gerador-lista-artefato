@@ -243,11 +243,40 @@ function GeradorController(geradorService, blockUI, $timeout) {
 
         limparMessages()
 
+        foo(vm.listaSaida)
+
+        adicionarMensagemSucesso('Tabela copiada para o clipboard', vm.alertsTop)
+    }
+
+    function copiarLinhaTabelaClipboard(saida) {
+
+        limparMessages()
+
+        foo([saida])
+
+        adicionarMensagemSucesso('Linha copiada para o clipboard', vm.alertsTop)
+    }
+
+    function obterSaidaClipboard(saida) {
+
+        const tipoModificacao = vm.TIPO_MODIFICACAO[saida.listaArtefatoSaida[0].tipoAlteracao]
+        const listaArtefatoSaida = saida.listaArtefatoSaida.map((artefato) =>
+            artefato.nomeArtefato).join('<br>')
+        const listaNumTarefaSaida = saida.listaNumTarefaSaida.join('<br>')
+
+        return tipoModificacao + '\t' + listaArtefatoSaida + '\t' + listaNumTarefaSaida
+    }
+
+    function foo(listaSaida) {
+
+        // https://codepen.io/rishabhp/pen/jAGjQV
+        // https://stackoverflow.com/questions/33855641/copy-output-of-a-javascript-variable-to-the-clipboard
+
         var range = document.createRange()
         var table = document.createElement("table");
         var tbody = document.createElement('tbody')
 
-        for (const saida of vm.listaSaida) {
+        for (const saida of listaSaida) {
 
             var tr = document.createElement('tr')
             var tdAtividade = document.createElement('td')
@@ -272,7 +301,7 @@ function GeradorController(geradorService, blockUI, $timeout) {
             for (const tarefa of saida.listaNumTarefaSaida) {
                 var li = document.createElement('li')
 
-                li.appendChild(document.createTextNode(tarefa))
+                li.appendChild(document.createTextNode(`Tarefa nº ${tarefa}`))
 
                 ulTarefa.appendChild(li)
             }
@@ -296,61 +325,5 @@ function GeradorController(geradorService, blockUI, $timeout) {
 
         document.execCommand("copy")
         document.body.removeChild(table)
-
-        adicionarMensagemSucesso('Linha copiada para o clipboard', vm.alertsTop)
-    }
-
-    function copiarTabelaClipboardFoo() {
-
-        limparMessages()
-
-        // https://codepen.io/rishabhp/pen/jAGjQV
-
-        var urlField = document.getElementById('foo')
-
-        // create a Range object
-        var range = document.createRange();
-
-        // set the Node to select the "range"
-        range.selectNode(urlField);
-
-        // add the Range to the set of window selections
-        window.getSelection().addRange(range);
-
-        // execute 'copy', can't 'cut' in this case
-        document.execCommand('copy');
-
-        adicionarMensagemSucesso('Linha copiada para o clipboard', vm.alertsTop)
-    }
-
-
-    function copiarLinhaTabelaClipboard(saida) {
-
-        limparMessages()
-
-        // https://stackoverflow.com/questions/33855641/copy-output-of-a-javascript-variable-to-the-clipboard
-
-        var dummy = document.createElement("textarea");
-
-        document.body.appendChild(dummy);
-
-        dummy.value = obterSaidaClipboard(saida);
-
-        dummy.select();
-
-        document.execCommand("copy");
-        document.body.removeChild(dummy);
-
-        adicionarMensagemSucesso('Linha copiada para o clipboard', vm.alertsTop)
-    }
-
-    function obterSaidaClipboard(saida) {
-
-        const tipoModificacao = vm.TIPO_MODIFICACAO[saida.listaArtefatoSaida[0].tipoAlteracao]
-        const listaArtefatoSaida = saida.listaArtefatoSaida.map((artefato) =>
-            artefato.nomeArtefato).join('<br>')
-        const listaNumTarefaSaida = saida.listaNumTarefaSaida.join('<br>')
-
-        return tipoModificacao + '\t' + listaArtefatoSaida + '\t' + listaNumTarefaSaida
     }
 }
