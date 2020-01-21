@@ -2,20 +2,13 @@ angular
     .module('geradorApp')
     .controller('GeradorController', GeradorController)
 
-GeradorController.$inject = ['geradorService', 'blockUI', '$timeout'];
+GeradorController.$inject = ['geradorService', 'blockUI', '$timeout', 'geradorUtil'];
 
-function GeradorController(geradorService, blockUI, $timeout) {
+function GeradorController(geradorService, blockUI, $timeout, geradorUtil) {
     var vm = this
 
     vm.listaSaida = []
     vm.req = {}
-
-    vm.TIPO_MODIFICACAO = {
-        A: 'Criado',
-        M: 'Alterado',
-        R: 'Renomeado',
-        D: 'Deletado'
-    }
 
     vm.TIPO_ALERTA = {
         SUCCESS: { class: 'alert-success', icone: '✓' },
@@ -191,9 +184,9 @@ function GeradorController(geradorService, blockUI, $timeout) {
         vm.req = {
             autor: 'fulano',
             projeto: [
-                '/tmp/gerador-lista-artefato-qas/bar-estatico', 
-                '/tmp/gerador-lista-artefato-qas/bar-api', 
-                '/tmp/gerador-lista-artefato-qas/qux-estatico', 
+                '/tmp/gerador-lista-artefato-qas/bar-estatico',
+                '/tmp/gerador-lista-artefato-qas/bar-api',
+                '/tmp/gerador-lista-artefato-qas/qux-estatico',
                 '/tmp/gerador-lista-artefato-qas/qux-api'
             ],
 
@@ -205,7 +198,7 @@ function GeradorController(geradorService, blockUI, $timeout) {
             //     '/kdi/git/fti-estatico'
             // ],
 
-            task: ["1168815","1172414","1168800","1167319","1163642","1155478","1150152","1161422"],
+            task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"],
 
             // task: ["1199211", "1203082", "1203670", "1207175", "1210684", "1210658", "1212262", "1212444"],
             // task: ["1239662", "1221786", "1234921", "1229100", "1227471", "1226285", "1221172", "1217966", "1215554"],
@@ -243,7 +236,7 @@ function GeradorController(geradorService, blockUI, $timeout) {
 
         limparMessages()
 
-        foo(vm.listaSaida)
+        geradorUtil.copiarTabelaClipboard(vm.listaSaida)
 
         adicionarMensagemSucesso('Tabela copiada para o clipboard', vm.alertsTop)
     }
@@ -252,81 +245,8 @@ function GeradorController(geradorService, blockUI, $timeout) {
 
         limparMessages()
 
-        foo([saida])
+        geradorUtil.copiarTabelaClipboard([saida])
 
         adicionarMensagemSucesso('Linha copiada para o clipboard', vm.alertsTop)
-    }
-
-    function obterSaidaClipboard(saida) {
-
-        const tipoModificacao = vm.TIPO_MODIFICACAO[saida.listaArtefatoSaida[0].tipoAlteracao]
-        const listaArtefatoSaida = saida.listaArtefatoSaida.map((artefato) =>
-            artefato.nomeArtefato).join('<br>')
-        const listaNumTarefaSaida = saida.listaNumTarefaSaida.join('<br>')
-
-        return tipoModificacao + '\t' + listaArtefatoSaida + '\t' + listaNumTarefaSaida
-    }
-
-    function foo(listaSaida) {
-
-        // https://codepen.io/rishabhp/pen/jAGjQV
-        // https://stackoverflow.com/questions/33855641/copy-output-of-a-javascript-variable-to-the-clipboard
-
-        const range = document.createRange()
-        const table = document.createElement("table");
-        const tbody = document.createElement('tbody')
-
-        for (const saida of listaSaida) {
-
-            const tr = document.createElement('tr')
-            const tdAtividade = document.createElement('td')
-            const tdArtefato = document.createElement('td')
-            const tdTarefa = document.createElement('td')
-
-            tdAtividade.appendChild(document.createTextNode(
-                vm.TIPO_MODIFICACAO[saida.listaArtefatoSaida[0].tipoAlteracao]))
-
-            const ulArtefato = document.createElement('ul')
-
-            for (const artefato of saida.listaArtefatoSaida) {
-                const li = document.createElement('li')
-
-                li.appendChild(document.createTextNode(artefato.nomeArtefato))
-
-                ulArtefato.appendChild(li)
-            }
-
-            const ulTarefa = document.createElement('ul')
-
-            for (const tarefa of saida.listaNumTarefaSaida) {
-                const li = document.createElement('li')
-
-                li.appendChild(document.createTextNode(`Tarefa nº ${tarefa}`))
-
-                ulTarefa.appendChild(li)
-            }
-
-            tdArtefato.appendChild(ulArtefato)
-            tdTarefa.appendChild(ulTarefa)
-
-            tr.appendChild(tdAtividade)
-            tr.appendChild(tdArtefato)
-            tr.appendChild(tdTarefa)
-
-            tbody.appendChild(tr)
-        }
-
-        table.appendChild(tbody);
-        document.body.appendChild(table)
-
-        range.selectNode(table)
-
-        const sel = window.getSelection()
-        
-        sel.removeAllRanges()
-        sel.addRange(range)
-
-        document.execCommand("copy")
-        document.body.removeChild(table)
     }
 }
