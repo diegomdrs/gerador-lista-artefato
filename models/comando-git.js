@@ -2,10 +2,13 @@ const Comando = (caminhoProjeto, autor, listaTask, mostrarCommitsLocais) => {
 
     let comando = `git -C ${caminhoProjeto} log --reverse --regexp-ignore-case --no-merges --author=${autor}`
 
-    if (mostrarCommitsLocais)
-        comando = comando.concat(' --branches')
-    else
-        comando = comando.concat(' --remotes')
+    // TODO - descomentar
+    // if (mostrarCommitsLocais)
+    //     comando = comando.concat(' --branches')
+    // else
+    //     comando = comando.concat(' --remotes')
+
+    comando = comando.concat(' --branches')
 
     comando = comando.concat(
         ' --name-status --pretty=format:\'%s\' -C')

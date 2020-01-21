@@ -20,7 +20,7 @@ function configure(
 	$locationProvider.html5Mode(true)
 
 	$routeProvider.when('/gerador', {
-		templateUrl: 'partials/gerador.html',
+		templateUrl: 'spas/gerador.tpl.html',
 		controller: 'GeradorController'
 	})
 

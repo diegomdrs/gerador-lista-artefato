@@ -23,6 +23,6 @@ module.exports = function (app) {
 
     // AngularJS html5mode com Node.js e Express
     app.all('/*', function (req, res) {
-        res.sendFile(path.join(__dirname, '../public/index.html'))
+        res.sendFile(path.join(__dirname, '../public/gerador.html'))
     });
 }
