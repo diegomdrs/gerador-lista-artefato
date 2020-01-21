@@ -272,34 +272,34 @@ function GeradorController(geradorService, blockUI, $timeout) {
         // https://codepen.io/rishabhp/pen/jAGjQV
         // https://stackoverflow.com/questions/33855641/copy-output-of-a-javascript-variable-to-the-clipboard
 
-        var range = document.createRange()
-        var table = document.createElement("table");
-        var tbody = document.createElement('tbody')
+        const range = document.createRange()
+        const table = document.createElement("table");
+        const tbody = document.createElement('tbody')
 
         for (const saida of listaSaida) {
 
-            var tr = document.createElement('tr')
-            var tdAtividade = document.createElement('td')
-            var tdArtefato = document.createElement('td')
-            var tdTarefa = document.createElement('td')
+            const tr = document.createElement('tr')
+            const tdAtividade = document.createElement('td')
+            const tdArtefato = document.createElement('td')
+            const tdTarefa = document.createElement('td')
 
             tdAtividade.appendChild(document.createTextNode(
                 vm.TIPO_MODIFICACAO[saida.listaArtefatoSaida[0].tipoAlteracao]))
 
-            var ulArtefato = document.createElement('ul')
+            const ulArtefato = document.createElement('ul')
 
             for (const artefato of saida.listaArtefatoSaida) {
-                var li = document.createElement('li')
+                const li = document.createElement('li')
 
                 li.appendChild(document.createTextNode(artefato.nomeArtefato))
 
                 ulArtefato.appendChild(li)
             }
 
-            var ulTarefa = document.createElement('ul')
+            const ulTarefa = document.createElement('ul')
 
             for (const tarefa of saida.listaNumTarefaSaida) {
-                var li = document.createElement('li')
+                const li = document.createElement('li')
 
                 li.appendChild(document.createTextNode(`Tarefa nº ${tarefa}`))
 
@@ -321,7 +321,10 @@ function GeradorController(geradorService, blockUI, $timeout) {
 
         range.selectNode(table)
 
-        window.getSelection().addRange(range)
+        const sel = window.getSelection()
+        
+        sel.removeAllRanges()
+        sel.addRange(range)
 
         document.execCommand("copy")
         document.body.removeChild(table)
