@@ -189,8 +189,13 @@ function GeradorController(geradorService, blockUI, $timeout) {
         limparMessages()
 
         vm.req = {
-            autor: 'beltrano',
-            projeto: ['/tmp/gerador-lista-artefato-qas/bar-estatico', '/tmp/gerador-lista-artefato-qas/bar-api', '/tmp/gerador-lista-artefato-qas/qux-estatico', '/tmp/gerador-lista-artefato-qas/qux-api'],
+            autor: 'fulano',
+            projeto: [
+                '/tmp/gerador-lista-artefato-qas/bar-estatico', 
+                '/tmp/gerador-lista-artefato-qas/bar-api', 
+                '/tmp/gerador-lista-artefato-qas/qux-estatico', 
+                '/tmp/gerador-lista-artefato-qas/qux-api'
+            ],
 
             // projeto: [
             //     '/kdi/git/apc-api',
@@ -200,7 +205,9 @@ function GeradorController(geradorService, blockUI, $timeout) {
             //     '/kdi/git/fti-estatico'
             // ],
 
-            task: [1199211, 1203082, 1203670, 1207175, 1210684, 1210658, 1212262, 1212444],
+            task: [1168815,1172414,1168800,1167319,1163642,1155478,1150152,1161422],
+
+            // task: [1199211, 1203082, 1203670, 1207175, 1210684, 1210658, 1212262, 1212444],
             // task: [1239662, 1221786, 1234921, 1229100, 1227471, 1226285, 1221172, 1217966, 1215554],
             mostrarDeletados: false,
             mostrarRenomeados: false
