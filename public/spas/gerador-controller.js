@@ -12,8 +12,7 @@ function GeradorController(geradorService, blockUI, $timeout, geradorUtil, gerad
 
     vm.TIPO_ALERTA = geradorConstants.TIPO_ALERTA
     vm.TIPO_MODIFICACAO = geradorConstants.TIPO_MODIFICACAO
-
-    const TIMEOUT_ALERTA = 2500
+    const TIMEOUT_ALERTA = geradorConstants.TIMEOUT_ALERTA
 
     vm.init = init
     vm.listarArtefatos = listarArtefatos
