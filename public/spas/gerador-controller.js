@@ -44,22 +44,19 @@ function GeradorController(geradorService, blockUI, $timeout, geradorUtil, gerad
             blockUI.start()
 
             geradorService.gerarListaArtefato(vm.req)
-                .then(function (resposta) {
+                .then((resposta) => {
 
                     vm.listaSaida = resposta.data
 
                     !vm.listaSaida.length && adicionarMensagemErro
                         ('Nenhum resultado encontrado', vm.alerts)
 
-                }).catch(function (error) {
+                }).catch((error) => {
 
                     adicionarMensagemErro(error.data.message, vm.alerts)
                     vm.listaSaida = []
 
-                }).finally(function () {
-
-                    blockUI.stop()
-                })
+                }).finally(() => blockUI.stop())
 
         } else {
 
@@ -90,7 +87,6 @@ function GeradorController(geradorService, blockUI, $timeout, geradorUtil, gerad
         vm.req.task = vm.req.task.filter(task =>
             task !== taskRemocao)
     }
-
 
     function adicionarTask() {
 
