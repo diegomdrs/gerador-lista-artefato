@@ -7,5 +7,10 @@ angular
             M: 'Alterado',
             R: 'Renomeado',
             D: 'Deletado'
+        },
+
+        TIPO_ALERTA: {
+            SUCCESS: { class: 'alert-success', icone: '✓' },
+            ERROR: { class: 'alert-danger', icone: '✗' },
         }
     })

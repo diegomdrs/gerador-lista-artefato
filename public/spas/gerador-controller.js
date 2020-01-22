@@ -10,11 +10,7 @@ function GeradorController(geradorService, blockUI, $timeout, geradorUtil, gerad
     vm.listaSaida = []
     vm.req = {}
 
-    vm.TIPO_ALERTA = {
-        SUCCESS: { class: 'alert-success', icone: '✓' },
-        ERROR: { class: 'alert-danger', icone: '✗' },
-    }
-
+    vm.TIPO_ALERTA = geradorConstants.TIPO_ALERTA
     vm.TIPO_MODIFICACAO = geradorConstants.TIPO_MODIFICACAO
 
     const TIMEOUT_ALERTA = 2500
