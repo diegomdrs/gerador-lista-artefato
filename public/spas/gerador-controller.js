@@ -26,7 +26,7 @@ function GeradorController(geradorService, blockUI, $timeout, geradorUtil, gerad
     vm.obterNomeProjeto = obterNomeProjeto
     vm.obterNomeArtefato = obterNomeArtefato
     vm.copiarLinhaTabelaClipboard = copiarLinhaTabelaClipboard
-    vm.copiarTabelaClipboard = copiarTabelaClipboard
+    vm.copiarTabelaClipboardTabulado = copiarTabelaClipboardTabulado
 
     function init() {
 
@@ -212,11 +212,11 @@ function GeradorController(geradorService, blockUI, $timeout, geradorUtil, gerad
         }
     }
 
-    function copiarTabelaClipboard() {
+    function copiarTabelaClipboardTabulado() {
 
         limparMessages()
 
-        geradorUtil.copiarTabelaClipboard(vm.listaSaida)
+        geradorUtil.copiarTabelaClipboardTabulado(vm.listaSaida)
 
         adicionarMensagemSucesso('Tabela copiada para o clipboard', vm.alertsTop)
     }
@@ -225,7 +225,7 @@ function GeradorController(geradorService, blockUI, $timeout, geradorUtil, gerad
 
         limparMessages()
 
-        geradorUtil.copiarTabelaClipboard([saida])
+        geradorUtil.copiarTabelaClipboardTabulado([saida])
 
         adicionarMensagemSucesso('Linha copiada para o clipboard', vm.alertsTop)
     }
