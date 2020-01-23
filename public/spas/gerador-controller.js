@@ -12,7 +12,6 @@ function GeradorController(geradorService, blockUI, $timeout, geradorUtil, gerad
 
     vm.TIPO_ALERTA = geradorConstants.TIPO_ALERTA
     vm.TIPO_MODIFICACAO = geradorConstants.TIPO_MODIFICACAO
-    const TIMEOUT_ALERTA = geradorConstants.TIMEOUT_ALERTA
 
     vm.init = init
     vm.listarArtefatos = listarArtefatos
@@ -167,7 +166,7 @@ function GeradorController(geradorService, blockUI, $timeout, geradorUtil, gerad
 
         $timeout(function () {
             message.close();
-        }, TIMEOUT_ALERTA)
+        }, geradorConstants.TIMEOUT_ALERTA)
     }
 
     function limparFiltros() {
@@ -182,19 +181,7 @@ function GeradorController(geradorService, blockUI, $timeout, geradorUtil, gerad
                 '/tmp/gerador-lista-artefato-qas/qux-estatico',
                 '/tmp/gerador-lista-artefato-qas/qux-api'
             ],
-
-            // projeto: [
-            //     '/kdi/git/apc-api',
-            //     '/kdi/git/apc-estatico',
-            //     '/kdi/git/crm-patrimonio-estatico',
-            //     '/kdi/git/crm-patrimonio-api',
-            //     '/kdi/git/fti-estatico'
-            // ],
-
             task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"],
-
-            // task: ["1199211", "1203082", "1203670", "1207175", "1210684", "1210658", "1212262", "1212444"],
-            // task: ["1239662", "1221786", "1234921", "1229100", "1227471", "1226285", "1221172", "1217966", "1215554"],
             mostrarDeletados: false,
             mostrarRenomeados: false
         }

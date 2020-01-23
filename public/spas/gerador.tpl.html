@@ -7,13 +7,13 @@
 
 	<div class='container' style='padding-right: 0px; padding-left:0px;'>
 
-		<div ng-repeat='alert in vm.alertsTop' class="container alert-top alert {{alert.tipoAlerta.class}}"
+		<div ng-repeat='alert in vm.alertsTop' class="container alert-top alert {{alert.tipoAlerta.class}} alert-dismissible"
 			style='cursor: pointer;'>
 			<a href="#" class="close" data-dismiss="alert" ng-click="alert.close()">&times;</a>
 			{{alert.tipoAlerta.icone}} {{alert.text}}
 		</div>
 
-		<div ng-repeat='alert in vm.alerts' class="alert alert {{alert.tipoAlerta.class}} alert-dismissible"
+		<div ng-repeat='alert in vm.alerts' class="alert {{alert.tipoAlerta.class}} alert-dismissible"
 			style='cursor: pointer;'>
 			<a href="#" class="close" data-dismiss="alert" ng-click="alert.close()">&times;</a>
 			{{alert.tipoAlerta.icone}} {{alert.text}}
