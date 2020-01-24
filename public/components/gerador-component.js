@@ -1,9 +1,9 @@
 angular
     .module('geradorApp')
-    .component('alert', alert)
+    .component('alertComponent', alertComponent)
     .controller('FooController', fooController)
 
-function alert() {
+function alertComponent() {
 
     return {
         bindings: {
