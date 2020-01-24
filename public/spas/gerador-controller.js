@@ -212,7 +212,7 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
 
         clipboardUtil.copiarTabelaClipboard(vm.listaSaida)
 
-        adicionarMensagemSucesso('Tabela copiada para o clipboard', vm.alertsTop)
+        adicionarMensagemSucesso('Dados da tabela copiada para o clipboard', vm.alertsTop)
     }
 
     function copiarLinhaTabelaClipboard(saida) {
@@ -221,6 +221,6 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
 
         clipboardUtil.copiarTabelaClipboard([saida])
 
-        adicionarMensagemSucesso('Linha copiada para o clipboard', vm.alertsTop)
+        adicionarMensagemSucesso('Dados da linha copiada para o clipboard', vm.alertsTop)
     }
 }
