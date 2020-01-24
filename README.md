@@ -22,6 +22,14 @@ App para listar os artefatos incluídos/alterados/renomeados para geração do Q
 
 - [Windows](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas.exe)
 
+## Configuração
+
+Na primeira utilização da versão Linux, execute:
+
+``` console
+$ chmod +x gerador-lista-artefato-qas
+```
+
 ## Utilização do modo Web
 
 Para utilizar a versão Web, tanto na versão para Linux quanto para Windows, execute o comando `gerador-lista-artefato-qas` com o parâmetro `-s` ou `--server`, como no exemplo abaixo:
@@ -37,13 +45,6 @@ Em seguida, acesse a url [http://localhost:3333/gerador](http://localhost:3333/g
 ## Utilização do modo CLI
 
 ### Linux
-
-Na primeira utilização da versão Linux, execute:
-
-``` console
-$ chmod +x gerador-lista-artefato-qas
-```
-Em seguida, execute o comando:
 
 ``` console
 $ ./gerador-lista-artefato-qas --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
