@@ -174,14 +174,8 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
         limparMessages()
 
         vm.req = {
-            autor: 'fulano',
-            projeto: [
-                '/tmp/gerador-lista-artefato-qas/bar-estatico',
-                '/tmp/gerador-lista-artefato-qas/bar-api',
-                '/tmp/gerador-lista-artefato-qas/qux-estatico',
-                '/tmp/gerador-lista-artefato-qas/qux-api'
-            ],
-            task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"],
+            projeto: [],
+            task: [],
             mostrarDeletados: false,
             mostrarRenomeados: false
         }
