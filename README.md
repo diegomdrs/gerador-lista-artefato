@@ -16,47 +16,18 @@ App para listar os artefatos incluídos/alterados/renomeados para geração do Q
 - Verificar se os merges estão sendo realizados de maneira correta
 - Utilizar o comando `git mv` para renomear os artefatos
 
-## Instalação 
+## Download 
 
-### Linux 
+- [Linux](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas)
 
-- Baixe o arquivo [gerador-lista-artefato-qas](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas)
+- [Windows](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas.exe)
 
-### Windows 
-
-- Baixe o arquivo [gerador-lista-artefato-qas.exe](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas.exe)
-
-### Repositório Github
-
-- Para instalar o gerador a partir do repositório Github, execute:
-
-``` console
-$ git clone https://github.com/diegomdrs/gerador-lista-artefato-qas.git
-$ cd gerador-lista-artefato-qas
-$ npm i -g
-```
-
-- Dessa forma o executável `gerador-lista-artefato-qas` estará disponível em todo sistema
-
-## Utilização do modo CLI
-
-### Linux
+## Configuração
 
 Na primeira utilização da versão Linux, execute:
 
 ``` console
 $ chmod +x gerador-lista-artefato-qas
-```
-Em seguida, execute o comando:
-
-``` console
-$ ./gerador-lista-artefato-qas --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
-```
-
-### Windows
-
-``` console
-$ ./gerador-lista-artefato-qas.exe --diretorio=C:/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
 ```
 
 ## Utilização do modo Web
@@ -71,7 +42,21 @@ Em seguida, acesse a url [http://localhost:3333/gerador](http://localhost:3333/g
 
 ![Modo Web](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/web.png)
 
-## Parâmetros do modo CLI
+## Utilização do modo CLI
+
+### Linux
+
+``` console
+$ ./gerador-lista-artefato-qas --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
+```
+
+### Windows
+
+``` console
+$ ./gerador-lista-artefato-qas.exe --diretorio=C:/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
+```
+
+### Parâmetros do modo CLI
 
 ``` console
 -d, --diretorio <type>     Diretório raiz dos projetos Git
@@ -86,7 +71,7 @@ Em seguida, acesse a url [http://localhost:3333/gerador](http://localhost:3333/g
 -h, --help                 output usage information
 ```
 
-## Saida do gerador em modo CLI
+### Saida do gerador em modo CLI
 
 ``` console
 $ ./gerador-lista-artefato-qas --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081 --mostrar-deletados --mostrar-num-modificacao --mostrar-deletados --mostrar-renomeados
@@ -118,7 +103,7 @@ Onde:
 - Nº de modificações do artefato na tarefa - se utilizado o parâmetro `--mostrar-num-modificacao`
 - Caminho do artefato
 
-## Exemplo de uso
+### Exemplo de uso
 
 ``` console
 $ ./gerador-lista-artefato-qas --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900077,900079
