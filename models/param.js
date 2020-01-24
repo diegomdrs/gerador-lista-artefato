@@ -14,7 +14,7 @@ function getList(param) {
 
 function getAttrRequired(paramName, attr) {
   if (!attr) {
-    throw new Error('Paramêtro não encontrado: ' + paramName)
+    throw new Error(`Paramêtro não encontrado: ${paramName}`)
   }
   return attr
 }
