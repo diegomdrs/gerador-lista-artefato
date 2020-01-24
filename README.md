@@ -16,11 +16,11 @@ App para listar os artefatos incluídos/alterados/renomeados para geração do Q
 - Verificar se os merges estão sendo realizados de maneira correta
 - Utilizar o comando `git mv` para renomear os artefatos
 
-## Instalação 
+## Download 
 
-### [Linux](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas)
+- [Linux](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas)
 
-### [Windows](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas.exe)
+- [Windows](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas.exe)
 
 ## Utilização do modo CLI
 
