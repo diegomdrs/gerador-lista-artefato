@@ -26,16 +26,6 @@ App para listar os artefatos incluídos/alterados/renomeados para geração do Q
 
 - Baixe o arquivo [gerador-lista-artefato-qas.exe](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas.exe)
 
-### Repositório Github
-
-- Para instalar o gerador a partir do repositório Github, execute:
-
-``` console
-$ git clone https://github.com/diegomdrs/gerador-lista-artefato-qas.git
-$ cd gerador-lista-artefato-qas
-$ npm i -g
-```
-
 - Dessa forma o executável `gerador-lista-artefato-qas` estará disponível em todo sistema
 
 ## Utilização do modo CLI
