@@ -1,13 +1,26 @@
 angular
     .module('geradorApp')
-    .factory('geradorUtil', geradorUtil)
+    .factory('clipboardUtil', clipboardUtil)
 
-geradorUtil.$inject = ['geradorConstants'];
+clipboardUtil.$inject = ['geradorConstants'];
 
-function geradorUtil(geradorConstants) {
+function clipboardUtil(geradorConstants) {
 
     return {
-        copiarTabelaClipboardTabulado: copiarTabelaClipboardTabulado
+        copiarTabelaClipboardTabulado: copiarTabelaClipboardTabulado,
+        copiarTabelaClipboard: copiarTabelaClipboard
+    }
+
+    function copiarTabelaClipboard(listaSaida) {
+
+        var textArea = document.createElement("textarea");
+        document.body.appendChild(textArea);
+
+        textArea.value = obterTextoListaSaida(listaSaida);
+        textArea.select();
+
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
     }
 
     function copiarTabelaClipboardTabulado(listaSaida) {
@@ -19,7 +32,7 @@ function geradorUtil(geradorConstants) {
         for (const saida of listaSaida) {
 
             const tr = document.createElement('tr')
-            
+
             const tdAtividade = document.createElement('td')
             const tdArtefato = document.createElement('td')
             const tdTarefa = document.createElement('td')
@@ -82,5 +95,38 @@ function geradorUtil(geradorConstants) {
         }
 
         return ulTarefa
+    }
+
+    function obterTextoListaSaida(listaSaida) {
+
+        return listaSaida.reduce((saidaTexto, saida) => {
+
+            if (saida.listaNumTarefaSaida.length === 1)
+                saidaTexto = saidaTexto.concat(
+                    `\nTarefa nº ${saida.listaNumTarefaSaida[0]}\n`)
+
+            else if (saida.listaNumTarefaSaida.length > 1)
+                saidaTexto = saidaTexto.concat(
+                    `\nTarefas nº ${saida.listaNumTarefaSaida.join(', ')}\n`)
+
+            for (const artefato of saida.listaArtefatoSaida)
+                saidaTexto = saidaTexto.concat(obterListaArtefato(artefato))
+
+            saidaTexto = saidaTexto.concat('\n')
+
+            return saidaTexto
+        },'')
+    }
+
+    function obterListaArtefato(artefato) {
+
+        let retorno = `\n${artefato.tipoAlteracao}\t`
+
+        if (artefato.tipoAlteracao === geradorConstants.TIPO_MODIFICACAO.RENAMED)
+            retorno = retorno.concat(`${artefato.nomeAntigoArtefato}\t${artefato.nomeNovoArtefato}`)
+        else 
+            retorno = retorno.concat(artefato.nomeArtefato)
+
+        return retorno
     }
 }

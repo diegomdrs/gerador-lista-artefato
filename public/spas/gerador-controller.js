@@ -2,9 +2,9 @@ angular
     .module('geradorApp')
     .controller('GeradorController', GeradorController)
 
-GeradorController.$inject = ['geradorService', 'blockUI', '$timeout', 'geradorUtil', 'geradorConstants'];
+GeradorController.$inject = ['geradorService', 'blockUI', '$timeout', 'clipboardUtil', 'geradorConstants'];
 
-function GeradorController(geradorService, blockUI, $timeout, geradorUtil, geradorConstants) {
+function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, geradorConstants) {
     var vm = this
 
     vm.listaSaida = []
@@ -26,7 +26,7 @@ function GeradorController(geradorService, blockUI, $timeout, geradorUtil, gerad
     vm.obterNomeProjeto = obterNomeProjeto
     vm.obterNomeArtefato = obterNomeArtefato
     vm.copiarLinhaTabelaClipboard = copiarLinhaTabelaClipboard
-    vm.copiarTabelaClipboardTabulado = copiarTabelaClipboardTabulado
+    vm.copiarTabelaClipboard = copiarTabelaClipboard
 
     function init() {
 
@@ -212,11 +212,11 @@ function GeradorController(geradorService, blockUI, $timeout, geradorUtil, gerad
         }
     }
 
-    function copiarTabelaClipboardTabulado() {
+    function copiarTabelaClipboard() {
 
         limparMessages()
 
-        geradorUtil.copiarTabelaClipboardTabulado(vm.listaSaida)
+        clipboardUtil.copiarTabelaClipboard(vm.listaSaida)
 
         adicionarMensagemSucesso('Tabela copiada para o clipboard', vm.alertsTop)
     }
@@ -225,7 +225,7 @@ function GeradorController(geradorService, blockUI, $timeout, geradorUtil, gerad
 
         limparMessages()
 
-        geradorUtil.copiarTabelaClipboardTabulado([saida])
+        clipboardUtil.copiarTabelaClipboard([saida])
 
         adicionarMensagemSucesso('Linha copiada para o clipboard', vm.alertsTop)
     }
