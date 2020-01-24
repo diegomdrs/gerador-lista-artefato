@@ -40,7 +40,7 @@ $ ./gerador-lista-artefato-qas -s
 
 Em seguida, acesse a url [http://localhost:3333/gerador](http://localhost:3333/gerador)
 
-![Modo Web](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/web.png)(http://localhost:3333/gerador)
+![Modo Web](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/web.png)
 
 ## Utilização do modo CLI
 
