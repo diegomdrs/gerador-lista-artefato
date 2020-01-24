@@ -11,7 +11,10 @@
   "scripts": {
     "start": "node app -s",
     "dev": "node --inspect app -s",
-    "test": "jest --runInBand --verbose"
+    "test": "jest --runInBand --verbose",
+    "pkg-win": "pkg . -t node8-win-x64 -o dist/gerador-lista-artefato-qas.exe",
+    "pkg-linux": "pkg . -t node8-linux-x64 -o dist/gerador-lista-artefato-qas",
+    "pkg": "npm run pkg-win && npm run pkg-linux"
   },
   "keywords": [],
   "author": "",
