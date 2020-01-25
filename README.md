@@ -99,14 +99,14 @@ D   1   foo-estatico/src/app/spas/foo/detalha-foo.tpl.html
 ```
 Onde:
 
-- Ação executada no artefato na tarefa - A (Added), M (Modified), R (Renamed) e D (Deleted)
+- Ação executada no artefato ou na lista de artefatos - A (Added), M (Modified), R (Renamed) e D (Deleted)
 - Nº de modificações do artefato na tarefa - se utilizado o parâmetro `--mostrar-num-modificacao`
 - Caminho do artefato
 
 ### Exemplo de uso
 
 ``` console
-$ ./gerador-lista-artefato-qas --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900077,900079
+$ ./gerador-lista-artefato-qas.exe --diretorio=C:/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900077,900079
 
 Tarefas nº 900077, 900079
 
