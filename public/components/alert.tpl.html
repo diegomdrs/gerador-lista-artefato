@@ -1,10 +1,10 @@
-<div ng-repeat='alert in vm.alertsTop' class="container alert-top alert {{alert.tipoAlerta.class}} alert-dismissible"
+<!-- <div ng-repeat='alert in vm.alertsFooTop' class="container alert-top alert {{alert.tipoAlerta.class}} alert-dismissible"
     style='cursor: pointer;'>
     <a href="#" class="close" data-dismiss="alert" ng-click="alert.close()">&times;</a>
     {{alert.tipoAlerta.icone}} {{alert.text}}
-</div>
+</div> -->
 
-<div ng-repeat='alert in vm.alerts' class="alert {{alert.tipoAlerta.class}} alert-dismissible" style='cursor: pointer;'>
-    <a href="#" class="close" data-dismiss="alert" ng-click="alert.close()">&times;</a>
+<div ng-repeat='alert in vm.alertsFoo' class="alert {{alert.tipoAlerta.class}} alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" ng-click="alert.close()" style='cursor: pointer;'>&times;</a>
     {{alert.tipoAlerta.icone}} {{alert.text}}
 </div>

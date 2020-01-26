@@ -2,6 +2,12 @@ angular
     .module('geradorApp')
     .constant('geradorConstants', {
 
+        // TODO - ver isso aqui
+        TIPO_FOO: {
+            DEFAULT: "DEFAULT", 
+            TOP: "TOP"
+        },
+
         TIPO_MODIFICACAO: {
             A: 'Criado',
             M: 'Alterado',

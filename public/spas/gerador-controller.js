@@ -48,11 +48,11 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
                     vm.listaSaida = resposta.data
 
                     !vm.listaSaida.length && adicionarMensagemErro
-                        ('Nenhum resultado encontrado', vm.alerts)
+                        ('Nenhum resultado encontrado', geradorConstants.TIPO_FOO.DEFAULT)
 
                 }).catch((error) => {
 
-                    adicionarMensagemErro(error.data.message, vm.alerts)
+                    adicionarMensagemErro(error.data.message, geradorConstants.TIPO_FOO.DEFAULT)
                     vm.listaSaida = []
 
                 }).finally(() => blockUI.stop())
@@ -60,10 +60,10 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
         } else {
 
             !vm.req.task.length && adicionarMensagemErro
-                ('Adicione ao menos uma tarefa ao filtro', vm.alerts)
+                ('Adicione ao menos uma tarefa ao filtro', geradorConstants.TIPO_FOO.DEFAULT)
 
             !vm.req.projeto.length && adicionarMensagemErro
-                ('Adicione ao menos um projeto ao filtro', vm.alerts)
+                ('Adicione ao menos um projeto ao filtro', geradorConstants.TIPO_FOO.DEFAULT)
         }
     }
 
@@ -140,33 +140,25 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
     function limparMessages() {
 
         vm.alerts = []
-        vm.alertsTop = []
     }
 
-    function adicionarMensagemSucesso(mensagem, alerts) {
-        adicionarMensagem(vm.TIPO_ALERTA.SUCCESS, mensagem, alerts)
+    function adicionarMensagemSucesso(mensagem, tipoFoo) {
+        adicionarMensagem(vm.TIPO_ALERTA.SUCCESS, mensagem, tipoFoo)
     }
 
-    function adicionarMensagemErro(mensagem, alerts) {
-        adicionarMensagem(vm.TIPO_ALERTA.ERROR, mensagem, alerts)
+    function adicionarMensagemErro(mensagem, tipoFoo) {
+        adicionarMensagem(vm.TIPO_ALERTA.ERROR, mensagem, tipoFoo)
     }
 
-    function adicionarMensagem(tipoAlerta, mensagem, alerts) {
+    function adicionarMensagem(tipoAlerta, mensagem, tipoFoo) {
 
         const message = {
             tipoAlerta: tipoAlerta,
             text: mensagem,
-            close: function () {
-                alerts.splice(
-                    alerts.indexOf(this), 1);
-            }
+            tipoFoo: tipoFoo
         }
 
-        alerts.push(message)
-
-        $timeout(function () {
-            message.close();
-        }, geradorConstants.TIMEOUT_ALERTA)
+        vm.alerts.push(message)
     }
 
     function limparFiltros() {
@@ -212,7 +204,7 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
 
         clipboardUtil.copiarTabelaClipboard(vm.listaSaida)
 
-        adicionarMensagemSucesso('Dados da tabela copiada para o clipboard', vm.alertsTop)
+        adicionarMensagemSucesso('Dados da tabela copiada para o clipboard', geradorConstants.TIPO_FOO.TOP)
     }
 
     function copiarLinhaTabelaClipboard(saida) {
@@ -221,6 +213,6 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
 
         clipboardUtil.copiarTabelaClipboard([saida])
 
-        adicionarMensagemSucesso('Dados da linha copiada para o clipboard', vm.alertsTop)
+        adicionarMensagemSucesso('Dados da linha copiada para o clipboard', geradorConstants.TIPO_FOO.TOP)
     }
 }
