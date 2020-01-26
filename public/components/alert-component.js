@@ -37,7 +37,7 @@ function alertController(geradorConstants, $timeout) {
         })
 
         vm.alertsFooTop = vm.alerts.filter((alert) =>
-            alert.tipoFoo === geradorConstants.TIPO_FOO.DEFAULT
+            alert.tipoFoo === geradorConstants.TIPO_FOO.TOP
         ).map((alert) => {
 
             alert.close = () =>
