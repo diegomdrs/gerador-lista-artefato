@@ -2,9 +2,9 @@ angular
     .module('geradorApp')
     .controller('GeradorController', GeradorController)
 
-GeradorController.$inject = ['geradorService', 'blockUI', '$timeout', 'clipboardUtil', 'geradorConstants'];
+GeradorController.$inject = ['geradorService', 'blockUI', 'clipboardUtil', 'geradorConstants'];
 
-function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, geradorConstants) {
+function GeradorController(geradorService, blockUI, clipboardUtil, geradorConstants) {
     var vm = this
 
     vm.listaSaida = []
@@ -16,7 +16,6 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
     vm.init = init
     vm.listarArtefatos = listarArtefatos
     vm.limparFiltros = limparFiltros
-    vm.closeMessage = closeMessage
 
     vm.obterNumero = obterNumero
     vm.adicionarCaminhoProjeto = adicionarCaminhoProjeto
@@ -180,10 +179,6 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
     function obterNomeProjeto(caminhoProjeto) {
 
         return caminhoProjeto.match(/([^/|\\]*)$/g)[0]
-    }
-
-    function closeMessage(index) {
-        vm.alerts.splice(index, 1);
     }
 
     function obterNomeArtefato(artefato) {

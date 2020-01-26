@@ -23,30 +23,37 @@ function alertController(geradorConstants, $timeout) {
 
     vm.$onChanges = function () {
 
-        vm.alertsFoo = vm.alerts.filter((alert) =>
-            alert.tipoFoo === geradorConstants.TIPO_FOO.DEFAULT
-        ).map((alert) => {
+        vm.alertsFoo = foo(geradorConstants.TIPO_FOO.DEFAULT)
+
+        // vm.alertsFooTop = vm.alerts.filter((alert) =>
+        //     alert.tipoFoo === geradorConstants.TIPO_FOO.TOP
+        // ).map((alert) => {
+
+        //     alert.close = () =>
+        //         vm.alertsFooTop.splice(vm.alertsFooTop.indexOf(this), 1)
+
+        //     $timeout(() => alert.close(),
+        //         geradorConstants.TIMEOUT_ALERTA)
+
+        //     return alert
+        // })
+    }
+
+    function foo(tipoFoo) {
+
+        return vm.alerts.filter((alert) =>
+            alert.tipoFoo === tipoFoo
+        ).reduce((accum, alert) => {
 
             alert.close = () =>
-                vm.alertsFoo.splice(vm.alertsFoo.indexOf(this), 1)
+                accum.splice(accum.indexOf(this), 1)
 
             $timeout(() => alert.close(),
                 geradorConstants.TIMEOUT_ALERTA)
 
-            return alert
-        })
+            accum.push(alert)
 
-        vm.alertsFooTop = vm.alerts.filter((alert) =>
-            alert.tipoFoo === geradorConstants.TIPO_FOO.TOP
-        ).map((alert) => {
-
-            alert.close = () =>
-                vm.alertsFooTop.splice(vm.alertsFooTop.indexOf(this), 1)
-
-            $timeout(() => alert.close(),
-                geradorConstants.TIMEOUT_ALERTA)
-
-            return alert
-        })
+            return accum
+        }, [])
     }
 }

@@ -20,5 +20,5 @@ angular
             ERROR: { class: 'alert-danger', icone: '✗' },
         },
 
-        TIMEOUT_ALERTA: 2500
+        TIMEOUT_ALERTA: 4000
     })
