@@ -5,6 +5,11 @@ angular
 function alert() {
 
     return {
-        templateUrl: 'components/alert.tpl.html'
+        bindings: {
+            alerts: '<',
+            alertsTop: '<'
+        },
+        templateUrl: 'components/alert.tpl.html',
+        controllerAs: 'vm'
     }
 }
