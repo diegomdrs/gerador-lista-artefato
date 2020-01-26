@@ -33,16 +33,18 @@ function alertController(geradorConstants, $timeout) {
 
     function foo() {
 
-        if (vm.alerts.length) {
+        vm.alerts.forEach((alert) => {
 
-            vm.alerts.forEach((alert) => {
+            alert.close = ($index) => {
 
-                alert.close = () =>
-                    vm.alerts.splice(vm.alerts.indexOf(this), 1)
+                console.log('$index ' + $index)
+                console.log('vm.alerts ' + JSON.stringify(vm.alerts))
 
-                // $timeout(() => alert.close(),
-                //     geradorConstants.TIMEOUT_ALERTA)
-            })
-        }
+                vm.alerts.splice($index, 1)
+            }
+
+            // $timeout(() => alert.close(),
+            //     geradorConstants.TIMEOUT_ALERTA)
+        })
     }
 }
