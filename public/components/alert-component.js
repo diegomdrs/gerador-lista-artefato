@@ -21,29 +21,17 @@ function alertController(geradorConstants, $timeout) {
 
     const vm = this;
 
-    vm.$onChanges = function () {
+    vm.$onChanges = function (changes) {
 
-        vm.alertsFoo = foo(geradorConstants.TIPO_FOO.DEFAULT)
+        vm.alertsFoo = foo()
 
-        // vm.alertsFooTop = vm.alerts.filter((alert) =>
-        //     alert.tipoFoo === geradorConstants.TIPO_FOO.TOP
-        // ).map((alert) => {
-
-        //     alert.close = () =>
-        //         vm.alertsFooTop.splice(vm.alertsFooTop.indexOf(this), 1)
-
-        //     $timeout(() => alert.close(),
-        //         geradorConstants.TIMEOUT_ALERTA)
-
-        //     return alert
-        // })
+        console.log(changes)
+        console.log(vm.alertsFoo)
     }
 
-    function foo(tipoFoo) {
+    function foo() {
 
-        return vm.alerts.filter((alert) =>
-            alert.tipoFoo === tipoFoo
-        ).reduce((accum, alert) => {
+        return vm.alerts.reduce((accum, alert) => {
 
             alert.close = () =>
                 accum.splice(accum.indexOf(this), 1)

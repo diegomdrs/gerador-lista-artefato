@@ -4,7 +4,7 @@ angular
 
         // TODO - ver isso aqui
         TIPO_FOO: {
-            DEFAULT: "DEFAULT", 
+            DEFAULT: "DEFAULT",
             TOP: "TOP"
         },
 
@@ -18,6 +18,11 @@ angular
         TIPO_ALERTA: {
             SUCCESS: { class: 'alert-success', icone: '✓' },
             ERROR: { class: 'alert-danger', icone: '✗' },
+        },
+
+        TIPO_FOO: {
+            DEFAULT: { class: 'alert alert-dismissible' },
+            TOP: { class: 'alert alert-dismissible container alert-top' },
         },
 
         TIMEOUT_ALERTA: 4000

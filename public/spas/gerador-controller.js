@@ -51,7 +51,9 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
 
                 }).catch((error) => {
 
-                    adicionarMensagemErro(error.data.message, geradorConstants.TIPO_FOO.DEFAULT)
+                    adicionarMensagemErro(error.data.message,
+                        geradorConstants.TIPO_FOO.DEFAULT)
+
                     vm.listaSaida = []
 
                 }).finally(() => blockUI.stop())
@@ -164,9 +166,22 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
 
         limparMessages()
 
+        // vm.req = {
+        //     projeto: [],
+        //     task: [],
+        //     mostrarDeletados: false,
+        //     mostrarRenomeados: false
+        // }
+
         vm.req = {
-            projeto: [],
-            task: [],
+            autor: 'fulano',
+            projeto: [
+                '/tmp/gerador-lista-artefato-qas/bar-estatico',
+                '/tmp/gerador-lista-artefato-qas/bar-api',
+                '/tmp/gerador-lista-artefato-qas/qux-estatico',
+                '/tmp/gerador-lista-artefato-qas/qux-api'
+            ],
+            task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"],
             mostrarDeletados: false,
             mostrarRenomeados: false
         }
@@ -199,7 +214,8 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
 
         clipboardUtil.copiarTabelaClipboard(vm.listaSaida)
 
-        adicionarMensagemSucesso('Dados da tabela copiada para o clipboard', geradorConstants.TIPO_FOO.TOP)
+        adicionarMensagemSucesso('Dados da tabela copiada para o clipboard',
+            geradorConstants.TIPO_FOO.TOP)
     }
 
     function copiarLinhaTabelaClipboard(saida) {
@@ -208,6 +224,7 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
 
         clipboardUtil.copiarTabelaClipboard([saida])
 
-        adicionarMensagemSucesso('Dados da linha copiada para o clipboard', geradorConstants.TIPO_FOO.TOP)
+        adicionarMensagemSucesso('Dados da linha copiada para o clipboard',
+            geradorConstants.TIPO_FOO.TOP)
     }
 }
