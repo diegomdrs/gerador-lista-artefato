@@ -2,9 +2,9 @@ angular
     .module('geradorApp')
     .controller('GeradorController', GeradorController)
 
-GeradorController.$inject = ['geradorService', 'blockUI', 'clipboardUtil', 'geradorConstants'];
+GeradorController.$inject = ['geradorService', 'blockUI', '$timeout', 'clipboardUtil', 'geradorConstants'];
 
-function GeradorController(geradorService, blockUI, clipboardUtil, geradorConstants) {
+function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, geradorConstants) {
     var vm = this
 
     vm.listaSaida = []
@@ -156,8 +156,15 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
         const message = {
             tipoAlerta: tipoAlerta,
             text: mensagem,
-            tipoFoo: tipoFoo
+            tipoFoo: tipoFoo,
+            close: () => {
+                vm.alerts.splice(
+                    vm.alerts.indexOf(this), 1);
+            }
         }
+
+        $timeout(() => message.close(),
+            geradorConstants.TIMEOUT_ALERTA)
 
         vm.alerts.push(message)
     }
@@ -198,14 +205,9 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
 
     function obterNomeArtefato(artefato) {
 
-        if (artefato.tipoAlteracao === 'R') {
-
-            return artefato.nomeAntigoArtefato + ' ' + artefato.nomeNovoArtefato
-
-        } else {
-
-            return artefato.nomeArtefato
-        }
+        return (artefato.tipoAlteracao === 'R')
+            ? artefato.nomeAntigoArtefato + ' ' + artefato.nomeNovoArtefato
+            : artefato.nomeArtefato
     }
 
     function copiarTabelaClipboard() {
