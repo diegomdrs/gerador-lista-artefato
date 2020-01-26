@@ -21,12 +21,9 @@ function alertController(geradorConstants, $timeout) {
 
     const vm = this;
 
-    vm.$onChanges = function (changes) {
+    vm.$doCheck = function () {
 
         vm.alertsFoo = foo()
-
-        console.log(changes)
-        console.log(vm.alertsFoo)
     }
 
     function foo() {
