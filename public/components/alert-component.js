@@ -14,26 +14,17 @@ function alert() {
     }
 }
 
-alertController.$inject = ['geradorConstants', '$timeout']
-
-function alertController(geradorConstants, $timeout) {
+function alertController() {
 
     const vm = this;
 
     vm.$doCheck = function () {
 
-        foo()
-    }
-
-    function foo() {
         for (const alert of vm.alerts) {
 
             alert.close = () => {
                 vm.alerts.splice(vm.alerts.indexOf(this), 1)
             }
-
-            // $timeout(() => alert.close(),
-            //     geradorConstants.TIMEOUT_ALERTA)   
         }
     }
 }
