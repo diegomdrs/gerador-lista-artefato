@@ -2,9 +2,9 @@ angular
     .module('geradorApp')
     .controller('GeradorController', GeradorController)
 
-GeradorController.$inject = ['geradorService', 'blockUI', '$timeout', 'clipboardUtil', 'geradorConstants'];
+GeradorController.$inject = ['geradorService', 'blockUI', 'clipboardUtil', 'geradorConstants'];
 
-function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, geradorConstants) {
+function GeradorController(geradorService, blockUI, clipboardUtil, geradorConstants) {
     var vm = this
 
     vm.listaSaida = []
@@ -157,14 +157,7 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
             tipoAlerta: tipoAlerta,
             text: mensagem,
             tipoFoo: tipoFoo,
-            close: () => {
-                vm.alerts.splice(
-                    vm.alerts.indexOf(this), 1);
-            }
         }
-
-        $timeout(() => message.close(),
-            geradorConstants.TIMEOUT_ALERTA)
 
         vm.alerts.push(message)
     }
@@ -184,11 +177,13 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
             autor: 'fulano',
             projeto: [
                 '/tmp/gerador-lista-artefato-qas/bar-estatico',
-                '/tmp/gerador-lista-artefato-qas/bar-api',
-                '/tmp/gerador-lista-artefato-qas/qux-estatico',
-                '/tmp/gerador-lista-artefato-qas/qux-api'
+                // '/tmp/gerador-lista-artefato-qas/bar-api',
+                // '/tmp/gerador-lista-artefato-qas/qux-estatico',
+                // '/tmp/gerador-lista-artefato-qas/qux-api'
             ],
-            task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"],
+            task: ["1168815", 
+                //"1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"
+            ],
             mostrarDeletados: false,
             mostrarRenomeados: false
         }
