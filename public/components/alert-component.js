@@ -18,13 +18,20 @@ function alertController() {
 
     const vm = this;
 
-    vm.$doCheck = function () {
+    vm.$onInit = () =>
+        alertsPrevious = angular.copy(vm.alerts)
 
-        for (const alert of vm.alerts) {
+    vm.$doCheck = () => {
 
-            alert.close = () => {
-                vm.alerts.splice(vm.alerts.indexOf(this), 1)
+        if (!angular.equals(vm.alerts, alertsPrevious)) {
+            for (const alert of vm.alerts) {
+
+                alert.close = () => {
+                    vm.alerts.splice(vm.alerts.indexOf(this), 1)
+                }
             }
         }
+
+        alertsPrevious = angular.copy(vm.alerts)
     }
 }
