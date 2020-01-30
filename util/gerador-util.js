@@ -1,6 +1,6 @@
 module.exports = {
 
-    imprimirListaSaida: (nomeArquivo) => {
+    obterExtensaoArquivo: (nomeArquivo) => {
 
         return nomeArquivo.split('.').pop()
     }
