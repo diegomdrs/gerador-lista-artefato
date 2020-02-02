@@ -27,7 +27,7 @@
             "internalConsoleOptions": "openOnSessionStart"
         },
         {
-            // node_modules/jest/bin/jest.js --runInBand --verbose test/gerador-comando-fulano.test.js
+            // jest --runInBand --verbose test/gerador-comando-fulano.test.js
             // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=bar-estatico,bar-api,qux-estatico,qux-api --autor=fulano --task=1168815,1172414,1168800,1167319,1163642,1155478,1150152,1161422 --mostrar-num-modificacao --mostrar-renomeados --mostrar-deletados --mostrar-commits-locais
             "type": "node",
             "request": "launch",
@@ -44,7 +44,7 @@
             ]
         },
         {
-            // node_modules/jest/bin/jest.js --runInBand --verbose test/gerador-comando-beltrano.test.js
+            // jest --runInBand --verbose test/gerador-comando-beltrano.test.js
             // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=bar-estatico,bar-api,qux-estatico,qux-api --autor=beltrano --task=1199211,1203082,1203670,1207175,1210684,1210658,1212262,1212444 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
             // /tmp/gerador-lista-artefato-qas/bar-estatico,/tmp/gerador-lista-artefato-qas/bar-api,/tmp/gerador-lista-artefato-qas/qux-estatico,/tmp/gerador-lista-artefato-qas/qux-api
             "type": "node",
@@ -62,7 +62,7 @@
             ]
         },
         {
-            // node_modules/jest/bin/jest.js --runInBand --verbose test/gerador.test.js
+            // jest --runInBand --verbose test/gerador.test.js
             // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo --autor=fulano --task=1111111 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
             "type": "node",
             "request": "launch",

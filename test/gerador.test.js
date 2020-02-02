@@ -377,43 +377,43 @@ describe('test gerais', () => {
 
         expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[0].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
-        expect(lista[0].listaArtefatoSaida).toHaveLength(2)
+        expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
-        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
-        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*cadastro-imovel.tpl.html$/g)
-
-        expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-        expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*alterar-imovel.tpl.html$/g)
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
+        expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*bem-services.js$/g)
 
         expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[1].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
-        expect(lista[1].listaArtefatoSaida).toHaveLength(4)
+        expect(lista[1].listaArtefatoSaida).toHaveLength(2)
 
         expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-        expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*inclusao-foo-controllers-spec.js$/g)
+        expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
+        expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*cadastro-imovel.tpl.html$/g)
 
         expect(lista[1].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        expect(lista[1].listaArtefatoSaida[1].numeroAlteracao).toBe(2)
-        expect(lista[1].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*Gruntfile.js$/g)
-
-        expect(lista[1].listaArtefatoSaida[2].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        expect(lista[1].listaArtefatoSaida[2].numeroAlteracao).toBe(2)
-        expect(lista[1].listaArtefatoSaida[2].nomeArtefato).toMatch(/.*cadastro-imovel-controllers.js$/g)
-
-        expect(lista[1].listaArtefatoSaida[3].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        expect(lista[1].listaArtefatoSaida[3].numeroAlteracao).toBe(1)
-        expect(lista[1].listaArtefatoSaida[3].nomeArtefato).toMatch(/.*inclusao-foo-controllers.js$/g)
+        expect(lista[1].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+        expect(lista[1].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*alterar-imovel.tpl.html$/g)
 
         expect(lista[2].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[2].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
-        expect(lista[2].listaArtefatoSaida).toHaveLength(1)
+        expect(lista[2].listaArtefatoSaida).toHaveLength(4)
 
-        expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
+        expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
         expect(lista[2].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-        expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*bem-services.js$/g)
+        expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*inclusao-foo-controllers-spec.js$/g)
+
+        expect(lista[2].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[2].listaArtefatoSaida[1].numeroAlteracao).toBe(2)
+        expect(lista[2].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*Gruntfile.js$/g)
+
+        expect(lista[2].listaArtefatoSaida[2].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[2].listaArtefatoSaida[2].numeroAlteracao).toBe(2)
+        expect(lista[2].listaArtefatoSaida[2].nomeArtefato).toMatch(/.*cadastro-imovel-controllers.js$/g)
+
+        expect(lista[2].listaArtefatoSaida[3].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[2].listaArtefatoSaida[3].numeroAlteracao).toBe(1)
+        expect(lista[2].listaArtefatoSaida[3].nomeArtefato).toMatch(/.*inclusao-foo-controllers.js$/g)
     })
 
     it('teste ignorar stashes na listagem de artefatos', async () => {
