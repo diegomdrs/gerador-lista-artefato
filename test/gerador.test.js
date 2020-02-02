@@ -533,4 +533,9 @@ describe('test gerais', () => {
         expect(lista[1].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
         expect(lista[1].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*Gruntfile.js$/g)        
     })
+
+    it('teste de listagem de A e M mas monstrando somente A', async () => {
+
+        
+    })
 })
