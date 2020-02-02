@@ -31,7 +31,7 @@ describe('test gerais', () => {
         params.mostrarCommitsLocais = true
     })
 
-    xit('test parâmetros inválidos', () => {
+    it('test parâmetros inválidos', () => {
 
         // const req = {
         //     diretorio: "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas",
@@ -400,12 +400,12 @@ describe('test gerais', () => {
         expect(lista[1].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*Gruntfile.js$/g)
 
         expect(lista[1].listaArtefatoSaida[2].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        expect(lista[1].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
-        expect(lista[1].listaArtefatoSaida[2].nomeArtefato).toMatch(/.*inclusao-foo-controllers.js$/g)
+        expect(lista[1].listaArtefatoSaida[2].numeroAlteracao).toBe(2)
+        expect(lista[1].listaArtefatoSaida[2].nomeArtefato).toMatch(/.*cadastro-imovel-controllers.js$/g)
 
         expect(lista[1].listaArtefatoSaida[3].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        expect(lista[1].listaArtefatoSaida[3].numeroAlteracao).toBe(2)
-        expect(lista[1].listaArtefatoSaida[3].nomeArtefato).toMatch(/.*cadastro-imovel-controllers.js$/g)
+        expect(lista[1].listaArtefatoSaida[3].numeroAlteracao).toBe(1)
+        expect(lista[1].listaArtefatoSaida[3].nomeArtefato).toMatch(/.*inclusao-foo-controllers.js$/g)
 
         expect(lista[2].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[2].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
@@ -501,7 +501,7 @@ describe('test gerais', () => {
         expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*arquivoQux.txt$/g)
     })
 
-    xit('teste separar arquivos com extensoes diferentes', async () => {
+    it('teste separar arquivos com extensoes diferentes', async () => {
 
         await geradorUtilTest.manipularListaArquivoSemCommit(git, '1111111', nomeProjeto, [
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'Gruntfile.js' },
@@ -511,30 +511,26 @@ describe('test gerais', () => {
 
         const lista = await gerador(params).gerarListaArtefato()
 
-        expect(lista).toHaveLength(3)
+        expect(lista).toHaveLength(2)
 
         expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[0].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
-        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*Gruntfile.js$/g)
+        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*foo.tpl.html$/g)
 
         expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[1].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
-        expect(lista[1].listaArtefatoSaida).toHaveLength(1)
+        expect(lista[1].listaArtefatoSaida).toHaveLength(2)
 
-        expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*inclusao-foo-controllers-spec.js$/g)
 
-        expect(lista[2].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[2].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
-        expect(lista[2].listaArtefatoSaida).toHaveLength(1)
-
-        expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        expect(lista[2].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-        expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*foo.tpl.html$/g)
+        expect(lista[1].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+        expect(lista[1].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+        expect(lista[1].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*Gruntfile.js$/g)        
     })
 })
