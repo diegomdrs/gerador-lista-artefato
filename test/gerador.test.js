@@ -24,11 +24,10 @@ describe('test gerais', () => {
             ],
             task: ["1111111"],
             mostrarNumModificacao: true,
+            mostrarCommitsLocais: true,
             mostrarDeletados: true,
             mostrarRenomeados: true
         })
-
-        params.mostrarCommitsLocais = true
     })
 
     it('test parâmetros inválidos', () => {
@@ -474,11 +473,10 @@ describe('test gerais', () => {
             ],
             task: ["1111111"],
             mostrarNumModificacao: true,
+            mostrarCommitsLocais: true,
             mostrarDeletados: true,
             mostrarRenomeados: true
         })
-
-        params.mostrarCommitsLocais = true
 
         const lista = await gerador(params).gerarListaArtefato()
 
