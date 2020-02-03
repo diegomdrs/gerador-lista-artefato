@@ -145,7 +145,7 @@
 								</td>
 							</tr>
 
-							<tr ng-repeat='task in vm.req.task'>
+							<tr ng-repeat='task in vm.req.task track by $index'>
 								<td style='width:80%'>{{task}}</td>
 								<td style='width:20%'>
 									<a href ng-click='vm.removerTask(task)'>Remover</a>
@@ -179,7 +179,7 @@
 								</td>
 							</tr>
 
-							<tr ng-repeat='caminhoProjeto in vm.req.projeto'>
+							<tr ng-repeat='caminhoProjeto in vm.req.projeto track by $index'>
 								<td style='width:80%' title='{{caminhoProjeto}}'>
 									<span>
 										.../{{vm.obterNomeProjeto(caminhoProjeto)}}
