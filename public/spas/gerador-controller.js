@@ -25,6 +25,7 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
     vm.obterNomeProjeto = obterNomeProjeto
     vm.obterNomeArtefato = obterNomeArtefato
     vm.copiarLinhaTabelaClipboard = copiarLinhaTabelaClipboard
+    vm.copiarTabelaPlainTextClipboard = copiarTabelaPlainTextClipboard
     vm.copiarTabelaClipboard = copiarTabelaClipboard
 
     function init() {
@@ -174,15 +175,17 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
         // }
 
         vm.req = {
-            autor: 'fulano',
+            autor: 'c1282036',
             projeto: [
-                '/tmp/gerador-lista-artefato-qas/bar-estatico',
-                // '/tmp/gerador-lista-artefato-qas/bar-api',
-                // '/tmp/gerador-lista-artefato-qas/qux-estatico',
-                // '/tmp/gerador-lista-artefato-qas/qux-api'
+                '/kdi/git/apc-api',
+                '/kdi/git/apc-estatico',
+                '/kdi/git/crm-patrimonio-estatico',
+                '/kdi/git/crm-patrimonio-api',
+                '/kdi/git/fti-estatico'
             ],
-            task: ["1168815", 
-                //"1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"
+            task: [
+                "1246280","1252935","1252655","1241448","1244356"
+                // "1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"
             ],
             mostrarDeletados: false,
             mostrarRenomeados: false
@@ -205,11 +208,21 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
             : artefato.nomeArtefato
     }
 
-    function copiarTabelaClipboard() {
+    function copiarTabelaPlainTextClipboard() {
 
         limparMessages()
 
         clipboardUtil.copiarTabelaClipboard(vm.listaSaida)
+
+        adicionarMensagemSucesso('Dados da tabela copiada para o clipboard',
+            geradorConstants.TIPO_FOO.TOP)
+    }
+
+    function copiarTabelaClipboard() {
+
+        limparMessages()
+
+        clipboardUtil.copiarTabelaClipboardTabulado(vm.listaSaida)
 
         adicionarMensagemSucesso('Dados da tabela copiada para o clipboard',
             geradorConstants.TIPO_FOO.TOP)
