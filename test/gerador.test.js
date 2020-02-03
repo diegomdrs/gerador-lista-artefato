@@ -534,13 +534,19 @@ describe('test gerais', () => {
         expect(lista[1].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*Gruntfile.js$/g)
     })
 
-    it('teste de listagem de artefato A e M mas monstrando somente A', async () => {
+    it('teste de listagem de artefato A e M mas mostrando somente A', async () => {
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
+
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
+            'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
+
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
+            'arquivoBar.txt', TIPO_MODIFICACAO.DELETED)
 
         const lista = await gerador(params).gerarListaArtefato()
     })
