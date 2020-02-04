@@ -17,7 +17,9 @@ const Param = function ({
 }
 
 function getList(param) {
-  return (!Array.isArray(param)) ? param.split() : param
+  const lista = !Array.isArray(param) ? param.split() : param
+
+  return Array.from(new Set(lista))
 }
 
 function getAttrRequired(paramName, attr) {

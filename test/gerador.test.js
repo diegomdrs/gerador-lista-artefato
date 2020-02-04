@@ -44,12 +44,15 @@ describe('test gerais', () => {
 
         const params = new Param({
             autor: "fulano",
-            projeto: ["bar"],
+            projeto: ["bar","bar","bar","bar","bar","bar"],
             task: ["1111111","1111111","1111111"]
         })
 
         expect(params.task).toHaveLength(1)
         expect(params.task[0]).toBe('1111111') 
+
+        expect(params.projeto).toHaveLength(1)
+        expect(params.projeto[0]).toBe('bar') 
     });
 
     it('teste de listagem de artefatos com projeto inválido', () => {
