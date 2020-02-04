@@ -97,9 +97,8 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
 
             for (const tarefa of listaTarefa) {
 
-                const contemTarefa = vm.req.task.some((task) => {
-                    task === tarefa
-                })
+                const contemTarefa = vm.req.task.some((task) =>
+                    task === tarefa)
 
                 !contemTarefa && vm.req.task.push(tarefa)
             }
@@ -118,9 +117,8 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
 
             for (const projeto of listaProjeto) {
 
-                const contemProjeto = vm.req.projeto.some((projetoSome) => {
-                    projeto.trim() === projetoSome
-                })
+                const contemProjeto = vm.req.projeto.some((projetoSome) =>
+                    projeto.trim() === projetoSome)
 
                 !contemProjeto && vm.req.projeto.push(projeto.trim())
             }
