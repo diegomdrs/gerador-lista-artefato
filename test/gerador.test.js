@@ -40,6 +40,18 @@ describe('test gerais', () => {
         // }
     });
 
+    it('teste do modulo Param com parametros repetidos', () => {
+
+        const params = new Param({
+            autor: "fulano",
+            projeto: ["bar"],
+            task: ["1111111","1111111","1111111"]
+        })
+
+        expect(params.task).toHaveLength(1)
+        expect(params.task[0]).toBe('1111111') 
+    });
+
     it('teste de listagem de artefatos com projeto inválido', () => {
 
         const paramsError = new Param({
