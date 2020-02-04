@@ -217,8 +217,8 @@
 				<table id='foo' class='table table-striped table-bordered table-hover'>
 					<thead>
 						<tr>
-							<th style='width:7%' class='text-right'>Qtde</th>
 							<th style='width:11%' class='text-right'>Atividade</th>
+							<th style='width:7%' class='text-right'>Qtde</th>
 							<th style='width:62%'>Nome dos Artefatos</th>
 							<th style='width:20%'>O que será feito</th>
 						</tr>
@@ -229,13 +229,13 @@
 
 							<td class='text-right'>
 								<span>
-									{{vm.obterNumero(saida)}}
+									{{vm.TIPO_MODIFICACAO[saida.listaArtefatoSaida[0].tipoAlteracao]}}
 								</span>
 							</td>
 
 							<td class='text-right'>
 								<span>
-									{{vm.TIPO_MODIFICACAO[saida.listaArtefatoSaida[0].tipoAlteracao]}}
+									{{vm.obterNumero(saida)}}
 								</span>
 							</td>
 
