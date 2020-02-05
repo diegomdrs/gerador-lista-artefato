@@ -45,11 +45,15 @@ function clipboardUtil(geradorConstants) {
 
             const tr = document.createElement('tr')
 
+            // const tdAtividade = document.createElement('td')
+            // const tdNada = document.createElement('td')
             const tdQuantidade = document.createElement('td')
             const tdArtefato = document.createElement('td')
             const tdTarefa = document.createElement('td')
 
             tdQuantidade.appendChild(document.createTextNode(obterNumero(saida)))
+            // tdAtividade.appendChild(document.createTextNode(geradorConstants.TIPO_MODIFICACAO
+            //     [saida.listaArtefatoSaida[0].tipoAlteracao]))
 
             const ulArtefato = obterUlListaArtefato(saida.listaArtefatoSaida)
             const ulTarefa = obterUlListaNumTarefa(saida.listaNumTarefaSaida)
@@ -57,6 +61,8 @@ function clipboardUtil(geradorConstants) {
             tdArtefato.appendChild(ulArtefato)
             tdTarefa.appendChild(ulTarefa)
 
+            // tr.appendChild(tdAtividade)
+            // tr.appendChild(tdNada)
             tr.appendChild(tdQuantidade)
             tr.appendChild(tdArtefato)
             tr.appendChild(tdTarefa)
