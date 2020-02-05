@@ -173,26 +173,9 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
 
         limparMessages()
 
-        // vm.req = {
-        //     projeto: [],
-        //     task: [],
-        //     mostrarDeletados: false,
-        //     mostrarRenomeados: false
-        // }
-
         vm.req = {
-            autor: 'c1282036',
-            projeto: [
-                '/kdi/git/apc-api',
-                '/kdi/git/apc-estatico',
-                '/kdi/git/crm-patrimonio-estatico',
-                '/kdi/git/crm-patrimonio-api',
-                '/kdi/git/fti-estatico'
-            ],
-            task: [
-                "1246280","1252935","1252655","1241448","1244356"
-                // "1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"
-            ],
+            projeto: [],
+            task: [],
             mostrarDeletados: false,
             mostrarRenomeados: false
         }
