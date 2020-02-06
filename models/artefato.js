@@ -3,6 +3,7 @@ const Artefato = function ({
     nomeNovoArtefato,
     nomeAntigoArtefato,
     extensao,
+    tipoArtefato,
     nomeProjeto,
     listaTarefa,
     tipoAlteracao,
@@ -12,6 +13,7 @@ const Artefato = function ({
     this.nomeNovoArtefato = nomeNovoArtefato
     this.nomeAntigoArtefato = nomeAntigoArtefato
     this.extensao = extensao
+    this.tipoArtefato = tipoArtefato
     this.nomeProjeto = nomeProjeto
     this.listaTarefa = listaTarefa
     this.tipoAlteracao = tipoAlteracao
