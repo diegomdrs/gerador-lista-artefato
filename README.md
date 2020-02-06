@@ -18,9 +18,9 @@ App para listar os artefatos incluídos/alterados/renomeados para geração do Q
 
 ## Download 
 
-- [Linux](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas)
+- [Linux](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/desenv/dist/gerador-lista-artefato-qas)
 
-- [Windows](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/dist/gerador-lista-artefato-qas.exe)
+- [Windows](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/desenv/dist/gerador-lista-artefato-qas.exe)
 
 ## Configuração
 
