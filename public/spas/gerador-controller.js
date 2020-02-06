@@ -2,9 +2,9 @@ angular
     .module('geradorApp')
     .controller('GeradorController', GeradorController)
 
-GeradorController.$inject = ['geradorService', 'blockUI', '$timeout', 'clipboardUtil', 'geradorConstants'];
+GeradorController.$inject = ['geradorService', 'blockUI', 'clipboardUtil', 'geradorConstants'];
 
-function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, geradorConstants) {
+function GeradorController(geradorService, blockUI, clipboardUtil, geradorConstants) {
     var vm = this
 
     vm.listaSaida = []
@@ -16,7 +16,6 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
     vm.init = init
     vm.listarArtefatos = listarArtefatos
     vm.limparFiltros = limparFiltros
-    vm.closeMessage = closeMessage
 
     vm.obterNumero = obterNumero
     vm.adicionarCaminhoProjeto = adicionarCaminhoProjeto
@@ -26,6 +25,7 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
     vm.obterNomeProjeto = obterNomeProjeto
     vm.obterNomeArtefato = obterNomeArtefato
     vm.copiarLinhaTabelaClipboard = copiarLinhaTabelaClipboard
+    vm.copiarTabelaPlainTextClipboard = copiarTabelaPlainTextClipboard
     vm.copiarTabelaClipboard = copiarTabelaClipboard
 
     function init() {
@@ -48,11 +48,13 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
                     vm.listaSaida = resposta.data
 
                     !vm.listaSaida.length && adicionarMensagemErro
-                        ('Nenhum resultado encontrado', vm.alerts)
+                        ('Nenhum resultado encontrado', geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
 
                 }).catch((error) => {
 
-                    adicionarMensagemErro(error.data.message, vm.alerts)
+                    adicionarMensagemErro(error.data.message,
+                        geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
+
                     vm.listaSaida = []
 
                 }).finally(() => blockUI.stop())
@@ -60,23 +62,19 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
         } else {
 
             !vm.req.task.length && adicionarMensagemErro
-                ('Adicione ao menos uma tarefa ao filtro', vm.alerts)
+                ('Adicione ao menos uma tarefa ao filtro', geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
 
             !vm.req.projeto.length && adicionarMensagemErro
-                ('Adicione ao menos um projeto ao filtro', vm.alerts)
+                ('Adicione ao menos um projeto ao filtro', geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
         }
     }
 
     function obterNumero(saida) {
 
-        if (saida.listaArtefatoSaida.length === 1) {
-
+        if (saida.listaArtefatoSaida.length === 1)
             return saida.listaNumTarefaSaida.length
-
-        } else {
-
+        else 
             return saida.listaArtefatoSaida.length
-        }
     }
 
     function removerTask(taskRemocao) {
@@ -97,10 +95,14 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
 
             for (const tarefa of listaTarefa) {
 
-                const contemTarefa = vm.req.task.some((task) =>
+                const contemTarefa = vm.req.task.some((task) => 
                     task === tarefa)
 
-                !contemTarefa && vm.req.task.push(tarefa)
+                if(!contemTarefa)
+                    vm.req.task.push(tarefa)
+                else 
+                    adicionarMensagemErro(`${tarefa} já consta na lista de tarefas`,
+                        geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
             }
 
             delete vm.tarefa
@@ -117,10 +119,14 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
 
             for (const projeto of listaProjeto) {
 
-                const contemProjeto = vm.req.projeto.some((projetoSome) =>
+                const contemProjeto = vm.req.projeto.some((projetoSome) => 
                     projeto.trim() === projetoSome)
 
-                !contemProjeto && vm.req.projeto.push(projeto.trim())
+                if(!contemProjeto) 
+                    vm.req.projeto.push(projeto.trim())
+                else 
+                    adicionarMensagemErro(`${projeto.trim()} já consta na lista de projetos`,
+                        geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
             }
 
             delete vm.caminhoProjeto
@@ -138,33 +144,25 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
     function limparMessages() {
 
         vm.alerts = []
-        vm.alertsTop = []
     }
 
-    function adicionarMensagemSucesso(mensagem, alerts) {
-        adicionarMensagem(vm.TIPO_ALERTA.SUCCESS, mensagem, alerts)
+    function adicionarMensagemSucesso(mensagem, tipoFoo) {
+        adicionarMensagem(vm.TIPO_ALERTA.SUCCESS, mensagem, tipoFoo)
     }
 
-    function adicionarMensagemErro(mensagem, alerts) {
-        adicionarMensagem(vm.TIPO_ALERTA.ERROR, mensagem, alerts)
+    function adicionarMensagemErro(mensagem, tipoFoo) {
+        adicionarMensagem(vm.TIPO_ALERTA.ERROR, mensagem, tipoFoo)
     }
 
-    function adicionarMensagem(tipoAlerta, mensagem, alerts) {
+    function adicionarMensagem(tipoAlerta, mensagem, tipoFoo) {
 
         const message = {
             tipoAlerta: tipoAlerta,
             text: mensagem,
-            close: function () {
-                alerts.splice(
-                    alerts.indexOf(this), 1);
-            }
+            tipoFoo: tipoFoo,
         }
 
-        alerts.push(message)
-
-        $timeout(function () {
-            message.close();
-        }, geradorConstants.TIMEOUT_ALERTA)
+        vm.alerts.push(message)
     }
 
     function limparFiltros() {
@@ -188,29 +186,31 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
         return caminhoProjeto.match(/([^/|\\]*)$/g)[0]
     }
 
-    function closeMessage(index) {
-        vm.alerts.splice(index, 1);
-    }
-
     function obterNomeArtefato(artefato) {
 
-        if (artefato.tipoAlteracao === 'R') {
+        return (artefato.tipoAlteracao === 'R')
+            ? artefato.nomeAntigoArtefato + ' ' + artefato.nomeNovoArtefato
+            : artefato.nomeArtefato
+    }
 
-            return artefato.nomeAntigoArtefato + ' ' + artefato.nomeNovoArtefato
+    function copiarTabelaPlainTextClipboard() {
 
-        } else {
+        limparMessages()
 
-            return artefato.nomeArtefato
-        }
+        clipboardUtil.copiarTabelaClipboard(vm.listaSaida)
+
+        adicionarMensagemSucesso('Dados da tabela copiado para o clipboard',
+            geradorConstants.TIPO_POSICAO_ALERT.TOP)
     }
 
     function copiarTabelaClipboard() {
 
         limparMessages()
 
-        clipboardUtil.copiarTabelaClipboard(vm.listaSaida)
+        clipboardUtil.copiarTabelaClipboardTabulado(vm.listaSaida)
 
-        adicionarMensagemSucesso('Dados da tabela copiada para o clipboard', vm.alertsTop)
+        adicionarMensagemSucesso('Dados da tabela copiado para o clipboard',
+            geradorConstants.TIPO_POSICAO_ALERT.TOP)
     }
 
     function copiarLinhaTabelaClipboard(saida) {
@@ -219,6 +219,7 @@ function GeradorController(geradorService, blockUI, $timeout, clipboardUtil, ger
 
         clipboardUtil.copiarTabelaClipboard([saida])
 
-        adicionarMensagemSucesso('Dados da linha copiada para o clipboard', vm.alertsTop)
+        adicionarMensagemSucesso('Dados da linha copiado para o clipboard',
+            geradorConstants.TIPO_POSICAO_ALERT.TOP)
     }
 }

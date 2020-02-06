@@ -1,15 +1,25 @@
-const Param = function ({ autor, task, projeto, mostrarDeletados, mostrarRenomeados, mostrarNumModificacao }) {
-
+const Param = function ({
+  autor,
+  task,
+  projeto,
+  mostrarDeletados,
+  mostrarRenomeados,
+  mostrarCommitsLocais,
+  mostrarNumModificacao
+}) {
   this.autor = getAttrRequired('autor', autor)
   this.task = getAttrRequired('task', getList(task))
   this.projeto = getAttrRequired('projeto', getList(projeto))
   this.mostrarDeletados = mostrarDeletados
   this.mostrarRenomeados = mostrarRenomeados
+  this.mostrarCommitsLocais = mostrarCommitsLocais
   this.mostrarNumModificacao = mostrarNumModificacao
 }
 
 function getList(param) {
-  return (!Array.isArray(param)) ? param.split() : param
+  const lista = !Array.isArray(param) ? param.split() : param
+
+  return Array.from(new Set(lista))
 }
 
 function getAttrRequired(paramName, attr) {

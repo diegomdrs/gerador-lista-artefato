@@ -8,11 +8,18 @@ module.exports = function (app) {
         const BAD_REQUEST_CODE = 400
 
         try {
-            const params = new Param(req.body)
+            const params = new Param({
+                autor: req.body.autor,
+                task: req.body.task,
+                projeto: req.body.projeto,
+                mostrarDeletados: req.body.mostrarDeletados,
+                mostrarRenomeados: req.body.mostrarRenomeados,
+                mostrarNumModificacao: req.body.mostrarNumModificacao
+            })
 
             const gerador = require('../lib/gerador')(params)
             const listaSaida = await gerador.gerarListaArtefato()
- 
+
             resp.json(listaSaida)
 
         } catch (error) {

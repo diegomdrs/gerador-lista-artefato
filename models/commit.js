@@ -8,6 +8,7 @@ const Commit = function (arquivo, numeroTarefa, linhaArquivo) {
     this.isTipoAlteracaoModificacao = () => this.tipoAlteracao === TIPO_MODIFICACAO.MODIFIED
     this.isTipoAlteracaoDelecao = () => this.tipoAlteracao === TIPO_MODIFICACAO.DELETED
     this.isTipoAlteracaoRenomear = () => this.tipoAlteracao === TIPO_MODIFICACAO.RENAMED
+    this.isTipoAlteracaoAdicionar = () => this.tipoAlteracao === TIPO_MODIFICACAO.ADDED
 
     if (this.isTipoAlteracaoRenomear()) {
 

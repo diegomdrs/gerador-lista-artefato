@@ -23,6 +23,18 @@ function clipboardUtil(geradorConstants) {
         document.body.removeChild(textArea);
     }
 
+    function obterNumero(saida) {
+
+        if (saida.listaArtefatoSaida.length === 1) {
+
+            return saida.listaNumTarefaSaida.length
+
+        } else {
+
+            return saida.listaArtefatoSaida.length
+        }
+    }
+
     function copiarTabelaClipboardTabulado(listaSaida) {
 
         const range = document.createRange()
@@ -33,12 +45,15 @@ function clipboardUtil(geradorConstants) {
 
             const tr = document.createElement('tr')
 
-            const tdAtividade = document.createElement('td')
+            // const tdAtividade = document.createElement('td')
+            // const tdNada = document.createElement('td')
+            const tdQuantidade = document.createElement('td')
             const tdArtefato = document.createElement('td')
             const tdTarefa = document.createElement('td')
 
-            tdAtividade.appendChild(document.createTextNode(
-                geradorConstants.TIPO_MODIFICACAO[saida.listaArtefatoSaida[0].tipoAlteracao]))
+            tdQuantidade.appendChild(document.createTextNode(obterNumero(saida)))
+            // tdAtividade.appendChild(document.createTextNode(geradorConstants.TIPO_MODIFICACAO
+            //     [saida.listaArtefatoSaida[0].tipoAlteracao]))
 
             const ulArtefato = obterUlListaArtefato(saida.listaArtefatoSaida)
             const ulTarefa = obterUlListaNumTarefa(saida.listaNumTarefaSaida)
@@ -46,7 +61,9 @@ function clipboardUtil(geradorConstants) {
             tdArtefato.appendChild(ulArtefato)
             tdTarefa.appendChild(ulTarefa)
 
-            tr.appendChild(tdAtividade)
+            // tr.appendChild(tdAtividade)
+            // tr.appendChild(tdNada)
+            tr.appendChild(tdQuantidade)
             tr.appendChild(tdArtefato)
             tr.appendChild(tdTarefa)
 
