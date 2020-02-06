@@ -71,14 +71,10 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
 
     function obterNumero(saida) {
 
-        if (saida.listaArtefatoSaida.length === 1) {
-
+        if (saida.listaArtefatoSaida.length === 1)
             return saida.listaNumTarefaSaida.length
-
-        } else {
-
+        else 
             return saida.listaArtefatoSaida.length
-        }
     }
 
     function removerTask(taskRemocao) {
