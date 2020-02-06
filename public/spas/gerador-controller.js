@@ -203,7 +203,7 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
 
         clipboardUtil.copiarTabelaClipboard(vm.listaSaida)
 
-        adicionarMensagemSucesso('Dados da tabela copiada para o clipboard',
+        adicionarMensagemSucesso('Dados da tabela copiado para o clipboard',
             geradorConstants.TIPO_FOO.TOP)
     }
 
@@ -213,7 +213,7 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
 
         clipboardUtil.copiarTabelaClipboardTabulado(vm.listaSaida)
 
-        adicionarMensagemSucesso('Dados da tabela copiada para o clipboard',
+        adicionarMensagemSucesso('Dados da tabela copiado para o clipboard',
             geradorConstants.TIPO_FOO.TOP)
     }
 
@@ -223,7 +223,7 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
 
         clipboardUtil.copiarTabelaClipboard([saida])
 
-        adicionarMensagemSucesso('Dados da linha copiada para o clipboard',
+        adicionarMensagemSucesso('Dados da linha copiado para o clipboard',
             geradorConstants.TIPO_FOO.TOP)
     }
 }
