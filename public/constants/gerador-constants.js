@@ -2,12 +2,6 @@ angular
     .module('geradorApp')
     .constant('geradorConstants', {
 
-        // TODO - ver isso aqui
-        TIPO_FOO: {
-            DEFAULT: "DEFAULT",
-            TOP: "TOP"
-        },
-
         TIPO_MODIFICACAO: {
             A: 'Criado',
             M: 'Alterado',
@@ -20,7 +14,7 @@ angular
             ERROR: { class: 'alert-danger', icone: '✗' },
         },
 
-        TIPO_FOO: {
+        TIPO_POSICAO_ALERT: {
             DEFAULT: { class: 'alert alert-dismissible' },
             TOP: { class: 'alert alert-dismissible container alert-top' },
         },

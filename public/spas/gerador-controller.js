@@ -48,12 +48,12 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
                     vm.listaSaida = resposta.data
 
                     !vm.listaSaida.length && adicionarMensagemErro
-                        ('Nenhum resultado encontrado', geradorConstants.TIPO_FOO.DEFAULT)
+                        ('Nenhum resultado encontrado', geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
 
                 }).catch((error) => {
 
                     adicionarMensagemErro(error.data.message,
-                        geradorConstants.TIPO_FOO.DEFAULT)
+                        geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
 
                     vm.listaSaida = []
 
@@ -62,10 +62,10 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
         } else {
 
             !vm.req.task.length && adicionarMensagemErro
-                ('Adicione ao menos uma tarefa ao filtro', geradorConstants.TIPO_FOO.DEFAULT)
+                ('Adicione ao menos uma tarefa ao filtro', geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
 
             !vm.req.projeto.length && adicionarMensagemErro
-                ('Adicione ao menos um projeto ao filtro', geradorConstants.TIPO_FOO.DEFAULT)
+                ('Adicione ao menos um projeto ao filtro', geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
         }
     }
 
@@ -106,7 +106,7 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
                     vm.req.task.push(tarefa)
                 else 
                     adicionarMensagemErro(`${tarefa} já consta na lista de tarefas`,
-                        geradorConstants.TIPO_FOO.DEFAULT)
+                        geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
             }
 
             delete vm.tarefa
@@ -130,7 +130,7 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
                     vm.req.projeto.push(projeto.trim())
                 else 
                     adicionarMensagemErro(`${projeto.trim()} já consta na lista de projetos`,
-                        geradorConstants.TIPO_FOO.DEFAULT)
+                        geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
             }
 
             delete vm.caminhoProjeto
@@ -204,7 +204,7 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
         clipboardUtil.copiarTabelaClipboard(vm.listaSaida)
 
         adicionarMensagemSucesso('Dados da tabela copiado para o clipboard',
-            geradorConstants.TIPO_FOO.TOP)
+            geradorConstants.TIPO_POSICAO_ALERT.TOP)
     }
 
     function copiarTabelaClipboard() {
@@ -214,7 +214,7 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
         clipboardUtil.copiarTabelaClipboardTabulado(vm.listaSaida)
 
         adicionarMensagemSucesso('Dados da tabela copiado para o clipboard',
-            geradorConstants.TIPO_FOO.TOP)
+            geradorConstants.TIPO_POSICAO_ALERT.TOP)
     }
 
     function copiarLinhaTabelaClipboard(saida) {
@@ -224,6 +224,6 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
         clipboardUtil.copiarTabelaClipboard([saida])
 
         adicionarMensagemSucesso('Dados da linha copiado para o clipboard',
-            geradorConstants.TIPO_FOO.TOP)
+            geradorConstants.TIPO_POSICAO_ALERT.TOP)
     }
 }
