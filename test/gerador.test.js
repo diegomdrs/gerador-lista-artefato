@@ -617,6 +617,12 @@ describe('test gerais', () => {
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'foo-controller.js', TIPO_MODIFICACAO.ADDED)
 
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
+            'foo-controller.html', TIPO_MODIFICACAO.ADDED)
+
+        await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
+            'foo-controller.xml', TIPO_MODIFICACAO.ADDED)
+
         const lista = await gerador(params).gerarListaArtefato()
     })
 })
