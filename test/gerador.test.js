@@ -48,11 +48,11 @@ describe('test gerais', () => {
             task: ["1111111", "1111111", "1111111"]
         })
 
-        expect(params.task).toHaveLength(1)
-        expect(params.task[0]).toBe('1111111')
+        expect(params.listaTarefa).toHaveLength(1)
+        expect(params.listaTarefa[0]).toBe('1111111')
 
-        expect(params.projeto).toHaveLength(1)
-        expect(params.projeto[0]).toBe('bar')
+        expect(params.listaProjeto).toHaveLength(1)
+        expect(params.listaProjeto[0]).toBe('bar')
     });
 
     xit('teste de listagem de artefatos com projeto inválido', () => {

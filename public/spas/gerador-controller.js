@@ -38,7 +38,7 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
 
         limparMessages()
 
-        if (vm.req.task.length && vm.req.projeto.length) {
+        if (vm.req.listaTarefa.length && vm.req.listaProjeto.length) {
 
             blockUI.start()
 
@@ -61,10 +61,10 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
 
         } else {
 
-            !vm.req.task.length && adicionarMensagemErro
+            !vm.req.listaTarefa.length && adicionarMensagemErro
                 ('Adicione ao menos uma tarefa ao filtro', geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
 
-            !vm.req.projeto.length && adicionarMensagemErro
+            !vm.req.listaProjeto.length && adicionarMensagemErro
                 ('Adicione ao menos um projeto ao filtro', geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
         }
     }
@@ -81,8 +81,8 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
 
         limparMessages()
 
-        vm.req.task = vm.req.task.filter(task =>
-            task !== taskRemocao)
+        vm.req.listaTarefa = vm.req.listaTarefa.filter(tarefa =>
+            tarefa !== taskRemocao)
     }
 
     function adicionarTask() {
@@ -95,11 +95,11 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
 
             for (const tarefa of listaTarefa) {
 
-                const contemTarefa = vm.req.task.some((task) => 
-                    task === tarefa)
+                const contemTarefa = vm.req.listaTarefa.some((tarefa) => 
+                    tarefa === tarefa)
 
                 if(!contemTarefa)
-                    vm.req.task.push(tarefa)
+                    vm.req.listaTarefa.push(tarefa)
                 else 
                     adicionarMensagemErro(`${tarefa} já consta na lista de tarefas`,
                         geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
@@ -119,11 +119,11 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
 
             for (const projeto of listaProjeto) {
 
-                const contemProjeto = vm.req.projeto.some((projetoSome) => 
+                const contemProjeto = vm.req.listaProjeto.some((projetoSome) => 
                     projeto.trim() === projetoSome)
 
                 if(!contemProjeto) 
-                    vm.req.projeto.push(projeto.trim())
+                    vm.req.listaProjeto.push(projeto.trim())
                 else 
                     adicionarMensagemErro(`${projeto.trim()} já consta na lista de projetos`,
                         geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
@@ -137,7 +137,7 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
 
         limparMessages()
 
-        vm.req.projeto = vm.req.projeto.filter(caminho =>
+        vm.req.listaProjeto = vm.req.listaProjeto.filter(caminho =>
             caminho !== caminhoRemocao)
     }
 
@@ -170,8 +170,8 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
         limparMessages()
 
         vm.req = {
-            projeto: [],
-            task: [],
+            listaProjeto: [],
+            listaTarefa: [],
             mostrarDeletados: false,
             mostrarRenomeados: false
         }

@@ -14,7 +14,15 @@ module.exports = async function (commander) {
 
             delete commander.diretorio
 
-            const params = new Param(commander)
+            const params = new Param({
+                autor: commander.autor,
+                listaTarefa: commander.task,
+                listaProjeto: commander.projeto,
+                mostrarDeletados: commander.mostrarDeletados,
+                mostrarRenomeados: commander.mostrarRenomeados,
+                mostrarCommitsLocais: commander.mostrarCommitsLocais,
+                mostrarNumModificacaocommander: commander.mostrarNumModificacaocommander
+            })
 
             const gerador = require('../lib/gerador')(params)
             const listaSaida = await gerador.gerarListaArtefato()
