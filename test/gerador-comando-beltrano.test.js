@@ -209,8 +209,8 @@ describe('test comando beltrano', () => {
 
         const params = new Param({
             autor: autor,
-            task: ["1199211", "1203082", "1203670", "1207175", "1210684", "1210658", "1212262", "1212444"],
-            projeto: [
+            listaTarefa: ["1199211", "1203082", "1203670", "1207175", "1210684", "1210658", "1212262", "1212444"],
+            listaProjeto: [
                 geradorUtilTest.pathTest() + "/bar-estatico",
                 geradorUtilTest.pathTest() + "/bar-api",
                 geradorUtilTest.pathTest() + "/qux-estatico",

@@ -318,8 +318,8 @@ describe('test comando fulano', () => {
 
         const params = new Param({
             autor: autor,
-            task: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"],
-            projeto: [
+            listaTarefa: ["1168815", "1172414", "1168800", "1167319", "1163642", "1155478", "1150152", "1161422"],
+            listaProjeto: [
                 geradorUtilTest.pathTest() + "/bar-estatico",
                 geradorUtilTest.pathTest() + "/bar-api",
                 geradorUtilTest.pathTest() + "/qux-estatico",

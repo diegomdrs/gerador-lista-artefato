@@ -10,8 +10,8 @@ module.exports = function (app) {
         try {
             const params = new Param({
                 autor: req.body.autor,
-                task: req.body.task,
-                projeto: req.body.projeto,
+                listaTarefa: req.body.listaTarefa,
+                listaProjeto: req.body.listaProjeto,
                 mostrarDeletados: req.body.mostrarDeletados,
                 mostrarRenomeados: req.body.mostrarRenomeados,
                 mostrarNumModificacao: req.body.mostrarNumModificacao

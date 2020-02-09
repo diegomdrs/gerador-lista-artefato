@@ -19,10 +19,10 @@ describe('test gerais', () => {
 
         params = new Param({
             autor: "fulano",
-            projeto: [
+            listaProjeto: [
                 geradorUtilTest.pathTest() + "/" + nomeProjeto
             ],
-            task: ["1111111"],
+            listaTarefa: ["1111111"],
             mostrarNumModificacao: true,
             mostrarCommitsLocais: true,
             mostrarDeletados: true,
@@ -35,17 +35,17 @@ describe('test gerais', () => {
         // const req = {
         //     diretorio: "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas",
         //     autor: "fulano",
-        //     projeto: ["apc-estatico", "crm-patrimonio-estatico"],
-        //     task: ["1199211", "1203082", "1203670", "1207175", "1210684", "1210658", "1212262", "1212444"]
+        //     listaProjeto: ["apc-estatico", "crm-patrimonio-estatico"],
+        //     listaTarefa: ["1199211", "1203082", "1203670", "1207175", "1210684", "1210658", "1212262", "1212444"]
         // }
     });
 
-    xit('teste do modulo Param com parametros repetidos', () => {
+    it('teste do modulo Param com parametros repetidos', () => {
 
         const params = new Param({
             autor: "fulano",
-            projeto: ["bar", "bar", "bar", "bar", "bar", "bar"],
-            task: ["1111111", "1111111", "1111111"]
+            listaProjeto: ["bar", "bar", "bar", "bar", "bar", "bar"],
+            listaTarefa: ["1111111", "1111111", "1111111"]
         })
 
         expect(params.listaTarefa).toHaveLength(1)
@@ -59,8 +59,8 @@ describe('test gerais', () => {
 
         const paramsError = new Param({
             autor: "fulano",
-            projeto: ["bar"],
-            task: ["1111111"]
+            listaProjeto: ["bar"],
+            listaTarefa: ["1111111"]
         })
 
         expect.assertions(1);
@@ -484,11 +484,11 @@ describe('test gerais', () => {
 
         const params = new Param({
             autor: "fulano",
-            projeto: [
+            listaProjeto: [
                 geradorUtilTest.pathTest() + "/" + nomeProjetoQux,
                 geradorUtilTest.pathTest() + "/" + nomeProjetoBaz,
             ],
-            task: ["1111111"],
+            listaTarefa: ["1111111"],
             mostrarNumModificacao: true,
             mostrarCommitsLocais: true,
             mostrarDeletados: true,
@@ -600,7 +600,7 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*arquivoBar.txt$/g)
     })
 
-    it('teste de listagem de artefato A, M e D mas mostrando somente D', async () => {
+    xit('teste de listagem de artefato A, M e D mas mostrando somente D', async () => {
 
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'BarResource.java', TIPO_MODIFICACAO.ADDED)
