@@ -1,5 +1,5 @@
 const Param = require('../models/param')
-const geradorUtilTest = require('./gerador-util-test')
+const geradorUtilTest = require('./gerador-test-util')
 
 const TIPO_MODIFICACAO = require('../lib/constants').TIPO_MODIFICACAO
 
