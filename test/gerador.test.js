@@ -624,6 +624,7 @@ describe('test gerais', () => {
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'bar-controller.html', TIPO_MODIFICACAO.DELETED)
 
+        // ??????????????????????????    
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
             'foo-controller.html', TIPO_MODIFICACAO.ADDED)
         await geradorUtilTest.manipularArquivoComCommit(git, nomeProjeto, '1111111',
