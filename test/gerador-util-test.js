@@ -97,6 +97,14 @@ module.exports = {
         }
     },
 
+    async manipularListaArquivoComCommit(git, tarefa, nomeProjeto, listaArquivo) {
+        for (const arquivo of listaArquivo)
+            await this.manipularArquivoSemCommit(git, nomeProjeto,
+                arquivo.pathArquivo, arquivo.tipoAlteracao)
+
+        await this.commitarProjeto(git, nomeProjeto, tarefa, listaArquivo)
+    },
+
     async commitarArquivo(git, nomeProjeto, task, pathArquivo) {
 
         await git.add(obterCaminhoArquivo(nomeProjeto, pathArquivo))
@@ -110,14 +118,6 @@ module.exports = {
         }
 
         await git.commit('task ' + task + ' commit')
-    },
-
-    async manipularListaArquivoSemCommit(git, tarefa, nomeProjeto, listaArquivo) {
-        for (const arquivo of listaArquivo)
-            await this.manipularArquivoSemCommit(git, nomeProjeto,
-                arquivo.pathArquivo, arquivo.tipoAlteracao)
-
-        await this.commitarProjeto(git, nomeProjeto, tarefa, listaArquivo)
     }
 }
 
