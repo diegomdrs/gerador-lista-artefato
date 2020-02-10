@@ -291,14 +291,9 @@ describe('test gerais', () => {
 
     it('teste de listagem de artefato A, M, D SEM opção de mostrar deletados', async () => {
 
-        await gitUtil.manipularArquivoComCommit('1111111',
-            'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
-
-        await gitUtil.manipularArquivoComCommit('1111111',
-            'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
-
-        await gitUtil.manipularArquivoComCommit('1111111',
-            'arquivoBar.txt', TIPO_MODIFICACAO.DELETED)
+        await gitUtil.manipularArquivoComCommit('1111111', 'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
+        await gitUtil.manipularArquivoComCommit('1111111', 'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
+        await gitUtil.manipularArquivoComCommit('1111111', 'arquivoBar.txt', TIPO_MODIFICACAO.DELETED)
 
         params.mostrarDeletados = false
 
@@ -310,12 +305,10 @@ describe('test gerais', () => {
     it('teste de listagem de artefatos criados em branches diferentes', async () => {
 
         await gitUtil.checkoutBranch('branchFoo')
-        await gitUtil.manipularArquivoComCommit(
-            '1111111', 'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
+        await gitUtil.manipularArquivoComCommit('1111111', 'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
 
         await gitUtil.checkoutBranch('branchBar')
-        await gitUtil.manipularArquivoComCommit(
-            '1111111', 'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
+        await gitUtil.manipularArquivoComCommit('1111111', 'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
         await gitUtil.checkoutBranch('master')
 
