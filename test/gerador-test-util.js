@@ -6,10 +6,8 @@ const fs = require('fs-extra')
 const NAME_APP = app.name
 const PATH_TEST = '/tmp' + path.sep + NAME_APP
 
-module.exports = function (
-    nomeProjeto,
-    autor
-) {
+module.exports = function (nomeProjeto, autor) {
+    
     this.nomeProjeto = nomeProjeto
     this.autor = autor
 
@@ -125,7 +123,7 @@ module.exports = function (
         await this.git.stash()
     }
 
-    this.obterCaminhoArquivo = function(pathArquivo) {
+    this.obterCaminhoArquivo = function (pathArquivo) {
         return PATH_TEST + path.sep + this.nomeProjeto + path.sep + pathArquivo
     }
 
