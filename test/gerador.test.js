@@ -74,10 +74,10 @@ describe('test gerais', () => {
 
     xit('teste de listagem de artefatos renomeados', async () => {
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.MODIFIED)
 
         await gitUtil.manipularArquivoComCommit(
@@ -85,7 +85,7 @@ describe('test gerais', () => {
             { origem: 'arquivoFoo.txt', destino: 'arquivoQux.txt' },
             TIPO_MODIFICACAO.RENAMED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoQux.txt', TIPO_MODIFICACAO.MODIFIED)
 
         const lista = await gerador(params).gerarListaArtefato()
@@ -113,24 +113,24 @@ describe('test gerais', () => {
 
     xit('teste de listagem de artefatos renomeados 2 vezes', async () => {
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.MODIFIED)
 
         await gitUtil.manipularArquivoComCommit(
             { origem: '1111111', destino: '1111111' },
             { origem: 'arquivoFoo.txt', destino: 'arquivoQux.txt' }, TIPO_MODIFICACAO.RENAMED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoQux.txt', TIPO_MODIFICACAO.MODIFIED)
 
         await gitUtil.manipularArquivoComCommit(
             { origem: '1111111', destino: '1111111' },
             { origem: 'arquivoQux.txt', destino: 'arquivoBar.txt' }, TIPO_MODIFICACAO.RENAMED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
         const lista = await gerador(params).gerarListaArtefato()
@@ -158,30 +158,30 @@ describe('test gerais', () => {
 
     xit('teste de listagem de artefato A, R, D e A novamente', async () => {
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.MODIFIED)
 
         await gitUtil.manipularArquivoComCommit(
             { origem: '1111111', destino: '1111111' },
             { origem: 'arquivoFoo.txt', destino: 'arquivoQux.txt' }, TIPO_MODIFICACAO.RENAMED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoQux.txt', TIPO_MODIFICACAO.MODIFIED)
 
         await gitUtil.manipularArquivoComCommit(
             { origem: '1111111', destino: '1111111' },
             { origem: 'arquivoQux.txt', destino: 'arquivoBar.txt' }, TIPO_MODIFICACAO.RENAMED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.DELETED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
 
         const lista = await gerador(params).gerarListaArtefato()
@@ -207,16 +207,16 @@ describe('test gerais', () => {
 
     xit('teste de listagem de artefato A, M, D e A com mesmo nome, COM opção de mostrar deletados', async () => {
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.DELETED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
         const lista = await gerador(params).gerarListaArtefato()
@@ -242,16 +242,16 @@ describe('test gerais', () => {
 
     xit('teste de listagem de artefato A, M, D e A com mesmo nome, SEM opção de mostrar deletados', async () => {
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.DELETED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
         params.mostrarDeletados = false
@@ -272,13 +272,13 @@ describe('test gerais', () => {
 
     xit('teste de listagem de artefato A, M, D COM opção de mostrar deletados', async () => {
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.DELETED)
 
         const lista = await gerador(params).gerarListaArtefato()
@@ -297,13 +297,13 @@ describe('test gerais', () => {
 
     xit('teste de listagem de artefato A, M, D SEM opção de mostrar deletados', async () => {
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.DELETED)
 
         params.mostrarDeletados = false
@@ -345,7 +345,7 @@ describe('test gerais', () => {
 
     xit('teste de listagem de artefatos commitados de uma vez', async () => {
 
-        await gitUtil.manipularListaArquivoComCommxit('0000000', [
+        await gitUtil.manipularListaArquivoComCommit('0000000', [
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'src/app/spas/inventario/bem-services.js' },
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'Gruntfile.js' },
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'spec/inclusao-foo-controllers-spec.js' },
@@ -355,7 +355,7 @@ describe('test gerais', () => {
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'src/app/spas/imovel/inclusao-foo/inclusao-foo-controllers.js' }
         ])
 
-        await gitUtil.manipularListaArquivoComCommxit('1111111', [
+        await gitUtil.manipularListaArquivoComCommit('1111111', [
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'Gruntfile.js' },
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/imovel/cadastro/alterar-imovel.tpl.html' },
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel-controllers.js' },
@@ -363,12 +363,12 @@ describe('test gerais', () => {
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/imovel/inclusao-foo/inclusao-foo-controllers.js' }
         ])
 
-        await gitUtil.manipularListaArquivoComCommxit('1111111', [
+        await gitUtil.manipularListaArquivoComCommit('1111111', [
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel-controllers.js' },
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel.tpl.html' }
         ])
 
-        await gitUtil.manipularListaArquivoComCommxit('1111111', [
+        await gitUtil.manipularListaArquivoComCommit('1111111', [
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'Gruntfile.js' },
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'spec/inclusao-foo-controllers-spec.js' },
             { tipoAlteracao: TIPO_MODIFICACAO.DELETED, pathArquivo: 'src/app/spas/inventario/bem-services.js' }
@@ -423,7 +423,7 @@ describe('test gerais', () => {
         expect(lista[3].listaArtefatoSaida[2].nomeArtefato).toMatch(/.*inclusao-foo-controllers.js$/g)
     })
 
-    it('teste ignorar stashes na listagem de artefatos', async () => {
+    xit('teste ignorar stashes na listagem de artefatos', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
@@ -448,7 +448,7 @@ describe('test gerais', () => {
 
     xit('teste ignorar commits locais na listagem de artefatos', async () => {
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
         params.mostrarCommitsLocais = false
@@ -459,7 +459,7 @@ describe('test gerais', () => {
     })
 
     // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=qux,baz --autor=fulano --task=1111111 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
-    xit('teste separar arquivos de projetos diferentes em linhas diferentes', async () => {
+    it('teste separar arquivos de projetos diferentes em linhas diferentes', async () => {
 
         const nomeProjetoQux = 'qux'
         const nomeProjetoBaz = 'baz'
@@ -467,11 +467,8 @@ describe('test gerais', () => {
         const gitQux = await gitUtil.criarRepo(nomeProjetoQux, autor)
         const gitBaz = await gitUtil.criarRepo(nomeProjetoBaz, autor)
 
-        await gitUtil.manipularArquivoComCommit(gitQux, nomeProjetoQux,
-            '1111111', 'arquivoQux.txt', TIPO_MODIFICACAO.ADDED)
-
-        await gitUtil.manipularArquivoComCommit(gitBaz, nomeProjetoBaz,
-            '1111111', 'arquivoBaz.txt', TIPO_MODIFICACAO.ADDED)
+        await gitQux.manipularArquivoComCommit('1111111', 'arquivoQux.txt', TIPO_MODIFICACAO.ADDED)
+        await gitBaz.manipularArquivoComCommit('1111111', 'arquivoBaz.txt', TIPO_MODIFICACAO.ADDED)
 
         const params = new Param({
             autor: "fulano",
@@ -546,13 +543,13 @@ describe('test gerais', () => {
 
     xit('teste de listagem de artefato A e M mas mostrando somente A', async () => {
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
         const lista = await gerador(params).gerarListaArtefato()
@@ -570,16 +567,16 @@ describe('test gerais', () => {
 
     xit('teste de listagem de artefato A, M e D mas mostrando somente D', async () => {
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.DELETED)
 
         const lista = await gerador(params).gerarListaArtefato()
