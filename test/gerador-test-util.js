@@ -13,21 +13,19 @@ module.exports = function (nomeProjeto, autor) {
 
     this.criarRepo = async function () {
 
-        const pathProjeto = PATH_TEST + '/' + this.nomeProjeto
+        this.removerDiretorioTest(this.obterPathProjeto())
 
-        this.removerDiretorioTest(pathProjeto)
+        fs.mkdirsSync(this.obterPathProjeto())
 
-        fs.mkdirsSync(pathProjeto)
-
-        this.git = require('simple-git/promise')(pathProjeto)
+        this.git = require('simple-git/promise')(this.obterPathProjeto())
 
         await this.git.init()
         await this.git.addConfig('user.name', this.autor)
         await this.git.addConfig('user.email', `${this.autor}@${this.autor}.com`)
     }
 
-    this.pathTest = function () {
-        return PATH_TEST
+    this.obterPathProjeto = function () {
+        return PATH_TEST + '/' + this.nomeProjeto
     }
 
     this.removerDiretorioTest = async function (path) {

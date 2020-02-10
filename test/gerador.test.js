@@ -18,7 +18,7 @@ describe('test gerais', () => {
         params = new Param({
             autor: "fulano",
             listaProjeto: [
-                gitUtil.pathTest() + "/" + nomeProjeto
+                gitUtil.obterPathProjeto()
             ],
             listaTarefa: ["1111111"],
             mostrarNumModificacao: true,
@@ -460,8 +460,8 @@ describe('test gerais', () => {
         const params = new Param({
             autor: "fulano",
             listaProjeto: [
-                gitUtil.pathTest() + "/" + nomeProjetoQux,
-                gitUtil.pathTest() + "/" + nomeProjetoBaz,
+                gitQux.obterPathProjeto(),
+                gitBaz.obterPathProjeto(),
             ],
             listaTarefa: ["1111111"],
             mostrarNumModificacao: true,
@@ -579,6 +579,7 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*arquivoBar.txt$/g)
     })
 
+    // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo,bar --autor=fulano --task=1111111,2222222 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais --mostrar-renomeados
     it('teste de listagem com arquivos com tipos diferentes separados', async () => {
 
         const nomeProjetoFoo = 'foo'
@@ -590,8 +591,8 @@ describe('test gerais', () => {
         const params = new Param({
             autor: "fulano",
             listaProjeto: [
-                gitFoo.pathTest() + "/" + nomeProjetoFoo,
-                gitBar.pathTest() + "/" + nomeProjetoBar,
+                gitFoo.obterPathProjeto(),
+                gitBar.obterPathProjeto(),
             ],
             listaTarefa: ["1111111", "2222222"],
             mostrarNumModificacao: true,
@@ -611,7 +612,6 @@ describe('test gerais', () => {
         ])
 
         await gitFoo.manipularArquivoComCommit('1111111', 'karma.conf.js', TIPO_MODIFICACAO.ADDED)
-        await gitFoo.manipularArquivoComCommit('1111111', 'Gruntfile.js', TIPO_MODIFICACAO.ADDED)
         await gitFoo.manipularArquivoComCommit('1111111', 'Gruntfile.js', TIPO_MODIFICACAO.ADDED)
 
         await gitFoo.manipularListaArquivoComCommit('1111111', [
