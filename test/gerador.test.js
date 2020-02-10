@@ -343,9 +343,9 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 
-    it('teste de listagem de artefatos commitados de uma vez', async () => {
+    xit('teste de listagem de artefatos commitados de uma vez', async () => {
 
-        await gitUtil.manipularListaArquivoComCommit('0000000', [
+        await gitUtil.manipularListaArquivoComCommxit('0000000', [
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'src/app/spas/inventario/bem-services.js' },
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'Gruntfile.js' },
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'spec/inclusao-foo-controllers-spec.js' },
@@ -355,7 +355,7 @@ describe('test gerais', () => {
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'src/app/spas/imovel/inclusao-foo/inclusao-foo-controllers.js' }
         ])
 
-        await gitUtil.manipularListaArquivoComCommit('1111111', [
+        await gitUtil.manipularListaArquivoComCommxit('1111111', [
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'Gruntfile.js' },
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/imovel/cadastro/alterar-imovel.tpl.html' },
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel-controllers.js' },
@@ -363,12 +363,12 @@ describe('test gerais', () => {
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/imovel/inclusao-foo/inclusao-foo-controllers.js' }
         ])
 
-        await gitUtil.manipularListaArquivoComCommit('1111111', [
+        await gitUtil.manipularListaArquivoComCommxit('1111111', [
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel-controllers.js' },
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel.tpl.html' }
         ])
 
-        await gitUtil.manipularListaArquivoComCommit('1111111', [
+        await gitUtil.manipularListaArquivoComCommxit('1111111', [
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'Gruntfile.js' },
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'spec/inclusao-foo-controllers-spec.js' },
             { tipoAlteracao: TIPO_MODIFICACAO.DELETED, pathArquivo: 'src/app/spas/inventario/bem-services.js' }
@@ -423,15 +423,15 @@ describe('test gerais', () => {
         expect(lista[3].listaArtefatoSaida[2].nomeArtefato).toMatch(/.*inclusao-foo-controllers.js$/g)
     })
 
-    xit('teste ignorar stashes na listagem de artefatos', async () => {
+    it('teste ignorar stashes na listagem de artefatos', async () => {
 
-        await gitUtil.manipularArquivoComCommxit('1111111',
+        await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
         await gitUtil.manipularArquivoSemCommit(
             'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
-        await git.stash()
+        await gitUtil.stash()
 
         const lista = await gerador(params).gerarListaArtefato()
 

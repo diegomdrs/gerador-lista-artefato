@@ -124,6 +124,10 @@ module.exports = {
 
     obterCaminhoArquivo(pathArquivo) {
         return PATH_TEST + path.sep + this.nomeProjeto + path.sep + pathArquivo
+    },
+
+    async stash() {
+        await this.git.stash()
     }
 }
 
