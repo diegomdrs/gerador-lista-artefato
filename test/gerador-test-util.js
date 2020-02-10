@@ -54,11 +54,8 @@ module.exports = function (nomeProjeto, autor) {
             await this.commitarArquivo(task, pathArquivo)
         } else {
 
-            fs.outputFileSync(this.obterCaminhoArquivo(pathArquivo.origem), randomValueHex())
-            await this.commitarArquivo(task.origem, pathArquivo.origem)
-
             await this.git.mv(pathArquivo.origem, pathArquivo.destino)
-            await this.commitarArquivo(task.destino, pathArquivo.destino)
+            await this.commitarArquivo(task, pathArquivo.destino)
         }
     }
 
