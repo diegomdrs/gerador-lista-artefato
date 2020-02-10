@@ -17,8 +17,6 @@ module.exports = function (
 
         const pathProjeto = PATH_TEST + '/' + this.nomeProjeto
 
-        this.removerDiretorioTest(pathProjeto)
-
         fs.mkdirsSync(pathProjeto)
 
         this.git = require('simple-git/promise')(pathProjeto)
@@ -44,14 +42,10 @@ module.exports = function (
 
         if (tipoAlteracao !== 'R') {
 
-            if (tipoAlteracao === 'D') {
-
+            if (tipoAlteracao === 'D')
                 fs.removeSync(this.obterCaminhoArquivo(pathArquivo))
-
-            } else {
-
+            else
                 fs.outputFileSync(this.obterCaminhoArquivo(pathArquivo), randomValueHex())
-            }
 
             await this.commitarArquivo(task, pathArquivo)
         } else {
@@ -84,6 +78,7 @@ module.exports = function (
     }
 
     this.manipularListaArquivoComCommit = async function (tarefa, listaArquivo) {
+
         for (const arquivo of listaArquivo)
             await this.manipularArquivoSemCommit(arquivo.pathArquivo, arquivo.tipoAlteracao)
 
@@ -109,13 +104,14 @@ module.exports = function (
 
         for (let estrutura of listaEstrutura) {
 
-            const git = await this.criarRepo(estrutura.nomeProjeto, autor)
+            await this.criarRepo(estrutura.nomeProjeto, autor)
 
             for (const artefato of estrutura.listaArtefato) {
 
                 for (const tarefa of artefato.listaTarefa) {
 
                     for (let i = 0; i < tarefa.numAlteracao; i++)
+
                         await this.manipularArquivoComCommit(estrutura.nomeProjeto,
                             tarefa.numeroTarefa, artefato.pathArtefato, tarefa.tipoAlteracao)
                 }
@@ -123,15 +119,23 @@ module.exports = function (
         }
     }
 
-    this.obterCaminhoArquivo = async function (pathArquivo) {
-        return PATH_TEST + path.sep + this.nomeProjeto + path.sep + pathArquivo
-    }
-
     this.stash = async function () {
         await this.git.stash()
     }
-    
-    return this
+
+    this.obterCaminhoArquivo = function(pathArquivo) {
+        return PATH_TEST + path.sep + this.nomeProjeto + path.sep + pathArquivo
+    }
+
+    return new Promise(async (resolve, reject) => {
+        try {
+            await this.criarRepo();
+
+            resolve(this);
+        } catch (err) {
+            reject(err);
+        }
+    })
 }
 
 function randomValueHex() {
