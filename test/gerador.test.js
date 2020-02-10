@@ -622,9 +622,14 @@ describe('test gerais', () => {
 
         await gitFoo.manipularArquivoComCommit('1111111', 'foo-controller.html', TIPO_MODIFICACAO.ADDED)
         await gitFoo.manipularArquivoComCommit('1111111', 'foo-controller.html', TIPO_MODIFICACAO.MODIFIED)
+
         await gitFoo.manipularArquivoComCommit('2222222', 'foo-controller.html', TIPO_MODIFICACAO.MODIFIED)
 
-        await gitFoo.manipularArquivoComCommit('1111111', 'config.xml', TIPO_MODIFICACAO.ADDED)
+        await gitFoo.manipularArquivoComCommit('2222222', 'qux-controller.html', TIPO_MODIFICACAO.ADDED)
+
+        await gitFoo.manipularArquivoComCommit(
+            { origem: '1111111', destino: '1111111' },
+            { origem: 'qux-controller.html', destino: 'quy-controller.html' }, TIPO_MODIFICACAO.RENAMED)
 
         const lista = await gerador(params).gerarListaArtefato()
     })
