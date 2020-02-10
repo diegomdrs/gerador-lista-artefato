@@ -6,11 +6,14 @@ const fs = require('fs-extra')
 const NAME_APP = app.name
 const PATH_TEST = '/tmp' + path.sep + NAME_APP
 
-module.exports = {
+module.exports = function (
+    nomeProjeto,
+    autor
+) {
+    this.nomeProjeto = nomeProjeto
+    this.autor = autor
 
-    async criarRepo(nomeProjeto, autor) {
-
-        this.nomeProjeto = nomeProjeto
+    this.criarRepo = async function () {
 
         const pathProjeto = PATH_TEST + '/' + this.nomeProjeto
 
@@ -21,25 +24,23 @@ module.exports = {
         this.git = require('simple-git/promise')(pathProjeto)
 
         await this.git.init()
-        await this.git.addConfig('user.name', autor)
-        await this.git.addConfig('user.email', `${autor}@${autor}.com`)
+        await this.git.addConfig('user.name', this.autor)
+        await this.git.addConfig('user.email', `${this.autor}@${this.autor}.com`)
+    }
 
-        return this
-    },
-
-    pathTest() {
+    this.pathTest = function () {
         return PATH_TEST
-    },
+    }
 
-    async removerDiretorioTest(path) {
+    this.removerDiretorioTest = async function (path) {
         fs.removeSync(path)
-    },
+    }
 
-    async checkoutBranch(nomeBranch) {
+    this.checkoutBranch = async function (nomeBranch) {
         await this.git.checkoutLocalBranch(nomeBranch)
-    },
+    }
 
-    async manipularArquivoComCommit(task, pathArquivo, tipoAlteracao) {
+    this.manipularArquivoComCommit = async function (task, pathArquivo, tipoAlteracao) {
 
         if (tipoAlteracao !== 'R') {
 
@@ -61,9 +62,9 @@ module.exports = {
             await this.git.mv(pathArquivo.origem, pathArquivo.destino)
             await this.commitarArquivo(task.destino, pathArquivo.destino)
         }
-    },
+    }
 
-    async manipularArquivoSemCommit(pathArquivo, tipoAlteracao) {
+    this.manipularArquivoSemCommit = async function (pathArquivo, tipoAlteracao) {
 
         if (tipoAlteracao !== 'R') {
 
@@ -80,31 +81,31 @@ module.exports = {
             fs.outputFileSync(this.obterCaminhoArquivo(pathArquivo.origem), randomValueHex())
             await this.git.mv(pathArquivo.origem, pathArquivo.destino)
         }
-    },
+    }
 
-    async manipularListaArquivoComCommit(tarefa, listaArquivo) {
+    this.manipularListaArquivoComCommit = async function (tarefa, listaArquivo) {
         for (const arquivo of listaArquivo)
             await this.manipularArquivoSemCommit(arquivo.pathArquivo, arquivo.tipoAlteracao)
 
         await this.commitarProjeto(tarefa, listaArquivo)
-    },
+    }
 
-    async commitarArquivo(task, pathArquivo) {
+    this.commitarArquivo = async function (task, pathArquivo) {
 
         await this.git.add(this.obterCaminhoArquivo(pathArquivo))
         await this.git.commit('task ' + task + ' commit')
-    },
+    }
 
-    async commitarProjeto(task, listaArquivo) {
+    this.commitarProjeto = async function (task, listaArquivo) {
 
         for (const arquivo of listaArquivo) {
             await this.git.add(this.obterCaminhoArquivo(arquivo.pathArquivo))
         }
 
         await this.git.commit('task ' + task + ' commit')
-    },
+    }
 
-    async criarEstrutura(listaEstrutura, autor) {
+    this.criarEstrutura = async function (listaEstrutura, autor) {
 
         for (let estrutura of listaEstrutura) {
 
@@ -120,15 +121,17 @@ module.exports = {
                 }
             }
         }
-    },
+    }
 
-    obterCaminhoArquivo(pathArquivo) {
+    this.obterCaminhoArquivo = async function (pathArquivo) {
         return PATH_TEST + path.sep + this.nomeProjeto + path.sep + pathArquivo
-    },
+    }
 
-    async stash() {
+    this.stash = async function () {
         await this.git.stash()
     }
+    
+    return this
 }
 
 function randomValueHex() {

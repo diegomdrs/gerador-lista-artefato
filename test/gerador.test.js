@@ -12,7 +12,7 @@ describe('test gerais', () => {
 
     beforeEach(async () => {
 
-        gitUtil = await GeradorTestUtil.criarRepo(nomeProjeto, autor)
+        gitUtil = new GeradorTestUtil(nomeProjeto, autor)
 
         gerador = require('../lib/gerador')
 
@@ -29,48 +29,48 @@ describe('test gerais', () => {
         })
     })
 
-    // xit('test foo', () => {
+    it('test parâmetros inválidos', () => {
 
-    //     console.log(gitUtil)
-    // });
+        console.log(gitUtil)
+    });
 
-    // xit('test parâmetros inválidos', () => {
+    xit('test parâmetros inválidos', () => {
 
-    //     // const req = {
-    //     //     diretorio: "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas",
-    //     //     autor: "fulano",
-    //     //     listaProjeto: ["apc-estatico", "crm-patrimonio-estatico"],
-    //     //     listaTarefa: ["1199211", "1203082", "1203670", "1207175", "1210684", "1210658", "1212262", "1212444"]
-    //     // }
-    // });
+        // const req = {
+        //     diretorio: "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas",
+        //     autor: "fulano",
+        //     listaProjeto: ["apc-estatico", "crm-patrimonio-estatico"],
+        //     listaTarefa: ["1199211", "1203082", "1203670", "1207175", "1210684", "1210658", "1212262", "1212444"]
+        // }
+    });
 
-    // xit('teste do modulo Param com parametros repetidos', () => {
+    xit('teste do modulo Param com parametros repetidos', () => {
 
-    //     const params = new Param({
-    //         autor: "fulano",
-    //         listaProjeto: ["bar", "bar", "bar", "bar", "bar", "bar"],
-    //         listaTarefa: ["1111111", "1111111", "1111111"]
-    //     })
+        const params = new Param({
+            autor: "fulano",
+            listaProjeto: ["bar", "bar", "bar", "bar", "bar", "bar"],
+            listaTarefa: ["1111111", "1111111", "1111111"]
+        })
 
-    //     expect(params.listaTarefa).toHaveLength(1)
-    //     expect(params.listaTarefa[0]).toBe('1111111')
+        expect(params.listaTarefa).toHaveLength(1)
+        expect(params.listaTarefa[0]).toBe('1111111')
 
-    //     expect(params.listaProjeto).toHaveLength(1)
-    //     expect(params.listaProjeto[0]).toBe('bar')
-    // });
+        expect(params.listaProjeto).toHaveLength(1)
+        expect(params.listaProjeto[0]).toBe('bar')
+    });
 
-    // xit('teste de listagem de artefatos com projeto inválido', () => {
+    xit('teste de listagem de artefatos com projeto inválido', () => {
 
-    //     const paramsError = new Param({
-    //         autor: "fulano",
-    //         listaProjeto: ["bar"],
-    //         listaTarefa: ["1111111"]
-    //     })
+        const paramsError = new Param({
+            autor: "fulano",
+            listaProjeto: ["bar"],
+            listaTarefa: ["1111111"]
+        })
 
-    //     expect.assertions(1);
-    //     return expect(gerador(paramsError).gerarListaArtefato()).rejects.toEqual(
-    //         new Error(`Projeto ${paramsError.listaProjeto[0]} não encontrado`));
-    // });
+        expect.assertions(1);
+        return expect(gerador(paramsError).gerarListaArtefato()).rejects.toEqual(
+            new Error(`Projeto ${paramsError.listaProjeto[0]} não encontrado`));
+    });
 
     xit('teste de listagem de artefatos renomeados', async () => {
 
@@ -459,7 +459,7 @@ describe('test gerais', () => {
     })
 
     // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=qux,baz --autor=fulano --task=1111111 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
-    it('teste separar arquivos de projetos diferentes em linhas diferentes', async () => {
+    xit('teste separar arquivos de projetos diferentes em linhas diferentes', async () => {
 
         const nomeProjetoQux = 'qux'
         const nomeProjetoBaz = 'baz'
