@@ -3,6 +3,8 @@ const crypto = require('crypto')
 const path = require('path')
 const fs = require('fs-extra')
 
+const TIPO_MODIFICACAO = require('../lib/constants').TIPO_MODIFICACAO
+
 const NAME_APP = app.name
 const PATH_TEST = '/tmp' + path.sep + NAME_APP
 
@@ -42,9 +44,9 @@ module.exports = function (nomeProjeto, autor) {
 
     this.manipularArquivoComCommit = async function (task, pathArquivo, tipoAlteracao) {
 
-        if (tipoAlteracao !== 'R') {
+        if (tipoAlteracao !== TIPO_MODIFICACAO.RENAMED) {
 
-            if (tipoAlteracao === 'D')
+            if (tipoAlteracao === TIPO_MODIFICACAO.DELETED)
                 fs.removeSync(this.obterCaminhoArquivo(pathArquivo))
             else
                 fs.outputFileSync(this.obterCaminhoArquivo(pathArquivo), randomValueHex())
@@ -62,9 +64,9 @@ module.exports = function (nomeProjeto, autor) {
 
     this.manipularArquivoSemCommit = async function (pathArquivo, tipoAlteracao) {
 
-        if (tipoAlteracao !== 'R') {
+        if (tipoAlteracao !== TIPO_MODIFICACAO.RENAMED) {
 
-            if (tipoAlteracao === 'D')
+            if (tipoAlteracao === TIPO_MODIFICACAO.DELETED)
                 fs.removeSync(this.obterCaminhoArquivo(pathArquivo))
             else
                 fs.outputFileSync(this.obterCaminhoArquivo(pathArquivo), randomValueHex())
