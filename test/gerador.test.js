@@ -18,7 +18,7 @@ describe('test gerais', () => {
         params = new Param({
             autor: "fulano",
             listaProjeto: [
-                gitUtil.obterPathProjeto()
+                gitUtil.obterCaminhoProjeto()
             ],
             listaTarefa: ["1111111"],
             mostrarNumModificacao: true,
@@ -460,8 +460,8 @@ describe('test gerais', () => {
         const params = new Param({
             autor: "fulano",
             listaProjeto: [
-                gitQux.obterPathProjeto(),
-                gitBaz.obterPathProjeto(),
+                gitQux.obterCaminhoProjeto(),
+                gitBaz.obterCaminhoProjeto(),
             ],
             listaTarefa: ["1111111"],
             mostrarNumModificacao: true,
@@ -591,8 +591,8 @@ describe('test gerais', () => {
         const params = new Param({
             autor: "fulano",
             listaProjeto: [
-                gitFoo.obterPathProjeto(),
-                gitBar.obterPathProjeto(),
+                gitFoo.obterCaminhoProjeto(),
+                gitBar.obterCaminhoProjeto(),
             ],
             listaTarefa: ["1111111", "2222222"],
             mostrarNumModificacao: true,

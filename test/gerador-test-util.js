@@ -7,25 +7,29 @@ const NAME_APP = app.name
 const PATH_TEST = '/tmp' + path.sep + NAME_APP
 
 module.exports = function (nomeProjeto, autor) {
-    
+
     this.nomeProjeto = nomeProjeto
     this.autor = autor
 
     this.criarRepo = async function () {
 
-        this.removerDiretorioTest(this.obterPathProjeto())
+        this.removerDiretorioTest(this.obterCaminhoProjeto())
 
-        fs.mkdirsSync(this.obterPathProjeto())
+        fs.mkdirsSync(this.obterCaminhoProjeto())
 
-        this.git = require('simple-git/promise')(this.obterPathProjeto())
+        this.git = require('simple-git/promise')(this.obterCaminhoProjeto())
 
         await this.git.init()
         await this.git.addConfig('user.name', this.autor)
         await this.git.addConfig('user.email', `${this.autor}@${this.autor}.com`)
     }
 
-    this.obterPathProjeto = function () {
-        return PATH_TEST + '/' + this.nomeProjeto
+    this.obterCaminhoProjeto = function () {
+        return `${PATH_TEST}/${this.nomeProjeto}`
+    }
+
+    this.obterCaminhoArquivo = function (pathArquivo) {
+        return `${this.obterCaminhoProjeto()}/${pathArquivo}`
     }
 
     this.removerDiretorioTest = async function (path) {
@@ -60,14 +64,10 @@ module.exports = function (nomeProjeto, autor) {
 
         if (tipoAlteracao !== 'R') {
 
-            if (tipoAlteracao === 'D') {
-
+            if (tipoAlteracao === 'D')
                 fs.removeSync(this.obterCaminhoArquivo(pathArquivo))
-
-            } else {
-
+            else
                 fs.outputFileSync(this.obterCaminhoArquivo(pathArquivo), randomValueHex())
-            }
         } else {
 
             fs.outputFileSync(this.obterCaminhoArquivo(pathArquivo.origem), randomValueHex())
@@ -86,7 +86,7 @@ module.exports = function (nomeProjeto, autor) {
     this.commitarArquivo = async function (task, pathArquivo) {
 
         await this.git.add(this.obterCaminhoArquivo(pathArquivo))
-        await this.git.commit('task ' + task + ' commit')
+        await this.git.commit(`task ${task} commit`)
     }
 
     this.commitarProjeto = async function (task, listaArquivo) {
@@ -95,7 +95,7 @@ module.exports = function (nomeProjeto, autor) {
             await this.git.add(this.obterCaminhoArquivo(arquivo.pathArquivo))
         }
 
-        await this.git.commit('task ' + task + ' commit')
+        await this.git.commit(`task ${task} commit`)
     }
 
     this.criarEstrutura = async function (listaEstrutura, autor) {
@@ -119,10 +119,6 @@ module.exports = function (nomeProjeto, autor) {
 
     this.stash = async function () {
         await this.git.stash()
-    }
-
-    this.obterCaminhoArquivo = function (pathArquivo) {
-        return PATH_TEST + path.sep + this.nomeProjeto + path.sep + pathArquivo
     }
 
     return new Promise(async (resolve, reject) => {
