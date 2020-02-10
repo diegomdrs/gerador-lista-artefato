@@ -17,6 +17,8 @@ module.exports = function (
 
         const pathProjeto = PATH_TEST + '/' + this.nomeProjeto
 
+        this.removerDiretorioTest(pathProjeto)
+
         fs.mkdirsSync(pathProjeto)
 
         this.git = require('simple-git/promise')(pathProjeto)

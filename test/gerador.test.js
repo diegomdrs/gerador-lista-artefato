@@ -458,8 +458,8 @@ describe('test gerais', () => {
         const nomeProjetoQux = 'qux'
         const nomeProjetoBaz = 'baz'
 
-        const gitQux = await gitUtil.criarRepo(nomeProjetoQux, autor)
-        const gitBaz = await gitUtil.criarRepo(nomeProjetoBaz, autor)
+        const gitQux = await new GeradorTestUtil(nomeProjetoQux, autor)
+        const gitBaz = await new GeradorTestUtil(nomeProjetoBaz, autor)
 
         await gitQux.manipularArquivoComCommit('1111111', 'arquivoQux.txt', TIPO_MODIFICACAO.ADDED)
         await gitBaz.manipularArquivoComCommit('1111111', 'arquivoBaz.txt', TIPO_MODIFICACAO.ADDED)
@@ -500,7 +500,7 @@ describe('test gerais', () => {
 
     it('teste de listagem com arquivos com extensoes diferentes separados', async () => {
 
-        await gitUtil.manipularListaArquivoComCommit(git, '1111111', nomeProjeto, [
+        await gitUtil.manipularListaArquivoComCommit('1111111', [
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'css/foo.css' },
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'spec/inclusao-foo-controllers-spec.js' },
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/inventario/foo.tpl.html' }
