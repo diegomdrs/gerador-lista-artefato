@@ -84,8 +84,7 @@ module.exports = {
 
     async manipularListaArquivoComCommit(tarefa, listaArquivo) {
         for (const arquivo of listaArquivo)
-            await this.manipularArquivoSemCommit(this.nomeProjeto,
-                arquivo.pathArquivo, arquivo.tipoAlteracao)
+            await this.manipularArquivoSemCommit(arquivo.pathArquivo, arquivo.tipoAlteracao)
 
         await this.commitarProjeto(tarefa, listaArquivo)
     },
