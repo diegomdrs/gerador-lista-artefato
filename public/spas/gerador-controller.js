@@ -95,8 +95,8 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
 
             for (const tarefa of listaTarefa) {
 
-                const contemTarefa = vm.req.listaTarefa.some((tarefa) => 
-                    tarefa === tarefa)
+                const contemTarefa = vm.req.listaTarefa.some((tarefaSome) => 
+                    tarefa === tarefaSome)
 
                 if(!contemTarefa)
                     vm.req.listaTarefa.push(tarefa)

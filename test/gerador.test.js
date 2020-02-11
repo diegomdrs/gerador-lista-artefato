@@ -647,7 +647,6 @@ describe('test gerais', () => {
         expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[0].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[0].listaArtefatoSaida).toHaveLength(1)
-
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*bar-controller.js$/g)
@@ -655,7 +654,6 @@ describe('test gerais', () => {
         expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[1].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[1].listaArtefatoSaida).toHaveLength(1)
-
         expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*foo-controller.html$/g)
@@ -663,7 +661,6 @@ describe('test gerais', () => {
         expect(lista[2].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[2].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[2].listaArtefatoSaida).toHaveLength(1)
-
         expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[2].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*foo-controller.js$/g)
@@ -671,9 +668,24 @@ describe('test gerais', () => {
         expect(lista[3].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[3].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[3].listaArtefatoSaida).toHaveLength(1)
-
         expect(lista[3].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
         expect(lista[3].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[3].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*bar-controller.html$/g)
+
+        expect(lista[4].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[4].listaNumTarefaSaida).toEqual(expect.arrayContaining(['2222222']))
+        expect(lista[4].listaArtefatoSaida).toHaveLength(1)
+        expect(lista[4].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+        expect(lista[4].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[4].listaArtefatoSaida[0].nomeArtefato).toBe('bar/quuz-controller.html')
+
+        expect(lista[5].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[5].listaNumTarefaSaida).toEqual(expect.arrayContaining(['2222222']))
+        expect(lista[5].listaArtefatoSaida).toHaveLength(1)
+        expect(lista[5].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
+        expect(lista[5].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
+        expect(lista[5].listaArtefatoSaida[0].nomeArtefato).toBe('bar/quuz-controller.html')
+        expect(lista[5].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('bar/quy-controller.html')
+        expect(lista[5].listaArtefatoSaida[0].nomeNovoArtefato).toBe('bar/quuz-controller.html')       
     })
 })
