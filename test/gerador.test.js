@@ -625,9 +625,12 @@ describe('test gerais', () => {
         await gitFoo.manipularArquivoComCommit('1111111', 'bar-controller.html', TIPO_MODIFICACAO.ADDED)
         await gitFoo.manipularArquivoComCommit('1111111', 'bar-controller.html', TIPO_MODIFICACAO.DELETED)
 
+        // Sera considerado somente A na tarefa
         await gitFoo.manipularArquivoComCommit('1111111', 'foo-controller.html', TIPO_MODIFICACAO.ADDED)
         await gitFoo.manipularArquivoComCommit('1111111', 'foo-controller.html', TIPO_MODIFICACAO.MODIFIED)
-
+        await gitFoo.manipularArquivoComCommit('1111111', 'foo-controller.html', TIPO_MODIFICACAO.MODIFIED)
+        
+        await gitFoo.manipularArquivoComCommit('2222222', 'foo-controller.html', TIPO_MODIFICACAO.MODIFIED)
         await gitFoo.manipularArquivoComCommit('2222222', 'foo-controller.html', TIPO_MODIFICACAO.MODIFIED)
 
         await gitBar.manipularArquivoComCommit('2222222', 'qux-controller.html', TIPO_MODIFICACAO.ADDED)
@@ -638,5 +641,39 @@ describe('test gerais', () => {
             { origem: 'quy-controller.html', destino: 'quuz-controller.html' }, TIPO_MODIFICACAO.RENAMED)
 
         const lista = await gerador(params).gerarListaArtefato()
+
+        // expect(lista).toHaveLength(1)
+
+        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[0].listaArtefatoSaida).toHaveLength(1)
+
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+        expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*bar-controller.js$/g)
+
+        expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[1].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[1].listaArtefatoSaida).toHaveLength(1)
+
+        expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+        expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*foo-controller.html$/g)
+
+        expect(lista[2].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[2].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[2].listaArtefatoSaida).toHaveLength(1)
+
+        expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+        expect(lista[2].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*foo-controller.js$/g)
+        
+        expect(lista[3].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[3].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[3].listaArtefatoSaida).toHaveLength(1)
+
+        expect(lista[3].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
+        expect(lista[3].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[3].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*bar-controller.html$/g)
     })
 })
