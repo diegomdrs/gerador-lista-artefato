@@ -20,7 +20,7 @@ describe('test gerais', () => {
             listaProjeto: [
                 gitUtil.obterCaminhoProjeto()
             ],
-            listaTarefa: ["1111111"],
+            listaTarefa: ["1111111","2222222"],
             mostrarNumModificacao: true,
             mostrarCommitsLocais: true,
             mostrarDeletados: true,
@@ -74,17 +74,16 @@ describe('test gerais', () => {
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.MODIFIED)
 
-        await gitUtil.manipularArquivoComCommit(
-            { origem: '1111111', destino: '1111111' },
+        await gitUtil.manipularArquivoComCommit('1111111',
             { origem: 'arquivoFoo.txt', destino: 'arquivoQux.txt' },
             TIPO_MODIFICACAO.RENAMED)
 
-        await gitUtil.manipularArquivoComCommit('1111111',
+        await gitUtil.manipularArquivoComCommit('2222222',
             'arquivoQux.txt', TIPO_MODIFICACAO.MODIFIED)
 
         const lista = await gerador(params).gerarListaArtefato()
 
-        expect(lista).toHaveLength(2)
+        expect(lista).toHaveLength(3)
 
         expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
@@ -103,6 +102,14 @@ describe('test gerais', () => {
         expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
         expect(lista[1].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('foo/arquivoFoo.txt')
         expect(lista[1].listaArtefatoSaida[0].nomeNovoArtefato).toBe('foo/arquivoQux.txt')
+
+        expect(lista[2].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[2].listaNumTarefaSaida[0]).toBe('2222222')
+        expect(lista[2].listaArtefatoSaida).toHaveLength(1)
+
+        expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[2].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
     })
 
     it('teste de listagem de artefatos renomeados 2 vezes', async () => {
@@ -113,15 +120,13 @@ describe('test gerais', () => {
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.MODIFIED)
 
-        await gitUtil.manipularArquivoComCommit(
-            { origem: '1111111', destino: '1111111' },
+        await gitUtil.manipularArquivoComCommit('1111111',
             { origem: 'arquivoFoo.txt', destino: 'arquivoQux.txt' }, TIPO_MODIFICACAO.RENAMED)
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoQux.txt', TIPO_MODIFICACAO.MODIFIED)
 
-        await gitUtil.manipularArquivoComCommit(
-            { origem: '1111111', destino: '1111111' },
+        await gitUtil.manipularArquivoComCommit('1111111',
             { origem: 'arquivoQux.txt', destino: 'arquivoBar.txt' }, TIPO_MODIFICACAO.RENAMED)
 
         await gitUtil.manipularArquivoComCommit('1111111',
@@ -158,15 +163,13 @@ describe('test gerais', () => {
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.MODIFIED)
 
-        await gitUtil.manipularArquivoComCommit(
-            { origem: '1111111', destino: '1111111' },
+        await gitUtil.manipularArquivoComCommit('1111111',
             { origem: 'arquivoFoo.txt', destino: 'arquivoQux.txt' }, TIPO_MODIFICACAO.RENAMED)
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoQux.txt', TIPO_MODIFICACAO.MODIFIED)
 
-        await gitUtil.manipularArquivoComCommit(
-            { origem: '1111111', destino: '1111111' },
+        await gitUtil.manipularArquivoComCommit('1111111',
             { origem: 'arquivoQux.txt', destino: 'arquivoBar.txt' }, TIPO_MODIFICACAO.RENAMED)
 
         await gitUtil.manipularArquivoComCommit('1111111',
