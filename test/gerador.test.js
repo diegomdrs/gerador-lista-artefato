@@ -629,7 +629,7 @@ describe('test gerais', () => {
         await gitFoo.manipularArquivoComCommit('1111111', 'foo-controller.html', TIPO_MODIFICACAO.ADDED)
         await gitFoo.manipularArquivoComCommit('1111111', 'foo-controller.html', TIPO_MODIFICACAO.MODIFIED)
         await gitFoo.manipularArquivoComCommit('1111111', 'foo-controller.html', TIPO_MODIFICACAO.MODIFIED)
-        
+
         await gitFoo.manipularArquivoComCommit('2222222', 'foo-controller.html', TIPO_MODIFICACAO.MODIFIED)
         await gitFoo.manipularArquivoComCommit('2222222', 'foo-controller.html', TIPO_MODIFICACAO.MODIFIED)
 
@@ -664,7 +664,7 @@ describe('test gerais', () => {
         expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[2].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*foo-controller.js$/g)
-        
+
         expect(lista[3].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[3].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[3].listaArtefatoSaida).toHaveLength(1)
@@ -686,6 +686,55 @@ describe('test gerais', () => {
         expect(lista[5].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
         expect(lista[5].listaArtefatoSaida[0].nomeArtefato).toBe('bar/quuz-controller.html')
         expect(lista[5].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('bar/quy-controller.html')
-        expect(lista[5].listaArtefatoSaida[0].nomeNovoArtefato).toBe('bar/quuz-controller.html')       
+        expect(lista[5].listaArtefatoSaida[0].nomeNovoArtefato).toBe('bar/quuz-controller.html')
+    })
+
+    it('teste de listagem de artefato .gitignore', async () => {
+
+        await gitUtil.manipularArquivoComCommit('1111111',
+            '.jshintr', TIPO_MODIFICACAO.ADDED)
+
+        await gitUtil.manipularArquivoComCommit('2222222',
+            { origem: '.jshintr', destino: '.jshintrc' }, TIPO_MODIFICACAO.RENAMED)
+
+        await gitUtil.manipularArquivoComCommit('1111111',
+            'bar/.gitignor', TIPO_MODIFICACAO.ADDED)
+
+        await gitUtil.manipularArquivoComCommit('2222222',
+            { origem: 'bar/.gitignor', destino: 'bar/.gitignore' }, TIPO_MODIFICACAO.RENAMED)
+
+        const lista = await gerador(params).gerarListaArtefato()
+
+        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[0].listaArtefatoSaida).toHaveLength(1)
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+        expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/.jshintrc')
+
+        expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[1].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[1].listaArtefatoSaida).toHaveLength(1)
+        expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+        expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/bar/.gitignore')
+
+        expect(lista[2].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[2].listaNumTarefaSaida).toEqual(expect.arrayContaining(['2222222']))
+        expect(lista[2].listaArtefatoSaida).toHaveLength(1)
+        expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
+        expect(lista[2].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toBe('foo/.jshintrc')
+        expect(lista[2].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('foo/.jshintr')
+        expect(lista[2].listaArtefatoSaida[0].nomeNovoArtefato).toBe('foo/.jshintrc') 
+        
+        expect(lista[3].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[3].listaNumTarefaSaida).toEqual(expect.arrayContaining(['2222222']))
+        expect(lista[3].listaArtefatoSaida).toHaveLength(1)
+        expect(lista[3].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
+        expect(lista[3].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[3].listaArtefatoSaida[0].nomeArtefato).toBe('foo/bar/.gitignore')
+        expect(lista[3].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('foo/bar/.gitignor')
+        expect(lista[3].listaArtefatoSaida[0].nomeNovoArtefato).toBe('foo/bar/.gitignore')  
     })
 })

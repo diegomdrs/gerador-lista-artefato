@@ -5,7 +5,9 @@ const Arquivo = function (nomeProjeto, numeroTarefa, linhaArquivo) {
 
     this.nomeProjeto = nomeProjeto
 
-    this.nomeArquivo = linhaArquivo.match(/\s.+/g)[0].match(/\w.+/g)[0]
+    // Matches a group before the main expression without including it in the result
+    this.nomeArquivo = linhaArquivo.match(/(?<=\s).*/g)[0]
+
     this.nomeArquivo = this.nomeArquivo.match(/^[^\s]*/g)[0]
         .replace(/^/g, this.nomeProjeto + '/')
 

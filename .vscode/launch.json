@@ -63,7 +63,7 @@
         },
         {
             // jest --runInBand --verbose test/gerador.test.js
-            // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo --autor=fulano --task=1111111 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais --mostrar-renomeados
+            // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo --autor=fulano --task=1111111,2222222 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais --mostrar-renomeados
             "type": "node",
             "request": "launch",
             "name": "comando test app.js",
@@ -72,7 +72,7 @@
                 "--diretorio=/tmp/gerador-lista-artefato-qas",
                 "--projeto=foo",
                 "--autor=fulano",
-                "--task=1111111",
+                "--task=1111111,2222222",
                 "--mostrar-num-modificacao",
                 "--mostrar-deletados",
                 "--mostrar-renomeados",
