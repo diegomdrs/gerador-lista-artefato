@@ -21,7 +21,7 @@ module.exports = async function (commander) {
                 mostrarDeletados: commander.mostrarDeletados,
                 mostrarRenomeados: commander.mostrarRenomeados,
                 mostrarCommitsLocais: commander.mostrarCommitsLocais,
-                mostrarNumModificacaocommander: commander.mostrarNumModificacaocommander
+                mostrarNumModificacao: commander.mostrarNumModificacao
             })
 
             const gerador = require('../lib/gerador')(params)
