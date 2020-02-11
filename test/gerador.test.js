@@ -691,7 +691,7 @@ describe('test gerais', () => {
 
         const lista = await gerador(params).gerarListaArtefato()
 
-        // expect(lista).toHaveLength(1)
+        expect(lista).toHaveLength(10)
 
         expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[0].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
