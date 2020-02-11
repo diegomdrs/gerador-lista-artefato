@@ -89,9 +89,9 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
 
         limparMessages()
 
-        if (vm.tarefa) {
+        if (vm.listaTarefa) {
 
-            const listaTarefa = vm.tarefa.split(',')
+            const listaTarefa = vm.listaTarefa.split(',')
 
             for (const tarefa of listaTarefa) {
 
@@ -105,7 +105,7 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
                         geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
             }
 
-            delete vm.tarefa
+            delete vm.listaTarefa
         }
     }
 
@@ -113,9 +113,9 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
 
         limparMessages()
 
-        if (vm.caminhoProjeto) {
+        if (vm.listaCaminhoProjeto) {
 
-            const listaProjeto = vm.caminhoProjeto.split(',')
+            const listaProjeto = vm.listaCaminhoProjeto.split(',')
 
             for (const projeto of listaProjeto) {
 
@@ -129,7 +129,7 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
                         geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
             }
 
-            delete vm.caminhoProjeto
+            delete vm.listaCaminhoProjeto
         }
     }
 
@@ -177,8 +177,8 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
         }
 
         delete vm.listaSaida
-        delete vm.caminhoProjeto
-        delete vm.tarefa
+        delete vm.listaCaminhoProjeto
+        delete vm.listaTarefa
     }
 
     function obterNomeProjeto(caminhoProjeto) {
