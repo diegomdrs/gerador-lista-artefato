@@ -1,0 +1,138 @@
+
+Tarefas nº 1241448, 1246280
+
+M	crm-patrimonio-api/pom.xml
+
+Tarefas nº 1241448, 1246280
+
+M	crm-patrimonio-estatico/src/app/spas/imovel/pagamentos-locacao/abas-pagamentos-locacao.tpl.html
+
+Tarefas nº 1244356, 1241448, 1252935
+
+M	crm-patrimonio-estatico/package.json
+
+Tarefas nº 1252655, 1252935
+
+M	crm-patrimonio-estatico/spec/inclusao-ocupante-imovel-controllers-spec.js
+
+Tarefas nº 1241448, 1246280
+
+M	crm-patrimonio-estatico/spec/lista-pagamentos-locacao-controllers-spec.js
+
+Tarefas nº 1244356, 1246280
+
+M	crm-patrimonio-estatico/src/app/spas/imovel/despacho-pagamento/modal-lista-fornecedor/modal-detalha-credor/detalhe-credor-controller.js
+
+Tarefas nº 1241448, 1244356, 1246280
+
+M	crm-patrimonio-estatico/src/app/crm/crm-constantes.js
+
+Tarefas nº 1252655, 1252935
+
+M	crm-patrimonio-estatico/src/app/spas/parcela/incorporar-parcela/incorporar-parcela-controllers.js
+
+Tarefas nº 1252655, 1252935
+
+M	crm-patrimonio-estatico/src/app/spas/baixar-bem/listar/listar-bens-baixa-controllers.js
+
+Tarefas nº 1252655, 1252935
+
+M	crm-patrimonio-estatico/src/app/spas/imovel/parcela-patrimonial/parcela-patrimonial-controllers.js
+
+Tarefas nº 1252655, 1252935
+
+M	crm-patrimonio-estatico/src/app/spas/imovel/inclusao-ocupante-imovel/inclusao-ocupante-imovel-controllers.js
+
+Tarefas nº 1252655, 1252935
+
+M	crm-patrimonio-estatico/src/app/spas/baixar-bem/liberar/liberar-baixa-bem-controllers.js
+
+Tarefas nº 1241448, 1246280
+
+M	crm-patrimonio-estatico/src/app/spas/imovel/pagamentos-locacao/lista-pagamentos-locacao-controllers.js
+
+Tarefas nº 1241448, 1246280
+
+M	crm-patrimonio-estatico/src/app/spas/imovel/pagamentos-locacao/tabela-component/tabela-component.js
+
+Tarefa nº 1246280
+
+A	crm-patrimonio-api/src/main/java/br/com/bb/crm/api/v1/pagamento/gateway/GatewayAlterarFluxoPagamentoContratoArrendamentoImovel.java
+
+Tarefa nº 1246280
+
+A	crm-patrimonio-estatico/src/app/componentes/modal-alerta/modal-alerta.tpl.html
+
+Tarefa nº 1246280
+
+A	crm-patrimonio-estatico/src/app/spas/imovel/pagamentos-locacao/pagamento-locacao-services.js
+
+Tarefa nº 1246280
+
+M	crm-patrimonio-estatico/karma.conf.js
+
+Tarefa nº 1246280
+
+D	crm-patrimonio-estatico/src/app/spas/imovel/pagamentos-locacao/modal-confirmacao.tpl.html
+
+Tarefa nº 1241448
+
+M	crm-patrimonio-estatico/src/styles/crm.css
+
+Tarefa nº 1246280
+
+M	crm-patrimonio-api/src/main/java/br/com/bb/crm/api/v1/pagamento/resources/PagamentoResource.java
+
+Tarefa nº 1241448
+
+M	crm-patrimonio-api/operacoes.xml
+
+Tarefa nº 1241448
+
+M	crm-patrimonio-estatico/src/app/spas/imovel/pagamentos-locacao/tabela-component/tabela.tpl.html
+
+Tarefa nº 1241448
+
+M	crm-patrimonio-estatico/src/app/spas/imovel/imovel-services.js
+
+Tarefa nº 1241448
+
+A	crm-patrimonio-api/src/main/java/br/com/bb/crm/api/v1/pagamento/resources/ListarAcaoTipoListaPagamentoResource.java
+A	crm-patrimonio-api/src/main/java/br/com/bb/crm/api/v1/pagamento/gateway/GatewayListarAcaoTipoListaPagamento.java
+
+Tarefa nº 1252935
+
+M	crm-patrimonio-estatico/spec/cadastro-imovel-controllers-spec.js
+M	crm-patrimonio-estatico/src/app/componentes/base-controller.js
+
+Tarefa nº 1244356
+
+M	crm-patrimonio-estatico/src/app/spas/imovel/despacho-pagamento/lista-contrato-locacao-fase-cronograma.tpl.html
+M	crm-patrimonio-estatico/src/app/spas/imovel/despacho-pagamento/modal-lista-fornecedor/modal-detalha-credor/detalhe-credor.tpl.html
+
+Tarefa nº 1252655
+
+M	crm-patrimonio-estatico/spec/lista-imovel-controllers-spec.js
+M	crm-patrimonio-estatico/src/app/spas/imovel/lista-imovel/lista-imovel-controllers.js
+
+Tarefa nº 1252935
+
+M	crm-patrimonio-estatico/src/app/spas/imovel/inclusao-ocupante-imovel/modal-incluir-ocupante/modal-incluir-ocupante.html
+M	crm-patrimonio-estatico/src/app/spas/imovel/inclusao-ocupante-imovel/modal-consulta-depe.tpl.html
+M	crm-patrimonio-estatico/src/app/spas/imovel/inclusao-ocupante-imovel/modal-incluir-ocupante/modal-confirmacao.tpl.html
+M	crm-patrimonio-estatico/src/app/spas/imovel/inclusao-ocupante-imovel/modal-consulta-depe-sem-ior.tpl.html
+
+Tarefa nº 1246280
+
+M	crm-patrimonio-estatico/src/app/componentes/modal-justificativa/modal-justificativa.tpl.html
+M	crm-patrimonio-estatico/src/app/componentes/modalJustificativa/modal-justificativa.tpl.html
+M	crm-patrimonio-estatico/src/app/componentes/modal-confirmacao/modal-confirmacao.tpl.html
+M	crm-patrimonio-estatico/src/app/spas/imovel/imovel.app.html
+
+Tarefa nº 1244356
+
+M	crm-patrimonio-estatico/spec/lista-contrato-locacao-fase-cronograma-controllers-spec.js
+M	crm-patrimonio-estatico/src/app/spas/imovel/despacho-pagamento/lista-contrato-locacao-fase-cronograma-controller.js
+M	crm-patrimonio-estatico/src/app/spas/imovel/despacho-pagamento/modal-detalha-cronograma-contrato/modal-detalha-cronograma-contrato-controller.js
+M	crm-patrimonio-estatico/src/app/spas/imovel/cadastro/cadastro-imovel-controllers.js
+M	crm-patrimonio-estatico/src/app/spas/imovel/despacho-pagamento/modal-lista-fornecedor/lista-fornecedor-controllers.js

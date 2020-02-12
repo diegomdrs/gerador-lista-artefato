@@ -1,0 +1,121 @@
+
+Tarefas nº 1221172, 1227471, 1229100, 1215554
+
+M	crm-patrimonio-estatico/src/app/spas/imovel/pagamentos-locacao/tabela-component/tabela.tpl.html
+
+Tarefas nº 1221786, 1239662
+
+M	crm-patrimonio-estatico/src/app/spas/imovel/cadastro/cadastro-imovel.tpl.html
+
+Tarefas nº 1221172, 1227471, 1229100, 1215554
+
+M	crm-patrimonio-estatico/src/app/spas/imovel/pagamentos-locacao/abas-pagamentos-locacao.tpl.html
+
+Tarefas nº 1227471, 1229100
+
+M	crm-patrimonio-estatico/src/app/spas/imovel/imovel.app.html
+
+Tarefas nº 1215554, 1221786, 1239662
+
+M	crm-patrimonio-estatico/package.json
+
+Tarefas nº 1215554, 1234921
+
+M	crm-patrimonio-estatico/karma.conf.js
+
+Tarefas nº 1221786, 1239662
+
+M	crm-patrimonio-estatico/src/app/spas/imovel/cadastro/cadastro-imovel-controllers.js
+
+Tarefas nº 1221172, 1227471, 1229100, 1215554
+
+M	crm-patrimonio-estatico/src/app/spas/imovel/pagamentos-locacao/lista-pagamentos-locacao-controllers.js
+
+Tarefas nº 1221172, 1227471, 1229100, 1215554
+
+M	crm-patrimonio-estatico/src/app/spas/imovel/pagamentos-locacao/tabela-component/tabela-component.js
+
+Tarefas nº 1217966, 1215554
+
+M	fti-estatico/package.json
+
+Tarefa nº 1229100
+
+M	crm-patrimonio-estatico/src/app/componentes/bb-filter-crm/filter-crm.css
+
+Tarefa nº 1239662
+
+M	crm-patrimonio-estatico/src/app/spas/imovel/cadastro/incluir-imovel.tpl.html
+
+Tarefa nº 1215554
+
+M	apc-estatico/package.json
+
+Tarefa nº 1221786
+
+D	crm-patrimonio-estatico/src/app/spas/inventario/bem-services.js
+
+Tarefa nº 1234921
+
+M	crm-patrimonio-estatico/spec/detalhe-pagamento-controllers-spec.js
+
+Tarefa nº 1229100
+
+A	crm-patrimonio-estatico/src/app/spas/imovel/pagamentos-locacao/detalhe-pagamento/detalhe-pagamento.tpl.html
+
+Tarefa nº 1229100
+
+A	crm-patrimonio-estatico/src/app/spas/imovel/pagamentos-locacao/detalhe-pagamento/detalhe-pagamento-controller.js
+
+Tarefa nº 1229100
+
+M	crm-patrimonio-estatico/src/app/spas/imovel/inclusao-ocupante-imovel/inclusao-ocupante-imovel.tpl.html
+
+Tarefa nº 1217966
+
+M	fti-estatico/src/app/fti/fti-constantes.js
+
+Tarefa nº 1221786
+
+M	crm-patrimonio-estatico/src/app/spas/imovel/cadastro/alterar-imovel.tpl.html
+
+Tarefa nº 1229100
+
+D	crm-patrimonio-estatico/src/app/spas/imovel/pagamentos-locacao/lista-pagamentos-locacao.tpl.html
+
+Tarefa nº 1227471
+
+A	crm-patrimonio-estatico/src/app/spas/imovel/pagamentos-locacao/tabela-component/tabela-component.css
+
+Tarefa nº 1227471
+
+M	crm-patrimonio-estatico/spec/lista-pagamento-locacao-controllers-spec.js
+
+Tarefa nº 1227471
+
+M	crm-patrimonio-estatico/src/styles/crm.css
+
+Tarefa nº 1226285
+
+M	apc-estatico/spec/app/spas/notaFiscal/itensNotaFiscal/vinculaItensNotaFiscal/vincular-itens-nota-controllers-spec.js
+
+Tarefa nº 1215554
+
+M	crm-patrimonio-estatico/src/app/spas/imovel/documentos/lista-documentos-controllers.js
+
+Tarefa nº 1229100
+
+M	crm-patrimonio-estatico/src/app/componentes/bb-filter-crm/filter-crm.js
+M	crm-patrimonio-estatico/src/app/spas/imovel/imovel-app.js
+
+Tarefa nº 1221786
+
+M	crm-patrimonio-estatico/spec/inclusao-ocupante-imovel-controllers-spec.js
+M	crm-patrimonio-estatico/Gruntfile.js
+M	crm-patrimonio-estatico/src/app/spas/imovel/inclusao-ocupante-imovel/inclusao-ocupante-imovel-controllers.js
+
+Tarefa nº 1215554
+
+M	crm-patrimonio-estatico/src/app/spas/imovel/documentos/includes/tabela-documentos-nao-obrigatorios.tpl.html
+M	crm-patrimonio-estatico/src/app/spas/imovel/documentos/includes/tabela-documentos-obrigatorios.tpl.html
+M	crm-patrimonio-estatico/src/app/spas/imovel/documentos/lista-documentos.tpl.html
