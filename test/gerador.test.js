@@ -745,7 +745,7 @@ describe('test gerais', () => {
         expect(lista[7].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*BazResource.java$/g)
         expect(lista[7].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[7].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-        expect(lista[7].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*BazResourceTest.java$/g) 
+        expect(lista[7].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*BazResourceTest.java$/g)
 
         expect(lista[8].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[8].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
@@ -755,7 +755,7 @@ describe('test gerais', () => {
         expect(lista[8].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*GatewayBar.java$/g)
         expect(lista[8].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[8].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-        expect(lista[8].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*GatewayBarTest.java$/g)  
+        expect(lista[8].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*GatewayBarTest.java$/g)
 
         expect(lista[9].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[9].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
@@ -765,6 +765,11 @@ describe('test gerais', () => {
         expect(lista[9].listaArtefatoSaida[0].nomeArtefato).toBe('foo/Gruntfile.js')
         expect(lista[9].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[9].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-        expect(lista[9].listaArtefatoSaida[1].nomeArtefato).toBe('foo/karma.conf.js')        
+        expect(lista[9].listaArtefatoSaida[1].nomeArtefato).toBe('foo/karma.conf.js')
+    })
+
+    afterAll(async () => { 
+
+        gitUtil.removerDiretorioTest()
     })
 })

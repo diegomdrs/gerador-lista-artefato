@@ -15,7 +15,7 @@ module.exports = function (nomeProjeto, autor) {
 
     this.criarRepo = async function () {
 
-        this.removerDiretorioTest(this.obterCaminhoProjeto())
+        this.removerDiretorioProjeto(this.obterCaminhoProjeto())
 
         fs.mkdirsSync(this.obterCaminhoProjeto())
 
@@ -34,8 +34,12 @@ module.exports = function (nomeProjeto, autor) {
         return `${this.obterCaminhoProjeto()}/${pathArquivo}`
     }
 
-    this.removerDiretorioTest = async function (path) {
+    this.removerDiretorioProjeto = async function (path) {
         fs.removeSync(path)
+    }
+
+    this.removerDiretorioTest = async function () {
+        fs.removeSync(PATH_TEST)
     }
 
     this.checkoutBranch = async function (nomeBranch) {
