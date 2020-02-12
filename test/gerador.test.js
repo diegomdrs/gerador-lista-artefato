@@ -68,15 +68,18 @@ describe('test gerais', () => {
 
     it('teste de listagem de artefatos renomeados', async () => {
 
-        await gitUtil.manipularArquivoComCommit('1111111',
-            'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
+        await gitUtil.manipularListaArquivoComCommit('1111111', [
+            { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'arquivoFoo.txt' }
+        ])
 
-        await gitUtil.manipularArquivoComCommit('1111111',
-            'arquivoFoo.txt', TIPO_MODIFICACAO.MODIFIED)
+        await gitUtil.manipularListaArquivoComCommit('1111111', [
+            { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'arquivoFoo.txt' }
+        ])
 
         await gitUtil.manipularArquivoComCommit('1111111',
             { origem: 'arquivoFoo.txt', destino: 'arquivoQux.txt' },
-            TIPO_MODIFICACAO.RENAMED)
+            TIPO_MODIFICACAO.RENAMED
+        )
 
         await gitUtil.manipularArquivoComCommit('2222222',
             'arquivoQux.txt', TIPO_MODIFICACAO.MODIFIED)
@@ -768,7 +771,7 @@ describe('test gerais', () => {
         expect(lista[9].listaArtefatoSaida[1].nomeArtefato).toBe('foo/karma.conf.js')
     })
 
-    afterAll(async () => { 
+    afterAll(async () => {
 
         gitUtil.removerDiretorioTest()
     })
