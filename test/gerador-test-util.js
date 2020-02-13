@@ -101,25 +101,6 @@ module.exports = function (nomeProjeto, autor) {
         await this.git.commit(`task ${task} commit`)
     }
 
-    this.criarEstrutura = async function (listaEstrutura, autor) {
-
-        for (let estrutura of listaEstrutura) {
-
-            await this.criarRepo(estrutura.nomeProjeto, autor)
-
-            for (const artefato of estrutura.listaArtefato) {
-
-                for (const tarefa of artefato.listaTarefa) {
-
-                    for (let i = 0; i < tarefa.numAlteracao; i++)
-
-                        await this.manipularArquivoComCommit(estrutura.nomeProjeto,
-                            tarefa.numeroTarefa, artefato.pathArtefato, tarefa.tipoAlteracao)
-                }
-            }
-        }
-    }
-
     this.stash = async function () {
         await this.git.stash()
     }

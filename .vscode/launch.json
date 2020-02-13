@@ -27,41 +27,6 @@
             "internalConsoleOptions": "openOnSessionStart"
         },
         {
-            // jest --runInBand --verbose test/gerador-comando-fulano.test.js
-            // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=bar-estatico,bar-api,qux-estatico,qux-api --autor=fulano --task=1168815,1172414,1168800,1167319,1163642,1155478,1150152,1161422 --mostrar-num-modificacao --mostrar-renomeados --mostrar-deletados --mostrar-commits-locais
-            "type": "node",
-            "request": "launch",
-            "name": "comando fulano app.js",
-            "program": "${workspaceFolder}/app.js",
-            "args": [
-                "--diretorio=/tmp/gerador-lista-artefato-qas",
-                "--projeto=bar-estatico,bar-api,qux-estatico,qux-api",
-                "--autor=fulano",
-                "--task=1168815,1172414,1168800,1167319,1163642,1155478,1150152,1161422",
-                "--mostrar-num-modificacao",
-                "--mostrar-deletados",
-                "--mostrar-commits-locais"
-            ]
-        },
-        {
-            // jest --runInBand --verbose test/gerador-comando-beltrano.test.js
-            // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=bar-estatico,bar-api,qux-estatico,qux-api --autor=beltrano --task=1199211,1203082,1203670,1207175,1210684,1210658,1212262,1212444 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
-            // /tmp/gerador-lista-artefato-qas/bar-estatico,/tmp/gerador-lista-artefato-qas/bar-api,/tmp/gerador-lista-artefato-qas/qux-estatico,/tmp/gerador-lista-artefato-qas/qux-api
-            "type": "node",
-            "request": "launch",
-            "name": "comando beltrano app.js",
-            "program": "${workspaceFolder}/app.js",
-            "args": [
-                "--diretorio=/tmp/gerador-lista-artefato-qas",
-                "--projeto=bar-estatico,bar-api,qux-estatico,qux-api",
-                "--autor=beltrano",
-                "--task=1199211,1203082,1203670,1207175,1210684,1210658,1212262,1212444",
-                "--mostrar-num-modificacao",
-                "--mostrar-deletados",
-                "--mostrar-commits-locais"
-            ]
-        },
-        {
             // jest --runInBand --verbose test/gerador.test.js
             // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo --autor=fulano --task=1111111,2222222 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais --mostrar-renomeados
             "type": "node",
