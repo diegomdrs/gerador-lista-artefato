@@ -1,7 +1,7 @@
 {
   "name": "gerador-lista-artefato-qas",
-  "version": "0.0.4-rc01",
-  "description": "",
+  "version": "0.0.4",
+  "description": "Gerador de listagem de artefatos do QAS",
   "bin": {
     "gerador-lista-artefato": "./app.js"
   },

@@ -28,16 +28,6 @@ describe('test gerais', () => {
         })
     })
 
-    it('test parâmetros inválidos', () => {
-
-        // const req = {
-        //     diretorio: "/home/foo/Documents/gerador-lista-artefato-qas/test/gerador-lista-artefato-qas",
-        //     autor: "fulano",
-        //     listaProjeto: ["apc-estatico", "crm-patrimonio-estatico"],
-        //     listaTarefa: ["1199211", "1203082", "1203670", "1207175", "1210684", "1210658", "1212262", "1212444"]
-        // }
-    });
-
     it('teste do modulo Param com parametros repetidos', () => {
 
         const params = new Param({
