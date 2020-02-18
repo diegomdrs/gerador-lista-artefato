@@ -4,10 +4,6 @@ init()
 
 async function init() {
 
-    const commander = require('./config/commander')
-
-    if (commander.server) {
-
         const PORT = require('./lib/constants').PORT
         const HOST = require('./lib/constants').HOST
 
@@ -19,11 +15,26 @@ async function init() {
 
         open(`http://${HOST}:${PORT}`, { app: 'firefox' })
 
-    } else if (commander.projeto && commander.autor && commander.task && commander.diretorio) {
+    // const commander = require('./config/commander')
 
-        require('./routes/gerador-cli')(commander)
-    } else {
+    // if (commander.server) {
 
-        commander.outputHelp()
-    }
+    //     const PORT = require('./lib/constants').PORT
+    //     const HOST = require('./lib/constants').HOST
+
+    //     const app = require('./config/express')
+    //     const open = require('open')
+
+    //     await require('./config/http')(app)
+    //     await require('./routes/gerador-web')(app)
+
+    //     open(`http://${HOST}:${PORT}`, { app: 'firefox' })
+
+    // } else if (commander.projeto && commander.autor && commander.task && commander.diretorio) {
+
+    //     require('./routes/gerador-cli')(commander)
+    // } else {
+
+    //     commander.outputHelp()
+    // }
 }
