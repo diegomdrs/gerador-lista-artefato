@@ -1,6 +1,6 @@
 {
   "name": "gerador-lista-artefato-qas",
-  "version": "0.0.4",
+  "version": "0.0.5-rc01",
   "description": "Gerador de listagem de artefatos do QAS",
   "bin": {
     "gerador-lista-artefato": "./app.js"
@@ -35,7 +35,8 @@
     "body-parser": "^1.19.0",
     "bootstrap": "^4.4.1",
     "commander": "^4.0.1",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "open": "^7.0.2"
   },
   "devDependencies": {
     "fs-extra": "^8.1.0",

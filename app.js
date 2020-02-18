@@ -8,10 +8,16 @@ async function init() {
 
     if (commander.server) {
 
-        const app = require('./config/express')
+        const PORT = require('./lib/constants').PORT
+        const HOST = require('./lib/constants').HOST
 
-        require('./config/http')(app)
-        require('./routes/gerador-web')(app)
+        const app = require('./config/express')
+        const open = require('open')
+
+        await require('./config/http')(app)
+        await require('./routes/gerador-web')(app)
+
+        open(`http://${HOST}:${PORT}`, { app: 'firefox' })
 
     } else if (commander.projeto && commander.autor && commander.task && commander.diretorio) {
 

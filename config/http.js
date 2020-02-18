@@ -3,7 +3,7 @@ module.exports = function (app) {
   const debug = require('debug')('gerador-artefato:server');
   const http = require('http');
 
-  const PORT = '3333'
+  const PORT = require('../lib/constants').PORT
 
   /**
    * Get port from environment and store in Express.
