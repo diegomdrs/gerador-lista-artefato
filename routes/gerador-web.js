@@ -28,20 +28,6 @@ module.exports = function (app) {
         }
     })
 
-    app.post('/listarDiretorios', async function (req, resp) {
-
-        try {
-            const diretorio = require('../lib/diretorio')(req.body.diretorio)
-            const listaSaida = await diretorio.listarDiretorios()
-
-            resp.json(listaSaida)
-
-        } catch (error) {
-
-            resp.status(BAD_REQUEST_CODE).send({ message: error.message })
-        }
-    })
-
     // AngularJS html5mode com Node.js e Express
     app.all('/*', function (req, res) {
         res.sendFile(path.join(__dirname, '../public/gerador.html'))
