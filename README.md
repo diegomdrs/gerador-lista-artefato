@@ -7,6 +7,7 @@ App para listar os artefatos incluídos/alterados/renomeados para geração do Q
 ### Sistema
 
 - Git versão mínima v2.17
+- Navegador Firefox
 
 ### Git
 
