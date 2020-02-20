@@ -42,6 +42,8 @@ $ ./gerador-lista-artefato-qas
 ```
 Em seguida, será aberto o endereço [http://localhost:3333/gerador](http://localhost:3333/gerador)
 
+![Modo Web](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato-qas/master/web.png)
+
 ## Utilização do modo CLI
 
 ### Linux
