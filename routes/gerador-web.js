@@ -3,9 +3,9 @@ const Param = require('../models/param')
 
 module.exports = function (app) {
 
-    app.post('/gerarListaArtefato', async function (req, resp) {
+    const BAD_REQUEST_CODE = 400
 
-        const BAD_REQUEST_CODE = 400
+    app.post('/gerarListaArtefato', async function (req, resp) {
 
         try {
             const params = new Param({
@@ -19,6 +19,20 @@ module.exports = function (app) {
 
             const gerador = require('../lib/gerador')(params)
             const listaSaida = await gerador.gerarListaArtefato()
+
+            resp.json(listaSaida)
+
+        } catch (error) {
+
+            resp.status(BAD_REQUEST_CODE).send({ message: error.message })
+        }
+    })
+
+    app.post('/listarDiretorios', async function (req, resp) {
+
+        try {
+            const diretorio = require('../lib/diretorio')(req.body.diretorio)
+            const listaSaida = await diretorio.listarDiretorios()
 
             resp.json(listaSaida)
 
