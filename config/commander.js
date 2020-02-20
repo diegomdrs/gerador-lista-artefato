@@ -4,6 +4,7 @@ const package = require('../package.json')
 
 program
     .description('Comando para listar os artefatos incluídos/alterados/renomeados para geração do QAS')
+    .option('-s, --server', 'Inicia a versão server e ignora os outros parâmetros (Modo Padrão)', true)
     .option('-d, --diretorio <type>', 'Diretório raiz dos projetos Git')
     .option('-p, --projeto <type>', 'Lista de projetos Git (podem ser passados vários projetos separados por vírgula)', commaSeparatedList)
     .option('-a, --autor <type>', 'Matrícula do autor dos commits')
@@ -12,7 +13,6 @@ program
     .option('--mostrar-deletados', 'Mostra artefatos deletados na tarefa (Opcional)')
     .option('--mostrar-renomeados', 'Mostra artefatos renomeados na tarefa (Opcional)')
     .option('--mostrar-commits-locais', 'Mostra commits remotos e locais (Opcional)')
-    .option('-s, --server', 'Inicia a versão server e ignora os outros parâmetros')
     .version(package.version, '-v, --version', 'Mostra a versão do programa')
 
 function commaSeparatedList(value, dummyPrevious) {
