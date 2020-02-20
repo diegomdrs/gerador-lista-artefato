@@ -61,7 +61,7 @@ $ ./gerador-lista-artefato-qas.exe --diretorio=C:/kdi/git --projeto=foo-estatico
 ### Parâmetros do modo CLI
 
 ``` console
-  -s, --server               Inicia a versão server e ignora os outros parâmetros (Modo Padrão) (default: true)
+  -s, --server               Inicia a versão server e ignora os outros parâmetros (default: true)
   -d, --diretorio <type>     Diretório raiz dos projetos Git
   -p, --projeto <type>       Lista de projetos Git (podem ser passados vários projetos separados por vírgula)
   -a, --autor <type>         Matrícula do autor dos commits
