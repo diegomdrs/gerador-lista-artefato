@@ -12,8 +12,7 @@ async function init() {
 
     } else if (commander.server) {
 
-        const PORT = require('./lib/constants').PORT
-        const HOST = require('./lib/constants').HOST
+        const { PORT, HOST } = require('./lib/constants')
 
         const app = require('./config/express')
         const open = require('open')

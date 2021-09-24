@@ -5,36 +5,72 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "server launch",
             "type": "node",
-            "request": "attach",
-            "name": "server attach",
-            "processId": "${command:PickProcess}",
-            "protocol": "inspector",
-            "restart": true
+            "request": "launch",
+            "program": "${workspaceFolder}/app.js",
+            "cwd": "${workspaceFolder}",
+            "restart": true,
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "name": "jest current file",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/node_modules/.bin/jest",
+            "args": [
+                "${fileBasenameNoExtension}"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "disableOptimisticBPs": true,
+            "windows": {
+                "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+            }
         },
         {
             // node app --diretorio=/home/foo/Documents --projeto=foo-estatico,foo-api --autor=diegomdrs --task=1111111 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
+            "name": "jest gerador-por-tipo-artefato",
             "type": "node",
             "request": "launch",
-            "name": "jest",
-            "program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-            "args": [
-                "-i",
+            "runtimeArgs": [
+                "--inspect-brk",
+                "${workspaceRoot}/node_modules/.bin/jest",
                 "--runInBand",
-                "--verbose",
-                "test/gerador.test.js"
+                "test/gerador-por-tipo-artefato.test.js"
             ],
-            "internalConsoleOptions": "openOnSessionStart"
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "port": 9229
+        },
+        {
+            // node app --diretorio=/home/foo/Documents --projeto=foo-estatico,foo-api --autor=diegomdrs --task=1111111 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
+            "name": "jest gerador-por-tarefa",
+            "type": "node",
+            "request": "launch",
+            "runtimeArgs": [
+                "--inspect-brk",
+                "${workspaceRoot}/node_modules/.bin/jest",
+                "--runInBand",
+                "test/gerador-por-tarefa.test.js"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "port": 9229
         },
         {
             // jest --runInBand --verbose test/gerador.test.js
-            // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo,bar --autor=fulano --task=1111111,2222222 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais --mostrar-renomeados
+            // node app --diretorio=/tmp/gerador-lista-artefato --projeto=foo,bar --autor=fulano --task=1111111,2222222 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais --mostrar-renomeados
             "type": "node",
             "request": "launch",
             "name": "comando test app.js",
             "program": "${workspaceFolder}/app.js",
             "args": [
-                "--diretorio=/tmp/gerador-lista-artefato-qas",
+                "--diretorio=/tmp/gerador-lista-artefato",
                 "--projeto=foo",
                 "--autor=fulano",
                 "--task=1111111,2222222",

@@ -1,7 +1,5 @@
 const Artefato = function ({
     nomeArtefato,
-    nomeNovoArtefato,
-    nomeAntigoArtefato,
     extensao,
     tipoArtefato,
     nomeProjeto,
@@ -10,8 +8,6 @@ const Artefato = function ({
     numeroAlteracao,
 }) {
     this.nomeArtefato = nomeArtefato
-    this.nomeNovoArtefato = nomeNovoArtefato
-    this.nomeAntigoArtefato = nomeAntigoArtefato
     this.extensao = extensao
     this.tipoArtefato = tipoArtefato
     this.nomeProjeto = nomeProjeto

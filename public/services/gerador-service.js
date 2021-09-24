@@ -10,7 +10,9 @@ function geradorService($http) {
     const HOST = 'localhost'
 
     const service = {
-        gerarListaArtefato: gerarListaArtefato
+        gerarListaArtefato: gerarListaArtefato,
+        listarDiretorio: listarDiretorio,
+        obterListaArtefatoCsv: obterListaArtefatoCsv
     }
 
     function gerarListaArtefato(req) {
@@ -21,6 +23,25 @@ function geradorService($http) {
             data: req
         })
     }
+
+    function listarDiretorio(req) {
+
+        return $http({
+            method: 'POST',
+            url: `http://${HOST}:${PORT}/listarDiretorio`,
+            data: req
+        })
+    }
+
+    function obterListaArtefatoCsv(req) {
+
+        return $http({
+            method: 'POST',
+            url: `http://${HOST}:${PORT}/obterListaArtefatoCsv`,
+            data: req
+        })
+    }
+
 
     return service
 }

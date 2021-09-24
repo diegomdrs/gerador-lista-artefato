@@ -1,6 +1,11 @@
 const path = require('path')
 const Param = require('../models/param')
 
+const GeradorPorTarefa = require('../lib/gerador-por-tarefa')
+const GeradorPorTipoArtefato = require('../lib/gerador-por-tipo-artefato')
+
+const { TIPO_LISTAGEM }  = require('../lib/constants')
+
 module.exports = async function (commander) {
 
     init()
@@ -8,9 +13,7 @@ module.exports = async function (commander) {
     async function init() {
 
         try {
-            commander.projeto = commander.projeto.map(function (nomeProjeto) {
-                return path.join(commander.diretorio, nomeProjeto)
-            })
+            commander.projeto = obterListaProjeto()
 
             delete commander.diretorio
 
@@ -24,15 +27,29 @@ module.exports = async function (commander) {
                 mostrarNumModificacao: commander.mostrarNumModificacao
             })
 
-            const gerador = require('../lib/gerador')(params)
+            const gerador = obterTipoGerador(commander.listagem, params)
             const listaSaida = await gerador.gerarListaArtefato()
             const printer = require('../lib/printer')(params, listaSaida)
 
-            printer.imprimirListaSaida(listaSaida)
+            printer.imprimirListaSaida()
 
         } catch ({ message }) {
 
             console.log(message)
+        }
+
+        function obterListaProjeto() {
+            return commander.projeto.map(function (nomeProjeto) {
+                return path.join(commander.diretorio, nomeProjeto)
+            })
+        }
+
+        function obterTipoGerador(tipoListagem, params) {
+
+            if (tipoListagem == TIPO_LISTAGEM.POR_TIPO_ARTEFATO)
+                return new GeradorPorTipoArtefato(params)
+    
+            return new GeradorPorTarefa(params)
         }
     }
 }

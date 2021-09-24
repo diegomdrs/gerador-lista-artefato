@@ -1,25 +1,23 @@
-const app = require('../package.json')
-const crypto = require('crypto')
 const path = require('path')
+const crypto = require('crypto')
 const fs = require('fs-extra')
 
-const TIPO_MODIFICACAO = require('../lib/constants').TIPO_MODIFICACAO
+const { TIPO_MODIFICACAO } = require('../lib/constants')
+const APP_NAME = require('../package.json').name
+const DIRETORIO_TEST = '/tmp' + path.sep + APP_NAME
 
-const NAME_APP = app.name
-const PATH_TEST = '/tmp' + path.sep + NAME_APP
+module.exports = function (caminho, autor) {
 
-module.exports = function (nomeProjeto, autor) {
-
-    this.nomeProjeto = nomeProjeto
+    this.caminho = DIRETORIO_TEST + path.sep + caminho
     this.autor = autor
 
     this.criarRepo = async function () {
 
-        this.removerDiretorioProjeto(this.obterCaminhoProjeto())
+        this.removerDiretorioProjeto()
 
-        fs.mkdirsSync(this.obterCaminhoProjeto())
+        fs.mkdirsSync(this.caminho)
 
-        this.git = require('simple-git/promise')(this.obterCaminhoProjeto())
+        this.git = require('simple-git/promise')(this.caminho)
 
         await this.git.init()
         await this.git.addConfig('user.name', this.autor)
@@ -27,19 +25,19 @@ module.exports = function (nomeProjeto, autor) {
     }
 
     this.obterCaminhoProjeto = function () {
-        return `${PATH_TEST}/${this.nomeProjeto}`
+        return `${this.caminho}`
     }
 
     this.obterCaminhoArquivo = function (pathArquivo) {
-        return `${this.obterCaminhoProjeto()}/${pathArquivo}`
+        return `${this.caminho}/${pathArquivo}`
     }
 
-    this.removerDiretorioProjeto = async function (path) {
-        fs.removeSync(path)
+    this.removerDiretorioProjeto = async function () {
+        fs.removeSync(this.caminho)
     }
 
     this.removerDiretorioTest = async function () {
-        fs.removeSync(PATH_TEST)
+        fs.removeSync(DIRETORIO_TEST)
     }
 
     this.checkoutBranch = async function (nomeBranch) {
@@ -63,6 +61,23 @@ module.exports = function (nomeProjeto, autor) {
         }
     }
 
+    this.manipularArquivoComCommxxxxit = async function ({task, pathArquivo, tipoAlteracao}) {
+
+        if (tipoAlteracao !== TIPO_MODIFICACAO.RENAMED) {
+
+            if (tipoAlteracao === TIPO_MODIFICACAO.DELETED)
+                fs.removeSync(this.obterCaminhoArquivo(pathArquivo))
+            else
+                fs.outputFileSync(this.obterCaminhoArquivo(pathArquivo), randomValueHex())
+
+            await this.commitarArquivo(task, pathArquivo)
+        } else {
+
+            await this.git.mv(pathArquivo.origem, pathArquivo.destino)
+            await this.commitarArquivo(task, pathArquivo.destino)
+        }
+    }
+    
     this.manipularArquivoSemCommit = async function (pathArquivo, tipoAlteracao) {
 
         if (tipoAlteracao !== TIPO_MODIFICACAO.RENAMED) {

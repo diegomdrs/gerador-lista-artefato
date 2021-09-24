@@ -16,7 +16,7 @@ function clipboardUtil(geradorConstants) {
         var textArea = document.createElement("textarea");
         document.body.appendChild(textArea);
 
-        textArea.value = obterTextoListaSaida(listaSaida);
+        textArea.value = listaSaida;
         textArea.select();
 
         document.execCommand("copy");
@@ -27,7 +27,7 @@ function clipboardUtil(geradorConstants) {
 
         if (saida.listaArtefatoSaida.length === 1) {
 
-            return saida.listaNumTarefaSaida.length
+            return saida.listaNumeroTarefaSaida.length
 
         } else {
 
@@ -45,24 +45,18 @@ function clipboardUtil(geradorConstants) {
 
             const tr = document.createElement('tr')
 
-            // const tdAtividade = document.createElement('td')
-            // const tdNada = document.createElement('td')
             const tdQuantidade = document.createElement('td')
             const tdArtefato = document.createElement('td')
             const tdTarefa = document.createElement('td')
 
             tdQuantidade.appendChild(document.createTextNode(obterNumero(saida)))
-            // tdAtividade.appendChild(document.createTextNode(geradorConstants.TIPO_MODIFICACAO
-            //     [saida.listaArtefatoSaida[0].tipoAlteracao]))
 
             const ulArtefato = obterUlListaArtefato(saida.listaArtefatoSaida)
-            const ulTarefa = obterUlListaNumTarefa(saida.listaNumTarefaSaida)
+            const ulTarefa = obterUlListaNumTarefa(saida.listaNumeroTarefaSaida)
 
             tdArtefato.appendChild(ulArtefato)
             tdTarefa.appendChild(ulTarefa)
 
-            // tr.appendChild(tdAtividade)
-            // tr.appendChild(tdNada)
             tr.appendChild(tdQuantidade)
             tr.appendChild(tdArtefato)
             tr.appendChild(tdTarefa)
@@ -99,11 +93,11 @@ function clipboardUtil(geradorConstants) {
         return ulArtefato
     }
 
-    function obterUlListaNumTarefa(listaNumTarefaSaida) {
+    function obterUlListaNumTarefa(listaNumeroTarefaSaida) {
 
         const ulTarefa = document.createElement('ul')
 
-        for (const tarefa of listaNumTarefaSaida) {
+        for (const tarefa of listaNumeroTarefaSaida) {
             const li = document.createElement('li')
 
             li.appendChild(document.createTextNode(`Tarefa nº ${tarefa}`))
@@ -112,38 +106,5 @@ function clipboardUtil(geradorConstants) {
         }
 
         return ulTarefa
-    }
-
-    function obterTextoListaSaida(listaSaida) {
-
-        return listaSaida.reduce((saidaTexto, saida) => {
-
-            if (saida.listaNumTarefaSaida.length === 1)
-                saidaTexto = saidaTexto.concat(
-                    `\nTarefa nº ${saida.listaNumTarefaSaida[0]}\n`)
-
-            else if (saida.listaNumTarefaSaida.length > 1)
-                saidaTexto = saidaTexto.concat(
-                    `\nTarefas nº ${saida.listaNumTarefaSaida.join(', ')}\n`)
-
-            for (const artefato of saida.listaArtefatoSaida)
-                saidaTexto = saidaTexto.concat(obterListaArtefato(artefato))
-
-            saidaTexto = saidaTexto.concat('\n')
-
-            return saidaTexto
-        },'')
-    }
-
-    function obterListaArtefato(artefato) {
-
-        let retorno = `\n${artefato.tipoAlteracao}\t`
-
-        if (artefato.tipoAlteracao === geradorConstants.TIPO_MODIFICACAO.RENAMED)
-            retorno = retorno.concat(`${artefato.nomeAntigoArtefato}\t${artefato.nomeNovoArtefato}`)
-        else 
-            retorno = retorno.concat(artefato.nomeArtefato)
-
-        return retorno
     }
 }
