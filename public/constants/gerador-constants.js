@@ -17,6 +17,7 @@ angular
         TIPO_ALERTA: {
             SUCCESS: { class: 'alert-success', icone: '✓' },
             ERROR: { class: 'alert-danger', icone: '✗' },
+            INFO: { class: 'alert-info', icone: 'ℹ' },
         },
 
         TIPO_POSICAO_ALERT: {

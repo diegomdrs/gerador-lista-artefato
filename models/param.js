@@ -2,6 +2,8 @@ const Param = function ({
   autor,
   listaTarefa,
   listaProjeto,
+  dataInicio,
+  dataFim,
   mostrarDeletados,
   mostrarRenomeados,
   mostrarCommitsLocais,
@@ -10,6 +12,8 @@ const Param = function ({
   this.autor = getAttrRequired('autor', autor)
   this.listaTarefa = getAttrRequired('task', getList(listaTarefa))
   this.listaProjeto = getAttrRequired('projeto', getList(listaProjeto))
+  this.dataInicio = dataInicio
+  this.dataFim = dataFim
   this.mostrarDeletados = mostrarDeletados
   this.mostrarRenomeados = mostrarRenomeados
   this.mostrarCommitsLocais = mostrarCommitsLocais

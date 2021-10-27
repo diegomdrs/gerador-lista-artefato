@@ -6,8 +6,8 @@ angular
 			'blockUI',
 			'ng.deviceDetector',
 			'ngFileSaver',
-			'angular.filter'
-
+			'angular.filter',
+			'angularMoment'
 		]).config(configure);
 
 configure.$inject = [

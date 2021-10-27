@@ -10,7 +10,49 @@ const autor = 'fulano'
 
 let gerador = {}
 
-describe('test gerais', () => {
+describe('Testes gerais', () => {
+
+    describe('', () => {
+
+        let gitUtil, params = {}
+
+        beforeEach(async () => {
+
+            gitUtil = await new GeradorTestUtil(nomeProjeto, autor)
+        })
+
+        it('teste de listagem de artefato A, M, R, D com período de pesquisa', async () => {
+
+            // git log --format=fuller
+            // git show 87adbd2dde --format=fuller
+
+            params = new Param({
+                autor: "fulano",
+                listaProjeto: [
+                    gitUtil.obterCaminhoProjeto()
+                ],
+                dataInicio: '2020-12-31T23:59:58.999Z',
+                dataFim: '2020-12-31T23:59:58.999Z',
+                listaTarefa: ["1111111"],
+                mostrarNumModificacao: true,
+                mostrarCommitsLocais: true,
+                mostrarDeletados: true,
+                mostrarRenomeados: true
+            })
+
+            gerador = new GeradorPorTarefa(params)
+
+            await gitUtil.manipularArquivoComCommit('1111111', 'arquivoBar.txt', TIPO_MODIFICACAO.ADDED, '2020-12-31T23:59:57.999Z')
+            await gitUtil.manipularArquivoComCommit('1111111', 'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED, '2020-12-31T23:59:58.999Z')
+            await gitUtil.manipularArquivoComCommit('1111111', 'arquivoWaz.txt', TIPO_MODIFICACAO.ADDED, '2020-12-31T23:59:59.999Z')
+
+            const lista = await gerador.gerarListaArtefato()
+
+            expect(lista).toHaveLength(1)
+            expect(lista[0].listaArtefatoSaida).toHaveLength(1)
+            expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toEqual('foo/arquivoFoo.txt')
+        })
+    })        
 
     describe('', () => {
 
@@ -71,7 +113,7 @@ describe('test gerais', () => {
             expectObj(lista[1].listaArtefatoSaida[0], TIPO_MODIFICACAO.MODIFIED, 1, 'foo/arquivoQux.txt')
         })
 
-        it('teste de listagem de artefatos renomeados 2 vezes', async () => {
+        it('teste de listagem de artefatos renomeados 2 vezes dentro da mesma tarefa', async () => {
 
             await gitUtil.manipularArquivoComCommit('1111111',
                 'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)

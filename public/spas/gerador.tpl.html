@@ -11,17 +11,19 @@
 
 			<div class="{{alert.tipo.class}} {{alert.tipoAlerta.class}}">
 				<a href="#" class="close" data-dismiss="alert" ng-click="vm.close($index)">&times;</a>
-				{{alert.tipoAlerta.icone}} {{alert.text}}
+				<span style="padding-right: 1rem;">{{alert.tipoAlerta.icone}}</span>
+				<span ng-if='alert.html' ng-bind-html="alert.html"></span>
+				<span ng-if='alert.text'>{{alert.text}}</span>
 			</div>
-		
+
 		</div>
 
 		<div class='row'>
 
-			<div class='col-xl-6'>
+			<div class='col-xl-2'>
 
 				<div class="form-group">
-					<label>Matrícula do Autor</label>
+					<label>Matrícula do Autor *</label>
 
 					<div class='input-group'>
 
@@ -34,8 +36,28 @@
 
 			</div>
 
-			<div class='col-xl-3'>
+			<div class='col-xl-4'>
 
+				<div class="form-group">
+
+					<label>Intervalo de Pesquisa</label>
+
+					<div class="row">
+						<div class="col">
+							<input type='date' class='form-control' aria-describedby='basic-addon2'
+								ng-model='vm.req.dataInicio'>
+						</div>
+						<div class="col">
+							<input type='date' class='form-control' aria-describedby='basic-addon2'
+								ng-model='vm.req.dataFim'>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class='col-xl-3'>
 				<div class="form-group">
 
 					<label>Opções de Pesquisa</label>
@@ -79,7 +101,8 @@
 						<div class='col px-0'>
 
 							<select class="custom-select" ng-model='vm.tipoListagem'>
-								<option ng-repeat="(key, obj) in vm.TIPO_LISTAGEM" value="{{key}}">{{obj.descricao}}</option>
+								<option ng-repeat="(key, obj) in vm.TIPO_LISTAGEM" value="{{key}}">{{obj.descricao}}
+								</option>
 							</select>
 
 						</div>
@@ -95,14 +118,14 @@
 			<div class='col'>
 
 				<div class="form-group">
-					<label>Número da Tarefa</label>
+					<label>Número da Tarefa *</label>
 
 					<div class='input-group mb-3'>
 
 						<input type='text' class='form-control'
 							placeholder='Adicione uma ou mais tarefas ex. 1576250, 1575103' ng-model='vm.listaTarefa'
-							ng-keyup='$event.keyCode == 13 ? vm.adicionarTask() : null'
-							maxlength='300' number-only-and-comma>
+							ng-keyup='$event.keyCode == 13 ? vm.adicionarTask() : null' maxlength='300'
+							number-only-and-comma>
 
 						<div class='input-group-append'>
 
@@ -120,12 +143,11 @@
 			<div class='col'>
 
 				<div class="form-group">
-					<label>Caminho do Projeto Git</label>
+					<label>Caminho do Projeto Git *</label>
 
 					<div class='input-group mb-3'>
 
-						<input type='text' class='form-control'
-							placeholder='{{vm.msgSugestaoListaCaminhoProjeto}}'
+						<input type='text' class='form-control' placeholder='{{vm.msgSugestaoListaCaminhoProjeto}}'
 							title='{{vm.msgSugestaoListaCaminhoProjeto}}'
 							ng-keyup='$event.keyCode == 13 ? vm.adicionarCaminhoProjeto() : null'
 							ng-model='vm.listaCaminhoProjeto' maxlength='300'>
@@ -216,7 +238,8 @@
 								<td style='width:25%'>
 
 									<div class="d-flex justify-content-center">
-										<a href class="text-danger" ng-click='vm.removerCaminhoProjeto(caminhoProjeto)'><i
+										<a href class="text-danger"
+											ng-click='vm.removerCaminhoProjeto(caminhoProjeto)'><i
 												class="oi oi-trash"></i> Remover</a>
 									</div>
 
@@ -265,7 +288,8 @@
 					</button>
 
 				</div>
-				<div class='py-1 px-0' ng-if='vm.listaSaida.length && vm.req.tipoListagem === vm.TIPO_LISTAGEM.POR_TIPO_ARTEFATO.codigo'>
+				<div class='py-1 px-0'
+					ng-if='vm.listaSaida.length && vm.req.tipoListagem === vm.TIPO_LISTAGEM.POR_TIPO_ARTEFATO.codigo'>
 					<button class='btn btn-block btn-success' ng-click='vm.exportarArquivoCsv()'
 						title='Exportar listagem para um arquivo CSV'>
 						<i class="oi oi-file"></i> Exportar para CSV

@@ -2,9 +2,9 @@ angular
     .module('geradorApp')
     .controller('GeradorController', GeradorController)
 
-GeradorController.$inject = ['FileSaver', 'Blob', 'geradorService', 'blockUI', 'clipboardUtil', 'geradorConstants', 'deviceDetector'];
+GeradorController.$inject = ['FileSaver', 'Blob', 'geradorService', 'blockUI', 'clipboardUtil', 'geradorConstants', 'deviceDetector', 'moment', '$sce'];
 
-function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUtil, geradorConstants, deviceDetector) {
+function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUtil, geradorConstants, deviceDetector, moment, $sce) {
     var vm = this
 
     vm.listaSaida = []
@@ -38,9 +38,26 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
         limparMessages()
         limparFiltros()
 
+        verificarUltimaVersaoApp();
+
         const caminhoPadraoProjeto = geradorConstants.TIPO_DIRETORIO_PADRAO[deviceDetector.os]
-        vm.msgSugestaoListaCaminhoProjeto = `Adicione um ou mais caminhos ex. ${
-            caminhoPadraoProjeto}, ${caminhoPadraoProjeto}/foo-api`
+        vm.msgSugestaoListaCaminhoProjeto = `Adicione um ou mais caminhos ex. ${caminhoPadraoProjeto}, ${caminhoPadraoProjeto}/foo-api`
+    }
+
+    function verificarUltimaVersaoApp() {
+
+        geradorService.verificarUltimaVersaoApp()
+            .then(resp => {
+
+                if(resp.data.outOfDate) {
+
+                    const html = `Seu gerador está desatualizado. Baixe a versão ${resp.data.latestVersion} no endereço <a href="https://github.com/diegomdrs/gerador-lista-artefato" target="_blank">github.com/diegomdrs/gerador-lista-artefato</a>`
+
+                    adicionarMensagemInfo('', geradorConstants.TIPO_POSICAO_ALERT.DEFAULT, html)
+                }
+            }) 
+            .catch(() => { })
+            .finally(() => blockUI.stop())
     }
 
     function listarDiretorio(listaDiretorio) {
@@ -62,7 +79,12 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
 
         limparMessages()
 
-        if (vm.req.listaTarefa.length && vm.req.listaProjeto.length) {
+        if (vm.req.listaTarefa.length && vm.req.listaProjeto.length && isDatasPesquisaValidas()) {
+
+            vm.req.tipoListagem = vm.tipoListagem
+
+            vm.req.dataInicio = vm.req.dataInicio && moment(vm.req.dataInicio).format('yyyy-MM-DDT00:00:00.000Z')
+            vm.req.dataFim = vm.req.dataFim && moment(vm.req.dataFim).format('yyyy-MM-DDT23:59:59.999Z')
 
             vm.req.tipoListagem = vm.tipoListagem
 
@@ -93,6 +115,42 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
             !vm.req.listaProjeto.length && adicionarMensagemErro
                 ('Adicione ao menos um projeto ao filtro', geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
         }
+    }
+
+    function isDatasPesquisaValidas() {
+
+        if(vm.req.dataInicio || vm.req.dataFim) {
+
+            if(!vm.req.dataInicio || !vm.req.dataFim) {
+
+                if(!vm.req.dataInicio) {
+                    adicionarMensagemErro('Preencha a data inicial de pesquisa',
+                        geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
+                }
+    
+                if(!vm.req.dataFim) {
+                    adicionarMensagemErro('Preencha a data final de pesquisa',
+                        geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
+                }
+
+                return false;
+
+            } else if ((vm.req.dataInicio && vm.req.dataFim)) {
+
+                if(moment(vm.req.dataInicio).isAfter(moment(vm.req.dataFim))) {
+                    adicionarMensagemErro('A data de início é maior que a data final de pesquisa',
+                    geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
+
+                    return false;
+                } else {
+                    
+                    return true;
+                }
+
+            }
+        }
+
+        return true
     }
 
     function obterNumero(saida) {
@@ -202,14 +260,13 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
         adicionarMensagem(vm.TIPO_ALERTA.ERROR, mensagem, tipo)
     }
 
-    function adicionarMensagem(tipoAlerta, mensagem, tipo) {
+    function adicionarMensagemInfo(mensagem, tipo, html) {
+        adicionarMensagem(vm.TIPO_ALERTA.INFO, mensagem, tipo, html)
+    }
 
-        const message = {
-            tipoAlerta: tipoAlerta,
-            text: mensagem,
-            tipo: tipo,
-        }
+    function adicionarMensagem(tipoAlerta, text, tipo, html) {
 
+        const message = { tipoAlerta, text, tipo, html: $sce.trustAsHtml(html) }
         vm.alerts.push(message)
     }
 
@@ -333,7 +390,6 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
                     saidaFoo = saidaFoo.concat(`Tarefa nº ${tarefa.numeroTarefa} - ${tarefa.descricaoTarefa}\n`)
                     return saidaFoo
                 }, '')
-    
                 saidaTexto = saidaTexto.concat(`\n${tarefas}`);
             }
 

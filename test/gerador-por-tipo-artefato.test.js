@@ -634,7 +634,6 @@ describe('test gerais', () => {
             gitBaz.removerDiretorioProjeto()
         })
 
-        // TODO - Terminar esse aqui
         /* 
         node app -l QAS --diretorio=/tmp/gerador-lista-artefato --projeto=abc,def,ghi --autor=fulano --task=1111111,2222222,3333333 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
         */
@@ -781,7 +780,7 @@ describe('test gerais', () => {
 
             expect(lista).toHaveLength(11)
 
-            // TODO - Isso aqui deveria esstar numa mesma linha
+            // TODO - Isso aqui deveria estar numa mesma linha
             expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
             expect(lista[0].listaNumeroTarefaSaida).toEqual(expect.arrayContaining([{descricaoTarefa: "commit", numeroTarefa: "2222222"}]))
             expect(lista[0].listaArtefatoSaida).toHaveLength(2)
@@ -840,7 +839,7 @@ describe('test gerais', () => {
             expect(lista[6].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
             expect(lista[6].listaArtefatoSaida[0].nomeArtefato).toBe('foo/foo-controller.html')
 
-            // TODO - Isso aqui deveria esstar numa mesma linha
+            // TODO - Isso aqui deveria estar numa mesma linha
             expect(lista[7].listaNumeroTarefaSaida).toHaveLength(1)
             expect(lista[7].listaNumeroTarefaSaida).toEqual(expect.arrayContaining([{descricaoTarefa: "commit", numeroTarefa: "1111111"}]))
             expect(lista[7].listaArtefatoSaida).toHaveLength(2)

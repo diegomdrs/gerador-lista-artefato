@@ -44,7 +44,7 @@ module.exports = function (caminho, autor) {
         await this.git.checkoutLocalBranch(nomeBranch)
     }
 
-    this.manipularArquivoComCommit = async function (task, pathArquivo, tipoAlteracao) {
+    this.manipularArquivoComCommit = async function (task, pathArquivo, tipoAlteracao, date) {
 
         if (tipoAlteracao !== TIPO_MODIFICACAO.RENAMED) {
 
@@ -53,11 +53,11 @@ module.exports = function (caminho, autor) {
             else
                 fs.outputFileSync(this.obterCaminhoArquivo(pathArquivo), randomValueHex())
 
-            await this.commitarArquivo(task, pathArquivo)
+            await this.commitarArquivo(task, pathArquivo, date)
         } else {
 
             await this.git.mv(pathArquivo.origem, pathArquivo.destino)
-            await this.commitarArquivo(task, pathArquivo.destino)
+            await this.commitarArquivo(task, pathArquivo.destino, date)
         }
     }
 
@@ -101,7 +101,12 @@ module.exports = function (caminho, autor) {
         await this.commitarProjeto(tarefa, listaArquivo)
     }
 
-    this.commitarArquivo = async function (task, pathArquivo) {
+    this.commitarArquivo = async function (task, pathArquivo, date) {
+
+        if(date) {
+            await this.git.env('GIT_AUTHOR_DATE', date)
+            await this.git.env('GIT_COMMITTER_DATE', date)
+        }
 
         await this.git.add(this.obterCaminhoArquivo(pathArquivo))
         await this.git.commit(`task ${task} commit`)

@@ -10,9 +10,18 @@ function geradorService($http) {
     const HOST = 'localhost'
 
     const service = {
-        gerarListaArtefato: gerarListaArtefato,
-        listarDiretorio: listarDiretorio,
-        obterListaArtefatoCsv: obterListaArtefatoCsv
+        gerarListaArtefato,
+        listarDiretorio,
+        obterListaArtefatoCsv,
+        verificarUltimaVersaoApp
+    }
+
+    function verificarUltimaVersaoApp() {
+
+        return $http({
+            method: 'GET',
+            url: `http://${HOST}:${PORT}/verificarUltimaVersaoApp`
+        })
     }
 
     function gerarListaArtefato(req) {

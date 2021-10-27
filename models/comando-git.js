@@ -1,4 +1,4 @@
-const Comando = (caminhoProjeto, autor, listaTask, mostrarCommitsLocais) => {
+const Comando = (caminhoProjeto, autor, listaTask, mostrarCommitsLocais, dataInicio, dataFim) => {
 
     let comando = `git -C ${caminhoProjeto} log --reverse --regexp-ignore-case --no-merges --author=${autor}`
 
@@ -13,6 +13,10 @@ const Comando = (caminhoProjeto, autor, listaTask, mostrarCommitsLocais) => {
 
     for (const task of listaTask)
         comando = comando.concat(` --grep=${task}`)
+
+    if (dataInicio && dataFim) {
+        comando = comando.concat(` --after="${dataInicio}" --before="${dataFim}"`)
+    }
 
     return comando
 }

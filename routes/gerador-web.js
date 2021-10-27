@@ -1,5 +1,6 @@
 const path = require('path')
 const Param = require('../models/param')
+const { StatusCodes } = require('http-status-codes')
 
 const geradorCvs = require('../lib/gerador-cvs')
 
@@ -10,7 +11,16 @@ const { TIPO_LISTAGEM } = require('../lib/constants')
 
 module.exports = function (app) {
 
-    const BAD_REQUEST_CODE = 400
+    app.get('/verificarUltimaVersaoApp', async function (req, resp) {
+
+        try {
+            const respJson =  await require('../lib/versao').verificarUltimaVersaoApp()
+            resp.json(respJson)
+
+        } catch (error) {
+            resp.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: error.message })
+        }
+    })
 
     app.post('/gerarListaArtefato', async function (req, resp) {
 
@@ -19,6 +29,8 @@ module.exports = function (app) {
                 autor: req.body.autor,
                 listaTarefa: req.body.listaTarefa,
                 listaProjeto: req.body.listaProjeto,
+                dataInicio: req.body.dataInicio,
+                dataFim: req.body.dataFim,
                 mostrarDeletados: req.body.mostrarDeletados,
                 mostrarRenomeados: req.body.mostrarRenomeados,
                 mostrarNumModificacao: req.body.mostrarNumModificacao,
@@ -32,7 +44,7 @@ module.exports = function (app) {
 
         } catch (error) {
 
-            resp.status(BAD_REQUEST_CODE).send({ message: error.message })
+            resp.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: error.message })
         }
     })
 
@@ -57,7 +69,7 @@ module.exports = function (app) {
 
         } catch (error) {
 
-            resp.status(BAD_REQUEST_CODE).send({ message: error.message })
+            resp.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: error.message })
         }
     })
 
@@ -71,7 +83,7 @@ module.exports = function (app) {
 
         } catch (error) {
 
-            resp.status(BAD_REQUEST_CODE).send({ message: error.message })
+            resp.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: error.message })
         }
     })
 
