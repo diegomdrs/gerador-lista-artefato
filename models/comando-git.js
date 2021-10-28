@@ -8,6 +8,7 @@ const Comando = (caminhoProjeto, autor, listaTask, mostrarCommitsLocais, dataIni
 
     // %H - commit hash
     // %h - abbreviated commit hash
+    // %s - subject
     comando = comando.concat(
         ' --name-status --pretty=format:"%h %s" -C')
 
