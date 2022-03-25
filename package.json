@@ -1,6 +1,6 @@
 {
   "name": "gerador-lista-artefato",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "App para listar os artefatos incluídos/alterados/renomeados/removidos para geração do orçamento de OF",
   "bin": {
     "gerador-lista-artefato": "./app.js"
@@ -53,6 +53,6 @@
   "devDependencies": {
     "fs-extra": "^8.1.0",
     "jest": "^27.2.5",
-    "simple-git": "^2.40.0"
+    "simple-git": "^3.4.0"
   }
 }
