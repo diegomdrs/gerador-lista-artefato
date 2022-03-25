@@ -28,7 +28,7 @@
 					<div class='input-group'>
 
 						<input type='text' class='form-control' aria-describedby='basic-addon2' ng-model='vm.req.autor'
-							maxlength='20' required>
+							maxlength='20'>
 
 					</div>
 
@@ -125,7 +125,7 @@
 						<input type='text' class='form-control'
 							placeholder='Adicione uma ou mais tarefas ex. 1576250, 1575103' ng-model='vm.listaTarefa'
 							ng-keyup='$event.keyCode == 13 ? vm.adicionarTask() : null' maxlength='300'
-							number-only-and-comma required>
+							number-only-and-comma>
 
 						<div class='input-group-append'>
 
@@ -150,7 +150,7 @@
 						<input type='text' class='form-control' placeholder='{{vm.msgSugestaoListaCaminhoProjeto}}'
 							title='{{vm.msgSugestaoListaCaminhoProjeto}}'
 							ng-keyup='$event.keyCode == 13 ? vm.adicionarCaminhoProjeto() : null'
-							ng-model='vm.listaCaminhoProjeto' maxlength='300' required>
+							ng-model='vm.listaCaminhoProjeto' maxlength='300'>
 
 						<div class='input-group-append'>
 

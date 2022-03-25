@@ -111,6 +111,9 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
 
             !vm.req.listaTarefa.length && adicionarMensagemErro
                 ('Adicione ao menos uma tarefa ao filtro', geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
+
+            !vm.req.listaProjeto.length && adicionarMensagemErro
+                ('Adicione ao menos um projeto ao filtro', geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
         }
     }
 
