@@ -21,9 +21,6 @@ App para listar os artefatos incluídos/alterados/renomeados/removidos para gera
   - `task 123456 Mensagem do commit`
   - `123456 - Mensagem do commit`
   - `123456 Mensagem do commit`
-- Executar os comandos abaixo para mudar o tamanho dos hashes abreviados dos commits:
-  - `git config --global log.abbrevcommit yes`
-  - `git config --global core.abbrev 10`
 
 ## Download 
 
@@ -43,26 +40,26 @@ Para utilizar o gerador na versão para Windows, baixe o executável e clique du
 
 Na primeira utilização da versão Linux, execute:
 
-``` console
+~~~ console
 $ chmod +x gerador-lista-artefato-lin
-```
+~~~
 Em seguida, execute o comando:
 
-``` console
+~~~ console
 $ ./gerador-lista-artefato-lin
-```
+~~~
 ### Mac
 
 Na primeira utilização da versão Mac, execute:
 
-``` console
+~~~ console
 $ chmod +x gerador-lista-artefato-mac
-```
+~~~
 Em seguida, execute o comando:
 
-``` console
+~~~ console
 $ ./gerador-lista-artefato-mac
-```
+~~~
 ## Modo Interface Web
 
 Ao executar os passos anteriores, será aberto o endereço [http://localhost:3333/gerador](http://localhost:3333/gerador), conforme a imagem abaixo
@@ -73,19 +70,19 @@ Ao executar os passos anteriores, será aberto o endereço [http://localhost:333
 
 ### Linux e Mac
 
-``` console
+~~~ console
 $ ./gerador-lista-artefato --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
-```
+~~~
 
 ### Windows
 
-``` console
+~~~ console
 $ ./gerador-lista-artefato.exe --diretorio=C:/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081
-```
+~~~
 
 ### Parâmetros do modo CLI
 
-``` console
+~~~ console
   -s, --server               Inicia a versão server e ignora os outros parâmetros (default: true)
   -d, --diretorio <type>     Diretório raiz dos projetos Git
   -p, --projeto <type>       Lista de projetos Git (podem ser passados vários projetos separados por vírgula)
@@ -98,11 +95,11 @@ $ ./gerador-lista-artefato.exe --diretorio=C:/kdi/git --projeto=foo-estatico,foo
   --mostrar-commits-locais   Mostra commits remotos e locais (Opcional)
   -v, --version              Mostra a versão do programa
   -h, --help                 output usage information
-```
+~~~
 
 ### Saida do gerador em modo CLI
 
-``` console
+~~~ console
 $ ./gerador-lista-artefato-lin --diretorio=/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900089,900081 --mostrar-deletados --mostrar-num-modificacao --mostrar-deletados --mostrar-renomeados
 
 Tarefa nº 900089
@@ -125,7 +122,7 @@ Tarefa nº 900089
 
 D   1   foo-estatico/src/app/spas/foo/detalha-foo.tpl.html#e73b22c
 
-```
+~~~
 Onde:
 
 - Ação executada no artefato ou na lista de artefatos - A (Added), M (Modified), R (Renamed) e D (Deleted)
@@ -134,7 +131,7 @@ Onde:
 
 ### Exemplo de uso
 
-``` console
+~~~ console
 $ ./gerador-lista-artefato-win.exe --diretorio=C:/kdi/git --projeto=foo-estatico,foo-api --autor=X1337 --task=900077,900079
 
 Tarefas nº 900077, 900079
@@ -155,4 +152,4 @@ Tarefa nº 900079
 M       foo-api/pom.xml#7749089
 M       foo-api/operacoes.xml#7749089
 
-```
+~~~

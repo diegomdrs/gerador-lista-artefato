@@ -13,7 +13,16 @@ function geradorService($http) {
         gerarListaArtefato,
         listarDiretorio,
         obterListaArtefatoCsv,
-        verificarUltimaVersaoApp
+        verificarUltimaVersaoApp,
+        obterVersaoApp
+    }
+
+    function obterVersaoApp() {
+
+        return $http({
+            method: 'GET',
+            url: `http://${HOST}:${PORT}/obterVersaoApp`
+        })
     }
 
     function verificarUltimaVersaoApp() {

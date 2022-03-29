@@ -11,6 +11,17 @@ const { TIPO_LISTAGEM } = require('../lib/constants')
 
 module.exports = function (app) {
 
+    app.get('/obterVersaoApp', async function (req, resp) {
+
+        try {
+            const respJson =  await require('../lib/versao').obterVersaoApp()
+            resp.json(respJson)
+
+        } catch (error) {
+            resp.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: error.message })
+        }
+    })
+
     app.get('/verificarUltimaVersaoApp', async function (req, resp) {
 
         try {

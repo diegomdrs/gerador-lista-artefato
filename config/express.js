@@ -8,7 +8,15 @@ app.use(express.json())
 
 app.use(express.static(path.join(__dirname, '../public')))
 
-app.use('/css/bootstrap.min.css', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/css/bootstrap.min.css')))
+// Foi necessário remover a classe 'valid' do state $form-validation-states do arquivo:
+// node_modules/bootstrap/scss/_variables.scss
+//
+// Em seguida, foi gerado um novo arquivo 'bootstrap.min.css' com o comando:
+// sass node_modules/bootstrap/scss/bootstrap.scss:public/css/bootstrap.min.css --style compressed
+// 
+// Sendo assim, a linha abaixo não é mais necessária
+// app.use('/css/bootstrap.min.css', express.static(path.join(__dirname, '../node_modules/bootstrap/compiler/bootstrap.min.css')))
+
 app.use('/css/angular-block-ui.min.css', express.static(path.join(__dirname, '../node_modules/angular-block-ui/dist/angular-block-ui.min.css')))
 app.use('/css/open-iconic-bootstrap.min.css', express.static(path.join(__dirname, '../node_modules/open-iconic/font/css/open-iconic-bootstrap.min.css')))
 

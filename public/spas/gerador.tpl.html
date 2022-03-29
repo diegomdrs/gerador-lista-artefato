@@ -1,4 +1,4 @@
-<form ng-controller='GeradorController as vm' ng-init='vm.init()'>
+<form ng-controller='GeradorController as vm' ng-init='vm.init()' ng-class="{'was-validated' : vm.wasValidated}" novalidate>
 
 	<div class='d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom shadow-sm'
 		style='background-color: #FEDB00'>
@@ -26,10 +26,7 @@
 					<label>Matrícula do Autor *</label>
 
 					<div class='input-group'>
-
-						<input type='text' class='form-control' aria-describedby='basic-addon2' ng-model='vm.req.autor'
-							maxlength='20'>
-
+						<input type='text' class='form-control' aria-describedby='basic-addon2' ng-model='vm.req.autor' maxlength='20' required>
 					</div>
 
 				</div>
@@ -43,11 +40,11 @@
 					<label>Intervalo de Pesquisa</label>
 
 					<div class="row">
-						<div class="col">
+						<div class="col-xl-6">
 							<input type='date' class='form-control' aria-describedby='basic-addon2'
 								ng-model='vm.req.dataInicio'>
 						</div>
-						<div class="col">
+						<div class="col-xl-6">
 							<input type='date' class='form-control' aria-describedby='basic-addon2'
 								ng-model='vm.req.dataFim'>
 						</div>
@@ -122,10 +119,13 @@
 
 					<div class='input-group mb-3'>
 
-						<input type='text' class='form-control'
-							placeholder='Adicione uma ou mais tarefas ex. 1576250, 1575103' ng-model='vm.listaTarefa'
+						<input type='text' 
+							class='form-control'
+							placeholder='Adicione uma ou mais tarefas ex. 1576250, 1575103' 
+							ng-model='vm.listaTarefa'
 							ng-keyup='$event.keyCode == 13 ? vm.adicionarTask() : null' maxlength='300'
-							number-only-and-comma>
+							number-only-and-comma
+							ng-required='!vm.req.listaTarefa.length'>
 
 						<div class='input-group-append'>
 
@@ -150,7 +150,8 @@
 						<input type='text' class='form-control' placeholder='{{vm.msgSugestaoListaCaminhoProjeto}}'
 							title='{{vm.msgSugestaoListaCaminhoProjeto}}'
 							ng-keyup='$event.keyCode == 13 ? vm.adicionarCaminhoProjeto() : null'
-							ng-model='vm.listaCaminhoProjeto' maxlength='300'>
+							ng-model='vm.listaCaminhoProjeto' maxlength='300'
+							ng-required='!vm.req.listaProjeto.length'>
 
 						<div class='input-group-append'>
 
@@ -308,6 +309,10 @@
 	<footer class='container'>
 
 		<div class="row justify-content-end">
+			<p class="text-muted">
+				Versão <a href="https://github.com/diegomdrs/gerador-lista-artefato" target="_blank">{{vm.version}}</a>
+			</p>
+			<p class="text-muted px-2" >|</p>
 			<p class="text-muted">Desenvolvido por <a href="https://github.com/diegomdrs" target="_blank">diegomdrs</a>
 			</p>
 		</div>

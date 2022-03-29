@@ -38,10 +38,19 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
         limparMessages()
         limparFiltros()
 
-        verificarUltimaVersaoApp();
+        obterVersaoApp()
+        verificarUltimaVersaoApp()
 
         const caminhoPadraoProjeto = geradorConstants.TIPO_DIRETORIO_PADRAO[deviceDetector.os]
         vm.msgSugestaoListaCaminhoProjeto = `Adicione um ou mais caminhos ex. ${caminhoPadraoProjeto}, ${caminhoPadraoProjeto}/foo-api`
+    }
+
+    function obterVersaoApp() {
+
+        geradorService.obterVersaoApp()
+            .then(resp => vm.version = resp.data.version) 
+            .catch(() => { })
+            .finally(() => blockUI.stop())
     }
 
     function verificarUltimaVersaoApp() {
@@ -78,6 +87,7 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
     function listarArtefatos() {
 
         limparMessages()
+        vm.wasValidated = true
 
         if (vm.req.listaTarefa.length && vm.req.listaProjeto.length && isDatasPesquisaValidas()) {
 
@@ -108,12 +118,14 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
                 }).finally(() => blockUI.stop())
 
         } else {
+            !vm.req.autor && adicionarMensagemErro
+                ('Insira a matrícula do autor', geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
 
             !vm.req.listaTarefa.length && adicionarMensagemErro
-                ('Adicione ao menos uma tarefa ao filtro', geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
+                ('Adicione ao menos um número de tarefa ao filtro', geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
 
             !vm.req.listaProjeto.length && adicionarMensagemErro
-                ('Adicione ao menos um projeto ao filtro', geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
+                ('Adicione ao menos um caminho de projeto git ao filtro', geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
         }
     }
 
@@ -230,7 +242,7 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
                                 vm.req.listaProjeto.push(diretorio)
                     }
                     else
-                        adicionarMensagemErro('Nenhum diretório encontrado',
+                        adicionarMensagemErro('Nenhum diretório de projeto git encontrado',
                             geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
                 })
 
@@ -273,6 +285,7 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
     function limparFiltros() {
 
         limparMessages()
+        vm.wasValidated = false
 
         vm.tipoListagem = vm.TIPO_LISTAGEM.POR_TAREFA.codigo
 
@@ -295,9 +308,15 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
 
     function obterNomeArtefato(artefato) {
 
-        return (artefato.tipoAlteracao === 'R')
-            ? artefato.nomeAntigoArtefato + ' ' + artefato.nomeNovoArtefato
-            : artefato.nomeArtefato
+        let saidaTexto = ''
+
+        if (artefato.tipoAlteracao === vm.TIPO_MODIFICACAO.RENAMED.codigo) {
+            saidaTexto = saidaTexto.concat(artefato.nomeAntigoArtefato + ' ' + artefato.nomeNovoArtefato)
+        } else {
+            saidaTexto = saidaTexto.concat(`${artefato.nomeArtefato}#${artefato.hash}`)
+        }
+
+        return saidaTexto
     }
 
     function exportarArquivoCsv() {

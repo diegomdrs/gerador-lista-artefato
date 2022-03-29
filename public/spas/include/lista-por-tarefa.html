@@ -6,29 +6,34 @@
 
             <thead>
                 <tr>
-                    <th style='width:10%'>Tarefa</th>
-                    <th style='width:15%'>Tipo de Alteração</th>
-                    <th style='width:64%'>Nome dos Artefatos</th>
+                    <th style='width:9%'>Tarefa</th>
+                    <th style='width:80%'>Nome dos Artefatos</th>
                     <th style='width:11%'></th>
                 </tr>
             </thead>
 
             <tbody ng-repeat='saida in vm.listaSaida'>
 
-                <tr ng-repeat="(tipoAlteracao, listaArtefatoAgrupado) in saida.listaArtefatoSaida | 
-                    groupBy: 'tipoAlteracao'">
+                <tr ng-repeat="(tipoAlteracao, listaArtefatoAgrupado) in saida.listaArtefatoSaida | groupBy: 'numeroTarefa'">
 
-                    <td ng-if="$first" rowspan="{{saida.listaArtefatoSaida.length}}">{{saida.listaNumeroTarefaSaida[0].numeroTarefa}}
+                    <td>{{saida.listaNumeroTarefaSaida[0].numeroTarefa}}
                     </td>
 
-                    <td>{{vm.obterDescricaoModificacao(tipoAlteracao)}}</td>
                     <td>
                         <li ng-repeat='artefato in listaArtefatoAgrupado' class='list-unstyled'>
-                            {{vm.obterNomeArtefato(artefato)}}#{{artefato.hash}}
+                            <i class="oi oi-plus" style="padding-right: .5rem;" title='Adicionado'
+                                ng-if="artefato.tipoAlteracao === vm.TIPO_MODIFICACAO.ADDED.codigo"></i>
+                            <i class="oi oi-pencil" style="padding-right: .5rem;" title='Modificado'
+                                ng-if="artefato.tipoAlteracao === vm.TIPO_MODIFICACAO.MODIFIED.codigo"></i>
+                            <i class="oi oi-pencil" style="padding-right: .5rem;" title='Renomeado'
+                                ng-if="artefato.tipoAlteracao === vm.TIPO_MODIFICACAO.RENAMED.codigo"></i>
+                            <i class="oi oi-trash" style="padding-right: .5rem;" title='Deletado'
+                                ng-if="artefato.tipoAlteracao === vm.TIPO_MODIFICACAO.DELETED.codigo"></i>                                
+                            {{vm.obterNomeArtefato(artefato)}}
                         </li>
                     </td>
 
-                    <td ng-if="$first" rowspan="{{saida.listaArtefatoSaida.length}}">
+                    <td>
 
                         <div class="d-flex justify-content-center">
 
@@ -43,6 +48,5 @@
                 </tr>
             </tbody>
         </table>
-
     </div>
 </div>

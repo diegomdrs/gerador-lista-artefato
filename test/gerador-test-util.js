@@ -17,7 +17,7 @@ module.exports = function (caminho, autor) {
 
         fs.mkdirsSync(this.caminho)
 
-        this.git = require('simple-git/promise')(this.caminho)
+        this.git = require('simple-git')(this.caminho)
 
         await this.git.init()
         await this.git.addConfig('user.name', this.autor)

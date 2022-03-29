@@ -1,6 +1,6 @@
 {
   "name": "gerador-lista-artefato",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "App para listar os artefatos incluídos/alterados/renomeados/removidos para geração do orçamento de OF",
   "bin": {
     "gerador-lista-artefato": "./app.js"
@@ -12,9 +12,9 @@
     "start": "node app -s",
     "dev": "node --inspect app -s",
     "test": "jest --runInBand --verbose",
-    "pkg-win": "pkg . -t node8-win-x64 -o dist/gerador-lista-artefato-win.exe",
-    "pkg-lin": "pkg . -t node8-linux-x64 -o dist/gerador-lista-artefato-lin",
-    "pkg-mac": "pkg . -t node8-macos-x64 -o dist/gerador-lista-artefato-mac",
+    "pkg-win": "pkg . -t node12-win-x64 -o dist/gerador-lista-artefato-win.exe",
+    "pkg-lin": "pkg . -t node12-linux-x64 -o dist/gerador-lista-artefato-lin",
+    "pkg-mac": "pkg . -t node12-macos-x64 -o dist/gerador-lista-artefato-mac",
     "pkg": "npm run pkg-win && npm run pkg-lin && npm run pkg-mac"
   },
   "keywords": [],
@@ -37,7 +37,7 @@
     "angular-resource": "^1.7.9",
     "angular-route": "^1.7.9",
     "body-parser": "^1.19.0",
-    "bootstrap": "^4.4.1",
+    "bootstrap": "^4.6.0",
     "commander": "^4.0.1",
     "express": "^4.17.1",
     "http-status-codes": "^2.1.4",
@@ -53,6 +53,6 @@
   "devDependencies": {
     "fs-extra": "^8.1.0",
     "jest": "^27.2.5",
-    "simple-git": "^2.40.0"
+    "simple-git": "^3.4.0"
   }
 }
