@@ -24,11 +24,11 @@ App para listar os artefatos incluídos/alterados/renomeados/removidos para gera
 
 ## Download 
 
-- [Linux](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato/master/dist/gerador-lista-artefato-lin)
+- [Linux](https://github.com/diegomdrs/gerador-lista-artefato/releases/download/0.0.7/gerador-lista-artefato-lin)
 
-- [Windows](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato/master/dist/gerador-lista-artefato-win.exe)
+- [Windows](https://github.com/diegomdrs/gerador-lista-artefato/releases/download/0.0.7/gerador-lista-artefato-win.exe)
 
-- [Mac](https://raw.githubusercontent.com/diegomdrs/gerador-lista-artefato/master/dist/gerador-lista-artefato-mac)
+- [Mac](https://github.com/diegomdrs/gerador-lista-artefato/releases/download/0.0.7/gerador-lista-artefato-mac)
 
 ## Utilização
 
